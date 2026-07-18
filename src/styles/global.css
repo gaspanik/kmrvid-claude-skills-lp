@@ -5,6 +5,40 @@
   /* --default-font-family: "Noto Sans JP", sans-serif; */
   --default-font-family: "Gen Interface JP", sans-serif;
   --heading-font-family: "Gen Interface JP Display", sans-serif;
+
+  /* Monochrome + single accent (cognitive-ui-design §5.3: achromatic + accent) */
+  --color-ink: #17140f;
+  --color-ink-soft: #4a453d;
+  --color-canvas: #ffffff;
+  --color-surface-alt: #f4f2ec;
+  --color-border: #e3ded2;
+  --color-accent: #d3401f;
+  --color-accent-soft: #f7e2d9;
+  --color-accent-dark: #a92e14;
+
+  /* Type scale: Major Third (1.250) — base 16px */
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-4xl: 3.052rem;
+  --text-5xl: 3.815rem;
+  --text-6xl: 4.768rem;
+  --text-7xl: 5.96rem;
+  --text-8xl: 7.451rem;
+  --text-9xl: 9.313rem;
+  --line-height-none: 1.1;
+}
+
+@utility font-heading {
+  font-family: var(--heading-font-family);
+}
+
+@utility font-body {
+  font-family: var(--default-font-family);
 }
 
 @layer base {
@@ -15,5 +49,41 @@
   h5,
   h6 {
     font-family: var(--heading-font-family);
+    line-height: var(--line-height-none);
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-3xl);
+  }
+  h3 {
+    font-size: var(--text-2xl);
+  }
+  h4 {
+    font-size: var(--text-xl);
+  }
+  h5 {
+    font-size: var(--text-lg);
+  }
+  h6 {
+    font-size: var(--text-base);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  em {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
   }
 }

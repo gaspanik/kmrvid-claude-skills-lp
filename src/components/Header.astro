@@ -1,0 +1,36 @@
+---
+const PURCHASE_URL =
+  'https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills';
+---
+
+<header
+  class="top-0 z-40 sticky bg-canvas/95 backdrop-blur-sm border-border border-b"
+>
+  <div
+    class="flex justify-between items-center gap-4 mx-auto px-6 py-4 max-w-6xl"
+  >
+    <a href="#top" class="font-heading text-ink leading-none">
+      <span class="block text-base tracking-tight">KMRVID</span>
+      <span class="block text-ink-soft text-xs tracking-[0.15em] uppercase"
+        >Claude Skills</span
+      >
+    </a>
+
+    <nav aria-label="メインナビゲーション" class="hidden md:block">
+      <ul class="flex items-center gap-8 text-sm">
+        <li><a href="#included" class="hover:text-accent transition-colors">講座内容</a></li>
+        <li><a href="#skills" class="hover:text-accent transition-colors">収録スキル</a></li>
+        <li><a href="#author" class="hover:text-accent transition-colors">講師紹介</a></li>
+        <li><a href="#pricing" class="hover:text-accent transition-colors">料金</a></li>
+        <li><a href="#faq" class="hover:text-accent transition-colors">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <a
+      href={PURCHASE_URL}
+      class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 shadow-xs px-4 py-2.5 rounded-full font-medium text-white text-sm whitespace-nowrap transition"
+    >
+      今すぐ申し込む
+    </a>
+  </div>
+</header>

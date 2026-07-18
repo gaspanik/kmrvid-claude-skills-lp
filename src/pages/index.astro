@@ -1,8 +1,528 @@
 ---
-import Welcome from "@/components/Welcome.astro";
-import Layout from "@/layouts/Layout.astro";
+import {
+  ArrowRight,
+  BadgePercent,
+  CircleCheck,
+  Clock,
+  GraduationCap,
+  Languages,
+  ListChecks,
+  MessageCircleQuestionMark,
+  PenTool,
+  Quote,
+  ShieldCheck,
+  Video,
+  Wand,
+  Workflow,
+} from '@lucide/astro';
+import macbookCode from '@/assets/images/macbook-code.jpg';
+import laptopWork from '@/assets/images/laptop-work.jpg';
+import deskWorkspace from '@/assets/images/desk-workspace.jpg';
+import codeScreen from '@/assets/images/code-screen.jpg';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+const PURCHASE_URL =
+  'https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills';
+const LINE_URL = 'https://lin.ee/EOgmkKQ';
+const PRODUCT_URL = 'https://kmrvid.com/products/kmrvid-claude-skills';
+
+const pains = [
+  '同じような指示を、案件のたびにゼロから書き直している',
+  '思った通りの結果になるかは、そのときの運と勘に左右される',
+  'うまくいった手順を、チームや将来の自分に共有できない',
+];
+
+const skillHighlights = [
+  {
+    icon: Wand,
+    name: 'create-mockup',
+    category: 'モックアップ作成系',
+    desc: 'Figmaなしで、サイトの種類・デザインスタイル・ページ構成をヒアリングしながらUIをゼロから組み上げる。',
+  },
+  {
+    icon: PenTool,
+    name: 'figma-audit / figma-weather',
+    category: 'Figma連携・品質チェック系',
+    desc: 'Figmaフレームの構造がAIにとって実装しやすいかを4つの観点で検査し、天気予報形式でスコアを提示する。',
+  },
+  {
+    icon: ListChecks,
+    name: 'tailwind-review',
+    category: 'Tailwind最適化系',
+    desc: 'Tailwind CSSのv3→v4移行チェックやアクセシビリティ構造の検証・自動修正まで一括で行う。',
+  },
+  {
+    icon: Languages,
+    name: 'japanese-web-guideline',
+    category: '日本語サイト品質ガイドライン',
+    desc: '見出しの折り返し・行間・文字サイズなど、日本語サイト特有にAIが陥りやすい実装のクセを補正する。',
+  },
+  {
+    icon: Workflow,
+    name: 'mockup-pipeline / full-pipeline',
+    category: 'オーケストレーション系',
+    desc: 'セットアップからモックアップ生成、仕上げの調整までを一括で自動実行するパイプラインスキル。',
+  },
+];
+
 ---
 
-<Layout title="Home - Astro 7 + Tailwind CSS 4 Starter">
-  <Welcome />
+<Layout title="KMRVID Claude Skills — Claude Code向けオリジナルスキル講座">
+  <Header />
+
+  <main id="top">
+    <!-- ============ HERO (Bottom-up: quiet header, large numeral block at the fold) ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href={PURCHASE_URL}
+          class="inline-flex items-center gap-2 bg-accent-soft mb-8 px-4 py-2 rounded-full font-medium text-accent-dark text-sm"
+        >
+          <BadgePercent size={16} stroke-width={2} />
+          夏休み応援クーポンで9,900円（7月20日 23:59まで）
+        </a>
+
+        <p class="mb-4 text-ink-soft text-sm tracking-[0.1em] uppercase">
+          Claude Code オリジナルスキル講座
+        </p>
+
+        <h1 id="hero-heading" class="max-w-3xl text-ink text-left">
+          AIには、毎回"指示"するより
+          <br />
+          <span class="text-accent">"スキル"</span>を渡した方が速い。
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+          インターネット黎明期からWeb制作の現場に立ち続けてきた著者が、実務の時間単価を最大化するために作ったオリジナルスキル群を一挙公開。プロンプトの書き方ではなく、エージェントが理解できる「スキル」の作り方・使い方を学ぶ講座です。
+        </p>
+
+        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+          <a
+            href={PURCHASE_URL}
+            class="inline-flex items-center gap-2 bg-accent hover:brightness-110 shadow-xs px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            9,900円で受講をはじめる
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#included"
+            class="inline-flex items-center gap-2 px-6 py-3.5 border border-ink/15 hover:bg-surface-alt rounded-full font-medium text-ink transition"
+          >
+            講座内容を見る
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
+              29
+              <span class="font-body text-white/50 text-lg">個</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">収録スキル数（一般非公開のものを含む）</p>
+          </div>
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
+              31
+              <span class="font-body text-white/50 text-lg">本</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">解説動画の本数</p>
+          </div>
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
+              3<span class="text-4xl md:text-5xl">h</span>20<span
+                class="text-4xl md:text-5xl">m</span
+              >
+            </p>
+            <p class="mt-2 text-white/60 text-sm">総再生時間（2026年7月18日時点）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEM / VALUE PROP ============ -->
+    <section aria-labelledby="problem-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+      <div class="max-w-2xl">
+        <h2 id="problem-heading" class="text-ink text-left">
+          その"やり取り"、
+          <br />
+          毎回ゼロからやっていませんか。
+        </h2>
+        <ul class="flex flex-col gap-4 mt-8">
+          {
+            pains.map((pain) => (
+              <li class="flex items-start gap-3 text-ink-soft text-base">
+                <span class="flex-none mt-0.5 text-accent">
+                  <CircleCheck size={20} stroke-width={2} />
+                </span>
+                <span class="text-justify leading-relaxed">{pain}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-8 text-ink text-base text-justify leading-relaxed">
+          <em>スキル</em>は、うまくいった手順をAIエージェントが理解できる形で保存し、何度でも呼び出せる「型」にする仕組みです。プロンプトを都度書く代わりに、スキルを渡すだけで再現性のある結果が得られます。
+        </p>
+      </div>
+
+      <!-- bottom weight: framed supporting visual -->
+      <figure class="mt-14">
+        <div class="border border-border rounded-2xl overflow-hidden aspect-video">
+          <Image
+            src={macbookCode}
+            alt="ノートパソコンの画面に表示されたコードエディタ"
+            width={1600}
+            height={900}
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <figcaption class="mt-3 text-ink-soft text-sm">
+          一度作ったスキルは、案件をまたいで何度でも呼び出せる資産になる。
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ WHAT'S INCLUDED ============ -->
+    <section
+      id="included"
+      aria-labelledby="included-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="included-heading" class="max-w-xl text-ink text-left">
+          講座の中身
+        </h2>
+        <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+          「使い方」だけでなく「作り方」まで解説する、実践と学習の両面を持つパッケージです。
+        </p>
+
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+            <ShieldCheck size={22} stroke-width={1.75} class="text-accent" />
+            <h3 class="mt-4 min-h-[3.5rem] text-lg text-left leading-snug">
+              専門性・実績に裏打ちされた内容
+            </h3>
+            <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+              黎明期からWeb制作の現場に立ち続け、多数の関連書籍・記事の執筆/監修を手がけてきた著者の実務知見をそのまま形にしている。
+            </p>
+          </div>
+          <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+            <Video size={22} stroke-width={1.75} class="text-accent" />
+            <h3 class="mt-4 min-h-[3.5rem] text-lg text-left leading-snug">
+              29スキル × 動画31本のボリューム
+            </h3>
+            <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+              一般非公開のスキルを含む全29個を日本語化し、使い方・作り方をそれぞれ動画で解説。約3時間20分に凝縮。
+            </p>
+          </div>
+          <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+            <Wand size={22} stroke-width={1.75} class="text-accent" />
+            <h3 class="mt-4 min-h-[3.5rem] text-lg text-left leading-snug">
+              プロンプトではなく"スキル"形式
+            </h3>
+            <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+              Figmaを使う実務現場でそのまま活用できる実践的スキル集であると同時に、自分の業務に合わせて改善・開発する教材にもなる。
+            </p>
+          </div>
+        </div>
+
+        <!-- bottom weight: supporting banner image -->
+        <figure class="mt-10">
+          <div class="border border-border rounded-2xl overflow-hidden aspect-[21/9]">
+            <Image
+              src={laptopWork}
+              alt="ノートパソコンで作業をしている手元"
+              width={1920}
+              height={823}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <figcaption class="mt-3 text-ink-soft text-sm">
+            動画は1本ずつ短く区切られており、必要なスキルだけをつまみ食いすることもできる。
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SKILL HIGHLIGHTS ============ -->
+    <section id="skills" aria-labelledby="skills-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+      <h2 id="skills-heading" class="max-w-xl text-ink text-left">
+        収録スキルの一例
+      </h2>
+      <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+        全29スキルのうち、代表的なものをいくつか紹介します。残りは講座内で公開しています。
+      </p>
+
+      <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10">
+        {
+          skillHighlights.map((skill) => (
+            <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+              <skill.icon size={22} stroke-width={1.75} class="text-accent" />
+              <p class="mt-4 text-ink-soft text-sm uppercase tracking-wide">
+                {skill.category}
+              </p>
+              <h3 class="mt-1 min-h-[3.5rem] font-mono text-base text-left leading-snug">
+                {skill.name}
+              </h3>
+              <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+                {skill.desc}
+              </p>
+            </div>
+          ))
+        }
+
+        <!-- Inline CTA fused into the grid (banner-blindness countermeasure) -->
+        <div class="relative flex flex-col justify-end bg-ink p-6 rounded-2xl min-h-[16rem] overflow-hidden text-canvas">
+          <Image
+            src={deskWorkspace}
+            alt=""
+            width={1200}
+            height={900}
+            class="absolute inset-0 opacity-30 w-full h-full object-cover"
+          />
+          <div class="z-10 relative">
+            <p class="text-white/70 text-sm">他 24 スキル</p>
+            <p class="mt-1 font-heading text-xl leading-snug">
+              残りは講座内で、すべて公開
+            </p>
+            <a
+              href={PURCHASE_URL}
+              class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 mt-4 px-4 py-2.5 rounded-full font-medium text-white text-sm transition"
+            >
+              9,900円で全スキルを見る
+              <ArrowRight size={16} stroke-width={2} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AUTHOR CREDIBILITY ============ -->
+    <section id="author" aria-labelledby="author-heading" class="bg-surface-alt py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-5xl">
+        <div class="max-w-2xl">
+          <p class="flex items-center gap-2 mb-4 text-ink-soft text-sm tracking-[0.1em] uppercase">
+            <GraduationCap size={18} stroke-width={2} />
+            講師紹介
+          </p>
+          <h2 id="author-heading" class="text-ink text-left">こもりまさあき</h2>
+          <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+            インターネット黎明期から活動し、数多くのWeb制作関連の記事・書籍の執筆/監修を手がけてきたWeb制作者。今なお現役で実務の現場に立ち続け、最新の技術スタックを日々の制作業務に取り入れている。
+          </p>
+          <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+            本講座で公開するスキル群は、制作時間の短縮と自身の時間単価の最大化のために、実務の中から生み出されたもの。誇張のない、現場目線の内容を心がけている。
+          </p>
+        </div>
+
+        <!-- bottom weight: large pull-quote -->
+        <blockquote class="relative mt-14 pl-8 md:pl-12 max-w-3xl">
+          <Quote size={32} stroke-width={1.5} class="top-0 left-0 absolute text-accent" />
+          <p class="font-heading text-2xl md:text-3xl text-left leading-snug">
+            プロンプトを書く技術ではなく、AIと働くための「仕組み」を作る技術を届けたい。
+          </p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ PRICING / OFFER ============ -->
+    <section id="pricing" aria-labelledby="pricing-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+      <div class="max-w-xl">
+        <p class="flex items-center gap-2 mb-4 text-accent-dark text-sm tracking-[0.1em] uppercase">
+          <BadgePercent size={18} stroke-width={2} />
+          期間限定オファー
+        </p>
+        <h2 id="pricing-heading" class="text-ink text-left">
+          夏休み応援ディスカウント
+        </h2>
+        <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+          クーポンコードの入力で、通常15,400円（税込）の講座が期間限定9,900円（税込）に。7月21日からは定価が19,800円（税込）に改定される予定です。
+        </p>
+        <p id="countdown" class="mt-4 font-medium text-accent-dark text-base">
+          残り時間を計算しています…
+        </p>
+      </div>
+
+      <!-- bottom weight: the price card itself -->
+      <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
+        <div class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12">
+          <div>
+            <p class="text-white/50 text-sm line-through">通常価格 15,400円（税込）</p>
+            <p class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl">
+              9,900<span class="text-2xl">円</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
+
+            <div class="flex flex-wrap items-center gap-3 mt-6">
+              <span class="bg-white/10 px-4 py-2 border border-white/15 rounded-full font-mono text-sm">
+                YHMRT9CTG5XX
+              </span>
+              <span class="text-white/50 text-sm">チェックアウト時に入力</span>
+            </div>
+
+            <a
+              href={PURCHASE_URL}
+              class="inline-flex items-center gap-2 bg-accent hover:brightness-110 shadow-xs mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
+            >
+              クーポン適用で申し込む
+              <ArrowRight size={18} stroke-width={2} />
+            </a>
+          </div>
+
+          <ul class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base">
+            <li class="flex items-start gap-3">
+              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <span>全29スキル（一般非公開のものを含む）</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <span>解説動画31本・約3時間20分</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <span>使い方だけでなく、作り方の解説付き</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <span>買い切り・視聴期限なし</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t">
+          <p class="text-white/70 text-sm">
+            公式LINE友だち登録で、さらに10%OFFクーポンも配布中
+          </p>
+          <a href={LINE_URL} class="text-white text-sm underline underline-offset-4">
+            LINEで10%OFFクーポンを受け取る
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-heading" class="bg-surface-alt py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-3xl">
+        <p class="flex items-center gap-2 mb-4 text-ink-soft text-sm tracking-[0.1em] uppercase">
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">よくある質問</h2>
+
+        <div class="mt-8 *:border-border *:border-b">
+          <details class="group py-5">
+            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+              スキルはどんな環境で使えますか？
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+              主にClaude Code環境と、Vite + Tailwind CSS v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
+            </p>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+              プログラミング未経験でも受講できますか？
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+              Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
+            </p>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+              クーポンはどこで使えますか？
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+              商品ページのチェックアウト画面でコード「YHMRT9CTG5XX」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
+            </p>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+              講座の詳細な内容はどこで確認できますか？
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+              全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくはこちらからご確認ください。
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA (full-bleed) ============ -->
+    <section aria-labelledby="final-cta-heading" class="relative py-24 md:py-32 overflow-hidden text-canvas">
+      <Image
+        src={codeScreen}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/85"></div>
+      <div class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">
+        <Clock size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          9,900円で、今すぐ始める
+        </h2>
+        <p class="max-w-md text-white/70 text-base text-justify leading-relaxed">
+          夏休み応援ディスカウントは7月20日23:59まで。7月21日からは定価19,800円に改定される予定です。
+        </p>
+        <a
+          href={PURCHASE_URL}
+          class="inline-flex items-center gap-2 bg-accent hover:brightness-110 shadow-xs px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          クーポン適用で申し込む
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a href={PRODUCT_URL} class="text-white/60 hover:text-white text-sm underline underline-offset-4">
+          商品ページで詳細を見る
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
 </Layout>
+
+<script>
+  const target = new Date('2026-07-20T23:59:00+09:00').getTime();
+  const el = document.getElementById('countdown');
+
+  function tick() {
+    if (!el) return;
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      el.textContent = '受付は終了しました';
+      return;
+    }
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    el.textContent = `クーポン期限まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>

@@ -133,6 +133,25 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       ))
     }
 
+    <!-- ============ TRIAL NOTE ============ -->
+    <section class="mx-auto px-6 max-w-5xl">
+      <div class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft">
+        <Puzzle size={18} stroke-width={2} class="flex-none mt-0.5 text-accent-dark" />
+        <p class="text-sm text-justify leading-snug text-accent-dark">
+          購入前に動作を試したい方向けに、軽量版スキル「create-mockup-lite」を
+          <a
+            href="https://github.com/gaspanik/create-mockup-lite-skill"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-4"
+          >
+            GitHub
+          </a>
+          にて無料公開しています。
+        </p>
+      </div>
+    </section>
+
     <!-- ============ CTA ============ -->
     <section class="bg-ink py-20 md:py-28 text-canvas">
       <div class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">

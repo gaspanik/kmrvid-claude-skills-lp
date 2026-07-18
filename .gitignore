@@ -132,3 +132,7 @@ mise.local.toml
 
 # generated types
 .astro/
+
+.dev.vars*
+!.dev.vars.example
+!.env.example

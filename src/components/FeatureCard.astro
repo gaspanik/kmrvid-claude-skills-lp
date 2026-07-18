@@ -1,0 +1,21 @@
+---
+type IconComponent = (_props: Record<string, unknown>) => unknown;
+
+interface Props {
+  icon: IconComponent;
+  title: string;
+  description: string;
+}
+
+const { icon: Icon, title, description } = Astro.props;
+---
+
+<div>
+  <Icon size={22} stroke-width={1.75} class="text-accent" />
+  <h3 class="mt-4 min-h-14 text-lg text-left leading-snug">
+    {title}
+  </h3>
+  <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+    {description}
+  </p>
+</div>

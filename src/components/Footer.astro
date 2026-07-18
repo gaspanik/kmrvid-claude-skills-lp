@@ -17,12 +17,22 @@ const LINE_URL = 'https://lin.ee/EOgmkKQ';
 
       <nav aria-label="フッターナビゲーション">
         <p class="text-white/40 text-sm uppercase tracking-[0.15em]">Menu</p>
-        <ul class="flex flex-col gap-2 mt-4 text-sm">
-          <li><a href="#included" class="hover:text-accent transition-colors">講座内容</a></li>
-          <li><a href="#skills" class="hover:text-accent transition-colors">収録スキル</a></li>
-          <li><a href="#author" class="hover:text-accent transition-colors">講師紹介</a></li>
-          <li><a href="#pricing" class="hover:text-accent transition-colors">料金</a></li>
-          <li><a href="#faq" class="hover:text-accent transition-colors">FAQ</a></li>
+        <ul class="flex flex-col mt-4 text-sm">
+          <li>
+            <a href="#included" class="flex items-center min-h-11 hover:text-accent transition-colors">講座内容</a>
+          </li>
+          <li>
+            <a href="#skills" class="flex items-center min-h-11 hover:text-accent transition-colors">収録スキル</a>
+          </li>
+          <li>
+            <a href="#author" class="flex items-center min-h-11 hover:text-accent transition-colors">講師紹介</a>
+          </li>
+          <li>
+            <a href="#pricing" class="flex items-center min-h-11 hover:text-accent transition-colors">料金</a>
+          </li>
+          <li>
+            <a href="#faq" class="flex items-center min-h-11 hover:text-accent transition-colors">FAQ</a>
+          </li>
         </ul>
       </nav>
 
@@ -31,13 +41,13 @@ const LINE_URL = 'https://lin.ee/EOgmkKQ';
         <div class="flex flex-col items-start gap-3 mt-4">
           <a
             href={PURCHASE_URL}
-            class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 px-4 py-2.5 rounded-full font-medium text-white text-sm transition"
+            class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
           >
             クーポンで申し込む
           </a>
           <a
             href={LINE_URL}
-            class="text-white/70 hover:text-white text-sm underline underline-offset-4"
+            class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
           >
             公式LINEで10%OFFクーポンを受け取る
           </a>
@@ -49,7 +59,7 @@ const LINE_URL = 'https://lin.ee/EOgmkKQ';
       class="flex sm:flex-row flex-col justify-between gap-4 mt-12 pt-8 border-white/10 border-t text-white/50 text-sm"
     >
       <p>&copy; kmrvid.com — KMRVID Claude Skills</p>
-      <p class="max-w-xl text-justify">
+      <p class="max-w-xl text-base text-justify">
         本講座に付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
       </p>
     </div>

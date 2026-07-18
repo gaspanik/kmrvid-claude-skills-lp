@@ -50,8 +50,6 @@
   h6 {
     font-family: var(--heading-font-family);
     line-height: var(--line-height-none);
-    text-wrap: balance;
-    word-break: keep-all;
   }
 
   h1 {
@@ -71,10 +69,6 @@
   }
   h6 {
     font-size: var(--text-base);
-  }
-
-  p {
-    text-wrap: pretty;
   }
 
   em {

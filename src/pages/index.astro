@@ -2,8 +2,10 @@
 import {
   ArrowRight,
   BadgePercent,
+  BookOpen,
   CircleCheck,
   Clock,
+  ExternalLink,
   GraduationCap,
   Languages,
   ListChecks,
@@ -19,6 +21,7 @@ import macbookCode from '@/assets/images/macbook-code.jpg';
 import laptopWork from '@/assets/images/laptop-work.jpg';
 import deskWorkspace from '@/assets/images/desk-workspace.jpg';
 import codeScreen from '@/assets/images/code-screen.jpg';
+import authorPhoto from '@/assets/images/IMG_8341_square.png';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Layout from '@/layouts/Layout.astro';
@@ -28,6 +31,15 @@ const PURCHASE_URL =
   'https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills';
 const LINE_URL = 'https://lin.ee/EOgmkKQ';
 const PRODUCT_URL = 'https://kmrvid.com/products/kmrvid-claude-skills';
+const BOOKS_URL = 'https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks';
+
+const socialLinks = [
+  { label: 'X', href: 'https://x.com/cipher/' },
+  { label: 'Facebook', href: 'https://www.facebook.com/gaspanik' },
+  { label: 'GitHub', href: 'https://github.com/gaspanik' },
+  { label: 'Instagram', href: 'https://www.instagram.com/cipher' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@kmrvid' },
+];
 
 const pains = [
   '同じような指示を、案件のたびにゼロから書き直している',
@@ -317,20 +329,59 @@ const skillHighlights = [
           </p>
           <h2 id="author-heading" class="text-ink text-left">こもりまさあき</h2>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-            インターネット黎明期から活動し、数多くのWeb制作関連の記事・書籍の執筆/監修を手がけてきたWeb制作者。今なお現役で実務の現場に立ち続け、最新の技術スタックを日々の制作業務に取り入れている。
+            1990年代前半、都内のDTP系デザイン会社でアルバイトを始め、大学卒業後にそのまま正社員として入出力・デザイン・ネットワーク関連の業務に従事。2001年に独立し、以降フリーランスとして活動を続けている。
           </p>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-            本講座で公開するスキル群は、制作時間の短縮と自身の時間単価の最大化のために、実務の中から生み出されたもの。誇張のない、現場目線の内容を心がけている。
+            案件ごとに担う役割が異なるため、単一の職域的な肩書きは持たない。Web制作関連書籍の執筆を多数手がける一方、近年はフロントエンド周りの制作業務に関わりながら、Figmaの企業研修講師やデザインシステム構築、Shopifyの運用サポート・コンサルティングなど幅広く活動中。本講座のスキル群も、こうした実務の中から生まれたものをそのまま形にしている。
           </p>
+
+          <a
+            href={BOOKS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            <BookOpen size={16} stroke-width={2} />
+            これまでの執筆・監修書籍一覧（Amazon）
+          </a>
+
+          <ul class="flex flex-wrap gap-2 mt-4">
+            {
+              socialLinks.map((social) => (
+                <li>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 bg-canvas hover:border-accent px-3 py-1.5 border border-border rounded-full text-ink-soft hover:text-accent text-xs transition"
+                  >
+                    {social.label}
+                    <ExternalLink size={12} stroke-width={2} />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
 
-        <!-- bottom weight: large pull-quote -->
-        <blockquote class="relative mt-14 pl-8 md:pl-12 max-w-3xl">
-          <Quote size={32} stroke-width={1.5} class="top-0 left-0 absolute text-accent" />
-          <p class="font-heading text-2xl md:text-3xl text-left leading-snug">
-            プロンプトを書く技術ではなく、AIと働くための「仕組み」を作る技術を届けたい。
-          </p>
-        </blockquote>
+        <!-- bottom weight: photo + pull-quote -->
+        <div class="items-start gap-8 grid grid-cols-1 md:grid-cols-[auto_1fr] mt-14 max-w-3xl">
+          <div class="border border-border rounded-full w-36 md:w-44 overflow-hidden shrink-0 aspect-square">
+            <Image
+              src={authorPhoto}
+              alt="著者 こもりまさあきのプロフィール写真"
+              width={400}
+              height={400}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <blockquote class="relative pl-8">
+            <Quote size={32} stroke-width={1.5} class="top-0 left-0 absolute text-accent" />
+            <p class="font-heading text-2xl md:text-3xl text-left leading-snug">
+              プロンプトを書く技術ではなく、AIと働くための「仕組み」を作る技術を届けたい。
+            </p>
+          </blockquote>
+        </div>
       </div>
     </section>
 

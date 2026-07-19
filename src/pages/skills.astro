@@ -1,77 +1,179 @@
 ---
-import { ArrowLeft, ArrowRight, BadgePercent, LayoutTemplate, Layers, Palette, Puzzle, Rocket, Wrench } from '@lucide/astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import Layout from '@/layouts/Layout.astro';
+import {
+  ArrowLeft,
+  ArrowRight,
+  BadgePercent,
+  LayoutTemplate,
+  Layers,
+  Palette,
+  Puzzle,
+  Rocket,
+  Wrench,
+} from "@lucide/astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Layout from "@/layouts/Layout.astro";
 
 const PURCHASE_URL =
-  'https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills';
+  "https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills";
 
 const categories = [
   {
     icon: Rocket,
-    name: 'セットアップ系',
-    tagline: '新規プロジェクトを立ち上げる',
+    name: "セットアップ系",
+    tagline: "新規プロジェクトを立ち上げる",
     skills: [
-      { name: 'setup-astro', desc: 'Astro v7 + Tailwind v4 の新規プロジェクトをセットアップ' },
-      { name: 'setup-html', desc: 'Vite + TypeScript + Tailwind のバニラHTMLプロジェクトをセットアップ' },
-      { name: 'setup-react', desc: 'Vite + React + TanStack Router の新規プロジェクトをセットアップ' },
-      { name: 'mockup-pipeline', desc: 'セットアップ → DESIGN.md → タイプスケール → モックアップまで一括実行' },
-      { name: 'full-pipeline', desc: 'mockup-pipelineに続けてmobile-polish → tailwind-review →（Astroなら）astro-doctor → DESIGN.md再生成まで自動実行する統合パイプライン' },
-      { name: 'lp-pipeline', desc: 'ランディングページ（LP）に特化した一気通貫パイプライン。目的・ターゲットに合わせてセクションを事前選択し、create-mockup → tailwind-review → mobile-polishまで自動実行' },
+      {
+        name: "setup-astro",
+        desc: "Astro v7 + Tailwind v4 の新規プロジェクトをセットアップ",
+      },
+      {
+        name: "setup-html",
+        desc: "Vite + TypeScript + Tailwind のバニラHTMLプロジェクトをセットアップ",
+      },
+      {
+        name: "setup-react",
+        desc: "Vite + React + TanStack Router の新規プロジェクトをセットアップ",
+      },
+      {
+        name: "mockup-pipeline",
+        desc: "セットアップ → DESIGN.md → タイプスケール → モックアップまで一括実行",
+      },
+      {
+        name: "full-pipeline",
+        desc: "mockup-pipelineに続けてmobile-polish → tailwind-review →（Astroなら）astro-doctor → DESIGN.md再生成まで自動実行する統合パイプライン",
+      },
+      {
+        name: "lp-pipeline",
+        desc: "ランディングページ（LP）に特化した一気通貫パイプライン。目的・ターゲットに合わせてセクションを事前選択し、create-mockup → tailwind-review → mobile-polishまで自動実行",
+      },
     ],
   },
   {
     icon: LayoutTemplate,
-    name: 'モックアップ作成系',
-    tagline: 'コードからUIを組み上げる',
-    note: 'create-mockup / create-multi-mockupは、cognitive-ui-design（定番レイアウトからの脱却）やjapanese-web-guideline（日本語サイトの実装補正）と組み合わせることで、AIにありがちな凡庸な仕上がりを避けられます。',
+    name: "モックアップ作成系",
+    tagline: "コードからUIを組み上げる",
+    note: "create-mockup / create-multi-mockupは、cognitive-ui-design（定番レイアウトからの脱却）やjapanese-web-guideline（日本語サイトの実装補正）と組み合わせることで、AIにありがちな凡庸な仕上がりを避けられます。",
     skills: [
-      { name: 'brief-me', desc: 'モックアップ作成前にビジネス要件をヒアリングしてBRIEF.mdを生成' },
-      { name: 'create-mockup', desc: 'FigmaなしでUIをゼロから構築' },
-      { name: 'create-multi-mockup', desc: '複数レイアウトパターンを一括生成して比較' },
-      { name: 'mobile-polish', desc: '既存モックアップにモバイル対応・ナビゲーションを追加' },
-      { name: 'rewrite-me', desc: '実装済みページの文言をBRIEF.mdの要件に合わせて書き直し' },
-      { name: 'create-design-md', desc: 'Google design.md仕様のDESIGN.mdをプロジェクトルートに生成' },
-      { name: 'export-design-md', desc: 'DESIGN.mdをビジュアルHTML / Astroページに変換' },
+      {
+        name: "brief-me",
+        desc: "モックアップ作成前にビジネス要件をヒアリングしてBRIEF.mdを生成",
+      },
+      { name: "create-mockup", desc: "FigmaなしでUIをゼロから構築" },
+      {
+        name: "create-multi-mockup",
+        desc: "複数レイアウトパターンを一括生成して比較",
+      },
+      {
+        name: "mobile-polish",
+        desc: "既存モックアップにモバイル対応・ナビゲーションを追加",
+      },
+      {
+        name: "create-design-md",
+        desc: "Google design.md仕様のDESIGN.mdをプロジェクトルートに生成",
+      },
+      {
+        name: "export-design-md",
+        desc: "DESIGN.mdをビジュアルHTML / Astroページに変換",
+      },
+      {
+        name: "rewrite-me",
+        desc: "実装済みページの文言をBRIEF.mdの要件に合わせて書き直し",
+      },
     ],
   },
   {
     icon: Layers,
-    name: 'Figma系',
-    tagline: 'Figmaと連携する（Tailwindベース）',
-    note: 'Figmaのフレーム構造は、そのままコードの構造に反映されます。先にfigma-auditでAI実装精度を診断し、スコアが低い箇所をFigma側で直してから実装に進むと、修正が少なく済みます。',
+    name: "Figma系",
+    tagline: "Figmaと連携する（Tailwindベース）",
+    note: "Figmaのフレーム構造は、そのままコードの構造に反映されます。先にfigma-auditでAI実装精度を診断し、スコアが低い箇所をFigma側で直してから実装に進むと、修正が少なく済みます。",
     skills: [
-      { name: 'figma-audit', desc: 'フレームのAI実装精度を4観点で検査してレポート出力' },
-      { name: 'figma-component-audit', desc: 'コンポーネント構造・バリアントを5観点で監査' },
-      { name: 'figma-weather', desc: '実装品質を天気形式（☀️〜🌀）でスコアリング（figma-auditと中身は同じ）' },
-      { name: 'figma-node-check', desc: 'use_figma実行前に読み込む必須チェックルール' },
-      { name: 'figma-workflow', desc: 'Figma → 実装 → レビュー → 最適化をサブエージェントで逐次実行' },
-      { name: 'figma-pipeline', desc: 'figma-weather → セットアップ → 変数同期 → 実装まで一気通貫' },
-      { name: 'figma-to-tailwind', desc: 'Figma VariablesをTailwind @themeトークンとして書き出し' },
-      { name: 'tailwind-to-figma', desc: 'Tailwind @themeトークンをFigma Variablesとして書き出し' },
-      { name: 'code-to-figma', desc: '実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）' },
+      {
+        name: "figma-audit",
+        desc: "フレームのAI実装精度を4観点で検査してレポート出力。改善点を修正してAIレディなFigmaに",
+      },
+      {
+        name: "figma-component-audit",
+        desc: "コンポーネント単位でのチェックはこちら。コンポーネント構造・バリアントを5観点で監査",
+      },
+      {
+        name: "figma-weather",
+        desc: "実装品質を天気形式（☀️〜🌀）でスコアリング（figma-auditと中身は同じ）",
+      },
+      {
+        name: "figma-node-check",
+        desc: "use_figma実行前に読み込む必須チェックルール。「code-to-figma」の裏でも使われる最重要スキル",
+      },
+      {
+        name: "figma-workflow",
+        desc: "Figma → 実装 → レビュー → 最適化をサブエージェントで逐次実行。作業環境が既にある場合に",
+      },
+      {
+        name: "figma-pipeline",
+        desc: "figma-weather → セットアップ → 変数同期 → 実装まで一気通貫",
+      },
+      {
+        name: "figma-to-tailwind",
+        desc: "Figma VariablesをTailwind @themeトークンとして書き出し",
+      },
+      {
+        name: "tailwind-to-figma",
+        desc: "Tailwind @themeトークンをFigma Variablesとして書き出し",
+      },
+      {
+        name: "code-to-figma",
+        desc: "実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）",
+      },
     ],
   },
   {
     icon: Palette,
-    name: 'Tailwind系',
-    tagline: 'スタイリングを整える',
+    name: "Tailwind系",
+    tagline: "スタイリングを整える",
     skills: [
-      { name: 'tailwind-review', desc: 'コードレビュー・v3→v4移行・アクセシビリティ構造の検証・自動修正適用' },
-      { name: 'tailwind-typescale', desc: 'Tailwind標準の書体サイズを変更する。ベースサイズとスケール比率を選んで@themeに適用' },
+      {
+        name: "tailwind-review",
+        desc: "コードレビュー・v3→v4移行・アクセシビリティ構造の検証・自動修正適用",
+      },
+      {
+        name: "tailwind-typescale",
+        desc: "Tailwind標準の書体サイズを変更する。ベースサイズとスケール比率を選んで@themeに適用",
+      },
     ],
   },
   {
     icon: Wrench,
-    name: '仕上げ・改善系',
-    tagline: '実装時、実装後の品質を上げる',
+    name: "仕上げ・改善系",
+    tagline: "実装時、実装後の品質を上げる",
     skills: [
-      { name: 'astro-doctor', desc: 'Astroコードを最新仕様に照合しコンポーネント粒度を最適化' },
-      { name: 'click-to-fix', desc: 'コードに不慣れな方でもブラウザ上をクリックして修正指示をそのまま実装' },
-      { name: 'visual-polish', desc: 'AI自身がスクリーンショットを撮りながら最大5回ループで自律修正' },
-      { name: 'japanese-web-guideline', desc: '日本語サイト特有の実装パターンのガイドライン' },
-      { name: 'cognitive-ui-design', desc: '視線誘導トポロジーと認知バイアス対策で、定番レイアウト・無難な配色への安易な依存を崩すガイドライン' },
+      {
+        name: "click-to-fix",
+        desc: "コードに不慣れな方でもブラウザ上をクリックして修正指示をそのまま実装",
+      },
+      {
+        name: "visual-polish",
+        desc: "AI自身がスクリーンショットを撮りながら最大5回ループで自律修正",
+      },
+      {
+        name: "finish-me",
+        desc: "既存モックアップに対して、最適化処理を対話形式で順番に実行する仕上げパイプライン",
+      },
+      {
+        name: "japanese-web-guideline",
+        desc: "日本語Webサイト・ページの実装時に、AIが陥りやすいデフォルト設定を補正するガイドラインスキル",
+      },
+      {
+        name: "cognitive-ui-design",
+        desc: "視線誘導トポロジーと認知バイアス対策で、定番レイアウト・無難な配色への安易な依存を崩すガイドライン",
+      },
+      {
+        name: "japanese-lp-seasoning",
+        desc: "日本の商業LPで使われるフルブリード・カルーセル・スクロール連動アニメ等のあしらいを、密度確認を挟んで選択・実装",
+      },
+      {
+        name: "astro-doctor",
+        desc: "Astroコードを最新仕様に照合しコンポーネント粒度を最適化",
+      },
     ],
   },
 ];
@@ -92,11 +194,15 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
         トップページに戻る
       </a>
 
-      <p class="mt-8 text-ink-soft text-sm uppercase tracking-widest">収録スキル一覧</p>
+      <p class="mt-8 text-ink-soft text-sm uppercase tracking-widest">
+        収録スキル一覧
+      </p>
       <h1 class="max-w-2xl text-ink max-sm:text-3xl text-left">
-        全{totalSkills}スキルで、実務のワークフローをまるごと自動化する
+        全{totalSkills}スキル。実務のワークフローをまるごと自動化する
       </h1>
-      <p class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+      <p
+        class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
         セットアップからモックアップ作成、Figma連携、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連の工程をカテゴリごとに整理しました。使い方だけでなく作り方の解説も付いているため、自分の業務に合わせたカスタマイズや新規スキル開発の参考にもなります。
       </p>
     </section>
@@ -114,15 +220,23 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
 
           {category.note && (
             <div class="flex items-start gap-3 mt-6 p-4 rounded-2xl max-w-2xl bg-accent-soft">
-              <Puzzle size={18} stroke-width={2} class="flex-none mt-0.5 text-accent-dark" />
-              <p class="text-sm text-justify leading-snug text-accent-dark">{category.note}</p>
+              <Puzzle
+                size={18}
+                stroke-width={2}
+                class="flex-none mt-0.5 text-accent-dark"
+              />
+              <p class="text-sm text-justify leading-snug text-accent-dark">
+                {category.note}
+              </p>
             </div>
           )}
 
           <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
             {category.skills.map((skill) => (
               <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
-                <p class="font-mono text-base text-left leading-snug">{skill.name}</p>
+                <p class="font-mono text-base text-left leading-snug">
+                  {skill.name}
+                </p>
                 <p class="flex-1 mt-2 text-ink-soft text-sm text-justify leading-snug">
                   {skill.desc}
                 </p>
@@ -134,9 +248,15 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
     }
 
     <!-- ============ TRIAL NOTE ============ -->
-    <section class="mx-auto px-6 pb-14 md:pb-20 max-w-5xl">
-      <div class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft">
-        <Puzzle size={18} stroke-width={2} class="flex-none mt-0.5 text-accent-dark" />
+    <section class="flex flex-col gap-4 mx-auto px-6 pb-14 md:pb-20 max-w-5xl">
+      <div
+        class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft"
+      >
+        <Puzzle
+          size={18}
+          stroke-width={2}
+          class="flex-none mt-0.5 text-accent-dark"
+        />
         <p class="text-sm text-justify leading-snug text-accent-dark">
           購入前に動作を試したい方向けに、軽量版スキル「create-mockup-lite」を
           <a
@@ -150,17 +270,44 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
           にて無料公開しています。
         </p>
       </div>
+      <div
+        class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft"
+      >
+        <Puzzle
+          size={18}
+          stroke-width={2}
+          class="flex-none mt-0.5 text-accent-dark"
+        />
+        <p class="text-sm text-justify leading-snug text-accent-dark">
+          「create-mockup-lite」「click-to-fix」の紹介と作業環境についてこちらの
+          <a
+            href="https://youtu.be/TySJxHhMKNQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-4"
+          >
+            YouTube
+          </a>
+          で動画を用意しています。
+        </p>
+      </div>
     </section>
 
     <!-- ============ CTA ============ -->
     <section class="bg-ink py-20 md:py-28 text-canvas">
-      <div class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">
+      <div
+        class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
         <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
           全{totalSkills}スキル、9,900円で今すぐ手に入る
         </h2>
-        <p class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed">
-          夏休み応援ディスカウントは7月20日23:59まで。7月21日以降は定価19,800円に戻ります。
+        <p
+          class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
+        >
+          夏休み応援ディスカウントは7月20日23:59まで。<br
+            class="hidden md:block"
+          />7月21日以降は定価19,800円に戻ります。
         </p>
         <a
           href={PURCHASE_URL}

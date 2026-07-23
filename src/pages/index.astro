@@ -16,71 +16,88 @@ import {
   Video,
   Wand,
   Workflow,
-} from '@lucide/astro';
-import macbookCode from '@/assets/images/macbook-code.jpg';
-import laptopWork from '@/assets/images/laptop-work.jpg';
-import deskWorkspace from '@/assets/images/desk-workspace.jpg';
-import codeScreen from '@/assets/images/code-screen.jpg';
-import authorPhoto from '@/assets/images/IMG_8341_square.png';
-import FeatureCard from '@/components/FeatureCard.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import Layout from '@/layouts/Layout.astro';
-import { Image } from 'astro:assets';
+} from "@lucide/astro";
+import macbookCode from "@/assets/images/macbook-code.jpg";
+import skillsDiagram from "@/assets/images/Gemini_Generated_Image_x3epc5x3epc5x3ep.png";
+import deskWorkspace from "@/assets/images/desk-workspace.jpg";
+import codeScreen from "@/assets/images/code-screen.jpg";
+import authorPhoto from "@/assets/images/IMG_8341_square.png";
+import FeatureCard from "@/components/FeatureCard.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 const PURCHASE_URL =
-  'https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills';
-const LINE_URL = 'https://lin.ee/EOgmkKQ';
-const PRODUCT_URL = 'https://kmrvid.com/products/kmrvid-claude-skills';
-const BOOKS_URL = 'https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks';
+  "https://kmrvid.com/discount/FK05ANQ7HZHZ?redirect=%2Fproducts%2Fkmrvid-claude-skills";
+const LINE_URL = "https://lin.ee/EOgmkKQ";
+const PRODUCT_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
+const BOOKS_URL = "https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks";
 
 const socialLinks = [
-  { label: 'X', href: 'https://x.com/cipher/' },
-  { label: 'Facebook', href: 'https://www.facebook.com/gaspanik' },
-  { label: 'GitHub', href: 'https://github.com/gaspanik' },
-  { label: 'Instagram', href: 'https://www.instagram.com/cipher' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@kmrvid' },
+  { label: "X", href: "https://x.com/cipher/" },
+  { label: "Facebook", href: "https://www.facebook.com/gaspanik" },
+  { label: "GitHub", href: "https://github.com/gaspanik" },
+  { label: "Instagram", href: "https://www.instagram.com/cipher" },
+  { label: "YouTube", href: "https://www.youtube.com/@kmrvid" },
 ];
 
 const pains = [
-  '同じような指示を、案件のたびにゼロから書き直している',
-  '思った通りの結果になるかは、そのときの運と勘に左右される',
-  'うまくいった手順を、チームや将来の自分に共有できない',
+  "同じような指示を、案件のたびにゼロから書き直している",
+  "思った通りの結果になるかは、そのときの運と勘に左右される",
+  "うまくいった手順を、チームや将来の自分に共有できない",
 ];
 
 const skillHighlights = [
   {
     icon: Wand,
-    name: 'create-mockup',
-    category: 'モックアップ作成系',
-    desc: 'Figmaなしで、サイトの種類・デザインスタイル・ページ構成をヒアリングしながらUIをゼロから組み上げる。',
+    name: "css-to-tailwind",
+    category: "Tailwind最適化系",
+    desc: "オリジナルのプレーンなCSS / Sass・SCSS のコードベースから Tailwind CSS v4 への初回移行を支援。",
   },
   {
     icon: PenTool,
-    name: 'figma-audit / figma-weather',
-    category: 'Figma連携・品質チェック系',
-    desc: 'Figmaフレームの構造がAIにとって実装しやすいかを4つの観点で検査し、天気予報形式でスコアを提示する。',
+    name: "figma-layer-rename",
+    category: "Figma連携・品質チェック系",
+    desc: "Figmaのフレーム/セクション全体を走査し、自動生成されたレイヤー名を意味のある名前にリネーム。",
   },
   {
     icon: ListChecks,
-    name: 'tailwind-review',
-    category: 'Tailwind最適化系',
-    desc: 'Tailwind CSSのv3→v4移行チェックやアクセシビリティ構造の検証・自動修正まで一括で行う。',
+    name: "figma-tokenize",
+    category: "Figma連携・品質チェック系",
+    desc: "変数なしのFigmaでハードコードされた色・フォントサイズ・スペーシングをトークン化して変数バインド。",
+  },
+  {
+    icon: Wand,
+    name: "create-mockup",
+    category: "モックアップ作成系",
+    desc: "Figmaなしで、サイトの種類・デザインスタイル・ページ構成をヒアリングしながらUIをゼロから組み上げる。",
+  },
+  {
+    icon: PenTool,
+    name: "figma-audit / figma-weather",
+    category: "Figma連携・品質チェック系",
+    desc: "Figmaフレームの構造がAIにとって実装しやすいかを4つの観点で検査し、天気予報形式でスコアを提示する。",
+  },
+  {
+    icon: ListChecks,
+    name: "tailwind-review",
+    category: "Tailwind最適化系",
+    desc: "Tailwind CSSのv3→v4移行チェックやアクセシビリティ構造の検証・自動修正まで一括で行う。",
   },
   {
     icon: Languages,
-    name: 'japanese-web-guideline',
-    category: '日本語サイト品質ガイドライン',
-    desc: '見出しの折り返し・行間・文字サイズなど、日本語サイト特有にAIが陥りやすい実装のクセを補正する。',
+    name: "japanese-web-guideline",
+    category: "日本語サイト品質ガイドライン",
+    desc: "見出しの折り返し・行間・文字サイズなど、日本語サイト特有にAIが陥りやすい実装のクセを補正する。",
   },
   {
     icon: Workflow,
-    name: 'mockup-pipeline / full-pipeline',
-    category: 'オーケストレーション系',
-    desc: 'セットアップからモックアップ生成、仕上げの調整までを一括で自動実行するパイプラインスキル。',
+    name: "mockup-pipeline / full-pipeline",
+    category: "オーケストレーション系",
+    desc: "セットアップからモックアップ生成、仕上げの調整までを一括で自動実行するパイプラインスキル。",
   },
 ];
-
 ---
 
 <Layout title="KMRVID Claude Skills — Claude Code向けオリジナルスキル講座">
@@ -98,14 +115,17 @@ const skillHighlights = [
           class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full font-medium text-sm bg-accent-soft text-accent-dark"
         >
           <BadgePercent size={16} stroke-width={2} />
-          夏休み応援クーポンで9,900円（〜7月20日 23:59）
+          スキル増量！週末ディスカウント（〜7月26日 23:59）
         </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
           Claude Code オリジナルスキル講座
         </p>
 
-        <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-3xl text-left">
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-3xl text-left"
+        >
           AIには、
           <br class="sm:hidden" />
           毎回"指示"するより
@@ -113,16 +133,20 @@ const skillHighlights = [
           <span class="text-accent">"スキル"</span>を渡した方が速い
         </h1>
 
-        <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
           インターネット黎明期からWeb制作の現場に立ち続け、Web制作関連書籍の執筆・監修やFigmaの企業研修講師も務める著者が、実務の時間単価を最大化するために作ったオリジナルスキル群を一挙公開。プロンプトの書き方ではなく、エージェントが理解できる「スキル」の作り方・使い方を学ぶ講座です。
         </p>
 
-        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+        <div
+          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+        >
           <a
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            9,900円で受講をはじめる
+            15,400円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -140,33 +164,46 @@ const skillHighlights = [
           class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
         >
           <div>
-            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
-              31
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              36
               <span class="font-body text-white/50 text-lg">個</span>
             </p>
-            <p class="mt-2 text-white/60 text-sm">収録スキル数（一般非公開のものを含む）</p>
+            <p class="mt-2 text-white/60 text-sm">
+              収録スキル数（一般非公開のものを含む）
+            </p>
           </div>
           <div>
-            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
               31
               <span class="font-body text-white/50 text-lg">本</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">解説動画の本数</p>
           </div>
           <div>
-            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
               3<span class="text-4xl md:text-5xl">h</span>20<span
                 class="text-4xl md:text-5xl">m</span
               >
             </p>
-            <p class="mt-2 text-white/60 text-sm">総再生時間（2026年7月18日時点）</p>
+            <p class="mt-2 text-white/60 text-sm">
+              総再生時間（2026年7月18日時点）
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ PROBLEM / VALUE PROP ============ -->
-    <section aria-labelledby="problem-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+    <section
+      aria-labelledby="problem-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
       <div class="max-w-2xl">
         <h2 id="problem-heading" class="text-ink text-left">
           その"やり取り"、
@@ -186,13 +223,16 @@ const skillHighlights = [
           }
         </ul>
         <p class="mt-8 text-ink text-base text-justify leading-relaxed">
-          <em>スキル</em>は、うまくいった手順をAIエージェントが理解できる形で保存し、何度でも呼び出せる「型」にする仕組みです。プロンプトを都度書く代わりに、スキルを渡すだけで再現性のある結果が得られます。
+          <em>スキル</em
+          >は、うまくいった手順をAIエージェントが理解できる形で保存し、何度でも呼び出せる「型」にする仕組みです。プロンプトを都度書く代わりに、スキルを渡すだけで再現性のある結果が得られます。
         </p>
       </div>
 
       <!-- bottom weight: framed supporting visual -->
       <figure class="mt-14">
-        <div class="border border-border rounded-2xl aspect-video overflow-hidden">
+        <div
+          class="border border-border rounded-2xl aspect-video overflow-hidden"
+        >
           <Image
             src={macbookCode}
             alt="ノートパソコンの画面に表示されたコードエディタ"
@@ -217,11 +257,15 @@ const skillHighlights = [
         <h2 id="included-heading" class="max-w-xl text-ink text-left">
           講座の中身
         </h2>
-        <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
           「使い方」だけでなく「そのスキルの中身」まで解説する、実践と学習の両面を持つパッケージです。
         </p>
 
-        <div class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl">
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+        >
           <FeatureCard
             icon={ShieldCheck}
             title="専門性・実績に裏打ちされた内容"
@@ -229,8 +273,8 @@ const skillHighlights = [
           />
           <FeatureCard
             icon={Video}
-            title="31スキル × 動画31本のボリューム"
-            description="一般非公開のスキルを含む全31個を日本語化し、そのスキル解説を動画にして約3時間20分に凝縮。スキルは不定期で機能改善・強化のため更新予定。"
+            title="36スキル × 動画31本のボリューム"
+            description="一般非公開のスキルを含む全36個を日本語化し、そのスキル解説を動画にして約3時間20分に凝縮。スキルは不定期で機能改善・強化のため更新予定。"
           />
           <FeatureCard
             icon={Wand}
@@ -241,29 +285,35 @@ const skillHighlights = [
 
         <!-- bottom weight: supporting banner image -->
         <figure class="mt-10">
-          <div class="border border-border rounded-2xl aspect-21/9 overflow-hidden">
+          <div class="border border-border rounded-2xl overflow-hidden">
             <Image
-              src={laptopWork}
-              alt="ノートパソコンで作業をしている手元"
-              width={1920}
-              height={823}
-              class="w-full h-full object-cover"
+              src={skillsDiagram}
+              alt="収録スキル同士の関係性を示した全体相関図"
+              width={1407}
+              height={768}
+              class="w-full h-auto"
             />
           </div>
           <figcaption class="mt-3 text-ink-soft text-sm">
-            動画は1本ずつ短く区切られており、必要なスキルだけをつまみ食いすることもできる。
+            スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。
           </figcaption>
         </figure>
       </div>
     </section>
 
     <!-- ============ SKILL HIGHLIGHTS ============ -->
-    <section id="skills" aria-labelledby="skills-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
       <h2 id="skills-heading" class="max-w-xl text-ink text-left">
         収録スキルの一例
       </h2>
-      <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
-        全31スキルのうち、代表的なものを紹介します。残りは講座内で公開しています。
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        全36スキルのうち、代表的なものを紹介します。残りは講座内で公開しています。
       </p>
       <a
         href="/skills"
@@ -292,7 +342,9 @@ const skillHighlights = [
         }
 
         <!-- Inline CTA fused into the grid (banner-blindness countermeasure) -->
-        <div class="relative flex flex-col justify-end bg-ink p-6 rounded-2xl min-h-64 overflow-hidden text-canvas">
+        <div
+          class="relative flex flex-col justify-end bg-ink p-6 rounded-2xl min-h-64 overflow-hidden text-canvas"
+        >
           <Image
             src={deskWorkspace}
             alt=""
@@ -301,7 +353,7 @@ const skillHighlights = [
             class="absolute inset-0 opacity-30 w-full h-full object-cover"
           />
           <div class="z-10 relative">
-            <p class="text-white/70 text-sm">他 24 スキル</p>
+            <p class="text-white/70 text-sm">他 28 スキル</p>
             <p class="mt-1 font-heading text-xl leading-snug">
               残りは講座ですべて公開
             </p>
@@ -309,7 +361,7 @@ const skillHighlights = [
               href={PURCHASE_URL}
               class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 mt-4 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
             >
-              9,900円で全スキルを見る
+              15,400円で全スキルを見る
               <ArrowRight size={16} stroke-width={2} />
             </a>
           </div>
@@ -318,10 +370,16 @@ const skillHighlights = [
     </section>
 
     <!-- ============ AUTHOR CREDIBILITY ============ -->
-    <section id="author" aria-labelledby="author-heading" class="bg-surface-alt py-20 md:py-28">
+    <section
+      id="author"
+      aria-labelledby="author-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
       <div class="mx-auto px-6 max-w-5xl">
         <div class="max-w-2xl">
-          <p class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          <p
+            class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+          >
             <GraduationCap size={18} stroke-width={2} />
             講師紹介
           </p>
@@ -363,8 +421,12 @@ const skillHighlights = [
         </div>
 
         <!-- bottom weight: photo + pull-quote -->
-        <div class="items-start md:items-center gap-8 grid grid-cols-1 md:grid-cols-[auto_1fr] mt-14 max-w-3xl">
-          <div class="border border-border rounded-full w-36 md:w-44 aspect-square overflow-hidden shrink-0">
+        <div
+          class="items-start md:items-center gap-8 grid grid-cols-1 md:grid-cols-[auto_1fr] mt-14 max-w-3xl"
+        >
+          <div
+            class="border border-border rounded-full w-36 md:w-44 aspect-square overflow-hidden shrink-0"
+          >
             <Image
               src={authorPhoto}
               alt="著者 こもりまさあきのプロフィール写真"
@@ -389,19 +451,24 @@ const skillHighlights = [
     </section>
 
     <!-- ============ PRICING / OFFER ============ -->
-    <section id="pricing" aria-labelledby="pricing-heading" class="mx-auto px-6 py-20 md:py-28 max-w-5xl">
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
       <div class="max-w-xl">
-        <p class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark">
+        <p
+          class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+        >
           <BadgePercent size={18} stroke-width={2} />
           期間限定オファー
         </p>
         <h2 id="pricing-heading" class="text-ink text-left">
-          夏休み応援
-          <br class="sm:hidden" />
-          ディスカウント
+          スキル増量！<br class="sm:hidden" />週末ディスカウント
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          クーポンコードの入力で、通常15,400円（税込）の講座が期間限定9,900円（税込）に。7月21日以降は定価が19,800円（税込）に改定される予定のため、この価格で申し込めるのは今だけです。
+          スキルが36個に増量し、定価19,800円（税込）に改定。クーポンコードの入力で、期間限定4,400円オフの15,400円（税込）に。<br
+          />7月26日 23:59までの期間限定価格です。
         </p>
         <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
           残り時間を計算しています…
@@ -410,17 +477,25 @@ const skillHighlights = [
 
       <!-- bottom weight: the price card itself -->
       <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
-        <div class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12">
+        <div
+          class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
+        >
           <div>
-            <p class="text-white/50 text-sm line-through">通常価格 15,400円（税込）</p>
-            <p class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl">
-              9,900<span class="text-2xl">円</span>
+            <p class="text-white/50 text-sm line-through">
+              定価 19,800円（税込）
+            </p>
+            <p
+              class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"
+            >
+              15,400<span class="text-2xl">円</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
             <div class="flex flex-wrap items-center gap-3 mt-6">
-              <span class="bg-white/10 px-4 py-2 border border-white/15 rounded-full font-mono text-sm">
-                YHMRT9CTG5XX
+              <span
+                class="bg-white/10 px-4 py-2 border border-white/15 rounded-full font-mono text-sm"
+              >
+                FK05ANQ7HZHZ
               </span>
               <span class="text-white/50 text-sm">チェックアウト時に入力</span>
             </div>
@@ -434,27 +509,47 @@ const skillHighlights = [
             </a>
           </div>
 
-          <ul class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base">
+          <ul
+            class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base"
+          >
             <li class="flex items-start gap-3">
-              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
-              <span>全31スキル（非公開のものを含む）</span>
+              <CircleCheck
+                size={18}
+                stroke-width={2}
+                class="flex-none mt-0.5 text-accent"
+              />
+              <span>全36スキル（非公開のものを含む）</span>
             </li>
             <li class="flex items-start gap-3">
-              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <CircleCheck
+                size={18}
+                stroke-width={2}
+                class="flex-none mt-0.5 text-accent"
+              />
               <span>解説動画31本・約3時間20分</span>
             </li>
             <li class="flex items-start gap-3">
-              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <CircleCheck
+                size={18}
+                stroke-width={2}
+                class="flex-none mt-0.5 text-accent"
+              />
               <span>使い方だけでなく、作り方の解説付き</span>
             </li>
             <li class="flex items-start gap-3">
-              <CircleCheck size={18} stroke-width={2} class="flex-none mt-0.5 text-accent" />
+              <CircleCheck
+                size={18}
+                stroke-width={2}
+                class="flex-none mt-0.5 text-accent"
+              />
               <span>買い切り・視聴期限なし</span>
             </li>
           </ul>
         </div>
 
-        <div class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t">
+        <div
+          class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t"
+        >
           <p class="text-white/70 text-sm">
             公式LINE友だち登録で、さらに10%OFFクーポンも配布中
           </p>
@@ -469,9 +564,15 @@ const skillHighlights = [
     </section>
 
     <!-- ============ FAQ ============ -->
-    <section id="faq" aria-labelledby="faq-heading" class="bg-surface-alt py-20 md:py-28">
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
       <div class="mx-auto px-6 max-w-3xl">
-        <p class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
           <MessageCircleQuestionMark size={18} stroke-width={2} />
           FAQ
         </p>
@@ -479,25 +580,38 @@ const skillHighlights = [
 
         <div class="mt-8 *:border-border *:border-b">
           <details class="group py-5">
-            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+            <summary
+              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+            >
               スキルはどんな環境で使えますか？
-              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+              <span
+                class="text-ink-soft group-open:rotate-180 transition-transform"
+              >
                 ▾
               </span>
             </summary>
-            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
-              主にClaude Code環境と、Vite + Tailwind CSS v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
+            <p
+              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+            >
+              主にClaude Code環境と、Vite + Tailwind CSS
+              v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
             </p>
           </details>
 
           <details class="group py-5">
-            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+            <summary
+              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+            >
               購入前にスキルの動作を試すことはできますか？
-              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+              <span
+                class="text-ink-soft group-open:rotate-180 transition-transform"
+              >
                 ▾
               </span>
             </summary>
-            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+            <p
+              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+            >
               軽量版スキル「create-mockup-lite」を
               <a
                 href="https://github.com/gaspanik/create-mockup-lite-skill"
@@ -521,39 +635,60 @@ const skillHighlights = [
           </details>
 
           <details class="group py-5">
-            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+            <summary
+              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+            >
               プログラミング未経験でも受講できますか？
-              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+              <span
+                class="text-ink-soft group-open:rotate-180 transition-transform"
+              >
                 ▾
               </span>
             </summary>
-            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+            <p
+              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+            >
               Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
             </p>
           </details>
 
           <details class="group py-5">
-            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+            <summary
+              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+            >
               クーポンはどこで使えますか？
-              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+              <span
+                class="text-ink-soft group-open:rotate-180 transition-transform"
+              >
                 ▾
               </span>
             </summary>
-            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
-              商品ページのチェックアウト画面でコード「YHMRT9CTG5XX」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
+            <p
+              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+            >
+              商品ページのチェックアウト画面でコード「FK05ANQ7HZHZ」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
             </p>
           </details>
 
           <details class="group py-5">
-            <summary class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer">
+            <summary
+              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+            >
               講座の詳細な内容はどこで確認できますか？
-              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+              <span
+                class="text-ink-soft group-open:rotate-180 transition-transform"
+              >
                 ▾
               </span>
             </summary>
-            <p class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed">
+            <p
+              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+            >
               全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくは
-              <a href="/skills" class="text-accent underline underline-offset-4">
+              <a
+                href="/skills"
+                class="text-accent underline underline-offset-4"
+              >
                 こちら
               </a>
               からご確認ください。
@@ -564,14 +699,20 @@ const skillHighlights = [
     </section>
 
     <div class="mx-auto px-6 py-8 max-w-2xl sm:max-w-4xl text-center">
-      <p class="inline-flex items-center gap-2 text-ink-soft text-base sm:text-center text-justify leading-snug">
+      <p
+        class="inline-flex items-center gap-2 text-ink-soft text-base sm:text-center text-justify leading-snug"
+      >
         <Sparkles size={16} stroke-width={2} class="flex-none text-accent" />
-        このページ自体、コードに触れず本講座収録スキルのみで約1時間30分で作成されました（使用モデル: Sonnet 5 - High）
+        このページ自体、コードに触れず本講座収録スキルのみで約1時間30分で作成されました（使用モデル:
+        Sonnet 5 - High）
       </p>
     </div>
 
     <!-- ============ FINAL CTA (full-bleed) ============ -->
-    <section aria-labelledby="final-cta-heading" class="relative py-24 md:py-32 overflow-hidden text-canvas">
+    <section
+      aria-labelledby="final-cta-heading"
+      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+    >
       <Image
         src={codeScreen}
         alt=""
@@ -580,15 +721,19 @@ const skillHighlights = [
         class="absolute inset-0 w-full h-full object-cover"
       />
       <div class="absolute inset-0 bg-ink/85"></div>
-      <div class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">
+      <div
+        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
         <Clock size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          9,900円で、
+          15,400円で
           <br class="sm:hidden" />
           今すぐ始める
         </h2>
-        <p class="max-w-md text-white/70 text-base text-justify leading-relaxed">
-          夏休み応援ディスカウントは7月20日23:59まで。このタイミングを逃すと、7月21日以降は定価19,800円に戻ります。
+        <p
+          class="max-w-md text-white/70 text-base text-justify leading-relaxed"
+        >
+          スキル増量！週末ディスカウントは7月26日23:59まで。このタイミングを逃すと、定価19,800円に戻ります。
         </p>
         <a
           href={PURCHASE_URL}
@@ -611,14 +756,14 @@ const skillHighlights = [
 </Layout>
 
 <script>
-  const target = new Date('2026-07-20T23:59:00+09:00').getTime();
-  const el = document.getElementById('countdown');
+  const target = new Date("2026-07-26T23:59:00+09:00").getTime();
+  const el = document.getElementById("countdown");
 
   function tick() {
     if (!el) return;
     const diff = target - Date.now();
     if (diff <= 0) {
-      el.textContent = '受付は終了しました';
+      el.textContent = "受付は終了しました";
       return;
     }
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));

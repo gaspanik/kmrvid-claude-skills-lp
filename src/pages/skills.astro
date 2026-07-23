@@ -9,13 +9,16 @@ import {
   Puzzle,
   Rocket,
   Wrench,
+  X,
 } from "@lucide/astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import skillsDiagram from "@/assets/images/Gemini_Generated_Image_x3epc5x3epc5x3ep.png";
 
 const PURCHASE_URL =
-  "https://kmrvid.com/discount/YHMRT9CTG5XX?redirect=%2Fproducts%2Fkmrvid-claude-skills";
+  "https://kmrvid.com/discount/FK05ANQ7HZHZ?redirect=%2Fproducts%2Fkmrvid-claude-skills";
 
 const categories = [
   {
@@ -57,12 +60,15 @@ const categories = [
     skills: [
       {
         name: "brief-me",
-        desc: "モックアップ作成前にビジネス要件をヒアリングしてBRIEF.mdを生成",
+        desc: "モックアップ作成の前段として、ビジネス要件をヒアリングして BRIEF.md を生成する",
       },
-      { name: "create-mockup", desc: "FigmaなしでUIをゼロから構築" },
+      {
+        name: "create-mockup",
+        desc: "FigmaなしでUIをゼロから構築。サイトの種類・デザインスタイル・ページ種別をヒアリングしてから実装を",
+      },
       {
         name: "create-multi-mockup",
-        desc: "複数レイアウトパターンを一括生成して比較",
+        desc: "1回のリクエストで複数レイアウトパターンのモックアップをまとめて生成する",
       },
       {
         name: "mobile-polish",
@@ -70,7 +76,7 @@ const categories = [
       },
       {
         name: "create-design-md",
-        desc: "Google design.md仕様のDESIGN.mdをプロジェクトルートに生成",
+        desc: "Google仕様の `DESIGN.md` をプロジェクトルートに生成",
       },
       {
         name: "export-design-md",
@@ -78,7 +84,7 @@ const categories = [
       },
       {
         name: "rewrite-me",
-        desc: "実装済みページの文言をBRIEF.mdの要件に合わせて書き直し",
+        desc: "実装済みページの目に見える文言をビジネス要件 BRIEF.md に合わせて書き直す",
       },
     ],
   },
@@ -101,6 +107,14 @@ const categories = [
         desc: "実装品質を天気形式（☀️〜🌀）でスコアリング（figma-auditと中身は同じ）",
       },
       {
+        name: "figma-layer-rename",
+        desc: "Figmaのフレーム/セクション全体を走査し、自動生成されたレイヤー名を意味のある名前にリネーム",
+      },
+      {
+        name: "figma-tokenize",
+        desc: "Figmaのフレーム/セクション全体を走査し、直接指定された色・フォントサイズなどをトークン化して変数バインド",
+      },
+      {
         name: "figma-node-check",
         desc: "use_figma実行前に読み込む必須チェックルール。「code-to-figma」の裏でも使われる最重要スキル",
       },
@@ -114,15 +128,15 @@ const categories = [
       },
       {
         name: "figma-to-tailwind",
-        desc: "Figma VariablesをTailwind @themeトークンとして書き出し",
+        desc: "Figma VariablesをTailwind CSS v4の @themeトークンとして書き出し",
       },
       {
         name: "tailwind-to-figma",
-        desc: "Tailwind @themeトークンをFigma Variablesとして書き出し",
+        desc: "Tailwind CSS v4の @themeトークンを指定されたFigmaへ変数として書き出し",
       },
       {
         name: "code-to-figma",
-        desc: "実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）",
+        desc: "実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）。自動でエクスポート設定も",
       },
     ],
   },
@@ -132,8 +146,12 @@ const categories = [
     tagline: "スタイリングを整える",
     skills: [
       {
+        name: "css-to-tailwind",
+        desc: "オリジナルのプレーンなCSS / Sass・SCSS のコードベースから Tailwind CSS v4 への初回移行を支援。",
+      },
+      {
         name: "tailwind-review",
-        desc: "コードレビュー・v3→v4移行・アクセシビリティ構造の検証・自動修正適用",
+        desc: "コードレビュー・v3→v4移行・アクセシビリティ構造の検証・レポート提出後、自動修正の適用まで",
       },
       {
         name: "tailwind-typescale",
@@ -147,18 +165,6 @@ const categories = [
     tagline: "実装時、実装後の品質を上げる",
     skills: [
       {
-        name: "click-to-fix",
-        desc: "コードに不慣れな方でもブラウザ上をクリックして修正指示をそのまま実装",
-      },
-      {
-        name: "visual-polish",
-        desc: "AI自身がスクリーンショットを撮りながら最大5回ループで自律修正",
-      },
-      {
-        name: "finish-me",
-        desc: "既存モックアップに対して、最適化処理を対話形式で順番に実行する仕上げパイプライン",
-      },
-      {
         name: "japanese-web-guideline",
         desc: "日本語Webサイト・ページの実装時に、AIが陥りやすいデフォルト設定を補正するガイドラインスキル",
       },
@@ -168,11 +174,38 @@ const categories = [
       },
       {
         name: "japanese-lp-seasoning",
-        desc: "日本の商業LPで使われるフルブリード・カルーセル・スクロール連動アニメ等のあしらいを、密度確認を挟んで選択・実装",
+        desc: "日本の商業LPで使われるフルブリード・カルーセル・スクロール連動アニメ等を、密度確認を挟んで選択・実装",
+      },
+      {
+        name: "click-to-fix",
+        desc: "コードに不慣れな方でもブラウザ上をクリックして修正指示をそのまま実装。レスポンシブ対応",
+      },
+      {
+        name: "visual-polish",
+        desc: "AIが自らスクリーンショットを撮りながら最大5回ループでコードを自律修正。作業監視エージェント付き",
+      },
+      {
+        name: "finish-me",
+        desc: "既存モックアップに対して、最適化処理を対話形式で順番に実行する仕上げパイプライン",
       },
       {
         name: "astro-doctor",
         desc: "Astroコードを最新仕様に照合しコンポーネント粒度を最適化",
+      },
+    ],
+  },
+  {
+    icon: Wrench,
+    name: "パイプライン設計支援系",
+    tagline: "自分のパイプラインを設計したいときに",
+    skills: [
+      {
+        name: "pipeline-thinking",
+        desc: "自分のインストール済みスキルを題材にパイプライン設計の考え方を対話形式で学ぶ教育スキル",
+      },
+      {
+        name: "pipeline-composer",
+        desc: "選んだスキルを並べて依存関係・受け渡し情報を PIPELINE.md として出力",
       },
     ],
   },
@@ -205,7 +238,53 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       >
         セットアップからモックアップ作成、Figma連携、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連の工程をカテゴリごとに整理しました。使い方だけでなく作り方の解説も付いているため、自分の業務に合わせたカスタマイズや新規スキル開発の参考にもなります。
       </p>
+
+      <figure class="mt-10">
+        <button
+          type="button"
+          id="diagram-trigger"
+          aria-haspopup="dialog"
+          aria-label="全体相関図を拡大表示"
+          class="block border border-border rounded-2xl w-full overflow-hidden cursor-zoom-in"
+        >
+          <Image
+            src={skillsDiagram}
+            alt="収録スキル同士の関係性を示した全体相関図"
+            width={1407}
+            height={768}
+            class="w-full h-auto"
+          />
+        </button>
+        <figcaption class="mt-3 text-ink-soft text-sm">
+          スキル同士の組み合わせ・依存関係を俯瞰した全体相関図。クリックで拡大表示。
+        </figcaption>
+      </figure>
     </section>
+
+    <div
+      id="diagram-lightbox"
+      class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed justify-center items-center bg-ink/90 p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="全体相関図の拡大表示"
+    >
+      <button
+        type="button"
+        id="diagram-lightbox-close"
+        aria-label="閉じる"
+        class="top-4 md:top-6 right-4 md:right-6 absolute flex justify-center items-center min-w-11 min-h-11 text-canvas"
+      >
+        <X size={28} stroke-width={1.75} />
+      </button>
+      <Image
+        src={skillsDiagram}
+        alt="収録スキル同士の関係性を示した全体相関図（拡大）"
+        width={1407}
+        height={768}
+        loading="lazy"
+        class="rounded-xl w-auto max-w-full h-auto max-h-full object-contain"
+      />
+    </div>
 
     {
       categories.map((category) => (
@@ -234,10 +313,10 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
           <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
             {category.skills.map((skill) => (
               <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
-                <p class="font-mono text-base text-left leading-snug">
+                <p class="font-mono font-bold text-base text-left leading-snug">
                   {skill.name}
                 </p>
-                <p class="flex-1 mt-2 text-ink-soft text-sm text-justify leading-snug">
+                <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
                   {skill.desc}
                 </p>
               </div>
@@ -300,14 +379,14 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       >
         <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          全{totalSkills}スキル、9,900円で今すぐ手に入る
+          全{totalSkills}スキル、<br class="sm:hidden" />15,400円で今すぐ
         </h2>
         <p
           class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
         >
-          夏休み応援ディスカウントは7月20日23:59まで。<br
+          スキル増量！週末ディスカウントは7月26日23:59まで。<br
             class="hidden md:block"
-          />7月21日以降は定価19,800円に戻ります。
+          />これを逃すと、定価19,800円に戻ります。
         </p>
         <a
           href={PURCHASE_URL}
@@ -322,3 +401,27 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
 
   <Footer />
 </Layout>
+
+<script>
+  const trigger = document.getElementById("diagram-trigger");
+  const lightbox = document.getElementById("diagram-lightbox");
+  const close = document.getElementById("diagram-lightbox-close");
+
+  const open = () => {
+    lightbox?.classList.remove("hidden");
+    lightbox?.classList.add("flex");
+  };
+  const shut = () => {
+    lightbox?.classList.add("hidden");
+    lightbox?.classList.remove("flex");
+  };
+
+  trigger?.addEventListener("click", open);
+  close?.addEventListener("click", shut);
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) shut();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") shut();
+  });
+</script>

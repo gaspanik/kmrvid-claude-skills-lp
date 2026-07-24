@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import { X } from '@lucide/astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  thumbAlt: string;
+  expandedAlt: string;
+  caption: string;
+}
+
+const { image, thumbAlt, expandedAlt, caption } = Astro.props;
+---
+
+<figure class="mt-10">
+  <button
+    type="button"
+    id="diagram-trigger"
+    aria-haspopup="dialog"
+    aria-label="全体相関図を拡大表示"
+    class="block border border-border rounded-2xl w-full overflow-hidden cursor-zoom-in"
+  >
+    <Image
+      src={image}
+      alt={thumbAlt}
+      width={1407}
+      height={768}
+      class="w-full h-auto"
+    />
+  </button>
+  <figcaption class="mt-3 text-ink-soft text-sm">
+    {caption}
+  </figcaption>
+</figure>
+
+<div
+  id="diagram-lightbox"
+  class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed items-center justify-center bg-ink/90 p-6"
+  role="dialog"
+  aria-modal="true"
+  aria-label="全体相関図の拡大表示"
+>
+  <button
+    type="button"
+    id="diagram-lightbox-close"
+    aria-label="閉じる"
+    class="top-4 right-4 md:top-6 md:right-6 absolute flex justify-center items-center min-w-11 min-h-11 text-canvas"
+  >
+    <X size={28} stroke-width={1.75} />
+  </button>
+  <Image
+    src={image}
+    alt={expandedAlt}
+    width={1407}
+    height={768}
+    loading="lazy"
+    class="rounded-xl max-w-full max-h-full w-auto h-auto object-contain"
+  />
+</div>
+
+<script>
+  const trigger = document.getElementById('diagram-trigger');
+  const lightbox = document.getElementById('diagram-lightbox');
+  const close = document.getElementById('diagram-lightbox-close');
+
+  const open = () => {
+    lightbox?.classList.remove('hidden');
+    lightbox?.classList.add('flex');
+  };
+  const shut = () => {
+    lightbox?.classList.add('hidden');
+    lightbox?.classList.remove('flex');
+  };
+
+  trigger?.addEventListener('click', open);
+  close?.addEventListener('click', shut);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) shut();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') shut();
+  });
+</script>

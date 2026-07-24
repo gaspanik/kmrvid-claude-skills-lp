@@ -31,6 +31,7 @@
   --text-8xl: 7.451rem;
   --text-9xl: 9.313rem;
   --line-height-none: 1.1;
+  --tracking-loose: 0.15em;
 }
 
 @utility font-heading {

@@ -16,7 +16,6 @@ import {
   Video,
   Wand,
   Workflow,
-  X,
 } from "@lucide/astro";
 import macbookCode from "@/assets/images/macbook-code.jpg";
 import skillsDiagram from "@/assets/images/Gemini_Generated_Image_x3epc5x3epc5x3ep.png";
@@ -24,6 +23,8 @@ import deskWorkspace from "@/assets/images/desk-workspace.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import authorPhoto from "@/assets/images/IMG_8341_square.png";
 import FeatureCard from "@/components/FeatureCard.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import ImageLightbox from "@/components/ImageLightbox.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -211,10 +212,12 @@ const skillHighlights = [
           <br />
           毎回ゼロからやっていませんか。
         </h2>
-        <ul class="flex flex-col gap-4 mt-8">
+        <ul
+          class="flex flex-col gap-4 mt-8 *:flex *:items-start *:gap-3 *:text-ink-soft *:text-base"
+        >
           {
             pains.map((pain) => (
-              <li class="flex items-start gap-3 text-ink-soft text-base">
+              <li>
                 <span class="flex-none mt-0.5 text-accent">
                   <CircleCheck size={20} stroke-width={2} />
                 </span>
@@ -285,53 +288,14 @@ const skillHighlights = [
         </div>
 
         <!-- bottom weight: supporting banner image -->
-        <figure class="mt-10">
-          <button
-            type="button"
-            id="diagram-trigger"
-            aria-haspopup="dialog"
-            aria-label="全体相関図を拡大表示"
-            class="block border border-border rounded-2xl w-full overflow-hidden cursor-zoom-in"
-          >
-            <Image
-              src={skillsDiagram}
-              alt="収録スキル同士の関係性を示した全体相関図"
-              width={1407}
-              height={768}
-              class="w-full h-auto"
-            />
-          </button>
-          <figcaption class="mt-3 text-ink-soft text-sm">
-            スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。クリックで拡大表示。
-          </figcaption>
-        </figure>
+        <ImageLightbox
+          image={skillsDiagram}
+          thumbAlt="収録スキル同士の関係性を示した全体相関図"
+          expandedAlt="収録スキル同士の関係性を示した全体相関図（拡大）"
+          caption="スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。クリックで拡大表示。"
+        />
       </div>
     </section>
-
-    <div
-      id="diagram-lightbox"
-      class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed items-center justify-center bg-ink/90 p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label="全体相関図の拡大表示"
-    >
-      <button
-        type="button"
-        id="diagram-lightbox-close"
-        aria-label="閉じる"
-        class="top-4 right-4 md:top-6 md:right-6 absolute flex justify-center items-center min-w-11 min-h-11 text-canvas"
-      >
-        <X size={28} stroke-width={1.75} />
-      </button>
-      <Image
-        src={skillsDiagram}
-        alt="収録スキル同士の関係性を示した全体相関図（拡大）"
-        width={1407}
-        height={768}
-        loading="lazy"
-        class="rounded-xl max-w-full max-h-full w-auto h-auto object-contain"
-      />
-    </div>
 
     <!-- ============ SKILL HIGHLIGHTS ============ -->
     <section
@@ -355,10 +319,12 @@ const skillHighlights = [
         <ArrowRight size={14} stroke-width={2} />
       </a>
 
-      <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10">
+      <div
+        class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 *:flex *:flex-col *:p-6 *:rounded-2xl"
+      >
         {
           skillHighlights.map((skill) => (
-            <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+            <div class="bg-canvas border border-border">
               <skill.icon size={22} stroke-width={1.75} class="text-accent" />
               <p class="mt-4 text-ink-soft text-sm uppercase tracking-wide">
                 {skill.category}
@@ -375,7 +341,7 @@ const skillHighlights = [
 
         <!-- Inline CTA fused into the grid (banner-blindness countermeasure) -->
         <div
-          class="relative flex flex-col justify-end bg-ink p-6 rounded-2xl min-h-64 overflow-hidden text-canvas"
+          class="relative justify-end bg-ink min-h-64 overflow-hidden text-canvas"
         >
           <Image
             src={deskWorkspace}
@@ -543,9 +509,9 @@ const skillHighlights = [
           </div>
 
           <ul
-            class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base"
+            class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base *:flex *:items-start *:gap-3"
           >
-            <li class="flex items-start gap-3">
+            <li>
               <CircleCheck
                 size={18}
                 stroke-width={2}
@@ -553,7 +519,7 @@ const skillHighlights = [
               />
               <span>全36スキル（非公開のものを含む）</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li>
               <CircleCheck
                 size={18}
                 stroke-width={2}
@@ -561,7 +527,7 @@ const skillHighlights = [
               />
               <span>解説動画31本・約3時間20分</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li>
               <CircleCheck
                 size={18}
                 stroke-width={2}
@@ -569,7 +535,7 @@ const skillHighlights = [
               />
               <span>使い方だけでなく、作り方の解説付き</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li>
               <CircleCheck
                 size={18}
                 stroke-width={2}
@@ -612,121 +578,48 @@ const skillHighlights = [
         <h2 id="faq-heading" class="text-ink text-left">よくある質問</h2>
 
         <div class="mt-8 *:border-border *:border-b">
-          <details class="group py-5">
-            <summary
-              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
-            >
-              スキルはどんな環境で使えますか？
-              <span
-                class="text-ink-soft group-open:rotate-180 transition-transform"
-              >
-                ▾
-              </span>
-            </summary>
-            <p
-              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
-            >
-              主にClaude Code環境と、Vite + Tailwind CSS
-              v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
-            </p>
-          </details>
+          <FaqItem question="スキルはどんな環境で使えますか？">
+            主にClaude Code環境と、Vite + Tailwind CSS
+            v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
+          </FaqItem>
 
-          <details class="group py-5">
-            <summary
-              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
+          <FaqItem question="購入前にスキルの動作を試すことはできますか？">
+            軽量版スキル「create-mockup-lite」を
+            <a
+              href="https://github.com/gaspanik/create-mockup-lite-skill"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
             >
-              購入前にスキルの動作を試すことはできますか？
-              <span
-                class="text-ink-soft group-open:rotate-180 transition-transform"
-              >
-                ▾
-              </span>
-            </summary>
-            <p
-              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
+              GitHub
+            </a>
+            にて無料公開しています。購入前にお使いの環境で動作をご確認いただけます。使い方は
+            <a
+              href="https://kmrvid.com/blogs/news/kmvid-skills-updates-20260717"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
             >
-              軽量版スキル「create-mockup-lite」を
-              <a
-                href="https://github.com/gaspanik/create-mockup-lite-skill"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-accent underline underline-offset-4"
-              >
-                GitHub
-              </a>
-              にて無料公開しています。購入前にお使いの環境で動作をご確認いただけます。使い方は
-              <a
-                href="https://kmrvid.com/blogs/news/kmvid-skills-updates-20260717"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-accent underline underline-offset-4"
-              >
-                こちらの記事
-              </a>
-              でも動画付きで紹介しています。
-            </p>
-          </details>
+              こちらの記事
+            </a>
+            でも動画付きで紹介しています。
+          </FaqItem>
 
-          <details class="group py-5">
-            <summary
-              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
-            >
-              プログラミング未経験でも受講できますか？
-              <span
-                class="text-ink-soft group-open:rotate-180 transition-transform"
-              >
-                ▾
-              </span>
-            </summary>
-            <p
-              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
-            >
-              Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
-            </p>
-          </details>
+          <FaqItem question="プログラミング未経験でも受講できますか？">
+            Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
+          </FaqItem>
 
-          <details class="group py-5">
-            <summary
-              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
-            >
-              クーポンはどこで使えますか？
-              <span
-                class="text-ink-soft group-open:rotate-180 transition-transform"
-              >
-                ▾
-              </span>
-            </summary>
-            <p
-              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
-            >
-              商品ページのチェックアウト画面でコード「FK05ANQ7HZHZ」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
-            </p>
-          </details>
+          <FaqItem question="クーポンはどこで使えますか？">
+            商品ページのチェックアウト画面でコード「FK05ANQ7HZHZ」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
+          </FaqItem>
 
-          <details class="group py-5">
-            <summary
-              class="flex justify-between items-center gap-4 font-medium text-ink text-base cursor-pointer"
-            >
-              講座の詳細な内容はどこで確認できますか？
-              <span
-                class="text-ink-soft group-open:rotate-180 transition-transform"
-              >
-                ▾
-              </span>
-            </summary>
-            <p
-              class="mt-3 pr-8 text-ink-soft text-base text-justify leading-relaxed"
-            >
-              全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくは
-              <a
-                href="/skills"
-                class="text-accent underline underline-offset-4"
-              >
-                こちら
-              </a>
-              からご確認ください。
-            </p>
-          </details>
+          <FaqItem question="講座の詳細な内容はどこで確認できますか？">
+            全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくは
+            <a href="/skills" class="text-accent underline underline-offset-4">
+              こちら
+            </a>
+            からご確認ください。
+          </FaqItem>
         </div>
       </div>
     </section>
@@ -808,28 +701,4 @@ const skillHighlights = [
 
   tick();
   setInterval(tick, 1000);
-</script>
-
-<script>
-  const trigger = document.getElementById("diagram-trigger");
-  const lightbox = document.getElementById("diagram-lightbox");
-  const close = document.getElementById("diagram-lightbox-close");
-
-  const open = () => {
-    lightbox?.classList.remove("hidden");
-    lightbox?.classList.add("flex");
-  };
-  const shut = () => {
-    lightbox?.classList.add("hidden");
-    lightbox?.classList.remove("flex");
-  };
-
-  trigger?.addEventListener("click", open);
-  close?.addEventListener("click", shut);
-  lightbox?.addEventListener("click", (e) => {
-    if (e.target === lightbox) shut();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") shut();
-  });
 </script>

@@ -16,31 +16,33 @@ const LINE_URL = 'https://lin.ee/EOgmkKQ';
       </div>
 
       <nav aria-label="フッターナビゲーション">
-        <p class="text-white/40 text-sm uppercase tracking-[0.15em]">Menu</p>
-        <ul class="flex flex-col mt-4 text-sm">
+        <p class="text-white/40 text-sm uppercase tracking-loose">Menu</p>
+        <ul
+          class="flex flex-col mt-4 text-sm **:flex **:items-center **:min-h-11 **:transition-colors **:hover:text-accent"
+        >
           <li>
-            <a href="/#included" class="flex items-center min-h-11 hover:text-accent transition-colors">講座内容</a>
+            <a href="/#included">講座内容</a>
           </li>
           <li>
-            <a href="/#skills" class="flex items-center min-h-11 hover:text-accent transition-colors">収録スキル</a>
+            <a href="/#skills">収録スキル</a>
           </li>
           <li>
-            <a href="/skills" class="flex items-center min-h-11 hover:text-accent transition-colors">スキル一覧</a>
+            <a href="/skills">スキル一覧</a>
           </li>
           <li>
-            <a href="/#author" class="flex items-center min-h-11 hover:text-accent transition-colors">講師紹介</a>
+            <a href="/#author">講師紹介</a>
           </li>
           <li>
-            <a href="/#pricing" class="flex items-center min-h-11 hover:text-accent transition-colors">料金</a>
+            <a href="/#pricing">料金</a>
           </li>
           <li>
-            <a href="/#faq" class="flex items-center min-h-11 hover:text-accent transition-colors">FAQ</a>
+            <a href="/#faq">FAQ</a>
           </li>
         </ul>
       </nav>
 
       <div>
-        <p class="text-white/40 text-sm uppercase tracking-[0.15em]">Get started</p>
+        <p class="text-white/40 text-sm uppercase tracking-loose">Get started</p>
         <div class="flex flex-col items-start gap-3 mt-4">
           <a
             href={PURCHASE_URL}

@@ -1,0 +1,10 @@
+---
+import { Puzzle } from '@lucide/astro';
+---
+
+<div class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft">
+  <Puzzle size={18} stroke-width={2} class="flex-none mt-0.5 text-accent-dark" />
+  <p class="text-sm text-justify leading-snug text-accent-dark">
+    <slot />
+  </p>
+</div>

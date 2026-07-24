@@ -21,19 +21,19 @@ const navLinks = [
   >
     <a href="/" class="font-heading text-ink leading-none">
       <span class="block text-base tracking-tight">KMRVID</span>
-      <span class="block text-ink-soft text-xs tracking-[0.15em] uppercase"
+      <span class="block text-ink-soft text-xs tracking-loose uppercase"
         >Claude Skills</span
       >
     </a>
 
     <nav aria-label="メインナビゲーション" class="hidden md:block">
-      <ul class="flex items-center gap-8 text-sm">
+      <ul
+        class="flex items-center gap-8 text-sm **:hover:text-accent **:transition-colors"
+      >
         {
           navLinks.map((link) => (
             <li>
-              <a href={link.href} class="hover:text-accent transition-colors">
-                {link.label}
-              </a>
+              <a href={link.href}>{link.label}</a>
             </li>
           ))
         }
@@ -81,16 +81,13 @@ const navLinks = [
     </button>
   </div>
   <nav aria-label="モバイルナビゲーション">
-    <ul class="flex flex-col px-6">
+    <ul
+      class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
+    >
       {
         navLinks.map((link) => (
-          <li class="border-white/10 border-b">
-            <a
-              href={link.href}
-              class="flex items-center min-h-14 text-base text-canvas"
-            >
-              {link.label}
-            </a>
+          <li>
+            <a href={link.href}>{link.label}</a>
           </li>
         ))
       }

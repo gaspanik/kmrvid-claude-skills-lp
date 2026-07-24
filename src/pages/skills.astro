@@ -6,15 +6,14 @@ import {
   LayoutTemplate,
   Layers,
   Palette,
-  Puzzle,
   Rocket,
   Wrench,
-  X,
 } from "@lucide/astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import Callout from "@/components/Callout.astro";
+import ImageLightbox from "@/components/ImageLightbox.astro";
 import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
 import skillsDiagram from "@/assets/images/Gemini_Generated_Image_x3epc5x3epc5x3ep.png";
 
 const PURCHASE_URL =
@@ -239,52 +238,13 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
         セットアップからモックアップ作成、Figma連携、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連の工程をカテゴリごとに整理しました。使い方だけでなく作り方の解説も付いているため、自分の業務に合わせたカスタマイズや新規スキル開発の参考にもなります。
       </p>
 
-      <figure class="mt-10">
-        <button
-          type="button"
-          id="diagram-trigger"
-          aria-haspopup="dialog"
-          aria-label="全体相関図を拡大表示"
-          class="block border border-border rounded-2xl w-full overflow-hidden cursor-zoom-in"
-        >
-          <Image
-            src={skillsDiagram}
-            alt="収録スキル同士の関係性を示した全体相関図"
-            width={1407}
-            height={768}
-            class="w-full h-auto"
-          />
-        </button>
-        <figcaption class="mt-3 text-ink-soft text-sm">
-          スキル同士の組み合わせ・依存関係を俯瞰した全体相関図。クリックで拡大表示。
-        </figcaption>
-      </figure>
-    </section>
-
-    <div
-      id="diagram-lightbox"
-      class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed justify-center items-center bg-ink/90 p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label="全体相関図の拡大表示"
-    >
-      <button
-        type="button"
-        id="diagram-lightbox-close"
-        aria-label="閉じる"
-        class="top-4 md:top-6 right-4 md:right-6 absolute flex justify-center items-center min-w-11 min-h-11 text-canvas"
-      >
-        <X size={28} stroke-width={1.75} />
-      </button>
-      <Image
-        src={skillsDiagram}
-        alt="収録スキル同士の関係性を示した全体相関図（拡大）"
-        width={1407}
-        height={768}
-        loading="lazy"
-        class="rounded-xl w-auto max-w-full h-auto max-h-full object-contain"
+      <ImageLightbox
+        image={skillsDiagram}
+        thumbAlt="収録スキル同士の関係性を示した全体相関図"
+        expandedAlt="収録スキル同士の関係性を示した全体相関図（拡大）"
+        caption="スキル同士の組み合わせ・依存関係を俯瞰した全体相関図。クリックで拡大表示。"
       />
-    </div>
+    </section>
 
     {
       categories.map((category) => (
@@ -298,21 +258,14 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
           </p>
 
           {category.note && (
-            <div class="flex items-start gap-3 mt-6 p-4 rounded-2xl max-w-2xl bg-accent-soft">
-              <Puzzle
-                size={18}
-                stroke-width={2}
-                class="flex-none mt-0.5 text-accent-dark"
-              />
-              <p class="text-sm text-justify leading-snug text-accent-dark">
-                {category.note}
-              </p>
+            <div class="mt-6">
+              <Callout>{category.note}</Callout>
             </div>
           )}
 
-          <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+          <div class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8 *:flex *:flex-col *:bg-canvas *:p-6 *:border *:border-border *:rounded-2xl">
             {category.skills.map((skill) => (
-              <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+              <div>
                 <p class="font-mono font-bold text-base text-left leading-snug">
                   {skill.name}
                 </p>
@@ -328,48 +281,30 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
 
     <!-- ============ TRIAL NOTE ============ -->
     <section class="flex flex-col gap-4 mx-auto px-6 pb-14 md:pb-20 max-w-5xl">
-      <div
-        class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft"
-      >
-        <Puzzle
-          size={18}
-          stroke-width={2}
-          class="flex-none mt-0.5 text-accent-dark"
-        />
-        <p class="text-sm text-justify leading-snug text-accent-dark">
-          購入前に動作を試したい方向けに、軽量版スキル「create-mockup-lite」を
-          <a
-            href="https://github.com/gaspanik/create-mockup-lite-skill"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline underline-offset-4"
-          >
-            GitHub
-          </a>
-          にて無料公開しています。
-        </p>
-      </div>
-      <div
-        class="flex items-start gap-3 p-4 rounded-2xl max-w-2xl bg-accent-soft"
-      >
-        <Puzzle
-          size={18}
-          stroke-width={2}
-          class="flex-none mt-0.5 text-accent-dark"
-        />
-        <p class="text-sm text-justify leading-snug text-accent-dark">
-          「create-mockup-lite」「click-to-fix」の紹介と作業環境についてこちらの
-          <a
-            href="https://youtu.be/TySJxHhMKNQ"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline underline-offset-4"
-          >
-            YouTube
-          </a>
-          で動画を用意しています。
-        </p>
-      </div>
+      <Callout>
+        購入前に動作を試したい方向けに、軽量版スキル「create-mockup-lite」を
+        <a
+          href="https://github.com/gaspanik/create-mockup-lite-skill"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline underline-offset-4"
+        >
+          GitHub
+        </a>
+        にて無料公開しています。
+      </Callout>
+      <Callout>
+        「create-mockup-lite」「click-to-fix」の紹介と作業環境についてこちらの
+        <a
+          href="https://youtu.be/TySJxHhMKNQ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline underline-offset-4"
+        >
+          YouTube
+        </a>
+        で動画を用意しています。
+      </Callout>
     </section>
 
     <!-- ============ CTA ============ -->
@@ -401,27 +336,3 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
 
   <Footer />
 </Layout>
-
-<script>
-  const trigger = document.getElementById("diagram-trigger");
-  const lightbox = document.getElementById("diagram-lightbox");
-  const close = document.getElementById("diagram-lightbox-close");
-
-  const open = () => {
-    lightbox?.classList.remove("hidden");
-    lightbox?.classList.add("flex");
-  };
-  const shut = () => {
-    lightbox?.classList.add("hidden");
-    lightbox?.classList.remove("flex");
-  };
-
-  trigger?.addEventListener("click", open);
-  close?.addEventListener("click", shut);
-  lightbox?.addEventListener("click", (e) => {
-    if (e.target === lightbox) shut();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") shut();
-  });
-</script>

@@ -407,7 +407,7 @@ const skillHighlights = [
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1 bg-canvas px-3 py-1.5 border border-border hover:border-accent rounded-full min-h-11 text-ink-soft hover:text-accent text-xs transition"
+                    class="inline-flex items-center gap-1 bg-canvas px-3 py-1.5 border border-border hover:border-accent rounded-full min-h-11 text-ink-soft hover:text-accent text-xs leading-tight transition"
                   >
                     {social.label}
                     <ExternalLink size={12} stroke-width={2} />
@@ -509,38 +509,22 @@ const skillHighlights = [
           </div>
 
           <ul
-            class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base *:flex *:items-start *:gap-3"
+            class="flex flex-col gap-3 md:pl-8 md:border-white/10 md:border-l text-white/80 text-base *:flex *:items-start *:gap-3 *:[&_svg]:flex-none *:[&_svg]:mt-0.5 *:[&_svg]:text-accent"
           >
             <li>
-              <CircleCheck
-                size={18}
-                stroke-width={2}
-                class="flex-none mt-0.5 text-accent"
-              />
+              <CircleCheck size={18} stroke-width={2} />
               <span>全36スキル（非公開のものを含む）</span>
             </li>
             <li>
-              <CircleCheck
-                size={18}
-                stroke-width={2}
-                class="flex-none mt-0.5 text-accent"
-              />
+              <CircleCheck size={18} stroke-width={2} />
               <span>解説動画31本・約3時間20分</span>
             </li>
             <li>
-              <CircleCheck
-                size={18}
-                stroke-width={2}
-                class="flex-none mt-0.5 text-accent"
-              />
+              <CircleCheck size={18} stroke-width={2} />
               <span>使い方だけでなく、作り方の解説付き</span>
             </li>
             <li>
-              <CircleCheck
-                size={18}
-                stroke-width={2}
-                class="flex-none mt-0.5 text-accent"
-              />
+              <CircleCheck size={18} stroke-width={2} />
               <span>買い切り・視聴期限なし</span>
             </li>
           </ul>

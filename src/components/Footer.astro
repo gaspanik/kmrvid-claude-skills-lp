@@ -2,6 +2,7 @@
 const PURCHASE_URL =
   'https://kmrvid.com/discount/FK05ANQ7HZHZ?redirect=%2Fproducts%2Fkmrvid-claude-skills';
 const LINE_URL = 'https://lin.ee/EOgmkKQ';
+const isSkillsPage = Astro.url.pathname === '/skills';
 ---
 
 <footer class="bg-ink text-canvas">
@@ -27,7 +28,9 @@ const LINE_URL = 'https://lin.ee/EOgmkKQ';
             <a href="/#skills">収録スキル</a>
           </li>
           <li>
-            <a href="/skills">スキル一覧</a>
+            <a href="/skills" aria-current={isSkillsPage ? 'page' : undefined}>
+              スキル一覧
+            </a>
           </li>
           <li>
             <a href="/#author">講師紹介</a>

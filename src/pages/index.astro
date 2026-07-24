@@ -16,6 +16,7 @@ import {
   Video,
   Wand,
   Workflow,
+  X,
 } from "@lucide/astro";
 import macbookCode from "@/assets/images/macbook-code.jpg";
 import skillsDiagram from "@/assets/images/Gemini_Generated_Image_x3epc5x3epc5x3ep.png";
@@ -285,7 +286,13 @@ const skillHighlights = [
 
         <!-- bottom weight: supporting banner image -->
         <figure class="mt-10">
-          <div class="border border-border rounded-2xl overflow-hidden">
+          <button
+            type="button"
+            id="diagram-trigger"
+            aria-haspopup="dialog"
+            aria-label="全体相関図を拡大表示"
+            class="block border border-border rounded-2xl w-full overflow-hidden cursor-zoom-in"
+          >
             <Image
               src={skillsDiagram}
               alt="収録スキル同士の関係性を示した全体相関図"
@@ -293,13 +300,38 @@ const skillHighlights = [
               height={768}
               class="w-full h-auto"
             />
-          </div>
+          </button>
           <figcaption class="mt-3 text-ink-soft text-sm">
-            スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。
+            スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。クリックで拡大表示。
           </figcaption>
         </figure>
       </div>
     </section>
+
+    <div
+      id="diagram-lightbox"
+      class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed items-center justify-center bg-ink/90 p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="全体相関図の拡大表示"
+    >
+      <button
+        type="button"
+        id="diagram-lightbox-close"
+        aria-label="閉じる"
+        class="top-4 right-4 md:top-6 md:right-6 absolute flex justify-center items-center min-w-11 min-h-11 text-canvas"
+      >
+        <X size={28} stroke-width={1.75} />
+      </button>
+      <Image
+        src={skillsDiagram}
+        alt="収録スキル同士の関係性を示した全体相関図（拡大）"
+        width={1407}
+        height={768}
+        loading="lazy"
+        class="rounded-xl max-w-full max-h-full w-auto h-auto object-contain"
+      />
+    </div>
 
     <!-- ============ SKILL HIGHLIGHTS ============ -->
     <section
@@ -776,4 +808,28 @@ const skillHighlights = [
 
   tick();
   setInterval(tick, 1000);
+</script>
+
+<script>
+  const trigger = document.getElementById("diagram-trigger");
+  const lightbox = document.getElementById("diagram-lightbox");
+  const close = document.getElementById("diagram-lightbox-close");
+
+  const open = () => {
+    lightbox?.classList.remove("hidden");
+    lightbox?.classList.add("flex");
+  };
+  const shut = () => {
+    lightbox?.classList.add("hidden");
+    lightbox?.classList.remove("flex");
+  };
+
+  trigger?.addEventListener("click", open);
+  close?.addEventListener("click", shut);
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) shut();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") shut();
+  });
 </script>

@@ -25,6 +25,8 @@ const categories = [
     name: "Figma Design Agent 専用",
     tagline: "【新登場】Figma の中で使えるカスタムスキル",
     note: "Figma内で動くAIエージェントに最適化されたカスタムスキル。フレーム構造を解析してAI実装精度を診断、変数化されていない値を変数化して紐付けるなど、Figma内での作業効率を大幅に向上させます。カスタムスキルのみが含まれた「KMRVID Figma Skills」も単体販売開始。",
+    ctaHref: "/figma",
+    ctaLabel: "KMRVID Figma Skills の詳細を見る",
     skills: [
       {
         name: "figma-audit",
@@ -294,7 +296,11 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       <p
         class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
       >
-        2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent でも動作するスキルを移植。Figma に最適化された専用スキルを追加（8スキル）。Figma内での作業効率を大幅に向上させるカスタムスキルです。
+        2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent でも動作するスキルを移植。Figma に最適化された専用スキルを追加（8スキル）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
+        <a href="/figma" class="text-accent underline underline-offset-4">
+          KMRVID Figma Skills
+        </a>
+        のページをご覧ください。
       </p>
 
       <ImageLightbox
@@ -320,6 +326,16 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
             <div class="mt-6">
               <Callout>{category.note}</Callout>
             </div>
+          )}
+
+          {category.ctaHref && (
+            <a
+              href={category.ctaHref}
+              class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              {category.ctaLabel}
+              <ArrowRight size={14} stroke-width={2} />
+            </a>
           )}
 
           <div class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-8 *:p-6 *:border *:border-border *:rounded-2xl">

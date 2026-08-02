@@ -113,7 +113,7 @@ const skillHighlights = [
     >
       <div class="mx-auto px-6 max-w-5xl">
         <a
-          href={PURCHASE_URL}
+          href='/figma'
           class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full font-medium text-sm bg-accent-soft text-accent-dark"
         >
           <BadgePercent size={16} stroke-width={2} />
@@ -309,15 +309,25 @@ const skillHighlights = [
       <p
         class="mt-4 max-w-xl text-ink-soft text-base text-justify text-pretty leading-relaxed"
       >
-        全47スキルのうち、代表的なものを紹介します。「KMRVID Claude Skills」には、Figma用に最適化されたカスタムスキル「KMRVID Figma Skills」も同梱。
+        全47スキルのうち、代表的なものを紹介します。<br />
+        「KMRVID Claude Skills」には、Figma用に最適化されたカスタムスキル「KMRVID Figma Skills」も同梱。
       </p>
-      <a
-        href="/skills"
-        class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-      >
-        全スキル一覧を見る
-        <ArrowRight size={14} stroke-width={2} />
-      </a>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3">
+        <a
+          href="/skills"
+          class="inline-flex items-center gap-1 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          全スキル一覧を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+        <a
+          href="/figma"
+          class="inline-flex items-center gap-1 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          KMRVID Figma Skills の詳細を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
 
       <div
         class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 *:p-6 *:rounded-2xl"
@@ -568,7 +578,11 @@ const skillHighlights = [
           </FaqItem>
 
           <FaqItem question="Figma Design Agent 専用スキルはどんな環境で使えますか？">
-            従来の Claude Code 版から処理していた作業を Figma のUI内で実行できるように最適化されたカスタムスキルです。Design Agentに登録してFigma内で利用可能です。 Figmaのフレーム構造を解析してAI実装精度を診断、変数化されていない値を変数化して紐付ける、テキストを抽出してスタイル化し紐付ける、選択されたレイヤーで繰り返し登場するフレームを自動抽出してバリアント付きのコンポーネントを生成するなど、Figma内での作業効率を大幅に向上させます。
+            従来の Claude Code 版から処理していた作業を Figma のUI内で実行できるように最適化されたカスタムスキルです。Design Agentに登録してFigma内で利用可能です。 Figmaのフレーム構造を解析してAI実装精度を診断、変数化されていない値を変数化して紐付ける、テキストを抽出してスタイル化し紐付ける、選択されたレイヤーで繰り返し登場するフレームを自動抽出してバリアント付きのコンポーネントを生成するなど、Figma内での作業効率を大幅に向上させます。詳しくは
+            <a href="/figma" class="text-accent underline underline-offset-4">
+              KMRVID Figma Skills
+            </a>
+            のページをご覧ください。
           </FaqItem>
 
           <FaqItem question="購入前にスキルの動作を試すことはできますか？">

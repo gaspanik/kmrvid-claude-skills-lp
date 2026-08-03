@@ -53,6 +53,10 @@ const categories = [
         desc: "選択したフレーム/セクション内のテキストをBRIEFの要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応",
       },
       {
+        name: "figma-typescale",
+        desc: "ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ",
+      },
+      {
         name: "figma-componentize",
         desc: "選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案し、バリアントの変数化までを対話的に実行",
       },
@@ -302,7 +306,7 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       >
         2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent
         でも動作するスキルを移植。Figma
-        に最適化された専用スキルを追加（9スキル）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
+        に最適化された専用スキルを追加（10スキル）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
         <a href="/figma" class="text-accent underline underline-offset-4">
           KMRVID Figma Skills
         </a>

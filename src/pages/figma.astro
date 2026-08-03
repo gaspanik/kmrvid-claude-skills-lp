@@ -82,6 +82,10 @@ const skills = [
     desc: "選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない",
   },
   {
+    name: "figma-typescale",
+    desc: "ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ",
+  },
+  {
     name: "japanese-lp-seasoning",
     desc: "フルブリード演出・カルーセル/バナースライダー・縦書きを、静的フレームでの見た目として選択・提案（スクロール連動アニメーションは対象外）",
   },
@@ -243,7 +247,7 @@ const totalSkills = skills.length;
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
         >
           「KMRVID Claude Skills」に含まれる代表的なスキルを、FigmaのDesign
-          Agent（カスタムスキル登録機能）でそのまま動くように移植した専用パッケージです。URLの貼り付けもチャットの往復も最小限に、キャンバス上の選択だけでレイヤー整理・トークン化・コンポーネント化までを完結できます。
+          Agent（カスタムスキル登録機能）でそのまま動くように移植した専用パッケージです。URLの貼り付けもチャットの往復も最小限に、キャンバス上の選択だけでレイヤー整理・トークン化・コンポーネント化までを完結できます。収録スキルの解説動画付き（8本／2026年8月3日現在）。
         </p>
 
         <div
@@ -304,8 +308,10 @@ const totalSkills = skills.length;
               </div>
             </div>
             <p class="mt-8 text-white/50 text-sm">
-              2026/08/03 更新 —
-              新スキル「japanese-lp-seasoning」「figma-componentize」を追加。既存スキルの調整（figma-tokenize）
+              2026/08/04 更新 —
+              新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
+              <br />
+              2026/08/03 更新 — 新スキル「japanese-lp-seasoning」「figma-componentize」を追加。既存スキルの調整
             </p>
           </div>
 
@@ -386,7 +392,7 @@ const totalSkills = skills.length;
         >
           Figmaのキャンバス上で選択して呼び出すだけで動く、{
             totalSkills
-          }つのカスタムスキルです。
+          }個のカスタムスキルです。
         </p>
 
         <div
@@ -481,7 +487,7 @@ const totalSkills = skills.length;
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               totalSkills
-            }つのFigma専用スキルを買い切りで利用できます。
+            }個のFigma専用スキルを買い切りで利用できます。
           </p>
         </div>
 
@@ -611,7 +617,7 @@ const totalSkills = skills.length;
         >
           発売記念価格でご案内中。{
             totalSkills
-          }つのカスタムスキルを、キャンバス上の選択だけで動かせます。
+          }個のカスタムスキルを、キャンバス上の選択だけで動かせます。
         </p>
         <a
           href={PURCHASE_URL}

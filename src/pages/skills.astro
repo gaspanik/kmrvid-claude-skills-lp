@@ -68,6 +68,22 @@ const categories = [
         name: "figma-contrast-check",
         desc: "選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応",
       },
+      {
+        name: "design-brief-me",
+        desc: "デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に",
+      },
+      {
+        name: "create-single-page",
+        desc: "`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる",
+      },
+      {
+        name: "figma-systematize",
+        desc: "選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。冒頭で実行モード（自動／各ステップ確認あり）を1回だけ確認",
+      },
+      {
+        name: "figma-enhance",
+        desc: "すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装",
+      },
     ],
   },
   {
@@ -306,7 +322,7 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       >
         2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent
         でも動作するスキルを移植。Figma
-        に最適化された専用スキルを追加（10スキル）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
+        に最適化された専用スキルを追加（14スキル／2026年8月5日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
         <a href="/figma" class="text-accent underline underline-offset-4">
           KMRVID Figma Skills
         </a>

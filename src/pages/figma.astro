@@ -97,6 +97,22 @@ const skills = [
     name: "figma-contrast-check",
     desc: "選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応",
   },
+  {
+    name: "design-brief-me",
+    desc: "デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に",
+  },
+  {
+    name: "create-single-page",
+    desc: "`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる",
+  },
+  {
+    name: "figma-systematize",
+    desc: "選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。冒頭で実行モード（自動／各ステップ確認あり）を1回だけ確認",
+  },
+  {
+    name: "figma-enhance",
+    desc: "すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装",
+  },
 ];
 
 const steps = [
@@ -303,15 +319,15 @@ const totalSkills = skills.length;
                   <span class="font-body text-white/50 text-lg">個</span>
                 </p>
                 <p class="mt-2 text-white/60 text-sm">
-                  Figma実機動作確認済み（2026/08/03時点）
+                  Figma実機動作確認済み（2026/08/05時点）
                 </p>
               </div>
             </div>
             <p class="mt-8 text-white/50 text-sm">
-              2026/08/04 更新 —
-              新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
+              2026/08/05 更新 —
+              新スキル「design-brief-me」「create-single-page」「figma-systematize」「figma-enhance」を追加。既存スキルの調整
               <br />
-              2026/08/03 更新 — 新スキル「japanese-lp-seasoning」「figma-componentize」を追加。既存スキルの調整
+              2026/08/04 更新 — 新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
             </p>
           </div>
 
@@ -413,7 +429,7 @@ const totalSkills = skills.length;
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          2026-08-03時点で、{
+          2026-08-05時点で、{
             totalSkills
           }スキルすべてFigma上での実機動作を確認済みです。利用環境やツールのバージョンによっては、正常に動作しない場合があります。
         </p>
@@ -451,10 +467,6 @@ const totalSkills = skills.length;
       </ol>
 
       <div class="flex flex-col gap-4 mt-10">
-        <Callout>
-          `figma-tokenize`は実行すると冒頭で「レイヤー名の整理（figma-layer-rename）も一緒に行いますか？」と聞いてくるので、`figma-layer-rename`も登録済みであれば
-          Yes と答えるだけで連携して自動実行されます。
-        </Callout>
         <Callout>
           `brief-me` → `create-multi-pattern` または `rewrite-me`
           の順で実行すると、ヒアリングした BRIEF
@@ -497,7 +509,7 @@ const totalSkills = skills.length;
           >
             <div>
               <p class="text-white/50 text-sm line-through">
-                定価 4,400円（税込）
+                定価 9,900円（税込）
               </p>
               <p
                 class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"

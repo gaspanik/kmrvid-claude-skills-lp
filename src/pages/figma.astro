@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   BadgePercent,
   CircleCheck,
+  Combine,
   ExternalLink,
   FileText,
   Languages,
@@ -27,6 +28,7 @@ const navLinks = [
   { href: "#skills", label: "収録スキル" },
   { href: "/", label: "Claude版" },
   { href: "#how-to", label: "使い方" },
+  { href: "#combos", label: "組み合わせ例" },
   { href: "#pricing", label: "料金" },
 ];
 
@@ -136,6 +138,39 @@ const steps = [
     n: "03",
     title: "チャットから実行",
     desc: "チャットからスキル名を呼び出すだけで実行されます。確認・質問・レポートはすべて日本語で表示されます。",
+  },
+];
+
+const combos = [
+  {
+    goal: "新しいページを一から作りたい",
+    chain: ["brief-me", "create-multi-pattern"],
+    desc: "要件をヒアリングしてBRIEFを作成後、それを引き継いで複数レイアウト案を一括生成。1案でよければ`create-single-page`（無質問・一発生成）に差し替え可能です。",
+  },
+  {
+    goal: "色や数値を変数化、コンポーネント化まで進めたい",
+    chain: ["figma-tokenize", "figma-componentize"],
+    desc: "ハードコードされた色をまず変数化し、繰り返しパターンをコンポーネント化候補として提案。この2段階を一括で行いたい場合は`figma-systematize`が便利です。",
+  },
+  {
+    goal: "ページ全体を整理して仕上げまで持っていきたい",
+    chain: ["figma-systematize", "figma-enhance"],
+    desc: "レイヤー名整理・トークン化・コンポーネント化を3段パイプラインで一括処理したうえで、さらなる改善点をページ全体から検出・提案・実装します。",
+  },
+  {
+    goal: "要件に沿ってコピーを書き直したい",
+    chain: ["brief-me", "rewrite-me"],
+    desc: "ヒアリングしたBRIEFをそのまま引き継いで、選択したフレーム内のテキストを要件に合わせて書き直します。レイアウトや構造は変更しません。",
+  },
+  {
+    goal: "実装前にAIが読み取りやすい構造か確認したい",
+    chain: ["figma-layer-rename", "figma-audit"],
+    desc: "自動生成レイヤー名を先に整理してから、実装精度を4観点で採点。コンポーネント単体を見たい場合は`figma-component-audit`に差し替えます。",
+  },
+  {
+    goal: "色のアクセシビリティを確認・修正したい",
+    chain: ["figma-contrast-check"],
+    desc: "選択フレーム内テキストのWCAGコントラスト比をAA/AAAで判定し、コンパクトなレポートを出力。そのまま自動修正まで依頼することもできます。",
   },
 ];
 
@@ -488,6 +523,61 @@ const totalSkills = skills.length;
       </div>
     </section>
 
+    <!-- ============ COMBOS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <div
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <Combine size={18} stroke-width={2} />
+          Combination
+        </div>
+        <h2 id="combos-heading" class="max-w-xl text-ink text-left">
+          こういう時はこのスキルを使おう
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
+        </p>
+
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+        >
+          {
+            combos.map((combo) => (
+              <div>
+                <h3 class="text-lg text-left leading-snug">{combo.goal}</h3>
+                <div class="flex flex-wrap items-center gap-2 mt-3">
+                  {combo.chain.map((skill, i) => (
+                    <>
+                      {i > 0 && (
+                        <ArrowRight
+                          size={14}
+                          stroke-width={2}
+                          class="text-ink-soft"
+                        />
+                      )}
+                      <span class="bg-surface-alt px-2.5 py-1 rounded-full font-mono text-xs">
+                        {skill}
+                      </span>
+                    </>
+                  ))}
+                </div>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {combo.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- ============ PRICING ============ -->
     <section
       id="pricing"
@@ -686,6 +776,9 @@ const totalSkills = skills.length;
             </li>
             <li>
               <a href="#how-to">使い方</a>
+            </li>
+            <li>
+              <a href="#combos">組み合わせ例</a>
             </li>
             <li>
               <a href="#pricing">料金</a>

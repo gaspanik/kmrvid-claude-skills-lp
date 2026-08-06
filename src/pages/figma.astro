@@ -33,7 +33,7 @@ const navLinks = [
 const differences = [
   {
     icon: MousePointerClick,
-    title: "キャンバス上の選択ノードが入力",
+    title: "キャンバス上で選択したノードが対象",
     description:
       "Figma URL の貼り付けは不要。フレームやセクションを選択してチャットで呼び出すだけで動きます。",
   },
@@ -45,13 +45,13 @@ const differences = [
   },
   {
     icon: FileText,
-    title: "1ファイル自己完結",
+    title: "カスタムスキル登録は1ファイルで完結",
     description:
       "SKILL.md 単体を登録すれば動作します。Figma のカスタムスキル登録機能にそのまま貼り付け可能。",
   },
   {
     icon: Languages,
-    title: "出力はすべて日本語",
+    title: "質問も出力もすべて日本語",
     description:
       "スキルの指示本文は英語ですが、確認テーブル・質問・レポートはすべて日本語で表示されます。",
   },
@@ -269,8 +269,8 @@ const totalSkills = skills.length;
         <p
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
         >
-          「KMRVID Claude Skills」に含まれる代表的なスキルを、FigmaのDesign
-          Agent（カスタムスキル登録機能）でそのまま動くように移植した専用パッケージです。URLの貼り付けもチャットの往復も最小限に、キャンバス上の選択だけでレイヤー整理・トークン化・コンポーネント化までを完結できます。収録スキルの解説動画付き（8本／2026年8月3日現在）。
+          「KMRVID Claude Skills」に含まれるスキルを、FigmaのDesign
+          Agent（カスタムスキル登録機能）でそのまま動くように移植した専用パッケージです。URLの貼り付けもチャットの往復も最小限に、新規のページ生成だけでなく、キャンバス上の選択だけでレイヤー整理・トークン化・コンポーネント化まで、ほぼ全自動で完結できます。収録スキルの解説動画付き（8本／2026年8月3日現在）。
         </p>
 
         <div
@@ -326,17 +326,17 @@ const totalSkills = skills.length;
                   <span class="font-body text-white/50 text-lg">個</span>
                 </p>
                 <p class="mt-2 text-white/60 text-sm">
-                  Figma実機動作確認済み（2026/08/05時点）
+                  Figma実機動作確認済み（2026/8/6時点）
                 </p>
               </div>
             </div>
             <p class="mt-8 text-white/50 text-sm">
-              2026/08/06 更新
+              2026/8/6 更新
               —新スキル「figma-component-audit」を追加。既存スキルの調整
               <br />
-              2026/08/05 更新 — 新スキル「design-brief-me」「create-single-page」「figma-systematize」「figma-enhance」を追加。既存スキルの調整
+              2026/8/5 更新 — 新スキル「design-brief-me」「create-single-page」「figma-systematize」「figma-enhance」を追加。既存スキルの調整
               <br />
-              2026/08/04 更新 — 新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
+              2026/8/4 更新 — 新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
             </p>
           </div>
 
@@ -368,7 +368,7 @@ const totalSkills = skills.length;
         class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
       >
         「KMRVID Claude
-        Skills」に含まれる同名スキルのFigma専用版です。中身のロジックは同じでも、Figmaのキャンバス上で動くように前提から作り直しています。
+        Skills」に含まれる同名スキルのFigma専用版。中身のロジックは同じでも、Figma上で問題なく動くように前提から作り直し最適化しています。
       </p>
 
       <div
@@ -438,7 +438,7 @@ const totalSkills = skills.length;
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          2026-08-06時点で、{
+          2026/8/6時点で、{
             totalSkills
           }スキルすべてFigma上での実機動作を確認済みです。利用環境やツールのバージョンによっては、正常に動作しない場合があります。
         </p>

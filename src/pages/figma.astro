@@ -172,6 +172,18 @@ const combos = [
     chain: ["figma-contrast-check"],
     desc: "選択フレーム内テキストのWCAGコントラスト比をAA/AAAで判定し、コンパクトなレポートを出力。そのまま自動修正まで依頼することもできます。",
   },
+  {
+    goal: "人間の特性を考慮したページデザインにしたい",
+    chain: ["create-multi-pattern"],
+    claudeSkill: "cognitive-ui-design",
+    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、通常版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と組み合わせることで、生成する複数パターンの質をさらに引き上げられます。",
+  },
+  {
+    goal: "日本語の処理を改善したい",
+    chain: ["rewrite-me"],
+    claudeSkill: "japanese-web-guideline",
+    desc: "禁則処理・斜体回避・見出しの整列など日本語特有の実装ガイドラインは、通常版限定の`japanese-web-guideline`が担当。Figma版の`rewrite-me`で整えた文言を、実装時にさらに日本語表示へ最適化できます。",
+  },
 ];
 
 const totalSkills = skills.length;
@@ -544,13 +556,23 @@ const totalSkills = skills.length;
         >
           スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
         </p>
+        <p class="flex items-center gap-2 mt-3 text-ink-soft text-sm">
+          <span class="inline-block bg-accent-soft border border-accent/30 rounded-full w-3 h-3" />
+          色付きのカードは、通常版「KMRVID Claude Skills」限定スキルとの組み合わせ例です
+        </p>
 
         <div
-          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 mt-10 *:p-6 *:border *:rounded-2xl"
         >
           {
             combos.map((combo) => (
-              <div>
+              <div
+                class={
+                  combo.claudeSkill
+                    ? "bg-accent-soft border-accent/30"
+                    : "bg-canvas border-border"
+                }
+              >
                 <h3 class="text-lg text-left leading-snug">{combo.goal}</h3>
                 <div class="flex flex-wrap items-center gap-2 mt-3">
                   {combo.chain.map((skill, i) => (
@@ -567,10 +589,31 @@ const totalSkills = skills.length;
                       </span>
                     </>
                   ))}
+                  {combo.claudeSkill && (
+                    <>
+                      <ArrowRight
+                        size={14}
+                        stroke-width={2}
+                        class="text-accent-dark"
+                      />
+                      <span class="bg-accent px-2.5 py-1 rounded-full font-mono text-white text-xs">
+                        {combo.claudeSkill}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
                   {combo.desc}
                 </p>
+                {combo.claudeSkill && (
+                  <a
+                    href="/"
+                    class="inline-flex items-center gap-1.5 mt-4 min-h-11 text-accent-dark hover:text-accent text-sm underline underline-offset-4 transition self-start"
+                  >
+                    Claude版の詳細を見る
+                    <ArrowUpRight size={14} stroke-width={2} />
+                  </a>
+                )}
               </div>
             ))
           }

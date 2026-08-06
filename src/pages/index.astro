@@ -30,8 +30,7 @@ import Footer from "@/components/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 
-const PURCHASE_URL =
-  "https://kmrvid.com/discount/FK05ANQ7HZHZ?redirect=%2Fproducts%2Fkmrvid-claude-skills";
+const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 const PRODUCT_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 const BOOKS_URL = "https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks";
@@ -113,11 +112,11 @@ const skillHighlights = [
     >
       <div class="mx-auto px-6 max-w-5xl">
         <a
-          href="/figma"
+          href="#pricing"
           class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full font-medium text-sm bg-accent-soft text-accent-dark"
         >
           <BadgePercent size={16} stroke-width={2} />
-          KMRVID Figma Skills 新登場！
+          定価改定前ラストチャンス（〜8月9日 23:59）
         </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
@@ -480,15 +479,15 @@ const skillHighlights = [
           class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
         >
           <BadgePercent size={18} stroke-width={2} />
-          期間限定オファー
+          価格改定のお知らせ
         </p>
         <h2 id="pricing-heading" class="text-ink text-left">
-          スキル増量！<br class="sm:hidden" />週末ディスカウント
+          定価改定前<br class="sm:hidden" />ラストチャンス
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          スキルが54個に増量し、定価19,800円（税込）に改定。クーポンコードの入力で、期間限定4,400円オフの15,400円（税込）に。<br
+          全54スキルを収録し、2026年8月10日（月）0:00より定価を27,500円（税込）に改定します。<br
             class="sm:hidden"
-          />7月26日 23:59までの期間限定価格。
+          />それまでは現行価格の19,800円（税込）でご案内。
         </p>
         <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
           残り時間を計算しています…
@@ -502,29 +501,20 @@ const skillHighlights = [
         >
           <div>
             <p class="text-white/50 text-sm line-through">
-              定価 19,800円（税込）
+              8/10以降の定価 27,500円（税込）
             </p>
             <p
               class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"
             >
-              15,400<span class="text-2xl">円</span>
+              19,800<span class="text-2xl">円</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
-
-            <div class="flex flex-wrap items-center gap-3 mt-6">
-              <span
-                class="bg-white/10 px-4 py-2 border border-white/15 rounded-full font-mono text-sm"
-              >
-                FK05ANQ7HZHZ
-              </span>
-              <span class="text-white/50 text-sm">チェックアウト時に入力</span>
-            </div>
 
             <a
               href={PURCHASE_URL}
               class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
             >
-              クーポン適用で申し込む
+              今すぐ申し込む
               <ArrowRight size={18} stroke-width={2} />
             </a>
           </div>
@@ -627,10 +617,6 @@ const skillHighlights = [
             Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
           </FaqItem>
 
-          <FaqItem question="クーポンはどこで使えますか？">
-            商品ページのチェックアウト画面でコード「FK05ANQ7HZHZ」を入力してください。直接リンクからアクセスすると自動的に適用された状態でページが開きます。
-          </FaqItem>
-
           <FaqItem question="講座の詳細な内容はどこで確認できますか？">
             全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくは
             <a href="/skills" class="text-accent underline underline-offset-4">
@@ -670,20 +656,20 @@ const skillHighlights = [
       >
         <Clock size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          15,400円で
+          19,800円で
           <br class="sm:hidden" />
           今すぐ始める
         </h2>
         <p
           class="max-w-md text-white/70 text-base text-justify leading-relaxed"
         >
-          スキル増量！週末ディスカウントは7月26日23:59まで。このタイミングを逃すと、定価19,800円に戻ります。
+          定価改定は2026年8月10日（月）0:00から。このタイミングを逃すと、定価27,500円に上がります。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          クーポン適用で申し込む
+          今すぐ申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a
@@ -700,21 +686,21 @@ const skillHighlights = [
 </Layout>
 
 <script>
-  const target = new Date("2026-07-26T23:59:00+09:00").getTime();
+  const target = new Date("2026-08-10T00:00:00+09:00").getTime();
   const el = document.getElementById("countdown");
 
   function tick() {
     if (!el) return;
     const diff = target - Date.now();
     if (diff <= 0) {
-      el.textContent = "受付は終了しました";
+      el.textContent = "定価27,500円（税込）に改定されました";
       return;
     }
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const m = Math.floor((diff / (1000 * 60)) % 60);
     const s = Math.floor((diff / 1000) % 60);
-    el.textContent = `クーポン期限まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
+    el.textContent = `定価改定まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
   }
 
   tick();

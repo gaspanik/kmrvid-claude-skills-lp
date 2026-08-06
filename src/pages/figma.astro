@@ -243,12 +243,13 @@ const totalSkills = skills.length;
       class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
     >
       <div class="mx-auto px-6 max-w-5xl">
-        <div
+        <a
+          href="#pricing"
           class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full font-medium text-sm bg-accent-soft text-accent-dark"
         >
           <BadgePercent size={16} stroke-width={2} />
-          発売記念価格 3,300円（税込）
-        </div>
+          定価改定前ラストチャンス（〜8月9日 23:59）
+        </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
           Figma Design Agent 専用カスタムスキル集
@@ -506,7 +507,10 @@ const totalSkills = skills.length;
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               totalSkills
-            }個のFigma専用スキルを買い切りで利用できます。
+            }個のFigma専用スキルを買い切りで利用できます。2026年8月10日（月）0:00より定価9,900円（税込）でのご案内となります。
+          </p>
+          <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
+            残り時間を計算しています…
           </p>
         </div>
 
@@ -636,7 +640,7 @@ const totalSkills = skills.length;
         >
           発売記念価格でご案内中。{
             totalSkills
-          }個のカスタムスキルを、キャンバス上の選択だけで動かせます。
+          }個のカスタムスキルを、キャンバス上の選択だけで動かせます。2026年8月10日（月）0:00より定価9,900円（税込）に切り替わります。
         </p>
         <a
           href={PURCHASE_URL}
@@ -738,4 +742,26 @@ const totalSkills = skills.length;
   toggle?.addEventListener("click", open);
   close?.addEventListener("click", shut);
   menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", shut));
+</script>
+
+<script>
+  const target = new Date("2026-08-10T00:00:00+09:00").getTime();
+  const el = document.getElementById("countdown");
+
+  function tick() {
+    if (!el) return;
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      el.textContent = "発売記念価格の受付は終了しました";
+      return;
+    }
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    el.textContent = `発売記念価格の終了まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
 </script>

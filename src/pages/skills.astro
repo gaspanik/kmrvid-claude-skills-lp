@@ -16,8 +16,7 @@ import ImageLightbox from "@/components/ImageLightbox.astro";
 import Layout from "@/layouts/Layout.astro";
 import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
 
-const PURCHASE_URL =
-  "https://kmrvid.com/discount/FK05ANQ7HZHZ?redirect=%2Fproducts%2Fkmrvid-claude-skills";
+const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 
 const categories = [
   {
@@ -420,20 +419,20 @@ const totalSkills = categories.reduce((sum, cat) => sum + cat.skills.length, 0);
       >
         <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          全{totalSkills}スキル、<br class="sm:hidden" />15,400円で今すぐ
+          全{totalSkills}スキル、<br class="sm:hidden" />19,800円で今すぐ
         </h2>
         <p
           class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
         >
-          スキル増量！週末ディスカウントは7月26日23:59まで。<br
+          定価改定は2026年8月10日（月）0:00から。<br
             class="hidden md:block"
-          />これを逃すと、定価19,800円に戻ります。
+          />これを逃すと、定価27,500円に上がります。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          クーポン適用で申し込む
+          今すぐ申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
       </div>

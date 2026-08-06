@@ -11,6 +11,7 @@ import {
   ListChecks,
   Menu,
   MousePointerClick,
+  Plus,
   SquareTerminal,
   Workflow,
   X,
@@ -176,13 +177,13 @@ const combos = [
     goal: "人間の特性を考慮したページデザインにしたい",
     chain: ["create-multi-pattern"],
     claudeSkill: "cognitive-ui-design",
-    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、通常版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と組み合わせることで、生成する複数パターンの質をさらに引き上げられます。",
+    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、通常版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と併用すると、コンパニオンスキルとして裏で呼び出され、生成する複数パターンの質をさらに引き上げられます。",
   },
   {
     goal: "日本語の処理を改善したい",
     chain: ["rewrite-me"],
     claudeSkill: "japanese-web-guideline",
-    desc: "禁則処理・斜体回避・見出しの整列など日本語特有の実装ガイドラインは、通常版限定の`japanese-web-guideline`が担当。Figma版の`rewrite-me`で整えた文言を、実装時にさらに日本語表示へ最適化できます。",
+    desc: "禁則処理・斜体回避・見出しの整列など日本語特有の実装ガイドラインは、通常版限定の`japanese-web-guideline`が担当。Figma版の`rewrite-me`と併用することで、整えた文言を実装時にさらに日本語表示へ最適化できます。",
   },
 ];
 
@@ -591,11 +592,7 @@ const totalSkills = skills.length;
                   ))}
                   {combo.claudeSkill && (
                     <>
-                      <ArrowRight
-                        size={14}
-                        stroke-width={2}
-                        class="text-accent-dark"
-                      />
+                      <Plus size={14} stroke-width={2} class="text-accent-dark" />
                       <span class="bg-accent px-2.5 py-1 rounded-full font-mono text-white text-xs">
                         {combo.claudeSkill}
                       </span>

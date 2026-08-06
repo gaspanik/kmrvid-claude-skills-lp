@@ -66,44 +66,45 @@ const skills = [
     desc: "選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）",
   },
   {
-    name: "figma-tokenize",
-    desc: "変数を使わずに値を直接ハードコードしている色・フォントサイズ・スペーシングを変数（トークン）化してバインド。テキストのスタイル化にも対応",
+    name: "figma-component-audit",
+    desc: "選択したコンポーネント/コンポーネントセット単体を、バリアント定義・コンポーネントプロパティ・レイヤー命名・Auto-layout・カラー/タイポグラフィトークンの5観点で採点",
   },
   {
     name: "brief-me",
     desc: "デザイン着手前のビジネス要件ヒアリング。create-multi-pattern の実行前の詳細な要件定義に。結果の BRIEF はチャットに出力",
   },
   {
-    name: "create-multi-pattern",
-    desc: "複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当にも対応",
+    name: "design-brief-me",
+    desc: "デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に",
   },
   {
     name: "rewrite-me",
     desc: "選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない",
   },
   {
-    name: "figma-typescale",
-    desc: "ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ",
+    name: "create-multi-pattern",
+    desc: "複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当にも対応",
+  },
+  {
+    name: "create-single-page",
+    desc: "`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる",
   },
   {
     name: "japanese-lp-seasoning",
     desc: "フルブリード演出・カルーセル/バナースライダー・縦書きを、静的フレームでの見た目として選択・提案（スクロール連動アニメーションは対象外）",
   },
   {
+    name: "figma-typescale",
+    desc: "ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ",
+  },
+  {
+    name: "figma-tokenize",
+    desc: "変数を使わずに値を直接ハードコードしている色・フォントサイズ・スペーシングを変数（トークン）化してバインド。テキストのスタイル化にも対応",
+  },
+
+  {
     name: "figma-componentize",
     desc: "選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案。バリアント生成、バリアントの変数化までを対話的に実行",
-  },
-  {
-    name: "figma-contrast-check",
-    desc: "選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応",
-  },
-  {
-    name: "design-brief-me",
-    desc: "デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に",
-  },
-  {
-    name: "create-single-page",
-    desc: "`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる",
   },
   {
     name: "figma-systematize",
@@ -112,6 +113,10 @@ const skills = [
   {
     name: "figma-enhance",
     desc: "すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装",
+  },
+  {
+    name: "figma-contrast-check",
+    desc: "選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応",
   },
 ];
 
@@ -324,8 +329,10 @@ const totalSkills = skills.length;
               </div>
             </div>
             <p class="mt-8 text-white/50 text-sm">
-              2026/08/05 更新 —
-              新スキル「design-brief-me」「create-single-page」「figma-systematize」「figma-enhance」を追加。既存スキルの調整
+              2026/08/06 更新
+              —新スキル「figma-component-audit」を追加。既存スキルの調整
+              <br />
+              2026/08/05 更新 — 新スキル「design-brief-me」「create-single-page」「figma-systematize」「figma-enhance」を追加。既存スキルの調整
               <br />
               2026/08/04 更新 — 新スキル「figma-contrast-check」「figma-typescale」を追加。既存スキルの調整
             </p>
@@ -429,7 +436,7 @@ const totalSkills = skills.length;
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          2026-08-05時点で、{
+          2026-08-06時点で、{
             totalSkills
           }スキルすべてFigma上での実機動作を確認済みです。利用環境やツールのバージョンによっては、正常に動作しない場合があります。
         </p>
@@ -571,7 +578,7 @@ const totalSkills = skills.length;
             Figma専用スキルだけでは物足りない方へ
           </p>
           <h2 id="cross-sell-heading" class="text-ink text-left">
-            全49スキルの「KMRVID Claude Skills」
+            全54スキルの「KMRVID Claude Skills」
           </h2>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             セットアップからモックアップ作成、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連のワークフローを自動化する本講座には、今回のFigma専用スキル{
@@ -642,7 +649,7 @@ const totalSkills = skills.length;
           href="/"
           class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
         >
-          KMRVID Claude Skills（全49スキル）はこちら
+          KMRVID Claude Skills（全54スキル）はこちら
         </a>
       </div>
     </section>
@@ -696,7 +703,7 @@ const totalSkills = skills.length;
               href="/"
               class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
             >
-              KMRVID Claude Skills（全49スキル）を見る
+              KMRVID Claude Skills（全54スキル）を見る
             </a>
           </div>
         </div>

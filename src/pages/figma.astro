@@ -248,7 +248,7 @@ const totalSkills = skills.length;
           class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full font-medium text-sm bg-accent-soft text-accent-dark"
         >
           <BadgePercent size={16} stroke-width={2} />
-          定価改定前ラストチャンス（〜8月9日 23:59）
+          値上げ前 最終ご案内（〜8月9日 23:59）
         </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
@@ -502,12 +502,12 @@ const totalSkills = skills.length;
             発売記念価格
           </p>
           <h2 id="pricing-heading" class="text-ink text-left">
-            KMRVID Figma Skills
+            KMRVID <br class="sm:hidden" /> Figma Skills
           </h2>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               totalSkills
-            }個のFigma専用スキルを買い切りで利用できます。2026年8月10日（月）0:00より定価9,900円（税込）でのご案内となります。
+            }個のFigma専用スキルを買い切りで利用できます。発売記念価格3,300円（税込）でご案内できるのは2026年8月10日（月）0:00まで。それ以降は定価9,900円（税込）に切り替わります。
           </p>
           <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
             残り時間を計算しています…
@@ -520,7 +520,7 @@ const totalSkills = skills.length;
           >
             <div>
               <p class="text-white/50 text-sm line-through">
-                定価 9,900円（税込）
+                8月10日以降の定価 9,900円（税込）
               </p>
               <p
                 class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"
@@ -547,7 +547,7 @@ const totalSkills = skills.length;
               </li>
               <li>
                 <CircleCheck size={18} stroke-width={2} />
-                <span>1ファイル自己完結・SKILL.md登録のみ</span>
+                <span>1ファイル完結・SKILL.md登録のみ</span>
               </li>
               <li>
                 <CircleCheck size={18} stroke-width={2} />
@@ -631,16 +631,16 @@ const totalSkills = skills.length;
       >
         <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          3,300円で
+          9,900円になる前に
           <br class="sm:hidden" />
-          Figmaの中から始める
+          3,300円で始める
         </h2>
         <p
           class="max-w-md text-white/70 text-base text-justify leading-relaxed"
         >
-          発売記念価格でご案内中。{
+          発売記念価格3,300円（税込）でご案内できるのは2026年8月10日（月）0:00まで。{
             totalSkills
-          }個のカスタムスキルを、キャンバス上の選択だけで動かせます。2026年8月10日（月）0:00より定価9,900円（税込）に切り替わります。
+          }個のカスタムスキルを、キャンバス上の選択だけで動かせます。それ以降は定価9,900円（税込）に切り替わります。
         </p>
         <a
           href={PURCHASE_URL}
@@ -752,7 +752,7 @@ const totalSkills = skills.length;
     if (!el) return;
     const diff = target - Date.now();
     if (diff <= 0) {
-      el.textContent = "発売記念価格の受付は終了しました";
+      el.textContent = "発売記念価格でのご案内は終了しました";
       return;
     }
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));

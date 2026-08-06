@@ -550,7 +550,7 @@ const totalSkills = skills.length;
           Combination
         </div>
         <h2 id="combos-heading" class="max-w-xl text-ink text-left">
-          こういう時はこのスキルを使おう
+          こういう時は<br class="sm:hidden" />このスキルを使おう
         </h2>
         <p
           class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
@@ -558,7 +558,7 @@ const totalSkills = skills.length;
           スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
         </p>
         <p class="flex items-center gap-2 mt-3 text-ink-soft text-sm">
-          <span class="inline-block bg-accent-soft border border-accent/30 rounded-full w-3 h-3" />
+          <span class="inline-block border border-accent/30 rounded-full w-3 h-3 bg-accent-soft" />
           色付きのカードは、通常版「KMRVID Claude Skills」限定スキルとの組み合わせ例です
         </p>
 
@@ -605,7 +605,7 @@ const totalSkills = skills.length;
                 {combo.claudeSkill && (
                   <a
                     href="/"
-                    class="inline-flex items-center gap-1.5 mt-4 min-h-11 text-accent-dark hover:text-accent text-sm underline underline-offset-4 transition self-start"
+                    class="inline-flex items-center self-start gap-1.5 mt-4 min-h-11 hover:text-accent text-sm underline underline-offset-4 transition text-accent-dark"
                   >
                     Claude版の詳細を見る
                     <ArrowUpRight size={14} stroke-width={2} />

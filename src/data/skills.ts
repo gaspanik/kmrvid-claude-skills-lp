@@ -61,6 +61,10 @@ export const figmaSkills = [
     name: 'figma-contrast-check',
     desc: '選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応',
   },
+  {
+    name: 'figma-design-md',
+    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+  },
 ]
 
 export const categories = [

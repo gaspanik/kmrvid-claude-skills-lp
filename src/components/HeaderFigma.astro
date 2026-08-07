@@ -1,0 +1,123 @@
+---
+import { Menu, X } from '@lucide/astro'
+
+const PURCHASE_URL = 'https://kmrvid.com/products/kmrvid-figma-skills'
+
+const navLinks = [
+  { href: '#diff', label: '通常版との違い' },
+  { href: '#skills', label: '収録スキル' },
+  { href: '/', label: 'Claude版' },
+  { href: '#how-to', label: '使い方' },
+  { href: '#combos', label: '組み合わせ例' },
+  { href: '#pricing', label: '料金' },
+]
+---
+
+<header
+  class="top-0 z-40 sticky bg-canvas/95 backdrop-blur-sm border-border border-b"
+>
+  <div
+    class="flex justify-between items-center gap-4 mx-auto px-6 py-4 max-w-6xl"
+  >
+    <a href="/figma" class="font-heading text-ink leading-none">
+      <span class="block text-base tracking-tight">KMRVID</span>
+      <span class="block text-ink-soft text-xs leading-tight tracking-loose uppercase"
+        >Figma Skills</span
+      >
+    </a>
+
+    <nav aria-label="メインナビゲーション" class="hidden md:block">
+      <ul
+        class="flex items-center gap-8 text-sm **:hover:text-accent **:transition-colors"
+      >
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={PURCHASE_URL}
+        class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 shadow-xs px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
+      >
+        3,300円で申し込む
+      </a>
+
+      <button
+        type="button"
+        id="menu-toggle"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="md:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
+      >
+        <Menu size={24} stroke-width={1.75} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-menu"
+  class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed bg-ink"
+  role="dialog"
+  aria-modal="true"
+  aria-label="ナビゲーションメニュー"
+>
+  <div class="flex justify-between items-center px-6 py-4">
+    <span class="font-heading text-base text-canvas leading-none">KMRVID</span>
+    <button
+      type="button"
+      id="menu-close"
+      aria-label="メニューを閉じる"
+      class="flex justify-center items-center min-w-11 min-h-11 text-canvas"
+    >
+      <X size={24} stroke-width={1.75} />
+    </button>
+  </div>
+  <nav aria-label="モバイルナビゲーション">
+    <ul
+      class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
+    >
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="px-6 py-6">
+      <a
+        href={PURCHASE_URL}
+        class="flex justify-center items-center gap-1.5 bg-accent hover:brightness-110 px-6 py-3.5 rounded-full w-full font-medium text-white transition"
+      >
+        3,300円で申し込む
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')
+  const menu = document.getElementById('mobile-menu')
+  const close = document.getElementById('menu-close')
+
+  const open = () => {
+    menu?.classList.remove('hidden')
+    toggle?.setAttribute('aria-expanded', 'true')
+  }
+  const shut = () => {
+    menu?.classList.add('hidden')
+    toggle?.setAttribute('aria-expanded', 'false')
+  }
+
+  toggle?.addEventListener('click', open)
+  close?.addEventListener('click', shut)
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', shut))
+</script>

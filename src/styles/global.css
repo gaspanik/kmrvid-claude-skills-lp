@@ -15,6 +15,8 @@
   --color-accent: #d3401f;
   --color-accent-soft: #f7e2d9;
   --color-accent-dark: #a92e14;
+  --color-positive: #16a34a;
+  --color-negative: #f87171;
 
   /* Type scale: Major Third (1.250) — base 16px */
   --text-xs: 0.64rem;

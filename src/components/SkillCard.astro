@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string
+  desc: string
+}
+
+const { name, desc } = Astro.props
+---
+
+<div>
+  <p class="font-mono font-bold text-base text-left leading-snug">{name}</p>
+  <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
+    {desc}
+  </p>
+</div>

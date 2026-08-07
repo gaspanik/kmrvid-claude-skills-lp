@@ -9,29 +9,24 @@ import {
   FileText,
   Languages,
   ListChecks,
-  Menu,
   MousePointerClick,
   Plus,
   SquareTerminal,
   Workflow,
-  X,
 } from "@lucide/astro";
 import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import FooterFigma from "@/components/FooterFigma.astro";
+import HeaderFigma from "@/components/HeaderFigma.astro";
+import SkillCard from "@/components/SkillCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { figmaSkills, totalSkills as claudeSkillsTotal } from "@/data/skills";
 
 const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-figma-skills";
-
-const navLinks = [
-  { href: "#diff", label: "通常版との違い" },
-  { href: "#skills", label: "収録スキル" },
-  { href: "/", label: "Claude版" },
-  { href: "#how-to", label: "使い方" },
-  { href: "#combos", label: "組み合わせ例" },
-  { href: "#pricing", label: "料金" },
-];
 
 const differences = [
   {
@@ -60,69 +55,7 @@ const differences = [
   },
 ];
 
-const skills = [
-  {
-    name: "figma-layer-rename",
-    desc: "自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。レイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に",
-  },
-  {
-    name: "figma-audit",
-    desc: "選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）",
-  },
-  {
-    name: "figma-component-audit",
-    desc: "選択したコンポーネント/コンポーネントセット単体を、バリアント定義・コンポーネントプロパティ・レイヤー命名・Auto-layout・カラー/タイポグラフィトークンの5観点で採点",
-  },
-  {
-    name: "brief-me",
-    desc: "デザイン着手前のビジネス要件ヒアリング。create-multi-pattern の実行前の詳細な要件定義に。結果の BRIEF はチャットに出力",
-  },
-  {
-    name: "design-brief-me",
-    desc: "デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に",
-  },
-  {
-    name: "rewrite-me",
-    desc: "選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない",
-  },
-  {
-    name: "create-multi-pattern",
-    desc: "複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当にも対応",
-  },
-  {
-    name: "create-single-page",
-    desc: "`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる",
-  },
-  {
-    name: "japanese-lp-seasoning",
-    desc: "フルブリード演出・カルーセル/バナースライダー・縦書きを、静的フレームでの見た目として選択・提案（スクロール連動アニメーションは対象外）、簡易実装処理まで",
-  },
-  {
-    name: "figma-typescale",
-    desc: "ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ",
-  },
-  {
-    name: "figma-tokenize",
-    desc: "変数を使わずに値を直接ハードコードしている色・フォントサイズ・スペーシングを変数（トークン）化してバインド。テキストのスタイル化にも対応",
-  },
-
-  {
-    name: "figma-componentize",
-    desc: "選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案。バリアント生成、バリアントの変数化までを対話的に実行",
-  },
-  {
-    name: "figma-systematize",
-    desc: "選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。冒頭で実行モード（自動／各ステップ確認あり）を1回だけ確認",
-  },
-  {
-    name: "figma-enhance",
-    desc: "すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装まで自動で実行",
-  },
-  {
-    name: "figma-contrast-check",
-    desc: "選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応",
-  },
-];
+const skills = figmaSkills;
 
 const steps = [
   {
@@ -191,99 +124,7 @@ const totalSkills = skills.length;
 ---
 
 <Layout title="KMRVID Figma Skills — Figma Design Agent専用カスタムスキル集">
-  <header
-    class="top-0 z-40 sticky bg-canvas/95 backdrop-blur-sm border-border border-b"
-  >
-    <div
-      class="flex justify-between items-center gap-4 mx-auto px-6 py-4 max-w-6xl"
-    >
-      <a href="/figma" class="font-heading text-ink leading-none">
-        <span class="block text-base tracking-tight">KMRVID</span>
-        <span
-          class="block text-ink-soft text-xs uppercase leading-tight tracking-loose"
-        >
-          Figma Skills
-        </span>
-      </a>
-
-      <nav aria-label="メインナビゲーション" class="hidden md:block">
-        <ul
-          class="flex items-center gap-8 **:hover:text-accent text-sm **:transition-colors"
-        >
-          {
-            navLinks.map((link) => (
-              <li>
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <div class="flex items-center gap-2">
-        <a
-          href={PURCHASE_URL}
-          class="inline-flex items-center gap-1.5 bg-accent shadow-xs hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
-        >
-          3,300円で申し込む
-        </a>
-
-        <button
-          type="button"
-          id="menu-toggle"
-          aria-label="メニューを開く"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          class="md:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
-        >
-          <Menu size={24} stroke-width={1.75} />
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div
-    id="mobile-menu"
-    class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed bg-ink"
-    role="dialog"
-    aria-modal="true"
-    aria-label="ナビゲーションメニュー"
-  >
-    <div class="flex justify-between items-center px-6 py-4">
-      <span class="font-heading text-canvas text-base leading-none">
-        KMRVID
-      </span>
-      <button
-        type="button"
-        id="menu-close"
-        aria-label="メニューを閉じる"
-        class="flex justify-center items-center min-w-11 min-h-11 text-canvas"
-      >
-        <X size={24} stroke-width={1.75} />
-      </button>
-    </div>
-    <nav aria-label="モバイルナビゲーション">
-      <ul
-        class="flex **:flex flex-col **:items-center px-6 *:border-white/10 *:border-b **:min-h-14 **:text-canvas **:text-base"
-      >
-        {
-          navLinks.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="px-6 py-6">
-        <a
-          href={PURCHASE_URL}
-          class="flex justify-center items-center gap-1.5 bg-accent hover:brightness-110 px-6 py-3.5 rounded-full w-full font-medium text-white transition"
-        >
-          3,300円で申し込む
-        </a>
-      </div>
-    </nav>
-  </div>
+  <HeaderFigma />
 
   <main id="top">
     <!-- ============ HERO ============ -->
@@ -424,15 +265,11 @@ const totalSkills = skills.length;
       >
         {
           differences.map((item) => (
-            <div>
-              <item.icon size={22} stroke-width={1.75} class="text-accent" />
-              <h3 class="mt-4 min-h-14 text-lg text-left leading-snug">
-                {item.title}
-              </h3>
-              <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
-                {item.description}
-              </p>
-            </div>
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
           ))
         }
       </div>
@@ -473,14 +310,7 @@ const totalSkills = skills.length;
         >
           {
             skills.map((skill) => (
-              <div>
-                <p class="font-mono font-bold text-base text-left leading-snug">
-                  {skill.name}
-                </p>
-                <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
-                  {skill.desc}
-                </p>
-              </div>
+              <SkillCard name={skill.name} desc={skill.desc} />
             ))
           }
         </div>
@@ -640,9 +470,11 @@ const totalSkills = skills.length;
               totalSkills
             }個のFigma専用スキルを買い切りで利用できます。発売記念価格3,300円（税込）でご案内できるのは2026年8月10日（月）0:00まで。それ以降は定価9,900円（税込）に切り替わります。
           </p>
-          <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
-            残り時間を計算しています…
-          </p>
+          <CountdownTimer
+            targetDate="2026-08-10T00:00:00+09:00"
+            activeLabel="発売記念価格の終了まで残り"
+            endedMessage="発売記念価格でのご案内は終了しました"
+          />
         </div>
 
         <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
@@ -713,7 +545,7 @@ const totalSkills = skills.length;
             Figma専用スキルだけでは物足りない方へ
           </p>
           <h2 id="cross-sell-heading" class="text-ink text-left">
-            全54スキルの「KMRVID Claude Skills」
+            全{claudeSkillsTotal}スキルの「KMRVID Claude Skills」
           </h2>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             セットアップからモックアップ作成、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連のワークフローを自動化する本講座には、今回のFigma専用スキル{
@@ -784,118 +616,11 @@ const totalSkills = skills.length;
           href="/"
           class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
         >
-          KMRVID Claude Skills（全54スキル）はこちら
+          KMRVID Claude Skills（全{claudeSkillsTotal}スキル）はこちら
         </a>
       </div>
     </section>
   </main>
 
-  <footer class="bg-ink text-canvas">
-    <div class="mx-auto px-6 py-16 max-w-6xl">
-      <div class="gap-10 grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div>
-          <p class="font-heading text-lg">KMRVID Figma Skills</p>
-          <p
-            class="mt-3 max-w-sm text-white/60 text-sm text-justify leading-relaxed"
-          >
-            Figma の Design
-            Agent（カスタムスキル登録機能）で使うために最適化した、Figma専用カスタムスキル集。
-          </p>
-        </div>
-
-        <nav aria-label="フッターナビゲーション">
-          <p class="text-white/40 text-sm uppercase tracking-loose">Menu</p>
-          <ul
-            class="flex **:flex flex-col **:items-center mt-4 **:min-h-11 **:hover:text-accent text-sm **:transition-colors"
-          >
-            <li>
-              <a href="#diff">通常版との違い</a>
-            </li>
-            <li>
-              <a href="#skills">収録スキル</a>
-            </li>
-            <li>
-              <a href="#how-to">使い方</a>
-            </li>
-            <li>
-              <a href="#combos">組み合わせ例</a>
-            </li>
-            <li>
-              <a href="#pricing">料金</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div>
-          <p class="text-white/40 text-sm uppercase tracking-loose">
-            Get started
-          </p>
-          <div class="flex flex-col items-start gap-3 mt-4">
-            <a
-              href={PURCHASE_URL}
-              class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
-            >
-              3,300円で申し込む
-            </a>
-            <a
-              href="/"
-              class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
-            >
-              KMRVID Claude Skills（全54スキル）を見る
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex sm:flex-row flex-col justify-between gap-4 mt-12 pt-8 border-white/10 border-t text-white/50 text-sm"
-      >
-        <p>&copy; kmrvid.com — KMRVID Figma Skills</p>
-        <p class="max-w-xl text-base text-justify">
-          本パッケージに付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
-        </p>
-      </div>
-    </div>
-  </footer>
+  <FooterFigma />
 </Layout>
-
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("mobile-menu");
-  const close = document.getElementById("menu-close");
-
-  const open = () => {
-    menu?.classList.remove("hidden");
-    toggle?.setAttribute("aria-expanded", "true");
-  };
-  const shut = () => {
-    menu?.classList.add("hidden");
-    toggle?.setAttribute("aria-expanded", "false");
-  };
-
-  toggle?.addEventListener("click", open);
-  close?.addEventListener("click", shut);
-  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", shut));
-</script>
-
-<script>
-  const target = new Date("2026-08-10T00:00:00+09:00").getTime();
-  const el = document.getElementById("countdown");
-
-  function tick() {
-    if (!el) return;
-    const diff = target - Date.now();
-    if (diff <= 0) {
-      el.textContent = "発売記念価格でのご案内は終了しました";
-      return;
-    }
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    el.textContent = `発売記念価格の終了まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
-  }
-
-  tick();
-  setInterval(tick, 1000);
-</script>

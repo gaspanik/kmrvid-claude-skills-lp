@@ -96,7 +96,7 @@ const typographyEntries = Object.entries(typography) as [string, any][];
       <hr class="mb-12 border-border" />
 
       <!-- Overview -->
-      <section class="mb-16">
+      <section class="mb-16" aria-label="Overview">
         <p class="font-medium text-ink-soft text-base">
           実務歴の長いWeb制作者が講師を務める、Claude Code向けスキル講座の販促LP。誇張のない落ち着いた説得トーンで、実績と網羅性（36スキル・31本の動画）を静かに裏付けとして提示する。ターゲットはFigma・コーディングを日常的に行うWeb制作者/フリーランスと、AI導入を検討する制作会社の意思決定者で、双方に「実務でそのまま使える」信頼感を与える必要がある。装飾は最小限にとどめ、単色（モノクローム）の地に一色のアクセントだけを効かせるエディトリアルな雰囲気とする。
         </p>
@@ -310,29 +310,29 @@ const typographyEntries = Object.entries(typography) as [string, any][];
           <h2 class="font-normal text-2xl">Do's and Don'ts</h2>
         </div>
 
-        <div class="flex flex-col gap-3">
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-green-600 shrink-0">✓</span>
+        <div class="flex flex-col gap-3 *:flex *:gap-2 *:text-sm *:leading-7">
+          <div>
+            <span class="font-bold text-positive shrink-0">✓</span>
             <p class="text-ink">カラーは必ずDESIGN.mdのトークン（primary/secondary/ink/mutedなど）経由で使う。</p>
           </div>
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-green-600 shrink-0">✓</span>
+          <div>
+            <span class="font-bold text-positive shrink-0">✓</span>
             <p class="text-ink">本文・説明文はtext-justify、見出しはtext-leftで統一する。</p>
           </div>
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-green-600 shrink-0">✓</span>
+          <div>
+            <span class="font-bold text-positive shrink-0">✓</span>
             <p class="text-ink">大文字表記が必要な場合はuppercaseクラスで表現し、テキスト自体は先頭大文字＋残り小文字で記述する。</p>
           </div>
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-red-400 shrink-0">✗</span>
+          <div>
+            <span class="font-bold text-negative shrink-0">✗</span>
             <p class="text-ink">Tailwindの生カラー（gray-*、neutral-*など）をプロジェクトのパレットとして使わない。</p>
           </div>
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-red-400 shrink-0">✗</span>
+          <div>
+            <span class="font-bold text-negative shrink-0">✗</span>
             <p class="text-ink">ボタンやバッジの角丸をrounded-full以外に変えない（統一感が崩れる）。</p>
           </div>
-          <div class="flex gap-2 text-sm leading-7">
-            <span class="font-bold text-red-400 shrink-0">✗</span>
+          <div>
+            <span class="font-bold text-negative shrink-0">✗</span>
             <p class="text-ink">誇大な演出（強いドロップシャドウ、過剰なグラデーション）を追加しない。落ち着いた実績訴求のトーンを崩す。</p>
           </div>
         </div>
@@ -340,7 +340,7 @@ const typographyEntries = Object.entries(typography) as [string, any][];
     </main>
 
     <!-- Footer -->
-    <footer class="border-gray-200 border-t">
+    <footer class="border-border border-t">
       <div
         class="flex justify-between items-center mx-auto px-6 py-6 max-w-4xl text-ink-soft text-sm"
       >

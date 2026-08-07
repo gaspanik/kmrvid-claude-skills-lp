@@ -25,10 +25,12 @@ import authorPhoto from "@/assets/images/IMG_8341_square.png";
 import FeatureCard from "@/components/FeatureCard.astro";
 import FaqItem from "@/components/FaqItem.astro";
 import ImageLightbox from "@/components/ImageLightbox.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { totalSkills } from "@/data/skills";
 
 const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 const LINE_URL = "https://lin.ee/EOgmkKQ";
@@ -178,7 +180,7 @@ const skillHighlights = [
             <p
               class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
             >
-              54
+              {totalSkills}
               <span class="font-body text-white/50 text-lg">個</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">
@@ -286,8 +288,8 @@ const skillHighlights = [
           />
           <FeatureCard
             icon={Video}
-            title="54スキル × 動画48本のボリューム"
-            description="一般非公開のスキルを含む全54個を日本語化し、そのスキル解説を動画にして約4時間59分に凝縮。スキルは不定期で機能改善・強化のため更新予定。"
+            title={`${totalSkills}スキル × 動画48本のボリューム`}
+            description={`一般非公開のスキルを含む全${totalSkills}個を日本語化し、そのスキル解説を動画にして約4時間59分に凝縮。スキルは不定期で機能改善・強化のため更新予定。`}
           />
           <FeatureCard
             icon={Wand}
@@ -318,7 +320,7 @@ const skillHighlights = [
       <p
         class="mt-4 max-w-xl text-ink-soft text-base text-justify text-pretty leading-relaxed"
       >
-        全54スキルのうち、代表的なものを紹介します。<br />
+        全{totalSkills}スキルのうち、代表的なものを紹介します。<br />
         「KMRVID Claude Skills」には、Figma用に最適化されたカスタムスキル「KMRVID
         Figma Skills」も同梱。
       </p>
@@ -485,11 +487,13 @@ const skillHighlights = [
           27,500円になる前に、<br class="sm:hidden" />19,800円で
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          全54スキルを収録した本講座は、2026年8月10日（月）0:00に定価27,500円（税込）へ改定されます。それまでのお申し込みなら、現行価格19,800円（税込）のままご案内します。
+          全{totalSkills}スキルを収録した本講座は、2026年8月10日（月）0:00に定価27,500円（税込）へ改定されます。それまでのお申し込みなら、現行価格19,800円（税込）のままご案内します。
         </p>
-        <p id="countdown" class="mt-4 font-medium text-base text-accent-dark">
-          残り時間を計算しています…
-        </p>
+        <CountdownTimer
+          targetDate="2026-08-10T00:00:00+09:00"
+          activeLabel="定価改定まで残り"
+          endedMessage="定価27,500円（税込）に改定されました"
+        />
       </div>
 
       <!-- bottom weight: the price card itself -->
@@ -522,7 +526,7 @@ const skillHighlights = [
           >
             <li>
               <CircleCheck size={18} stroke-width={2} />
-              <span>全54スキル（非公開のものを含む）</span>
+              <span>全{totalSkills}スキル（非公開のものを含む）</span>
             </li>
             <li>
               <CircleCheck size={18} stroke-width={2} />
@@ -682,25 +686,3 @@ const skillHighlights = [
 
   <Footer />
 </Layout>
-
-<script>
-  const target = new Date("2026-08-10T00:00:00+09:00").getTime();
-  const el = document.getElementById("countdown");
-
-  function tick() {
-    if (!el) return;
-    const diff = target - Date.now();
-    if (diff <= 0) {
-      el.textContent = "定価27,500円（税込）に改定されました";
-      return;
-    }
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    el.textContent = `定価改定まで残り ${d}日 ${h}時間 ${m}分 ${s}秒`;
-  }
-
-  tick();
-  setInterval(tick, 1000);
-</script>

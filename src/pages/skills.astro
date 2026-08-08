@@ -87,7 +87,12 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 
           <div class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-8 *:p-6 *:border *:border-border *:rounded-2xl">
             {category.skills.map((skill) => (
-              <SkillCard name={skill.name} desc={skill.desc} />
+              <SkillCard
+                name={skill.name}
+                desc={skill.desc}
+                liteUrl={skill.liteUrl}
+                liteLabel={skill.liteLabel}
+              />
             ))}
           </div>
         </section>

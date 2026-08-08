@@ -1,9 +1,18 @@
 import { LayoutTemplate, Layers, Palette, Rocket, Wrench } from '@lucide/astro'
 
-export const figmaSkills = [
+interface SkillItem {
+  name: string
+  desc: string
+  liteUrl?: string
+  liteLabel?: string
+}
+
+export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-layer-rename',
     desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。レイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
+    liteUrl: 'https://github.com/gaspanik/figma-layer-rename-lite-skill',
+    liteLabel: '無料の機能限定版で先に動作を試す',
   },
   {
     name: 'figma-audit',
@@ -67,7 +76,17 @@ export const figmaSkills = [
   },
 ]
 
-export const categories = [
+interface Category {
+  icon: typeof Palette
+  name: string
+  tagline: string
+  note?: string
+  ctaHref?: string
+  ctaLabel?: string
+  skills: SkillItem[]
+}
+
+export const categories: Category[] = [
   {
     icon: Palette,
     name: 'Figma Design Agent 専用',

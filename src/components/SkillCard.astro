@@ -1,10 +1,14 @@
 ---
+import { ExternalLink } from '@lucide/astro'
+
 interface Props {
   name: string
   desc: string
+  liteUrl?: string
+  liteLabel?: string
 }
 
-const { name, desc } = Astro.props
+const { name, desc, liteUrl, liteLabel } = Astro.props
 ---
 
 <div>
@@ -12,4 +16,17 @@ const { name, desc } = Astro.props
   <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
     {desc}
   </p>
+  {
+    liteUrl && (
+      <a
+        href={liteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 mt-3 min-h-11 text-accent-dark text-sm underline underline-offset-4 hover:text-accent transition"
+      >
+        {liteLabel}
+        <ExternalLink size={14} stroke-width={2} />
+      </a>
+    )
+  }
 </div>

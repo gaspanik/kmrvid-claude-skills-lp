@@ -21,14 +21,14 @@ const navLinks = [
   >
     <a href="/figma" class="font-heading text-ink leading-none">
       <span class="block text-base tracking-tight">KMRVID</span>
-      <span class="block text-ink-soft text-xs leading-tight tracking-loose uppercase"
+      <span class="block text-ink-soft text-xs uppercase leading-tight tracking-loose"
         >Figma Skills</span
       >
     </a>
 
     <nav aria-label="メインナビゲーション" class="hidden md:block">
       <ul
-        class="flex items-center gap-8 text-sm **:hover:text-accent **:transition-colors"
+        class="flex items-center gap-8 **:hover:text-accent text-sm **:transition-colors"
       >
         {
           navLinks.map((link) => (
@@ -43,9 +43,9 @@ const navLinks = [
     <div class="flex items-center gap-2">
       <a
         href={PURCHASE_URL}
-        class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 shadow-xs px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
+        class="inline-flex items-center gap-1.5 bg-accent shadow-xs hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
       >
-        3,300円で申し込む
+        9,900円で申し込む
       </a>
 
       <button
@@ -70,7 +70,7 @@ const navLinks = [
   aria-label="ナビゲーションメニュー"
 >
   <div class="flex justify-between items-center px-6 py-4">
-    <span class="font-heading text-base text-canvas leading-none">KMRVID</span>
+    <span class="font-heading text-canvas text-base leading-none">KMRVID</span>
     <button
       type="button"
       id="menu-close"
@@ -82,7 +82,7 @@ const navLinks = [
   </div>
   <nav aria-label="モバイルナビゲーション">
     <ul
-      class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
+      class="flex **:flex flex-col **:items-center px-6 *:border-white/10 *:border-b **:min-h-14 **:text-canvas **:text-base"
     >
       {
         navLinks.map((link) => (
@@ -97,7 +97,7 @@ const navLinks = [
         href={PURCHASE_URL}
         class="flex justify-center items-center gap-1.5 bg-accent hover:brightness-110 px-6 py-3.5 rounded-full w-full font-medium text-white transition"
       >
-        3,300円で申し込む
+        9,900円で申し込む
       </a>
     </div>
   </nav>

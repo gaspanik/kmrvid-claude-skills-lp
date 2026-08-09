@@ -1,16 +1,16 @@
 ---
-import { Menu, X } from '@lucide/astro'
+import { Menu, X } from "@lucide/astro";
 
-const PURCHASE_URL = 'https://kmrvid.com/products/kmrvid-figma-skills'
+const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-figma-skills";
 
 const navLinks = [
-  { href: '#diff', label: '通常版との違い' },
-  { href: '#skills', label: '収録スキル' },
-  { href: '/', label: 'Claude版' },
-  { href: '#how-to', label: '使い方' },
-  { href: '#combos', label: '組み合わせ例' },
-  { href: '#pricing', label: '料金' },
-]
+  { href: "#diff", label: "通常版との違い" },
+  { href: "#skills", label: "収録スキル" },
+  { href: "/", label: "Claude版" },
+  { href: "#how-to", label: "使い方" },
+  { href: "#combos", label: "組み合わせ例" },
+  { href: "#pricing", label: "料金" },
+];
 ---
 
 <header
@@ -21,7 +21,8 @@ const navLinks = [
   >
     <a href="/figma" class="font-heading text-ink leading-none">
       <span class="block text-base tracking-tight">KMRVID</span>
-      <span class="block text-ink-soft text-xs uppercase leading-tight tracking-loose"
+      <span
+        class="block text-ink-soft text-xs uppercase leading-tight tracking-loose"
         >Figma Skills</span
       >
     </a>
@@ -45,7 +46,7 @@ const navLinks = [
         href={PURCHASE_URL}
         class="inline-flex items-center gap-1.5 bg-accent shadow-xs hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
       >
-        9,900円で申し込む
+        今すぐ申し込む
       </a>
 
       <button
@@ -97,27 +98,27 @@ const navLinks = [
         href={PURCHASE_URL}
         class="flex justify-center items-center gap-1.5 bg-accent hover:brightness-110 px-6 py-3.5 rounded-full w-full font-medium text-white transition"
       >
-        9,900円で申し込む
+        今すぐ申し込む
       </a>
     </div>
   </nav>
 </div>
 
 <script>
-  const toggle = document.getElementById('menu-toggle')
-  const menu = document.getElementById('mobile-menu')
-  const close = document.getElementById('menu-close')
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const close = document.getElementById("menu-close");
 
   const open = () => {
-    menu?.classList.remove('hidden')
-    toggle?.setAttribute('aria-expanded', 'true')
-  }
+    menu?.classList.remove("hidden");
+    toggle?.setAttribute("aria-expanded", "true");
+  };
   const shut = () => {
-    menu?.classList.add('hidden')
-    toggle?.setAttribute('aria-expanded', 'false')
-  }
+    menu?.classList.add("hidden");
+    toggle?.setAttribute("aria-expanded", "false");
+  };
 
-  toggle?.addEventListener('click', open)
-  close?.addEventListener('click', shut)
-  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', shut))
+  toggle?.addEventListener("click", open);
+  close?.addEventListener("click", shut);
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", shut));
 </script>

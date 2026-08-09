@@ -10,13 +10,13 @@ interface SkillItem {
 export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-layer-rename',
-    desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。レイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
+    desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。Sectionなどレイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
     liteUrl: 'https://github.com/gaspanik/figma-layer-rename-lite-skill',
     liteLabel: '無料の機能限定版で先に動作を試す',
   },
   {
     name: 'figma-audit',
-    desc: '選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）',
+    desc: 'MCPを介したエージェントによるコーディング結果はフレームの構造に依存。選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）',
   },
   {
     name: 'figma-component-audit',
@@ -24,7 +24,7 @@ export const figmaSkills: SkillItem[] = [
   },
   {
     name: 'brief-me',
-    desc: 'デザイン着手前のビジネス要件ヒアリング。create-multi-pattern の実行前の詳細な要件定義に。結果の BRIEF はチャットに出力',
+    desc: 'デザイン着手前のビジネス要件ヒアリング。create-multi-pattern の実行前の詳細な要件定義に。結果の BRIEF はチャットに出力。ファイルとして保存して再利用可能',
   },
   {
     name: 'design-brief-me',
@@ -64,7 +64,7 @@ export const figmaSkills: SkillItem[] = [
   },
   {
     name: 'figma-systematize',
-    desc: '選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。冒頭で実行モード（自動／各ステップ確認あり）を1回だけ確認',
+    desc: '選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。実行モード（自動／各ステップ確認あり）選択可',
   },
   {
     name: 'figma-enhance',

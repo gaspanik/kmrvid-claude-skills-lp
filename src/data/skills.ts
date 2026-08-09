@@ -55,6 +55,10 @@ export const figmaSkills: SkillItem[] = [
     desc: '変数を使わずに値を直接ハードコードしている色・フォントサイズ・スペーシングを変数（トークン）化してバインド。テキストのスタイル化にも対応',
   },
   {
+    name: 'figma-design-md',
+    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+  },
+  {
     name: 'figma-componentize',
     desc: '選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案。バリアント生成、バリアントの変数化までを対話的に実行',
   },
@@ -75,8 +79,8 @@ export const figmaSkills: SkillItem[] = [
     desc: '選択したフレーム/セクション内の IMAGE fill を持つノードをすべて検出し、実際にレンダリング結果を見た上で具体的な ALT テキスト案を提案',
   },
   {
-    name: 'figma-design-md',
-    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+    name: 'figma-annotate',
+    desc: 'Figma 純正のDevモード注釈（プリセットカテゴリ）を選択範囲に書き込み、コーディングエージェントへ構造だけでは伝わらない実装意図を渡す',
   },
 ]
 

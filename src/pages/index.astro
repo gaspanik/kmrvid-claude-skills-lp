@@ -1,10 +1,8 @@
 ---
 import {
   ArrowRight,
-  BadgePercent,
   BookOpen,
   CircleCheck,
-  Clock,
   ExternalLink,
   GraduationCap,
   Languages,
@@ -13,6 +11,7 @@ import {
   PenTool,
   ShieldCheck,
   Sparkles,
+  Tag,
   Video,
   Wand,
   Workflow,
@@ -25,7 +24,6 @@ import authorPhoto from "@/assets/images/IMG_8341_square.png";
 import FeatureCard from "@/components/FeatureCard.astro";
 import FaqItem from "@/components/FaqItem.astro";
 import ImageLightbox from "@/components/ImageLightbox.astro";
-import CountdownTimer from "@/components/CountdownTimer.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -114,11 +112,11 @@ const skillHighlights = [
     >
       <div class="mx-auto px-6 max-w-5xl">
         <a
-          href="#pricing"
+          href="/figma"
           class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
         >
-          <BadgePercent size={16} stroke-width={2} />
-          値上げ前 最終ご案内（〜8月9日 23:59）
+          <Sparkles size={16} stroke-width={2} />
+          Figmaのカスタムスキル版、新登場
         </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
@@ -149,7 +147,7 @@ const skillHighlights = [
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            19,800円で受講をはじめる
+            27,500円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -381,7 +379,7 @@ const skillHighlights = [
               href={PURCHASE_URL}
               class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 mt-4 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
             >
-              19,800円で全スキルを見る
+              27,500円で全スキルを見る
               <ArrowRight size={16} stroke-width={2} />
             </a>
           </div>
@@ -480,20 +478,15 @@ const skillHighlights = [
         <p
           class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
         >
-          <BadgePercent size={18} stroke-width={2} />
-          定価改定のご案内
+          <Tag size={18} stroke-width={2} />
+          料金
         </p>
         <h2 id="pricing-heading" class="text-ink text-left break-keep text-balance">
-          27,500円になる前に、<br class="sm:hidden" />19,800円で
+          27,500円で、<br class="sm:hidden" />すべてのスキルを
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          全{totalSkills}スキルを収録した本講座は、2026年8月10日（月）0:00に定価27,500円（税込）へ改定されます。それまでのお申し込みなら、現行価格19,800円（税込）のままご案内します。
+          全{totalSkills}スキルを収録した本講座は、27,500円（税込）の買い切りでお申し込みいただけます。
         </p>
-        <CountdownTimer
-          targetDate="2026-08-10T00:00:00+09:00"
-          activeLabel="定価改定まで残り"
-          endedMessage="定価27,500円（税込）に改定されました"
-        />
       </div>
 
       <!-- bottom weight: the price card itself -->
@@ -502,13 +495,10 @@ const skillHighlights = [
           class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
         >
           <div>
-            <p class="text-white/50 text-sm line-through">
-              8月10日以降の定価 27,500円（税込）
-            </p>
             <p
-              class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
             >
-              19,800<span class="text-2xl">円</span>
+              27,500<span class="text-2xl">円</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
@@ -516,7 +506,7 @@ const skillHighlights = [
               href={PURCHASE_URL}
               class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
             >
-              19,800円で申し込む
+              27,500円で申し込む
               <ArrowRight size={18} stroke-width={2} />
             </a>
           </div>
@@ -656,22 +646,22 @@ const skillHighlights = [
       <div
         class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
       >
-        <Clock size={28} stroke-width={1.75} class="text-accent" />
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          27,500円になる前に
+          27,500円で
           <br class="sm:hidden" />
-          19,800円で始める
+          今日から始める
         </h2>
         <p
           class="max-w-md text-white/70 text-base text-justify leading-relaxed"
         >
-          定価改定は2026年8月10日（月）0:00から。今なら現行価格19,800円（税込）でお申し込みいただけます。
+          全{totalSkills}スキルを収録した本講座を、27,500円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          19,800円で申し込む
+          27,500円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

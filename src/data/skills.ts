@@ -71,6 +71,10 @@ export const figmaSkills: SkillItem[] = [
     desc: '選択フレーム内のテキストのWCAGコントラスト比（AA/AAA）を判定し、コンパクトなレポートを出力（詳細表示可）。自動修正にも対応',
   },
   {
+    name: 'figma-alt-suggest',
+    desc: '選択したフレーム/セクション内の IMAGE fill を持つノードをすべて検出し、実際にレンダリング結果を見た上で具体的な ALT テキスト案を提案',
+  },
+  {
     name: 'figma-design-md',
     desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
   },
@@ -278,6 +282,10 @@ export const categories: Category[] = [
       {
         name: 'finish-me',
         desc: '既存モックアップに対して、最適化処理を対話形式で順番に実行する仕上げパイプライン',
+      },
+      {
+        name: 'a11y-review',
+        desc: 'コード内の画像の alt テキストを実際に画像を読んで生成、構造的アクセシビリティもチェック・修正（環境不問）',
       },
     ],
   },

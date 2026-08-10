@@ -158,15 +158,27 @@ const skillHighlights = [
           </a>
         </div>
 
-        <a
-          href="https://x.com/cipher/status/2083645472091279452"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-        >
-          デザイン生成・最適化・実装、3本の実例をXで読む
-          <ExternalLink size={14} stroke-width={2} />
-        </a>
+        <div class="flex flex-col items-start">
+          <a
+            href="https://x.com/cipher/status/2083645472091279452"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            デザイン生成・最適化・実装、3本の実例をXで読む
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+
+          <a
+            href="https://github.com/gaspanik/figma-contrast-check-lite-skill"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 -mt-2 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            figma-contrast-checkの無料版を先に試す
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
       </div>
 
       <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
@@ -481,11 +493,16 @@ const skillHighlights = [
           <Tag size={18} stroke-width={2} />
           料金
         </p>
-        <h2 id="pricing-heading" class="text-ink text-left break-keep text-balance">
+        <h2
+          id="pricing-heading"
+          class="text-ink text-left break-keep text-balance"
+        >
           27,500円で、<br class="sm:hidden" />すべてのスキルを
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          全{totalSkills}スキルを収録した本講座は、27,500円（税込）の買い切りでお申し込みいただけます。
+          全{
+            totalSkills
+          }スキルを収録した本講座は、27,500円（税込）の買い切りでお申し込みいただけます。
         </p>
       </div>
 
@@ -655,7 +672,9 @@ const skillHighlights = [
         <p
           class="max-w-md text-white/70 text-base text-justify leading-relaxed"
         >
-          全{totalSkills}スキルを収録した本講座を、27,500円（税込）の買い切りでお申し込みいただけます。
+          全{
+            totalSkills
+          }スキルを収録した本講座を、27,500円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}

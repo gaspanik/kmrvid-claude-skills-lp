@@ -77,6 +77,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-alt-suggest',
     desc: '選択したフレーム/セクション内の IMAGE fill を持つノードをすべて検出し、実際にレンダリング結果を見た上で具体的な ALT テキスト案を提案',
+    liteUrl: 'https://github.com/gaspanik/figma-alt-suggest-lite-skill',
+    liteLabel: '無料の機能限定版で先に動作を試す',
   },
   {
     name: 'figma-annotate',

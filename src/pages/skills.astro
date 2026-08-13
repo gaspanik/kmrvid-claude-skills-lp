@@ -7,7 +7,7 @@ import ImageLightbox from "@/components/ImageLightbox.astro";
 import SkillCard from "@/components/SkillCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
-import { categories, totalSkills } from "@/data/skills";
+import { categories, totalSkills, figmaSkillsCount } from "@/data/skills";
 
 const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
 ---
@@ -43,7 +43,7 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
       >
         2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent
         でも動作するスキルを移植。Figma
-        に最適化された専用スキルを追加（15スキル／2026年8月6日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
+        に最適化された専用スキルを追加（{figmaSkillsCount}スキル／2026年8月12日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
         <a href="/figma" class="text-accent underline underline-offset-4">
           KMRVID Figma Skills
         </a>

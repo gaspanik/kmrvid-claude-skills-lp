@@ -106,16 +106,15 @@ const combos = [
     desc: "選択フレーム内テキストのWCAGコントラスト比をAA/AAAで判定し、コンパクトなレポートを出力。そのまま自動修正まで依頼することもできます。",
   },
   {
+    goal: "フレーム内の日本語の処理を改善したい",
+    chain: ["create-single-page", "figma-japanese-web-guideline"],
+    desc: "禁則処理・斜体回避・見出しの整列など日本語特有の実装ガイドラインは、`figma-japanese-web-guideline`が担当。単独での利用も可能だが他のスキルと併用（一部は選択適用）することで、フレーム内の日本語の処理を自動で最適化できます。",
+  },
+  {
     goal: "人間の特性を考慮したページデザインにしたい",
     chain: ["create-multi-pattern"],
     claudeSkill: "cognitive-ui-design",
     desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、通常版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と併用すると、コンパニオンスキルとして裏で呼び出され、生成する複数パターンの質をさらに引き上げられます。",
-  },
-  {
-    goal: "日本語の処理を改善したい",
-    chain: ["rewrite-me"],
-    claudeSkill: "japanese-web-guideline",
-    desc: "禁則処理・斜体回避・見出しの整列など日本語特有の実装ガイドラインは、通常版限定の`japanese-web-guideline`が担当。Figma版の`rewrite-me`と併用することで、整えた文言を実装時にさらに日本語表示へ最適化できます。",
   },
 ];
 
@@ -181,12 +180,12 @@ const totalSkills = skills.length;
 
         <div class="flex flex-col items-start">
           <a
-            href="https://x.com/cipher/status/2083645472091279452"
+            href="https://x.com/cipher/status/2087497917284385192"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
           >
-            デザイン生成・最適化・実装、3本の実例をXで読む
+            Figma版スキルの使いどころ、便利なところ
             <ExternalLink size={14} stroke-width={2} />
           </a>
 
@@ -239,6 +238,9 @@ const totalSkills = skills.length;
               </div>
             </div>
             <p class="mt-8 text-white/50 text-sm">
+              2026/8/24 更新 —
+              新スキル「figma-mobile-convert」「figma-japanese-web-guidelines」を追加
+              <br />
               2026/8/18 更新 — 解説動画を用途別にリニューアル。全20本に増量
               <br />
               2026/8/10 更新 — 新スキル「figma-annotate」を追加
@@ -299,9 +301,8 @@ const totalSkills = skills.length;
 
       <div class="mt-6">
         <Callout>
-          `cognitive-ui-design`と`japanese-web-guideline`スキルは、通常版の「KMRVID
-          Claude
-          Skills」に含まれるスキルで、Figma専用版には含まれません。レイアウトの定石崩しや日本語Web実装の補正などのガイドラインは、その内容が重要であるため通常版のみでの提供です。
+          `cognitive-ui-design` は、通常版の「KMRVID Claude
+          Skills」に含まれるスキルで、Figma専用版には含まれません。レイアウトの定石崩しなどのガイドラインは、その内容が重要であるため通常版のみでの提供です。
         </Callout>
       </div>
     </section>
@@ -340,7 +341,7 @@ const totalSkills = skills.length;
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          2026/8/9時点で、{
+          2026/8/24時点で、{
             totalSkills
           }スキルすべてFigma上での実機動作を確認済みです。Figma Design Agent
           は現在β版です。状況によっては正常に動作しない場合があります。

@@ -84,6 +84,14 @@ export const figmaSkills: SkillItem[] = [
     name: 'figma-annotate',
     desc: 'Figma 純正のDevモード注釈（プリセットカテゴリ）を選択範囲に書き込み、コーディングエージェントへ構造だけでは伝わらない実装意図を渡す',
   },
+  {
+    name: 'figma-mobile-convert',
+    desc: 'デスクトップサイズのフレームからモバイル版を生成。レイアウトやフォントサイズを自動調整し、必要に応じてタッチターゲットのサイズも調整',
+  },
+  {
+    name: 'figma-japanese-web-guideline',
+    desc: '日本語サイトのデザインを Figma で作成・編集する際に、AIが陥りやすいデフォルト（中央揃えの折り返し崩れ、行間の広げすぎ、不自然な配色など）を補正するガイドライン',
+  },
 ]
 
 interface Category {

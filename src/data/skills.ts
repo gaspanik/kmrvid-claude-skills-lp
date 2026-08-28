@@ -11,7 +11,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-layer-rename',
     desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。Sectionなどレイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
-    liteUrl: 'https://github.com/gaspanik/figma-layer-rename-lite-skill/releases/tag/v2026.8.8',
+    liteUrl:
+      'https://github.com/gaspanik/figma-layer-rename-lite-skill/releases/tag/v2026.8.8',
     liteLabel: '無料の機能限定版で先に動作を試す',
   },
   {

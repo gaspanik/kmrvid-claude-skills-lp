@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgePercent,
   CircleCheck,
   Combine,
   ExternalLink,
@@ -11,12 +12,12 @@ import {
   MousePointerClick,
   Plus,
   SquareTerminal,
-  Tag,
   Workflow,
 } from "@lucide/astro";
 import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
 import FooterFigma from "@/components/FooterFigma.astro";
 import HeaderFigma from "@/components/HeaderFigma.astro";
@@ -167,7 +168,7 @@ const totalSkills = skills.length;
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            9,900円で受講をはじめる
+            6,930円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -492,17 +493,22 @@ const totalSkills = skills.length;
           <p
             class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
           >
-            <Tag size={18} stroke-width={2} />
-            料金
+            <BadgePercent size={18} stroke-width={2} />
+            期間限定 今だけ30%オフ
           </p>
           <h2 id="pricing-heading" class="text-ink text-left">
             KMRVID <br class="sm:hidden" /> Figma Skills
           </h2>
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-            単体パッケージとして、{
+            日頃のご視聴への感謝を込めて、2026年8月30日（日）23:59まで、単体パッケージの{
               totalSkills
-            }個のFigma専用スキルを、9,900円（税込）の買い切りでご利用いただけます。
+            }個のFigma専用スキルが、チェックアウト時に30%オフを自動適用します（クーポンコード不要）。
           </p>
+          <CountdownTimer
+            targetDate="2026-08-30T23:59:00+09:00"
+            activeLabel="30%オフ終了まで残り"
+            endedMessage="30%オフの期間は終了しました"
+          />
         </div>
 
         <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
@@ -510,18 +516,23 @@ const totalSkills = skills.length;
             class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
           >
             <div>
-              <p
-                class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
-              >
-                9,900<span class="text-2xl">円</span>
+              <p class="text-white/50 text-sm line-through">
+                通常価格 9,900円（税込）
               </p>
-              <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
+              <p
+                class="flex items-baseline gap-2 mt-2 font-heading text-6xl md:text-7xl"
+              >
+                6,930<span class="text-2xl">円</span>
+              </p>
+              <p class="mt-2 text-white/60 text-sm">
+                税込・買い切り（チェックアウト時に30%オフを自動適用）
+              </p>
 
               <a
                 href={PURCHASE_URL}
                 class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
               >
-                9,900円で申し込む
+                6,930円で申し込む
                 <ArrowRight size={18} stroke-width={2} />
               </a>
             </div>
@@ -618,24 +629,24 @@ const totalSkills = skills.length;
       <div
         class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
       >
-        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          9,900円で
+          30%オフの今だけ
           <br class="sm:hidden" />
-          今日から始める
+          6,930円で始める
         </h2>
         <p
           class="max-w-md text-white/70 text-base text-justify leading-relaxed"
         >
-          {
+          2026年8月30日（日）23:59まで、{
             totalSkills
-          }個のカスタムスキルを、9,900円（税込）の買い切りで、キャンバス上の選択だけで動かせます。
+          }個のカスタムスキルを、チェックアウト時に自動適用される30%オフ（クーポンコード不要）で、キャンバス上の選択だけで動かせます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          9,900円で申し込む
+          6,930円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

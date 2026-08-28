@@ -77,7 +77,7 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-alt-suggest',
     desc: '選択したフレーム/セクション内の IMAGE fill を持つノードをすべて検出し、実際にレンダリング結果を見た上で具体的な ALT テキスト案を提案',
-    liteUrl: 'https://github.com/gaspanik/figma-alt-suggest-lite-skill/releases/tag/v2026.8.11',
+    liteUrl: 'https://github.com/gaspanik/alt-suggest-skill',
     liteLabel: '無料の機能限定版で先に動作を試す',
   },
   {
@@ -91,6 +91,10 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-japanese-web-guideline',
     desc: '日本語サイトのデザインを Figma で作成・編集する際に、AIが陥りやすいデフォルト（中央揃えの折り返し崩れ、行間の広げすぎ、不自然な配色など）を補正するガイドライン',
+  },
+  {
+    name: 'figma-i18n-translator',
+    desc: '実装前のレイアウト確認用（本番の多言語実装・翻訳はコード側で行う想定）。選択したフレーム/セクションを言語ごとに複製し、INSTANCE内も含めて全テキストノードを翻訳',
   },
 ]
 

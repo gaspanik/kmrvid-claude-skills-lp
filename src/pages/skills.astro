@@ -1,5 +1,5 @@
 ---
-import { ArrowLeft, ArrowRight, BadgePercent } from "@lucide/astro";
+import { ArrowLeft, ArrowRight, Tag } from "@lucide/astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Callout from "@/components/Callout.astro";
@@ -132,20 +132,20 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
       <div
         class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
       >
-        <BadgePercent size={28} stroke-width={1.75} class="text-accent" />
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          全{totalSkills}スキルが、<br class="sm:hidden" />今だけ30%オフ
+          全{totalSkills}スキルを、<br class="sm:hidden" />27,500円で
         </h2>
         <p
           class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
         >
-          2026年8月30日（日）23:59まで、チェックアウト時に30%オフが自動適用され、19,250円（税込・クーポンコード不要）でお申し込みいただけます。
+          27,500円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          19,250円で申し込む
+          27,500円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
       </div>

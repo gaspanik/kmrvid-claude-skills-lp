@@ -13,11 +13,13 @@ export const figmaSkills: SkillItem[] = [
     desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。Sectionなどレイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
     liteUrl:
       'https://github.com/gaspanik/figma-layer-rename-lite-skill/releases/tag/v2026.8.8',
-    liteLabel: '無料の機能限定版で先に動作を試す',
+    liteLabel: '機能限定版をGitHubからダウンロード',
   },
   {
     name: 'figma-audit',
     desc: 'MCPを介したエージェントによるコーディング結果はフレームの構造に依存。選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）',
+    liteUrl: 'https://www.figma.com/community/skill/89814',
+    liteLabel: '無料版をFigmaで直接インストール',
   },
   {
     name: 'figma-component-audit',
@@ -58,6 +60,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-design-md',
     desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+    liteUrl: 'https://www.figma.com/community/skill/93189',
+    liteLabel: '無料版をFigmaで直接インストール',
   },
   {
     name: 'figma-componentize',
@@ -78,8 +82,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-alt-suggest',
     desc: '選択したフレーム/セクション内の IMAGE fill を持つノードをすべて検出し、実際にレンダリング結果を見た上で具体的な ALT テキスト案を提案',
-    liteUrl: 'https://github.com/gaspanik/alt-suggest-skill',
-    liteLabel: '無料の機能限定版で先に動作を試す',
+    liteUrl: 'https://www.figma.com/community/skill/92022',
+    liteLabel: '機能限定版をFigmaで直接インストール',
   },
   {
     name: 'figma-annotate',
@@ -96,6 +100,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-i18n-translator',
     desc: '実装前のレイアウト確認用（本番の多言語実装・翻訳はコード側で行う想定）。選択したフレーム/セクションを言語ごとに複製し、INSTANCE内も含めて全テキストノードを翻訳',
+    liteUrl: 'https://www.figma.com/community/skill/92859',
+    liteLabel: '無料版をFigmaで直接インストール',
   },
 ]
 

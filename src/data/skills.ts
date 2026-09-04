@@ -34,6 +34,10 @@ export const figmaSkills: SkillItem[] = [
     desc: 'デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に',
   },
   {
+    name: 'hey-brief-me',
+    desc: 'brief-me と design-brief-me のどちらを実行するか複数選択で選び、選ばれたものだけを固定順（brief-me → design-brief-me）で実行するピッカー。複数回呼び出すのが面倒なときに',
+  },
+  {
     name: 'rewrite-me',
     desc: '選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない',
   },
@@ -58,12 +62,6 @@ export const figmaSkills: SkillItem[] = [
     desc: '変数を使わずに値を直接ハードコードしている色・フォントサイズ・スペーシングを変数（トークン）化してバインド。テキストのスタイル化にも対応',
   },
   {
-    name: 'figma-design-md',
-    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
-    liteUrl: 'https://www.figma.com/community/skill/93189',
-    liteLabel: '無料版をFigmaで直接インストール',
-  },
-  {
     name: 'figma-componentize',
     desc: '選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案。バリアント生成、バリアントの変数化までを対話的に実行',
   },
@@ -74,6 +72,20 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'figma-enhance',
     desc: 'すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装まで自動で実行',
+  },
+  {
+    name: 'hey-optimize-me',
+    desc: 'figma-layer-rename / figma-tokenize / figma-componentize / figma-enhance の中から実行したいタスクを複数選択で選び、選ばれたものだけを固定順で実行するピッカー',
+  },
+  {
+    name: 'figma-design-md',
+    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+    liteUrl: 'https://www.figma.com/community/skill/93189',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
+  {
+    name: 'figma-mobile-convert',
+    desc: 'デスクトップサイズのフレームからモバイル版を生成。レイアウトやフォントサイズを自動調整し、必要に応じてタッチターゲットのサイズも調整',
   },
   {
     name: 'figma-contrast-check',
@@ -90,10 +102,6 @@ export const figmaSkills: SkillItem[] = [
     desc: 'Figma 純正のDevモード注釈（プリセットカテゴリ）を選択範囲に書き込み、コーディングエージェントへ構造だけでは伝わらない実装意図を渡す',
   },
   {
-    name: 'figma-mobile-convert',
-    desc: 'デスクトップサイズのフレームからモバイル版を生成。レイアウトやフォントサイズを自動調整し、必要に応じてタッチターゲットのサイズも調整',
-  },
-  {
     name: 'figma-japanese-web-guideline',
     desc: '日本語サイトのデザインを Figma で作成・編集する際に、AIが陥りやすいデフォルト（中央揃えの折り返し崩れ、行間の広げすぎ、不自然な配色など）を補正するガイドライン',
   },
@@ -101,6 +109,12 @@ export const figmaSkills: SkillItem[] = [
     name: 'figma-i18n-translator',
     desc: '実装前のレイアウト確認用（本番の多言語実装・翻訳はコード側で行う想定）。選択したフレーム/セクションを言語ごとに複製し、INSTANCE内も含めて全テキストノードを翻訳',
     liteUrl: 'https://www.figma.com/community/skill/92859',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
+  {
+    name: 'coding-prompter',
+    desc: 'デザインが完成した選択フレームを、コーディングエージェントに実装してもらうための実装プロンプトを生成する。使用したい技術スタックに合わせて細かな指示も可能',
+    liteUrl: 'https://www.figma.com/community/skill/98255',
     liteLabel: '無料版をFigmaで直接インストール',
   },
 ]
@@ -233,6 +247,14 @@ export const categories: Category[] = [
       {
         name: 'figma-pipeline',
         desc: 'figma-weather → セットアップ → 変数同期 → 実装まで一気通貫',
+      },
+      {
+        name: 'figma-update-checker',
+        desc: 'Figmaノードが前回チェック時から変更されたかを検知し、.figma-cache.json に記録',
+      },
+      {
+        name: 'figma-update-patch',
+        desc: 'figma-update-checker での変更検知後、ページ全体を作り直さず変更箇所だけをピンポイント修正',
       },
       {
         name: 'figma-to-tailwind',

@@ -123,6 +123,12 @@ export const figmaSkills: SkillItem[] = [
     liteUrl: 'https://www.figma.com/community/skill/102425',
     liteLabel: '無料版をFigmaで直接インストール',
   },
+  {
+    name: 'agent-handoff',
+    desc: '会話全体の履歴を確認したうえでハンドオフドキュメントを1つのフェンス付きコードブロックで出力。新しいチャットセッションの最初のメッセージとして貼り付けて作業を継続可',
+    liteUrl: 'https://www.figma.com/community/skill/102459',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
 ]
 
 interface Category {

@@ -117,6 +117,12 @@ export const figmaSkills: SkillItem[] = [
     liteUrl: 'https://www.figma.com/community/skill/98255',
     liteLabel: '無料版をFigmaで直接インストール',
   },
+  {
+    name: 'slot-table-maker',
+    desc: 'スロットテーブルを自動生成する。列数・行数をヒアリングし、固定ヘッダー＋可変データ行のテーブルコンポーネントシステムを生成する',
+    liteUrl: 'https://www.figma.com/community/skill/102425',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
 ]
 
 interface Category {

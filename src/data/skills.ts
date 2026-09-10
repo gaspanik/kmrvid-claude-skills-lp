@@ -129,6 +129,16 @@ export const figmaSkills: SkillItem[] = [
     liteUrl: 'https://www.figma.com/community/skill/102459',
     liteLabel: '無料版をFigmaで直接インストール',
   },
+  {
+    name: 'hey-be-careful',
+    desc: 'キャンバスではなくエージェント自身の振る舞いを対象とするガイドライン。新しいチャットの開始時や、より丁寧で入念な作業をさせたいときに',
+  },
+  {
+    name: 'tidy-up',
+    desc: '選択したフレームまたはコンポーネント（複数選択可）を、オートレイアウト／整理されたレイヤー名／正規化されたスペーシングで再構築する',
+    liteUrl: 'https://www.figma.com/community/skill/104998',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
 ]
 
 interface Category {

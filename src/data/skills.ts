@@ -139,6 +139,12 @@ export const figmaSkills: SkillItem[] = [
     liteUrl: 'https://www.figma.com/community/skill/104998',
     liteLabel: '無料版をFigmaで直接インストール',
   },
+  {
+    name: 'hey-polish-me',
+    desc: '既存のデザイン済みフレーム全体またはセクション単位を分析し、原本を残したまま改善案を作成する。コンパニオンスキル対応。出力はレポート・アノテーション・両方から選択可能',
+    liteUrl: 'https://www.figma.com/community/skill/109967',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
 ]
 
 interface Category {

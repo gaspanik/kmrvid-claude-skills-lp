@@ -145,6 +145,10 @@ export const figmaSkills: SkillItem[] = [
     liteUrl: 'https://www.figma.com/community/skill/109967',
     liteLabel: '無料版をFigmaで直接インストール',
   },
+  {
+    name: 'create-jp-lp',
+    desc: '日本の商業LPに特有の画像運用・配色コンベンションに特化した単一ページ生成スキル。BRIEFから訴求ジャンルと業種を自動判定し、実例調査に基づくパレット・セクション構成を適用',
+  },
 ]
 
 interface Category {

@@ -261,8 +261,24 @@ export const categories: Category[] = [
         desc: 'Figmaのフレーム/セクション全体を走査し、自動生成されたレイヤー名を意味のある名前にリネーム',
       },
       {
+        name: 'figma-tidy-up',
+        desc: 'オートレイアウト未適用のフレームを、意味のあるレイヤー名・正規化したスペーシング・適切なネスト構造に再構築',
+      },
+      {
         name: 'figma-tokenize',
         desc: 'Figmaのフレーム/セクション全体を走査し、直接指定された色・フォントサイズなどをトークン化して変数バインド',
+      },
+      {
+        name: 'figma-componentize',
+        desc: '繰り返し要素・ヘッダー/フッター等を検出し、コンポーネント化＋バリアントセット生成をユーザー確認を挟みながら実施',
+      },
+      {
+        name: 'figma-enhance',
+        desc: '変数化・コンポーネント化済みのファイルをさらに監査（バリアント統合・プロパティ追加・バインド漏れ等）して実装',
+      },
+      {
+        name: 'figma-optimize',
+        desc: 'tidy-up / layer-rename / tokenize / componentize / enhance の5タスクから実行するものを選択し依存順に自動実行',
       },
       {
         name: 'figma-contrast-check',

@@ -9,23 +9,6 @@ interface SkillItem {
 
 export const figmaSkills: SkillItem[] = [
   {
-    name: 'figma-layer-rename',
-    desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。Sectionなどレイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
-    liteUrl:
-      'https://github.com/gaspanik/figma-layer-rename-lite-skill/releases/tag/v2026.8.8',
-    liteLabel: '機能限定版をGitHubからダウンロード',
-  },
-  {
-    name: 'figma-audit',
-    desc: 'MCPを介したエージェントによるコーディング結果はフレームの構造に依存。選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）',
-    liteUrl: 'https://www.figma.com/community/skill/89814',
-    liteLabel: '無料版をFigmaで直接インストール',
-  },
-  {
-    name: 'figma-component-audit',
-    desc: '選択したコンポーネント/コンポーネントセット単体を、バリアント定義・コンポーネントプロパティ・レイヤー命名・Auto-layout・カラー/タイポグラフィトークンの5観点で採点',
-  },
-  {
     name: 'brief-me',
     desc: 'デザイン着手前のビジネス要件ヒアリング。create-multi-pattern の実行前の詳細な要件定義に。結果の BRIEF はチャットに出力。ファイルとして保存して再利用可能',
   },
@@ -38,24 +21,37 @@ export const figmaSkills: SkillItem[] = [
     desc: 'brief-me と design-brief-me のどちらを実行するか複数選択で選び、選ばれたものだけを固定順（brief-me → design-brief-me）で実行するピッカー。複数回呼び出すのが面倒なときに',
   },
   {
-    name: 'rewrite-me',
-    desc: '選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない',
+    name: 'create-single-page',
+    desc: '`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる',
   },
   {
     name: 'create-multi-pattern',
     desc: '複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当にも対応',
   },
   {
-    name: 'create-single-page',
-    desc: '`create-multi-pattern`の無質問版。全て決定的なルールで自動確定し、単一ページを一発生成。質問を一切出さないため、連続プロンプトに繋げて無人実行できる',
+    name: 'create-jp-lp',
+    desc: '日本の商業LPに特有の画像運用・配色コンベンションに特化した単一ページ生成スキル。BRIEFから訴求ジャンルと業種を自動判定し、実例調査に基づくパレット・セクション構成を適用',
   },
   {
     name: 'japanese-lp-seasoning',
     desc: 'フルブリード演出・カルーセル/バナースライダー・縦書きを、静的フレームでの見た目として選択・提案（スクロール連動アニメーションは対象外）、簡易実装処理まで',
   },
   {
-    name: 'figma-typescale',
-    desc: 'ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ',
+    name: 'rewrite-me',
+    desc: '選択したフレーム/セクション内のテキストを要件に合わせて書き直す。文章のボリューム調整、LP限定の行動経済学的説得軸にも対応。レイアウト・色・構造は一切変更しない',
+  },
+  {
+    name: 'tidy-up',
+    desc: '選択したフレームまたはコンポーネント（複数選択可）を、オートレイアウト／整理されたレイヤー名／正規化されたスペーシングで再構築する',
+    liteUrl: 'https://www.figma.com/community/skill/104998',
+    liteLabel: '無料版をFigmaで直接インストール',
+  },
+  {
+    name: 'figma-layer-rename',
+    desc: '自動生成レイヤー名を検出し、確認のうえセマンティックな名前にリネーム。Sectionなどレイヤーの兄弟間で重複している名前も、オプションで差別化リネームの対象に',
+    liteUrl:
+      'https://github.com/gaspanik/figma-layer-rename-lite-skill/releases/tag/v2026.8.8',
+    liteLabel: '機能限定版をGitHubからダウンロード',
   },
   {
     name: 'figma-tokenize',
@@ -66,10 +62,6 @@ export const figmaSkills: SkillItem[] = [
     desc: '選択フレーム内の繰り返しパターン（ボタン・カード等）を検出してコンポーネント化を提案。バリアント生成、バリアントの変数化までを対話的に実行',
   },
   {
-    name: 'figma-systematize',
-    desc: '選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。実行モード（自動／各ステップ確認あり）選択可',
-  },
-  {
     name: 'figma-enhance',
     desc: 'すでにトークン化・コンポーネント化済みのファイルをページ全体で監査し、さらなる改善点を検出・提案・実装まで自動で実行',
   },
@@ -78,14 +70,24 @@ export const figmaSkills: SkillItem[] = [
     desc: 'figma-layer-rename / figma-tokenize / figma-componentize / figma-enhance の中から実行したいタスクを複数選択で選び、選ばれたものだけを固定順で実行するピッカー',
   },
   {
-    name: 'figma-design-md',
-    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
-    liteUrl: 'https://www.figma.com/community/skill/93189',
+    name: 'figma-systematize',
+    desc: '選択フレームを「レイヤー名整理 → トークン化 → コンポーネント化」の3段パイプラインで一括処理。実行モード（自動／各ステップ確認あり）選択可',
+  },
+  {
+    name: 'figma-audit',
+    desc: 'MCPを介したエージェントによるコーディング結果はフレームの構造に依存。選択フレームのAI実装精度を4観点で採点し、コンパクトなレポートを出力（詳細は追加要求で表示）',
+    liteUrl: 'https://www.figma.com/community/skill/89814',
     liteLabel: '無料版をFigmaで直接インストール',
   },
   {
-    name: 'figma-mobile-convert',
-    desc: 'デスクトップサイズのフレームからモバイル版を生成。レイアウトやフォントサイズを自動調整し、必要に応じてタッチターゲットのサイズも調整',
+    name: 'figma-component-audit',
+    desc: '選択したコンポーネント/コンポーネントセット単体を、バリアント定義・コンポーネントプロパティ・レイヤー命名・Auto-layout・カラー/タイポグラフィトークンの5観点で採点',
+  },
+  {
+    name: 'coding-prompter',
+    desc: 'デザインが完成した選択フレームを、コーディングエージェントに実装してもらうための実装プロンプトを生成する。使用したい技術スタックに合わせて細かな指示も可能',
+    liteUrl: 'https://www.figma.com/community/skill/98255',
+    liteLabel: '無料版をFigmaで直接インストール',
   },
   {
     name: 'figma-contrast-check',
@@ -102,8 +104,14 @@ export const figmaSkills: SkillItem[] = [
     desc: 'Figma 純正のDevモード注釈（プリセットカテゴリ）を選択範囲に書き込み、コーディングエージェントへ構造だけでは伝わらない実装意図を渡す',
   },
   {
-    name: 'figma-japanese-web-guideline',
-    desc: '日本語サイトのデザインを Figma で作成・編集する際に、AIが陥りやすいデフォルト（中央揃えの折り返し崩れ、行間の広げすぎ、不自然な配色など）を補正するガイドライン',
+    name: 'figma-typescale',
+    desc: 'ベースサイズと比率を聞き、タイプスケールを生成。命名規則を「オリジナル」と「Tailwind」から選択可能。オリジナルはText Styleも作成、Tailwindは変数のみ',
+  },
+  {
+    name: 'figma-design-md',
+    desc: 'DESIGN.mdとFigmaの変数・Text Style・コンポーネントを双方向に同期するスキル。Import/Exportどちらのモードでもプレビューページをオプションで生成',
+    liteUrl: 'https://www.figma.com/community/skill/93189',
+    liteLabel: '無料版をFigmaで直接インストール',
   },
   {
     name: 'figma-i18n-translator',
@@ -112,10 +120,18 @@ export const figmaSkills: SkillItem[] = [
     liteLabel: '無料版をFigmaで直接インストール',
   },
   {
-    name: 'coding-prompter',
-    desc: 'デザインが完成した選択フレームを、コーディングエージェントに実装してもらうための実装プロンプトを生成する。使用したい技術スタックに合わせて細かな指示も可能',
-    liteUrl: 'https://www.figma.com/community/skill/98255',
+    name: 'figma-japanese-web-guideline',
+    desc: '日本語サイトのデザインを Figma で作成・編集する際に、AIが陥りやすいデフォルト（中央揃えの折り返し崩れ、行間の広げすぎ、不自然な配色など）を補正するガイドライン',
+  },
+  {
+    name: 'hey-polish-me',
+    desc: '既存のデザイン済みフレーム全体またはセクション単位を分析し、原本を残したまま改善案を作成する。コンパニオンスキル対応。出力はレポート・アノテーション・両方から選択可能',
+    liteUrl: 'https://www.figma.com/community/skill/109967',
     liteLabel: '無料版をFigmaで直接インストール',
+  },
+  {
+    name: 'figma-mobile-convert',
+    desc: 'デスクトップサイズのフレームからモバイル版を生成。レイアウトやフォントサイズを自動調整し、必要に応じてタッチターゲットのサイズも調整',
   },
   {
     name: 'slot-table-maker',
@@ -132,22 +148,8 @@ export const figmaSkills: SkillItem[] = [
   {
     name: 'hey-be-careful',
     desc: 'キャンバスではなくエージェント自身の振る舞いを対象とするガイドライン。新しいチャットの開始時や、より丁寧で入念な作業をさせたいときに',
-  },
-  {
-    name: 'tidy-up',
-    desc: '選択したフレームまたはコンポーネント（複数選択可）を、オートレイアウト／整理されたレイヤー名／正規化されたスペーシングで再構築する',
-    liteUrl: 'https://www.figma.com/community/skill/104998',
+    liteUrl: 'https://www.figma.com/community/skill/115227',
     liteLabel: '無料版をFigmaで直接インストール',
-  },
-  {
-    name: 'hey-polish-me',
-    desc: '既存のデザイン済みフレーム全体またはセクション単位を分析し、原本を残したまま改善案を作成する。コンパニオンスキル対応。出力はレポート・アノテーション・両方から選択可能',
-    liteUrl: 'https://www.figma.com/community/skill/109967',
-    liteLabel: '無料版をFigmaで直接インストール',
-  },
-  {
-    name: 'create-jp-lp',
-    desc: '日本の商業LPに特有の画像運用・配色コンベンションに特化した単一ページ生成スキル。BRIEFから訴求ジャンルと業種を自動判定し、実例調査に基づくパレット・セクション構成を適用',
   },
 ]
 

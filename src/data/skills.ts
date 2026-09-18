@@ -287,8 +287,12 @@ export const categories: Category[] = [
         desc: 'Figmaのフレーム/セクション全体を走査し、コントラスト比をチェックしてレポート出力。自動修正まで',
       },
       {
-        name: 'figma-node-check',
-        desc: 'use_figma実行前に読み込む必須チェックルール。「code-to-figma」の裏でも使われる最重要スキル',
+        name: 'figma-to-tailwind',
+        desc: 'Figma VariablesをTailwind CSS v4の @themeトークンとして書き出し',
+      },
+      {
+        name: 'tailwind-to-figma',
+        desc: 'Tailwind CSS v4の @themeトークンを指定されたFigmaへ変数として書き出し',
       },
       {
         name: 'figma-workflow',
@@ -307,16 +311,12 @@ export const categories: Category[] = [
         desc: 'figma-update-checker での変更検知後、ページ全体を作り直さず変更箇所だけをピンポイント修正',
       },
       {
-        name: 'figma-to-tailwind',
-        desc: 'Figma VariablesをTailwind CSS v4の @themeトークンとして書き出し',
-      },
-      {
-        name: 'tailwind-to-figma',
-        desc: 'Tailwind CSS v4の @themeトークンを指定されたFigmaへ変数として書き出し',
-      },
-      {
         name: 'code-to-figma',
         desc: '実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）。自動でエクスポート設定も',
+      },
+      {
+        name: 'figma-node-check',
+        desc: 'use_figma実行前に読み込む必須チェックルール。「code-to-figma」の裏でも使われる最重要スキル',
       },
     ],
   },

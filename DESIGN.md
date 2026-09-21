@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: KMRVID Claude Skills
-description: Claude Code向けオリジナルスキル講座「KMRVID Claude Skills」の販促LP
+name: KMRVID Skills
+description: Claude Code / Figma向けオリジナルスキル講座「KMRVID Skills - All-in-One Bundle」と、その単体パッケージ「KMRVID Claude Skills」「KMRVID Figma Skills」の販促LP群
 colors:
   primary: "#d3401f"
   secondary: "#a92e14"
@@ -88,11 +88,22 @@ components:
   section-alt:
     backgroundColor: "{colors.surface-alt}"
     textColor: "{colors.ink}"
+  package-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.border}"
+    rounded: "{rounded.md}"
+    padding: 24px
+  panel-dark:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.lg}"
+    padding: 48px
 ---
 
 ## Overview
 
-実務歴の長いWeb制作者が講師を務める、Claude Code向けスキル講座の販促LP。誇張のない落ち着いた説得トーンで、実績と網羅性（36スキル・31本の動画）を静かに裏付けとして提示する。ターゲットはFigma・コーディングを日常的に行うWeb制作者/フリーランスと、AI導入を検討する制作会社の意思決定者で、双方に「実務でそのまま使える」信頼感を与える必要がある。装飾は最小限にとどめ、単色（モノクローム）の地に一色のアクセントだけを効かせるエディトリアルな雰囲気とする。
+実務歴の長いWeb制作者が講師を務める、Claude Code / Figma向けスキル講座の販促LP群。全スキル入りの「All-in-One Bundle」（トップページ・76スキル・動画60本）を主軸に、単体パッケージの「Claude Skills」（`/claude`・46スキル・動画40本）と「Figma Skills」（`/figma`・30スキル・動画20本）の個別ページを持つ。3ページは同じデザイン言語を共有し、商品の違いは文言とデータ（価格・スキル数など）でのみ表現する。誇張のない落ち着いた説得トーンで、実績と網羅性を静かに裏付けとして提示する。ターゲットはFigma・コーディングを日常的に行うWeb制作者/フリーランスと、AI導入を検討する制作会社の意思決定者で、双方に「実務でそのまま使える」信頼感を与える必要がある。装飾は最小限にとどめ、単色（モノクローム）の地に一色のアクセントだけを効かせるエディトリアルな雰囲気とする。
 
 ## Colors
 
@@ -113,7 +124,9 @@ components:
 
 ## Layout
 
-`max-w-5xl`〜`max-w-6xl`を基準としたセンター寄せの単一カラムレイアウト。セクション間の余白は`py-20`〜`py-28`（spacing.xl相当）と大きめに取り、情報の塊ごとに白背景とSurface Alt背景を交互に切り替えて視覚的な区切りを作る。カード群は`grid`でsm:2列/lg:3列に展開し、`gap-6`前後で統一する。
+`max-w-5xl`〜`max-w-6xl`を基準としたセンター寄せの単一カラムレイアウト。セクション間の余白は`py-20`〜`py-28`（spacing.xl相当）と大きめに取り、情報の塊ごとに白背景とSurface Alt背景を交互に切り替えて視覚的な区切りを作る。カード群は`grid`でsm:2列/lg:3列に展開し、`gap-6`前後で統一する。商品（パッケージ）カードは`md:grid-cols-2`の2列で並べる。
+
+ページ構成は、ヒーロー直下にInk反転の大きな数値ブロック（スキル数・動画本数・総再生時間）を置いて第一印象の重みを持たせ、その後は白背景とSurface Alt背景を交互に重ねる。価格セクションはInk反転のパネルに価格と特典を収める。各ページはヘッダー・フッターを共有し、商品ごとにナビゲーションだけを切り替える（`Header` / `Footer` の`variant`）。
 
 ## Elevation & Depth
 
@@ -130,6 +143,8 @@ components:
 - **card:** Surface背景・Border罫線・rounded-mdのカード。特徴紹介やスキル紹介のグリッドで使用。
 - **badge / callout:** Tertiary背景・Secondary文字色の小さなラベル/注意書き。強調しすぎずに補足情報を伝える。
 - **section-alt:** Surface Alt背景のセクション。白背景セクションと交互に配置し、ページ全体のリズムを作る。
+- **package-card:** 商品紹介カード（`PackageCard`）。環境ラベル・商品名・説明・スキル数/動画本数/総時間・価格・購入ボタン・詳細リンクを縦に並べる。Bundle・Claude版・Figma版の各ページで共通して使い、価格などは`src/data/products.ts`から読む。
+- **panel-dark:** Ink背景・白文字の大きなパネル。料金カードや、ヒーロー直下の数値ブロックで使用。
 
 ## Do's and Don'ts
 

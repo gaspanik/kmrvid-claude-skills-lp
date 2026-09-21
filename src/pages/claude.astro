@@ -1,0 +1,501 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CircleCheck,
+  ExternalLink,
+  MessageCircleQuestionMark,
+  SquareTerminal,
+  Tag,
+  Video,
+  Workflow,
+} from "@lucide/astro";
+import codeScreen from "@/assets/images/code-screen.jpg";
+import Callout from "@/components/Callout.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { claudeCategories, claudeSkillsCount } from "@/data/skills";
+import {
+  bundleSaving,
+  formatDuration,
+  formatYen,
+  products,
+  STATS_AS_OF,
+} from "@/data/products";
+
+const product = products.claude;
+const PURCHASE_URL = product.url;
+const PRICE = formatYen(product.price);
+const LINE_URL = "https://lin.ee/EOgmkKQ";
+---
+
+<Layout title="KMRVID Claude Skills — Claude Code向けオリジナルスキル集">
+  <Header variant="claude" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Figma版とのセット「All-in-One Bundle」はこちら
+        </a>
+
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Claude Code 向けオリジナルスキル集
+        </p>
+
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-3xl text-left"
+        >
+          Web制作の一連の工程を、
+          <br />
+          <span class="text-accent">"スキル"</span>で自動化する
+        </h1>
+
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Claude Code で動く{claudeSkillsCount}個のオリジナルスキルを収録した単体パッケージです。セットアップからモックアップ作成、Figma連携、Tailwindの整理、仕上げの品質チェックまで、Web制作のワークフローを一通りカバー。使い方だけでなく、スキルの作り方まで解説する動画付き（{
+            product.videos
+          }本・{formatDuration(product)}／{STATS_AS_OF}現在）。
+        </p>
+
+        <div
+          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+        >
+          <a
+            href={PURCHASE_URL}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            {PRICE}円で受講をはじめる
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#categories"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            収録スキルを見る
+          </a>
+        </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href="https://github.com/gaspanik/create-mockup-lite-skill"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            軽量版「create-mockup-lite」を無料で先に試す
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {product.skills}
+              <span class="font-body text-white/50 text-lg">個</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">
+              収録スキル数（一般非公開のものを含む）
+            </p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {product.videos}
+              <span class="font-body text-white/50 text-lg">本</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">解説動画の本数</p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {product.hours}<span class="text-4xl md:text-5xl">h</span
+              >{product.minutes}<span class="text-4xl md:text-5xl">m</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">
+              総再生時間（{STATS_AS_OF}時点）
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section
+      id="overview"
+      aria-labelledby="overview-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="overview-heading" class="max-w-xl text-ink text-left">
+        Claude版の特長
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        プロンプトを都度書く代わりに、うまくいった手順を「スキル」として保存し、何度でも呼び出せる形にします。
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        <FeatureCard
+          icon={SquareTerminal}
+          title="Claude Codeで動く実務スキル"
+          description="セットアップ、モックアップ作成、Figma連携、Tailwind最適化、仕上げまで、Web制作の工程ごとにスキルを用意。主にClaude Code環境と、Vite + Tailwind CSS v4構成のフロントエンドプロジェクトを想定しています。"
+        />
+        <FeatureCard
+          icon={Video}
+          title={`${product.skills}スキル × 動画${product.videos}本のボリューム`}
+          description={`一般非公開のスキルを含む全${product.skills}個を日本語化し、そのスキル解説を動画にして${formatDuration(product)}に凝縮。スキルは不定期で機能改善・強化のため更新予定。`}
+        />
+        <FeatureCard
+          icon={Workflow}
+          title={`使い方だけでなく"作り方"まで`}
+          description="「使い方」だけでなく「そのスキルの中身」まで解説。自分の業務に合わせて改善・開発する教材にもなります。"
+        />
+      </div>
+
+      <div class="mt-6">
+        <Callout>
+          Figma Design Agent 内で動く専用カスタムスキルは、本パッケージには含まれません。Figma内で使いたい場合は「KMRVID
+          Figma Skills」、両方使いたい場合は「All-in-One
+          Bundle」をご検討ください。
+        </Callout>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section
+      id="categories"
+      aria-labelledby="categories-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="categories-heading" class="max-w-xl text-ink text-left">
+          収録{claudeSkillsCount}スキル
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Web制作の工程ごとに、{claudeCategories.length}つのカテゴリに整理しています。各スキルの説明は
+          <a href="/skills" class="text-accent underline underline-offset-4">
+            スキル一覧ページ
+          </a>
+          で確認できます。
+        </p>
+
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-2 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+        >
+          {
+            claudeCategories.map((category) => (
+              <div>
+                <div class="flex justify-between items-start gap-4">
+                  <category.icon
+                    size={22}
+                    stroke-width={1.75}
+                    class="text-accent"
+                  />
+                  <p class="text-ink-soft text-sm">
+                    {category.skills.length}スキル
+                  </p>
+                </div>
+                <h3 class="mt-4 text-lg text-left leading-snug">
+                  {category.name}
+                </h3>
+                <p class="mt-1 text-ink-soft text-base text-justify leading-snug">
+                  {category.tagline}
+                </p>
+                <ul class="flex flex-wrap gap-2 mt-4">
+                  {category.skills.map((skill) => (
+                    <li class="bg-surface-alt px-2.5 py-1 rounded-full font-mono text-xs">
+                      {skill.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+
+        <a
+          href="/skills"
+          class="inline-flex items-center gap-1 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          全スキルの説明を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <div class="max-w-xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+        >
+          <Tag size={18} stroke-width={2} />
+          料金
+        </p>
+        <h2 id="pricing-heading" class="text-ink text-left">
+          KMRVID <br class="sm:hidden" /> Claude Skills
+        </h2>
+        <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+          単体パッケージとして、{product.skills}個のClaude Code向けスキルを、{
+            PRICE
+          }円（税込）の買い切りでご利用いただけます。
+        </p>
+      </div>
+
+      <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
+        <div
+          class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
+        >
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {PRICE}<span class="text-2xl">円</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
+
+            <a
+              href={PURCHASE_URL}
+              class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
+            >
+              {PRICE}円で申し込む
+              <ArrowRight size={18} stroke-width={2} />
+            </a>
+          </div>
+
+          <ul
+            class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 md:pl-8 md:border-white/10 md:border-l text-white/80 *:[&_svg]:text-accent text-base"
+          >
+            <li>
+              <CircleCheck size={18} stroke-width={2} />
+              <span>Claude Code向けスキル{product.skills}個（非公開のものを含む）</span>
+            </li>
+            <li>
+              <CircleCheck size={18} stroke-width={2} />
+              <span>解説動画{product.videos}本・{formatDuration(product)}</span>
+            </li>
+            <li>
+              <CircleCheck size={18} stroke-width={2} />
+              <span>使い方だけでなく、作り方の解説付き</span>
+            </li>
+            <li>
+              <CircleCheck size={18} stroke-width={2} />
+              <span>買い切り・視聴期限なし</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t"
+        >
+          <p class="text-white/70 text-sm">
+            公式LINE友だち登録で、さらに10%OFFクーポンも配布中
+          </p>
+          <a
+            href={LINE_URL}
+            class="inline-flex items-center min-h-11 text-white text-sm underline underline-offset-4"
+          >
+            LINEで10%OFFクーポンを受け取る
+          </a>
+        </div>
+      </div>
+
+      <p
+        class="mt-6 max-w-xl text-ink-soft text-sm text-justify leading-relaxed"
+      >
+        本パッケージに付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
+      </p>
+    </section>
+
+    <!-- ============ CROSS-SELL (Figma版 / All-in-One Bundle) ============ -->
+    <section
+      aria-labelledby="cross-sell-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p class="mb-3 text-ink-soft text-sm uppercase tracking-widest">
+          Figmaでも使いたい方へ
+        </p>
+        <h2 id="cross-sell-heading" class="max-w-xl text-ink text-left">
+          Figma版とのセットもあります
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Figma Design Agent のカスタムスキル登録機能で動く、Figma専用スキルの単体パッケージと、Claude版とのセット「All-in-One
+          Bundle」をご用意しています。
+        </p>
+
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+          <PackageCard
+            product="figma"
+            description="Figma Design Agentのカスタムスキル登録機能で動く、Figma専用スキル群。キャンバス上で選択して呼び出すだけで使えます。"
+          />
+          <PackageCard
+            product="bundle"
+            description="Claude版とFigma版の全スキルを収録したセット。両方使う場合は、個別に購入するよりお得です。"
+          />
+        </div>
+
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+        >
+          All-in-One Bundleは、Claude版とFigma版を個別に購入するより{
+            formatYen(bundleSaving)
+          }円お得です。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      class="py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-3xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">よくある質問</h2>
+
+        <div class="mt-8 *:border-border *:border-b">
+          <FaqItem question="スキルはどんな環境で使えますか？">
+            主にClaude Code環境と、Vite + Tailwind CSS
+            v4構成のフロントエンドプロジェクトを想定しています。利用環境やツールのバージョンによっては、正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりませんので、あらかじめご了承ください。
+          </FaqItem>
+
+          <FaqItem question="Figma版・All-in-One Bundleとの違いは何ですか？">
+            本パッケージは、Claude Code向けのスキルのみを収録した単体パッケージです。Figma
+            Design Agent内で動くFigma専用スキルは含まれません。Figma専用スキルのみの
+            <a href="/figma" class="text-accent underline underline-offset-4">
+              KMRVID Figma Skills
+            </a>
+            と、両方を収録した
+            <a href="/" class="text-accent underline underline-offset-4">
+              All-in-One Bundle
+            </a>
+            もあわせてご検討ください。
+          </FaqItem>
+
+          <FaqItem question="購入前にスキルの動作を試すことはできますか？">
+            軽量版スキル「create-mockup-lite」を
+            <a
+              href="https://github.com/gaspanik/create-mockup-lite-skill"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
+            >
+              GitHub
+            </a>
+            にて無料公開しています。購入前にお使いの環境で動作をご確認いただけます。使い方は
+            <a
+              href="https://kmrvid.com/blogs/news/kmvid-skills-updates-20260717"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
+            >
+              こちらの記事
+            </a>
+            でも動画付きで紹介しています。
+          </FaqItem>
+
+          <FaqItem question="プログラミング未経験でも受講できますか？">
+            Figmaやコーディングを日常的に行うWeb制作者・フリーランスを主な対象としています。スキルの「作り方」も解説するため、AI活用ワークフローを学びたい方にも役立つ内容です。
+          </FaqItem>
+
+          <FaqItem question="収録スキルの詳細はどこで確認できますか？">
+            全スキルの詳細・依存関係を紹介するスキル紹介ページを別途ご用意しています。詳しくは
+            <a href="/skills" class="text-accent underline underline-offset-4">
+              こちら
+            </a>
+            からご確認ください。
+          </FaqItem>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA (full-bleed) ============ -->
+    <section
+      aria-labelledby="final-cta-heading"
+      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+    >
+      <Image
+        src={codeScreen}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/85"></div>
+      <div
+        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          {PRICE}円で
+          <br class="sm:hidden" />
+          今日から始める
+        </h2>
+        <p
+          class="max-w-md text-white/70 text-base text-justify leading-relaxed"
+        >
+          {
+            product.skills
+          }個のClaude Code向けスキルを、{PRICE}円（税込）の買い切りでお申し込みいただけます。
+        </p>
+        <a
+          href={PURCHASE_URL}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          {PRICE}円で申し込む
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href="/"
+          class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
+        >
+          Figma版とのセット「All-in-One Bundle」はこちら
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="claude" />
+</Layout>

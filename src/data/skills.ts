@@ -155,6 +155,7 @@ export const figmaSkills: SkillItem[] = [
 
 interface Category {
   icon: typeof Palette
+  product: 'claude' | 'figma'
   name: string
   tagline: string
   note?: string
@@ -166,15 +167,17 @@ interface Category {
 export const categories: Category[] = [
   {
     icon: Palette,
+    product: 'figma',
     name: 'Figma Design Agent 専用',
     tagline: '【新登場】Figma の中で使えるカスタムスキル',
-    note: 'Figma内で動くAIエージェントに最適化されたカスタムスキル。フレーム構造を解析してAI実装精度を診断、変数化されていない値を変数化して紐付けるなど、Figma内での作業効率を大幅に向上させます。カスタムスキルのみが含まれた「KMRVID Figma Skills」も単体販売開始。',
+    note: 'Figma内で動くAIエージェントに最適化されたカスタムスキル。フレーム構造を解析してAI実装精度を診断、変数化されていない値を変数化して紐付けるなど、Figma内での作業効率を大幅に向上させます。このカテゴリのスキルのみを収録した「KMRVID Figma Skills」も単体で販売中。',
     ctaHref: '/figma',
     ctaLabel: 'KMRVID Figma Skills の詳細を見る',
     skills: figmaSkills,
   },
   {
     icon: Rocket,
+    product: 'claude',
     name: 'セットアップ系',
     tagline: '新規プロジェクトを立ち上げる',
     skills: [
@@ -206,6 +209,7 @@ export const categories: Category[] = [
   },
   {
     icon: LayoutTemplate,
+    product: 'claude',
     name: 'モックアップ作成系',
     tagline: 'コードからUIを組み上げる',
     note: 'create-mockup / create-multi-mockupは、cognitive-ui-design（定番レイアウトからの脱却）やjapanese-web-guideline（日本語サイトの実装補正）と組み合わせることで、AIにありがちな凡庸な仕上がりを避けられます。',
@@ -242,6 +246,7 @@ export const categories: Category[] = [
   },
   {
     icon: Layers,
+    product: 'claude',
     name: 'Figma系',
     tagline: 'Figmaと連携する（Tailwindベース）',
     note: 'Figmaのフレーム構造は、そのままコードの構造に反映されます。先にfigma-auditでAI実装精度を診断し、スコアが低い箇所をFigma側で直してから実装に進むと、修正が少なく済みます。',
@@ -322,6 +327,7 @@ export const categories: Category[] = [
   },
   {
     icon: Palette,
+    product: 'claude',
     name: 'Tailwind系',
     tagline: 'スタイリングを整える',
     skills: [
@@ -341,6 +347,7 @@ export const categories: Category[] = [
   },
   {
     icon: Wrench,
+    product: 'claude',
     name: '仕上げ・改善系',
     tagline: '実装時、実装後の品質を上げる',
     skills: [
@@ -388,6 +395,7 @@ export const categories: Category[] = [
   },
   {
     icon: Wrench,
+    product: 'claude',
     name: 'パイプライン設計支援系',
     tagline: '自分のパイプラインを設計したいときに',
     skills: [
@@ -409,3 +417,9 @@ export const totalSkills = categories.reduce(
 )
 
 export const figmaSkillsCount = figmaSkills.length
+
+export const claudeSkillsCount = totalSkills - figmaSkillsCount
+
+export const claudeCategories = categories.filter(
+  (cat) => cat.product === 'claude',
+)

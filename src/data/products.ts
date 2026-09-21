@@ -1,0 +1,67 @@
+import { claudeSkillsCount, figmaSkillsCount, totalSkills } from './skills'
+
+export type ProductKey = 'bundle' | 'claude' | 'figma'
+
+interface Product {
+  name: string
+  /** 環境（ヒーロー等のラベル用） */
+  env: string
+  /** このLP内のパス */
+  href: string
+  /** kmrvid.com の商品ページ */
+  url: string
+  /** 税込・買い切り（円） */
+  price: number
+  skills: number
+  videos: number
+  hours: number
+  minutes: number
+}
+
+/** 動画本数・総再生時間の集計日 */
+export const STATS_AS_OF = '2026年9月20日'
+
+export const products: Record<ProductKey, Product> = {
+  bundle: {
+    name: 'KMRVID Skills - All-in-One Bundle',
+    env: 'Claude Code + Figma Design Agent',
+    href: '/',
+    url: 'https://kmrvid.com/products/kmrvid-skills-bundle',
+    price: 29800,
+    skills: totalSkills,
+    videos: 60,
+    hours: 6,
+    minutes: 5,
+  },
+  claude: {
+    name: 'KMRVID Claude Skills',
+    env: 'Claude Code',
+    href: '/claude',
+    url: 'https://kmrvid.com/products/kmrvid-claude-skills',
+    price: 19800,
+    skills: claudeSkillsCount,
+    videos: 40,
+    hours: 4,
+    minutes: 10,
+  },
+  figma: {
+    name: 'KMRVID Figma Skills',
+    env: 'Figma Design Agent',
+    href: '/figma',
+    url: 'https://kmrvid.com/products/kmrvid-figma-skills',
+    price: 15400,
+    skills: figmaSkillsCount,
+    videos: 20,
+    hours: 1,
+    minutes: 55,
+  },
+}
+
+export const formatYen = (price: number) => price.toLocaleString('ja-JP')
+
+export const formatDuration = ({ hours, minutes }: Product) =>
+  `約${hours}時間${minutes}分`
+
+/** Claude版 + Figma版を個別に買う場合との差額 */
+export const bundleSaving =
+  products.claude.price + products.figma.price - products.bundle.price

@@ -1,0 +1,66 @@
+---
+import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import {
+  formatDuration,
+  formatYen,
+  type ProductKey,
+  products,
+} from "@/data/products";
+
+interface Props {
+  product: ProductKey;
+  description: string;
+}
+
+const { product, description } = Astro.props;
+const { name, env, href, url, price, skills, videos } = products[product];
+---
+
+<div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+  <p class="text-ink-soft text-sm uppercase tracking-wide">{env}</p>
+  <h3 class="mt-1 text-xl text-left leading-snug">{name}</h3>
+  <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+    {description}
+  </p>
+
+  <dl
+    class="gap-4 grid grid-cols-3 mt-6 pt-6 border-t border-border text-left"
+  >
+    <div>
+      <dt class="text-ink-soft text-sm">スキル</dt>
+      <dd class="mt-1 font-heading text-2xl">{skills}<span class="ml-0.5 font-body text-ink-soft text-sm">個</span></dd>
+    </div>
+    <div>
+      <dt class="text-ink-soft text-sm">解説動画</dt>
+      <dd class="mt-1 font-heading text-2xl">{videos}<span class="ml-0.5 font-body text-ink-soft text-sm">本</span></dd>
+    </div>
+    <div>
+      <dt class="text-ink-soft text-sm">総時間</dt>
+      <dd class="mt-1 font-body text-base leading-snug">
+        {formatDuration(products[product])}
+      </dd>
+    </div>
+  </dl>
+
+  <p class="mt-6 font-heading text-4xl">
+    {formatYen(price)}<span class="ml-1 text-lg">円</span>
+    <span class="ml-1 font-body text-ink-soft text-sm">税込・買い切り</span>
+  </p>
+
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+    <a
+      href={url}
+      class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-5 py-3 rounded-full min-h-11 font-medium text-white text-sm transition"
+    >
+      {formatYen(price)}円で申し込む
+      <ArrowRight size={16} stroke-width={2} />
+    </a>
+    <a
+      href={href}
+      class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+    >
+      詳細を見る
+      <ArrowUpRight size={14} stroke-width={2} />
+    </a>
+  </div>
+</div>

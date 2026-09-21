@@ -7,7 +7,6 @@ import {
   ExternalLink,
   FileText,
   Languages,
-  ListChecks,
   MousePointerClick,
   Plus,
   SquareTerminal,
@@ -18,14 +17,25 @@ import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
-import FooterFigma from "@/components/FooterFigma.astro";
-import HeaderFigma from "@/components/HeaderFigma.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
 import SkillCard from "@/components/SkillCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { figmaSkills, totalSkills as claudeSkillsTotal } from "@/data/skills";
+import { figmaSkills } from "@/data/skills";
+import {
+  bundleSaving,
+  formatDuration,
+  formatYen,
+  products,
+  STATS_AS_OF,
+} from "@/data/products";
 
-const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-figma-skills";
+const product = products.figma;
+const PURCHASE_URL = product.url;
+const PRICE = formatYen(product.price);
+const LINE_URL = "https://lin.ee/EOgmkKQ";
 
 const differences = [
   {
@@ -114,7 +124,7 @@ const combos = [
     goal: "人間の特性を考慮したページデザインにしたい",
     chain: ["create-multi-pattern"],
     claudeSkill: "cognitive-ui-design",
-    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、通常版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と併用すると、コンパニオンスキルとして裏で呼び出され、生成する複数パターンの質をさらに引き上げられます。",
+    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、Claude版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と併用すると、コンパニオンスキルとして裏で呼び出され、生成する複数パターンの質をさらに引き上げられます。",
   },
 ];
 
@@ -122,7 +132,7 @@ const totalSkills = skills.length;
 ---
 
 <Layout title="KMRVID Figma Skills — Figma Design Agent専用カスタムスキル集">
-  <HeaderFigma />
+  <Header variant="figma" />
 
   <main id="top">
     <!-- ============ HERO ============ -->
@@ -136,7 +146,7 @@ const totalSkills = skills.length;
           class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
         >
           <ArrowUpRight size={16} stroke-width={2} />
-          Claude Code版のフルセットはこちら
+          Claude版とのセット「All-in-One Bundle」はこちら
         </a>
 
         <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
@@ -156,7 +166,7 @@ const totalSkills = skills.length;
         <p
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
         >
-          Claude Code 版のスキルを Figma の Design Agent（カスタムスキル機能）で動作するよう最適化した専用パッケージです。チャットの往復は最小限。スキルを呼び出すだけで、新規のページ生成から複数のレイアウトパターンの生成、キャンバス上のレイヤー整理・トークン化・コンポーネント化まで、ほぼ全自動で完結できます。収録スキルの解説動画付き（20本／2026年8月18日現在）。
+          Claude Code 版のスキルを Figma の Design Agent（カスタムスキル機能）で動作するよう最適化した専用パッケージです。チャットの往復は最小限。スキルを呼び出すだけで、新規のページ生成から複数のレイアウトパターンの生成、キャンバス上のレイヤー整理・トークン化・コンポーネント化まで、ほぼ全自動で完結できます。収録スキルの解説動画付き（{product.videos}本・{formatDuration(product)}／{STATS_AS_OF}現在）。
         </p>
 
         <div
@@ -166,14 +176,14 @@ const totalSkills = skills.length;
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            9,900円で受講をはじめる
+            {PRICE}円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
             href="#diff"
             class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
           >
-            通常版との違い
+            Claude版との違い
           </a>
         </div>
 
@@ -273,14 +283,14 @@ const totalSkills = skills.length;
       class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
     >
       <h2 id="diff-heading" class="max-w-xl text-ink text-left">
-        通常版と何が違うのか
+        Claude版と何が違うのか
       </h2>
       <p
         class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
       >
-        通常版「KMRVID Claude
-        Skills」に含まれる同名スキルのFigma専用版。中身のロジックは同じでも、Figma上で問題なく動くように前提から作り直し最適化しています。通常版にはこちらの「KMRVID
-        Figma Skills」が含まれます。
+        Claude Code版「KMRVID Claude
+        Skills」に含まれる同名スキルのFigma専用版。中身のロジックは同じでも、Figma上で問題なく動くように前提から作り直し最適化しています。両方をセットにした「KMRVID
+        Skills - All-in-One Bundle」もあります。
       </p>
 
       <div
@@ -303,8 +313,9 @@ const totalSkills = skills.length;
 
       <div class="mt-6">
         <Callout>
-          `cognitive-ui-design` は、通常版の「KMRVID Claude
-          Skills」に含まれるスキルで、Figma専用版には含まれません。レイアウトの定石崩しなどのガイドラインは、その内容が重要であるため通常版のみでの提供です。
+          `cognitive-ui-design` は、Claude Code版の「KMRVID Claude
+          Skills」（およびAll-in-One
+          Bundle）に含まれるスキルで、Figma専用版には含まれません。レイアウトの定石崩しなどのガイドラインは、その内容が重要であるためClaude版のみでの提供です。
         </Callout>
       </div>
     </section>
@@ -419,7 +430,7 @@ const totalSkills = skills.length;
           <span
             class="inline-block border border-accent/30 rounded-full w-3 h-3 bg-accent-soft"
           ></span>
-          色付きのカードは、通常版「KMRVID Claude Skills」限定スキルとの組み合わせ例です
+          色付きのカードは、Claude版「KMRVID Claude Skills」限定スキルとの組み合わせ例です
         </p>
 
         <div
@@ -468,7 +479,7 @@ const totalSkills = skills.length;
                 </p>
                 {combo.claudeSkill && (
                   <a
-                    href="/"
+                    href="/claude"
                     class="inline-flex items-center self-start gap-1.5 mt-4 min-h-11 hover:text-accent text-sm underline underline-offset-4 transition text-accent-dark"
                   >
                     Claude版の詳細を見る
@@ -502,7 +513,7 @@ const totalSkills = skills.length;
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               totalSkills
-            }個のFigma専用スキルを、9,900円（税込）の買い切りでご利用いただけます。
+            }個のFigma専用スキルを、{PRICE}円（税込）の買い切りでご利用いただけます。
           </p>
         </div>
 
@@ -514,7 +525,7 @@ const totalSkills = skills.length;
               <p
                 class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
               >
-                9,900<span class="text-2xl">円</span>
+                {PRICE}<span class="text-2xl">円</span>
               </p>
               <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
@@ -522,7 +533,7 @@ const totalSkills = skills.length;
                 href={PURCHASE_URL}
                 class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
               >
-                9,900円で申し込む
+                {PRICE}円で申し込む
                 <ArrowRight size={18} stroke-width={2} />
               </a>
             </div>
@@ -548,6 +559,20 @@ const totalSkills = skills.length;
               </li>
             </ul>
           </div>
+
+          <div
+            class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t"
+          >
+            <p class="text-white/70 text-sm">
+              公式LINE友だち登録で、さらに10%OFFクーポンも配布中
+            </p>
+            <a
+              href={LINE_URL}
+              class="inline-flex items-center min-h-11 text-white text-sm underline underline-offset-4"
+            >
+              LINEで10%OFFクーポンを受け取る
+            </a>
+          </div>
         </div>
 
         <p
@@ -559,48 +584,48 @@ const totalSkills = skills.length;
       </div>
     </section>
 
-    <!-- ============ CROSS-SELL TO MAIN COURSE ============ -->
+    <!-- ============ CROSS-SELL (Claude版 / All-in-One Bundle) ============ -->
     <section
       aria-labelledby="cross-sell-heading"
       class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
     >
-      <div
-        class="items-center gap-10 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] bg-canvas p-8 md:p-12 border border-border rounded-3xl"
+      <p class="mb-3 text-ink-soft text-sm uppercase tracking-widest">
+        Figma専用スキルだけでは物足りない方へ
+      </p>
+      <h2 id="cross-sell-heading" class="max-w-xl text-ink text-left">
+        Claude Code版も、あわせて使いたい方へ
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
       >
-        <div>
-          <p class="mb-3 text-ink-soft text-sm uppercase tracking-widest">
-            Figma専用スキルだけでは物足りない方へ
-          </p>
-          <h2 id="cross-sell-heading" class="text-ink text-left">
-            全{claudeSkillsTotal}スキルの「KMRVID Claude Skills」
-          </h2>
-          <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-            セットアップからモックアップ作成、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連のワークフローを自動化する本講座には、今回のFigma専用スキル{
-              totalSkills
-            }個もすべて同梱されています。使い方だけでなく、スキルの作り方まで解説する動画48本付きです。
-          </p>
-          <a
-            href="/"
-            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
-          >
-            KMRVID Claude Skills の詳細を見る
-            <ArrowUpRight size={14} stroke-width={2} />
-          </a>
-        </div>
-        <div class="flex flex-col gap-3 bg-surface-alt p-6 rounded-2xl">
-          <div class="flex items-center gap-2 text-ink-soft text-sm">
-            <ListChecks size={16} stroke-width={2} class="text-accent" />
-            収録スキル一覧も別ページでご覧いただけます
-          </div>
-          <a
-            href="/skills"
-            class="inline-flex justify-center items-center gap-1.5 bg-ink hover:brightness-110 px-5 py-3 rounded-full min-h-11 font-medium text-canvas text-sm transition"
-          >
-            全スキル一覧を見る
-            <ExternalLink size={14} stroke-width={2} />
-          </a>
-        </div>
+        セットアップからモックアップ作成、Tailwindの整理、仕上げの品質チェックまで、Web制作の一連のワークフローを自動化するClaude Code版のスキル群は、単体パッケージとしても、Figma版とのセットとしても購入できます。
+      </p>
+
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        <PackageCard
+          product="claude"
+          description="Claude Codeで動く、セットアップ・モックアップ作成・Figma連携・Tailwind最適化・仕上げまでを網羅したスキル群。"
+        />
+        <PackageCard
+          product="bundle"
+          description="Claude版とFigma版の全スキルを収録したセット。両方使う場合は、個別に購入するよりお得です。"
+        />
       </div>
+
+      <p
+        class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        All-in-One Bundleは、Claude版とFigma版を個別に購入するより{
+          formatYen(bundleSaving)
+        }円お得です。
+      </p>
+      <a
+        href="/skills"
+        class="inline-flex items-center gap-1.5 mt-2 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        全スキル一覧を見る
+        <ExternalLink size={14} stroke-width={2} />
+      </a>
     </section>
 
     <!-- ============ FINAL CTA (full-bleed) ============ -->
@@ -621,7 +646,7 @@ const totalSkills = skills.length;
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          9,900円で
+          {PRICE}円で
           <br class="sm:hidden" />
           今日から始める
         </h2>
@@ -630,24 +655,24 @@ const totalSkills = skills.length;
         >
           {
             totalSkills
-          }個のカスタムスキルを、9,900円（税込）の買い切りで、キャンバス上の選択だけで動かせます。
+          }個のカスタムスキルを、{PRICE}円（税込）の買い切りで、キャンバス上の選択だけで動かせます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          9,900円で申し込む
+          {PRICE}円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a
           href="/"
           class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
         >
-          KMRVID Claude Skills（全{claudeSkillsTotal}スキル）はこちら
+          Claude版とのセット「All-in-One Bundle」はこちら
         </a>
       </div>
     </section>
   </main>
 
-  <FooterFigma />
+  <Footer variant="figma" />
 </Layout>

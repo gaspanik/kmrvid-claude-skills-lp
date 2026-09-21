@@ -1,16 +1,58 @@
 ---
 import { Menu, X } from '@lucide/astro';
+import { type ProductKey, products } from '@/data/products';
 
-const PURCHASE_URL = 'https://kmrvid.com/products/kmrvid-claude-skills';
+interface Props {
+  variant?: ProductKey;
+}
 
-const navLinks = [
-  { href: '/#included', label: '講座内容' },
-  { href: '/#skills', label: '収録スキル' },
-  { href: '/figma', label: 'Figma版' },
-  { href: '/#author', label: '講師紹介' },
-  { href: '/#pricing', label: '料金' },
-  { href: '/#faq', label: 'FAQ' },
+const { variant = 'bundle' } = Astro.props;
+
+// ページ内アンカー（ページごとに異なる）
+const configs = {
+  bundle: {
+    brand: 'All-in-One Bundle',
+    home: '/',
+    links: [
+      { href: '/#included', label: '講座内容' },
+      { href: '/#skills', label: '収録スキル' },
+      { href: '/#author', label: '講師紹介' },
+      { href: '/#pricing', label: '料金' },
+      { href: '/#faq', label: 'FAQ' },
+    ],
+  },
+  claude: {
+    brand: 'Claude Skills',
+    home: '/claude',
+    links: [
+      { href: '#overview', label: '特長' },
+      { href: '#categories', label: '収録スキル' },
+      { href: '#pricing', label: '料金' },
+      { href: '#faq', label: 'FAQ' },
+    ],
+  },
+  figma: {
+    brand: 'Figma Skills',
+    home: '/figma',
+    links: [
+      { href: '#diff', label: '違い' },
+      { href: '#skills', label: '収録スキル' },
+      { href: '#how-to', label: '使い方' },
+      { href: '#combos', label: '組み合わせ例' },
+      { href: '#pricing', label: '料金' },
+    ],
+  },
+};
+
+// 全ページ共通の商品リンク（現在のページを強調）
+const productLinks: { key: ProductKey; label: string }[] = [
+  { key: 'bundle', label: 'All-in-One' },
+  { key: 'claude', label: 'Claude版' },
+  { key: 'figma', label: 'Figma版' },
 ];
+
+const { brand, home, links: navLinks } = configs[variant];
+const PURCHASE_URL = products[variant].url;
 ---
 
 <header
@@ -19,21 +61,42 @@ const navLinks = [
   <div
     class="flex justify-between items-center gap-4 mx-auto px-6 py-4 max-w-6xl"
   >
-    <a href="/" class="font-heading text-ink leading-none">
+    <a href={home} class="font-heading text-ink leading-none">
       <span class="block text-base tracking-tight">KMRVID</span>
       <span class="block text-ink-soft text-xs leading-tight tracking-loose uppercase"
-        >Claude Skills</span
+        >{brand}</span
       >
     </a>
 
-    <nav aria-label="メインナビゲーション" class="hidden md:block">
-      <ul
-        class="flex items-center gap-8 text-sm **:hover:text-accent **:transition-colors"
-      >
+    <nav
+      aria-label="メインナビゲーション"
+      class="hidden lg:flex items-center gap-6 text-sm"
+    >
+      <ul class="flex items-center gap-6 **:hover:text-accent **:transition-colors">
         {
           navLinks.map((link) => (
             <li>
               <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul
+        aria-label="商品"
+        class="flex items-center gap-6 pl-6 border-border border-l **:hover:text-accent **:transition-colors"
+      >
+        {
+          productLinks.map((item) => (
+            <li>
+              <a
+                href={products[item.key].href}
+                aria-current={item.key === variant ? 'page' : undefined}
+                class:list={[
+                  item.key === variant && 'font-medium text-accent',
+                ]}
+              >
+                {item.label}
+              </a>
             </li>
           ))
         }
@@ -54,7 +117,7 @@ const navLinks = [
         aria-label="メニューを開く"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="md:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
+        class="lg:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
       >
         <Menu size={24} stroke-width={1.75} />
       </button>
@@ -64,7 +127,7 @@ const navLinks = [
 
 <div
   id="mobile-menu"
-  class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed bg-ink"
+  class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed bg-ink overflow-y-auto"
   role="dialog"
   aria-modal="true"
   aria-label="ナビゲーションメニュー"
@@ -88,6 +151,27 @@ const navLinks = [
         navLinks.map((link) => (
           <li>
             <a href={link.href}>{link.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 px-6 text-white/40 text-sm uppercase tracking-loose">
+      Products
+    </p>
+    <ul
+      aria-label="商品"
+      class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
+    >
+      {
+        productLinks.map((item) => (
+          <li>
+            <a
+              href={products[item.key].href}
+              aria-current={item.key === variant ? 'page' : undefined}
+              class:list={[item.key === variant && 'font-medium text-accent!']}
+            >
+              {products[item.key].name}
+            </a>
           </li>
         ))
       }

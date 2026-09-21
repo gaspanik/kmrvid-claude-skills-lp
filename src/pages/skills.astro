@@ -7,12 +7,20 @@ import ImageLightbox from "@/components/ImageLightbox.astro";
 import SkillCard from "@/components/SkillCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
-import { categories, totalSkills, figmaSkillsCount } from "@/data/skills";
+import {
+  categories,
+  claudeSkillsCount,
+  figmaSkillsCount,
+  totalSkills,
+} from "@/data/skills";
+import { formatYen, products } from "@/data/products";
 
-const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
+const PURCHASE_URL = products.bundle.url;
+const PRICE = formatYen(products.bundle.price);
+const LINE_URL = "https://lin.ee/EOgmkKQ";
 ---
 
-<Layout title="収録スキル一覧 — KMRVID Claude Skills">
+<Layout title="収録スキル一覧 — KMRVID Skills - All-in-One Bundle">
   <Header />
 
   <main>
@@ -41,13 +49,22 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
       <p
         class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
       >
-        2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent
-        でも動作するスキルを移植。Figma
-        に最適化された専用スキルを追加（{figmaSkillsCount}スキル／2026年9月17日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。詳しくは
+        全{totalSkills}スキルの内訳は、Claude Code向けの
+        <a href="/claude" class="text-accent underline underline-offset-4">
+          KMRVID Claude Skills
+        </a>
+        （{claudeSkillsCount}スキル）と、Figma Design Agent向けの
         <a href="/figma" class="text-accent underline underline-offset-4">
           KMRVID Figma Skills
         </a>
-        のページをご覧ください。
+        （{figmaSkillsCount}スキル）です。それぞれ単体パッケージとしても購入できます。
+      </p>
+      <p
+        class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        2026年7月31日、公開中の Claude Code 用スキルの中から Figma Design Agent
+        でも動作するスキルを移植。Figma
+        に最適化された専用スキルを追加しました（{figmaSkillsCount}スキル／2026年9月20日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。
       </p>
 
       <ImageLightbox
@@ -65,6 +82,15 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
             <category.icon size={22} stroke-width={1.75} class="text-accent" />
             <h2 class="text-ink text-left">{category.name}</h2>
           </div>
+          <p class="mt-3 text-ink-soft text-sm">
+            収録パッケージ：
+            <a
+              href={products[category.product].href}
+              class="text-accent-dark hover:text-accent underline underline-offset-4 transition"
+            >
+              {products[category.product].name}
+            </a>
+          </p>
           <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
             {category.tagline}
           </p>
@@ -134,20 +160,45 @@ const PURCHASE_URL = "https://kmrvid.com/products/kmrvid-claude-skills";
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          全{totalSkills}スキルを、<br class="sm:hidden" />27,500円で
+          全{totalSkills}スキルを、<br class="sm:hidden" />{PRICE}円で
         </h2>
         <p
           class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
         >
-          27,500円（税込）の買い切りでお申し込みいただけます。
+          「KMRVID Skills - All-in-One Bundle」は、{PRICE}円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          27,500円で申し込む
+          {PRICE}円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
+        <p class="text-white/70 text-sm text-center leading-relaxed">
+          公式LINE友だち登録で、さらに10%OFFクーポンも配布中<br />
+          <a
+            href={LINE_URL}
+            class="inline-flex items-center min-h-11 text-white underline underline-offset-4"
+          >
+            LINEで10%OFFクーポンを受け取る
+          </a>
+        </p>
+        <p class="text-white/60 text-sm">
+          単体パッケージ：
+          <a
+            href="/claude"
+            class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
+          >
+            Claude Skills（{formatYen(products.claude.price)}円）
+          </a>
+          ／
+          <a
+            href="/figma"
+            class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
+          >
+            Figma Skills（{formatYen(products.figma.price)}円）
+          </a>
+        </p>
       </div>
     </section>
   </main>

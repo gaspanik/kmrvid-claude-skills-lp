@@ -6,8 +6,12 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 
 | パス | 内容 |
 |---|---|
-| `/` | メインLP(Hero / 課題提起 / 講座内容 / スキルハイライト / 講師紹介 / 料金 / FAQ / 最終CTA) |
-| `/skills` | 全36スキルをカテゴリ別に一覧表示するスキル紹介ページ |
+| `/` | 「KMRVID Skills - All-in-One Bundle」のメインLP(Hero / 課題提起 / 講座内容 / スキルハイライト / 講師紹介 / 料金 / 個別パッケージ / FAQ / 最終CTA) |
+| `/claude` | 単体パッケージ「KMRVID Claude Skills」(Claude Code版)のLP |
+| `/figma` | 単体パッケージ「KMRVID Figma Skills」(Figma Design Agent版)のLP |
+| `/skills` | 全スキルをカテゴリ別に一覧表示するスキル紹介ページ |
+
+価格・動画本数・総再生時間は `src/data/products.ts`、スキル一覧は `src/data/skills.ts` に集約しています。
 
 ## スタック
 
@@ -36,8 +40,9 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 ├── src/
 │   ├── assets/images/   # Vite が処理するアセット(import で参照)
 │   ├── components/
-│   │   ├── Header.astro       # グローバルヘッダー(モバイルメニュー付き)
-│   │   ├── Footer.astro       # グローバルフッター
+│   │   ├── Header.astro       # グローバルヘッダー(variant: bundle / claude / figma)
+│   │   ├── Footer.astro       # グローバルフッター(同上)
+│   │   ├── PackageCard.astro  # 商品(パッケージ)紹介カード
 │   │   ├── FeatureCard.astro  # 「講座の中身」セクション用カード
 │   │   ├── FaqItem.astro      # FAQの <details> アコーディオン項目
 │   │   ├── Callout.astro      # Puzzleアイコン付き注記ボックス
@@ -45,7 +50,9 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 │   ├── layouts/
 │   │   └── Layout.astro # ルートの HTML シェル — グローバル CSS はここで import
 │   ├── pages/
-│   │   ├── index.astro   # メインLP
+│   │   ├── index.astro   # All-in-One Bundle LP
+│   │   ├── claude.astro  # Claude Skills LP
+│   │   ├── figma.astro   # Figma Skills LP
 │   │   └── skills.astro  # スキル一覧ページ
 │   └── styles/
 │       └── global.css   # @import "tailwindcss" + @theme トークン

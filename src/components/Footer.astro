@@ -1,17 +1,83 @@
 ---
-const PURCHASE_URL = 'https://kmrvid.com/products/kmrvid-claude-skills';
+import { type ProductKey, products } from '@/data/products';
+
+interface Props {
+  variant?: ProductKey;
+}
+
+const { variant = 'bundle' } = Astro.props;
+
 const LINE_URL = 'https://lin.ee/EOgmkKQ';
 const isSkillsPage = Astro.url.pathname === '/skills';
+
+interface FooterConfig {
+  description: string;
+  menu: { href: string; label: string; current?: boolean }[];
+  sub: { href: string; label: string } | null;
+}
+
+const configs: Record<ProductKey, FooterConfig> = {
+  bundle: {
+    description:
+      'Claude Code版・Figma版の全スキルを収録した、実務の現場に立ち続けるWeb制作者が形にしたオリジナルスキル講座。',
+    menu: [
+      { href: '/#included', label: '講座内容' },
+      { href: '/#skills', label: '収録スキル' },
+      { href: '/skills', label: 'スキル一覧', current: isSkillsPage },
+      { href: '/#author', label: '講師紹介' },
+      { href: '/#pricing', label: '料金' },
+      { href: '/#packages', label: '個別パッケージ' },
+      { href: '/claude', label: 'KMRVID Claude Skills' },
+      { href: '/figma', label: 'KMRVID Figma Skills' },
+      { href: '/#faq', label: 'FAQ' },
+    ],
+    sub: null,
+  },
+  claude: {
+    description:
+      '実務の現場に立ち続けるWeb制作者が形にした、Claude Code向けオリジナルスキル集。',
+    menu: [
+      { href: '#overview', label: '特長' },
+      { href: '#categories', label: '収録スキル' },
+      { href: '#pricing', label: '料金' },
+      { href: '#faq', label: 'FAQ' },
+      { href: '/skills', label: 'スキル一覧' },
+      { href: '/figma', label: 'KMRVID Figma Skills' },
+    ],
+    sub: {
+      href: '/',
+      label: `${products.bundle.name}（全${products.bundle.skills}スキル）を見る`,
+    },
+  },
+  figma: {
+    description:
+      'Figma の Design Agent（カスタムスキル登録機能）で使うために最適化した、Figma専用カスタムスキル集。',
+    menu: [
+      { href: '#diff', label: 'Claude版との違い' },
+      { href: '#skills', label: '収録スキル' },
+      { href: '#how-to', label: '使い方' },
+      { href: '#combos', label: '組み合わせ例' },
+      { href: '#pricing', label: '料金' },
+      { href: '/claude', label: 'KMRVID Claude Skills' },
+    ],
+    sub: {
+      href: '/',
+      label: `${products.bundle.name}（全${products.bundle.skills}スキル）を見る`,
+    },
+  },
+};
+
+const { description, menu, sub } = configs[variant];
+const { name, url: PURCHASE_URL } = products[variant];
 ---
 
 <footer class="bg-ink text-canvas">
   <div class="mx-auto px-6 py-16 max-w-6xl">
     <div class="gap-10 grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr]">
       <div>
-        <p class="font-heading text-lg">KMRVID Claude Skills</p>
+        <p class="font-heading text-lg">{name}</p>
         <p class="mt-3 max-w-sm text-white/60 text-sm text-justify leading-relaxed">
-          実務の現場に立ち続けるWeb制作者が形にした、Claude
-          Code向けオリジナルスキル講座。
+          {description}
         </p>
       </div>
 
@@ -20,29 +86,18 @@ const isSkillsPage = Astro.url.pathname === '/skills';
         <ul
           class="flex flex-col mt-4 text-sm **:flex **:items-center **:min-h-11 **:transition-colors **:hover:text-accent"
         >
-          <li>
-            <a href="/#included">講座内容</a>
-          </li>
-          <li>
-            <a href="/#skills">収録スキル</a>
-          </li>
-          <li>
-            <a href="/skills" aria-current={isSkillsPage ? 'page' : undefined}>
-              スキル一覧
-            </a>
-          </li>
-          <li>
-            <a href="/figma">KMRVID Figma Skills</a>
-          </li>
-          <li>
-            <a href="/#author">講師紹介</a>
-          </li>
-          <li>
-            <a href="/#pricing">料金</a>
-          </li>
-          <li>
-            <a href="/#faq">FAQ</a>
-          </li>
+          {
+            menu.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
 
@@ -55,6 +110,16 @@ const isSkillsPage = Astro.url.pathname === '/skills';
           >
             今すぐ申し込む
           </a>
+          {
+            sub && (
+              <a
+                href={sub.href}
+                class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
+              >
+                {sub.label}
+              </a>
+            )
+          }
           <a
             href={LINE_URL}
             class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
@@ -68,9 +133,9 @@ const isSkillsPage = Astro.url.pathname === '/skills';
     <div
       class="flex sm:flex-row flex-col justify-between gap-4 mt-12 pt-8 border-white/10 border-t text-white/50 text-sm"
     >
-      <p>&copy; kmrvid.com — KMRVID Claude Skills</p>
+      <p>&copy; kmrvid.com — {name}</p>
       <p class="max-w-xl text-base text-justify">
-        本講座に付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
+        本パッケージに付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
       </p>
     </div>
   </div>

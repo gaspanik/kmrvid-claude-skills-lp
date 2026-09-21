@@ -1,5 +1,6 @@
 ---
-import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import { ArrowRight, ArrowUpRight, BadgePercent } from "@lucide/astro";
+import Price from "@/components/Price.astro";
 import {
   formatDuration,
   formatYen,
@@ -13,10 +14,19 @@ interface Props {
 }
 
 const { product, description } = Astro.props;
-const { name, env, href, url, price, skills, videos } = products[product];
+const { name, env, href, url, price, skills, videos, campaign } =
+  products[product];
 ---
 
 <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+  {
+    campaign && (
+      <p class="campaign-ended:hidden self-start flex items-center gap-1.5 bg-accent-soft mb-3 px-3 py-1 rounded-full font-medium text-accent-dark text-sm">
+        <BadgePercent size={14} stroke-width={2} class="flex-none" />
+        発売記念価格 {campaign.endsAtShort}まで
+      </p>
+    )
+  }
   <p class="text-ink-soft text-sm uppercase tracking-wide">{env}</p>
   <h3 class="mt-1 text-xl text-left leading-snug">{name}</h3>
   <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
@@ -43,8 +53,15 @@ const { name, env, href, url, price, skills, videos } = products[product];
   </dl>
 
   <p class="mt-6 font-heading text-4xl">
-    {formatYen(price)}<span class="ml-1 text-lg">円</span>
+    <Price product={product} /><span class="ml-1 text-lg">円</span>
     <span class="ml-1 font-body text-ink-soft text-sm">税込・買い切り</span>
+    {
+      campaign && (
+        <span class="campaign-ended:hidden ml-2 font-body text-ink-soft text-sm line-through">
+          通常 {formatYen(price)}円
+        </span>
+      )
+    }
   </p>
 
   <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
@@ -52,7 +69,7 @@ const { name, env, href, url, price, skills, videos } = products[product];
       href={url}
       class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-5 py-3 rounded-full min-h-11 font-medium text-white text-sm transition"
     >
-      {formatYen(price)}円で申し込む
+      <span><Price product={product} />円で申し込む</span>
       <ArrowRight size={16} stroke-width={2} />
     </a>
     <a

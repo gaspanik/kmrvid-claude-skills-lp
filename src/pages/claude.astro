@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgePercent,
   CircleCheck,
   ExternalLink,
   MessageCircleQuestionMark,
@@ -12,11 +13,13 @@ import {
 } from "@lucide/astro";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
 import FaqItem from "@/components/FaqItem.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
+import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { claudeCategories, claudeSkillsCount } from "@/data/skills";
@@ -30,7 +33,8 @@ import {
 
 const product = products.claude;
 const PURCHASE_URL = product.url;
-const PRICE = formatYen(product.price);
+const REGULAR_PRICE = formatYen(product.price);
+const campaign = product.campaign;
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 ---
 
@@ -73,14 +77,34 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           }本・{formatDuration(product)}／{STATS_AS_OF}現在）。
         </p>
 
+        {
+          campaign && (
+            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+              <p class="flex items-center gap-2 font-medium text-base">
+                <BadgePercent size={18} stroke-width={2} class="flex-none" />
+                発売記念価格 {REGULAR_PRICE}円 → {formatYen(campaign.price)}円（税込）
+              </p>
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="終了まで残り"
+                fallback={`${campaign.endsAtLabel}まで`}
+                class="mt-1 text-base"
+              />
+            </div>
+          )
+        }
+
         <div
-          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+          class:list={[
+            "flex sm:flex-row flex-col items-start sm:items-center gap-4",
+            campaign ? "mt-4 campaign-ended:mt-8" : "mt-8",
+          ]}
         >
           <a
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            {PRICE}円で受講をはじめる
+            <span><Price product="claude" />円で受講をはじめる</span>
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -262,17 +286,55 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         <p
           class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
         >
-          <Tag size={18} stroke-width={2} />
-          料金
+          {
+            campaign ? (
+              <>
+                <BadgePercent
+                  size={18}
+                  stroke-width={2}
+                  class="campaign-ended:hidden"
+                />
+                <Tag
+                  size={18}
+                  stroke-width={2}
+                  class="hidden campaign-ended:block"
+                />
+                <span class="campaign-ended:hidden">発売記念価格</span>
+                <span class="hidden campaign-ended:inline">料金</span>
+              </>
+            ) : (
+              <>
+                <Tag size={18} stroke-width={2} />
+                料金
+              </>
+            )
+          }
         </p>
         <h2 id="pricing-heading" class="text-ink text-left">
           KMRVID <br class="sm:hidden" /> Claude Skills
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          単体パッケージとして、{product.skills}個のClaude Code向けスキルを、{
-            PRICE
-          }円（税込）の買い切りでご利用いただけます。
+          単体パッケージとして、{product.skills}個のClaude Code向けスキルを、<Price
+            product="claude"
+          />円（税込）の買い切りでご利用いただけます。
+          {
+            campaign && (
+              <span class="campaign-ended:hidden">
+                発売記念として、{campaign.endsAtLabel}まで特別価格でご案内しています。
+              </span>
+            )
+          }
         </p>
+        {
+          campaign && (
+            <CountdownTimer
+              endsAt={campaign.endsAt}
+              label="発売記念価格 終了まで残り"
+              fallback={`${campaign.endsAtLabel}まで`}
+              class="campaign-ended:hidden mt-4 text-accent-dark text-base"
+            />
+          )
+        }
       </div>
 
       <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
@@ -280,18 +342,38 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
         >
           <div>
+            {
+              campaign && (
+                <p class="campaign-ended:hidden text-white/50 text-sm line-through">
+                  通常価格 {REGULAR_PRICE}円（税込）
+                </p>
+              )
+            }
             <p
-              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+              class:list={[
+                "flex items-baseline gap-2 font-heading text-6xl md:text-7xl",
+                campaign && "mt-2 campaign-ended:mt-0",
+              ]}
             >
-              {PRICE}<span class="text-2xl">円</span>
+              <span><Price product="claude" /></span><span class="text-2xl"
+                >円</span
+              >
             </p>
-            <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
+            <p class="mt-2 text-white/60 text-sm">
+              税込・買い切り{
+                campaign && (
+                  <span class="campaign-ended:hidden">
+                    （{campaign.endsAtLabel}まで発売記念価格）
+                  </span>
+                )
+              }
+            </p>
 
             <a
               href={PURCHASE_URL}
               class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
             >
-              {PRICE}円で申し込む
+              <span><Price product="claude" />円で申し込む</span>
               <ArrowRight size={18} stroke-width={2} />
             </a>
           </div>
@@ -373,7 +455,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         <p
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
         >
-          All-in-One Bundleは、Claude版とFigma版を個別に購入するより{
+          All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより{
             formatYen(bundleSaving)
           }円お得です。
         </p>
@@ -469,7 +551,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          {PRICE}円で
+          <Price product="claude" />円で
           <br class="sm:hidden" />
           今日から始める
         </h2>
@@ -478,13 +560,20 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         >
           {
             product.skills
-          }個のClaude Code向けスキルを、{PRICE}円（税込）の買い切りでお申し込みいただけます。
+          }個のClaude Code向けスキルを、<Price product="claude" />円（税込）の買い切りでお申し込みいただけます。
+          {
+            campaign && (
+              <span class="campaign-ended:hidden">
+                発売記念価格は{campaign.endsAtLabel}までです。
+              </span>
+            )
+          }
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          {PRICE}円で申し込む
+          <span><Price product="claude" />円で申し込む</span>
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

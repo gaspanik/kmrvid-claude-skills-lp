@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import { campaignEndsAt } from "@/data/products";
 
 interface Props {
   title?: string;
@@ -16,6 +17,14 @@ const { title = "Astro 7 + Tailwind CSS 4 Starter" } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {
+      campaignEndsAt && (
+        <script is:inline define:vars={{ campaignEndsAt }}>
+          if (Date.now() >= new Date(campaignEndsAt).getTime())
+            document.documentElement.setAttribute("data-campaign-ended", "");
+        </script>
+      )
+    }
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.8.0/cdn/all.css"

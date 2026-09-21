@@ -36,6 +36,13 @@
   --tracking-loose: 0.15em;
 }
 
+/*
+ * キャンペーン終了後の表示切り替え。
+ * Layout のインラインスクリプトと CountdownTimer が <html data-campaign-ended> を付与する。
+ * 例: <span class="campaign-ended:hidden">特別価格</span><span class="hidden campaign-ended:inline">通常価格</span>
+ */
+@custom-variant campaign-ended (&:where([data-campaign-ended] *));
+
 @utility font-heading {
   font-family: var(--heading-font-family);
 }

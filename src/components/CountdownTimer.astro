@@ -1,0 +1,52 @@
+---
+interface Props {
+  endsAt: string;
+  /** カウントダウンの前に付けるラベル */
+  label: string;
+  /** JS無効時に表示する終了日時 */
+  fallback: string;
+  class?: string;
+}
+
+const { endsAt, label, fallback, class: className } = Astro.props;
+---
+
+<p
+  role="timer"
+  data-countdown
+  data-ends-at={endsAt}
+  data-label={label}
+  class:list={["font-medium tabular-nums", className]}
+>
+  {fallback}
+</p>
+
+<script>
+  const timers = document.querySelectorAll<HTMLElement>("[data-countdown]");
+
+  const tick = () => {
+    const now = Date.now();
+    let running = 0;
+
+    for (const el of timers) {
+      const diff = new Date(el.dataset.endsAt ?? "").getTime() - now;
+      if (Number.isNaN(diff) || diff <= 0) continue;
+
+      running++;
+      const d = Math.floor(diff / 86_400_000);
+      const h = Math.floor((diff / 3_600_000) % 24);
+      const m = Math.floor((diff / 60_000) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      el.textContent = `${el.dataset.label} ${d}日 ${h}時間 ${m}分 ${s}秒`;
+    }
+
+    if (running === 0) {
+      // 終了後は特別価格の表示を隠し、通常価格に切り替える
+      document.documentElement.setAttribute("data-campaign-ended", "");
+      clearInterval(timerId);
+    }
+  };
+
+  const timerId = setInterval(tick, 1000);
+  tick();
+</script>

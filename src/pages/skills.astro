@@ -13,6 +13,7 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
+import Price from "@/components/Price.astro";
 import { formatYen, products } from "@/data/products";
 
 const PURCHASE_URL = products.bundle.url;
@@ -189,7 +190,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
             href="/claude"
             class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
           >
-            Claude Skills（{formatYen(products.claude.price)}円）
+            Claude Skills（<Price product="claude" />円）
           </a>
           ／
           <a

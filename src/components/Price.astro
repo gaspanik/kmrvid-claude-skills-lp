@@ -1,0 +1,21 @@
+---
+import { formatYen, type ProductKey, products } from "@/data/products";
+
+interface Props {
+  product: ProductKey;
+}
+
+const { product } = Astro.props;
+const { price, campaign } = products[product];
+---
+
+{
+  campaign ? (
+    <>
+      <span class="campaign-ended:hidden">{formatYen(campaign.price)}</span>
+      <span class="hidden campaign-ended:inline">{formatYen(price)}</span>
+    </>
+  ) : (
+    formatYen(price)
+  )
+}

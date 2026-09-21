@@ -64,7 +64,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           id="hero-heading"
           class="max-w-3xl text-ink max-sm:text-3xl text-left"
         >
-          Web制作の一連の工程を、
+          制作の一連の工程を、
           <br />
           <span class="text-accent">"スキル"</span>で自動化する
         </h1>
@@ -79,7 +79,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
 
         {
           campaign && (
-            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+            <div class="campaign-ended:hidden mt-8 p-4 rounded-2xl max-w-2xl bg-accent-soft text-accent-dark">
               <p class="flex items-center gap-2 font-medium text-base">
                 <BadgePercent size={18} stroke-width={2} class="flex-none" />
                 発売記念価格 {REGULAR_PRICE}円 → {formatYen(campaign.price)}円（税込）
@@ -331,7 +331,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
               endsAt={campaign.endsAt}
               label="発売記念価格 終了まで残り"
               fallback={`${campaign.endsAtLabel}まで`}
-              class="campaign-ended:hidden mt-4 text-accent-dark text-base"
+              class="campaign-ended:hidden mt-4 text-base text-accent-dark"
             />
           )
         }

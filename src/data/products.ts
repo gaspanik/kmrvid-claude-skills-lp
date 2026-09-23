@@ -56,13 +56,6 @@ export const products: Record<ProductKey, Product> = {
     videos: 40,
     hours: 4,
     minutes: 10,
-    // 発売記念価格キャンペーン（Claude版のみ）
-    campaign: {
-      price: 15400,
-      endsAt: '2026-09-23T23:59:00+09:00',
-      endsAtLabel: '2026年9月23日（水）23:59',
-      endsAtShort: '9/23（水）23:59',
-    },
   },
   figma: {
     name: 'KMRVID Figma Skills',

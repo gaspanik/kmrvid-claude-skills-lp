@@ -227,6 +227,10 @@ export const categories: Category[] = [
         desc: '1回のリクエストで複数レイアウトパターンのモックアップをまとめて生成する',
       },
       {
+        name: 'create-jp-lp',
+        desc: '日本の商業LPに特化した判断ロジックのスキル。Figma版 create-jp-lp の姉妹スキル',
+      },
+      {
         name: 'mobile-polish',
         desc: '既存モックアップにモバイル対応・ナビゲーションを追加',
       },
@@ -382,6 +386,10 @@ export const categories: Category[] = [
       {
         name: 'visual-polish',
         desc: 'AIが自らスクリーンショットを撮りながら最大5回ループでコードを自律修正。作業監視エージェント付き',
+      },
+      {
+        name: 'polish-me',
+        desc: '実装済みのページやセクションをレビューし、根拠のある改善提案をレポートするスキル。Figma版 hey-polish-me の姉妹スキル',
       },
       {
         name: 'finish-me',

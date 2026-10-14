@@ -5,9 +5,11 @@
  *
  * assets.run_worker_first = true のため、すべてのリクエストでこの Worker が先に動く。
  * Version Preview URL（<id>-<worker名>.<アカウント>.workers.dev）は転送しない。
+ * HTML レスポンスには、エージェントが発見に使う Link ヘッダ（RFC 8288）を付ける。
  */
 const CANONICAL_HOST = 'kmrvidskills.dev'
 const LEGACY_HOST_PREFIX = 'kmrvid-claude-skills.'
+const LINK_HEADER = '</sitemap.xml>; rel="sitemap"; type="application/xml"'
 
 export default {
   /**
@@ -27,6 +29,13 @@ export default {
       return Response.redirect(url.toString(), 301)
     }
 
-    return env.ASSETS.fetch(request)
+    const response = await env.ASSETS.fetch(request)
+    if (!response.headers.get('Content-Type')?.startsWith('text/html')) {
+      return response
+    }
+
+    const withLink = new Response(response.body, response)
+    withLink.headers.append('Link', LINK_HEADER)
+    return withLink
   },
 }

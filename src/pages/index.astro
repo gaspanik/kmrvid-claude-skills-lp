@@ -18,19 +18,24 @@ import {
   Workflow,
 } from "@lucide/astro";
 import macbookCode from "@/assets/images/macbook-code.jpg";
-import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
 import deskWorkspace from "@/assets/images/desk-workspace.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import authorPhoto from "@/assets/images/IMG_8341_square.png";
 import FeatureCard from "@/components/FeatureCard.astro";
 import FaqItem from "@/components/FaqItem.astro";
-import ImageLightbox from "@/components/ImageLightbox.astro";
+import FlowCard from "@/components/FlowCard.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { claudeSkillsCount, figmaSkillsCount, totalSkills } from "@/data/skills";
+import { bundleFlows } from "@/data/flows";
+import {
+  claudeCategories,
+  claudeSkillsCount,
+  figmaSkillsCount,
+  totalSkills,
+} from "@/data/skills";
 import {
   AGENSI_URL,
   bundleSaving,
@@ -60,56 +65,26 @@ const pains = [
   "うまくいった手順を、チームや将来の自分に共有できない",
 ];
 
-const skillHighlights = [
-  {
-    icon: Wand,
-    name: "css-to-tailwind",
-    category: "Tailwind最適化系",
-    desc: "オリジナルのプレーンなCSS / Sass・SCSS のコードベースから Tailwind CSS v4 への初回移行を支援。",
-  },
-  {
-    icon: PenTool,
-    name: "figma-layer-rename",
-    category: "Figma連携・品質チェック系",
-    desc: "Figmaのフレーム/セクション全体を走査し、自動生成されたレイヤー名を意味のある名前にリネーム。",
-  },
-  {
-    icon: ListChecks,
-    name: "figma-tokenize",
-    category: "Figma連携・品質チェック系",
-    desc: "変数なしのFigmaでハードコードされた色・フォントサイズ・スペーシングをトークン化して変数バインド。",
-  },
-  {
-    icon: Wand,
-    name: "create-mockup",
-    category: "モックアップ作成系",
-    desc: "Figmaなしで、サイトの種類・デザインスタイル・ページ構成をヒアリングしながらUIをゼロから組み上げる。",
-  },
-  {
-    icon: PenTool,
-    name: "figma-audit / figma-weather",
-    category: "Figma連携・品質チェック系",
-    desc: "Figmaフレームの構造がAIにとって実装しやすいかを4つの観点で検査し、天気予報形式でスコアを提示する。",
-  },
-  {
-    icon: ListChecks,
-    name: "tailwind-review",
-    category: "Tailwind最適化系",
-    desc: "Tailwind CSSのv3→v4移行チェックやアクセシビリティ構造の検証・自動修正まで一括で行う。",
-  },
-  {
-    icon: Languages,
-    name: "japanese-web-guideline",
-    category: "日本語サイト品質ガイドライン",
-    desc: "見出しの折り返し・行間・文字サイズなど、日本語サイト特有にAIが陥りやすい実装のクセを補正する。",
-  },
-  {
-    icon: Workflow,
-    name: "mockup-pipeline / full-pipeline",
-    category: "オーケストレーション系",
-    desc: "セットアップからモックアップ生成、仕上げの調整までを一括で自動実行するパイプラインスキル。",
-  },
+// 代表的なスキル。説明とカテゴリ名は skills.ts から引く（手書きしない）
+const highlightPicks = [
+  { name: "css-to-tailwind", icon: Wand },
+  { name: "figma-layer-rename", icon: PenTool },
+  { name: "figma-tokenize", icon: ListChecks },
+  { name: "create-mockup", icon: Wand },
+  { name: "figma-audit", icon: PenTool },
+  { name: "tailwind-review", icon: ListChecks },
+  { name: "japanese-web-guideline", icon: Languages },
+  { name: "mockup-pipeline", icon: Workflow },
 ];
+
+const skillHighlights = highlightPicks.map(({ name, icon }) => {
+  const category = claudeCategories.find((cat) =>
+    cat.skills.some((skill) => skill.name === name),
+  );
+  const skill = category?.skills.find((item) => item.name === name);
+  if (!category || !skill) throw new Error(`skills.ts に ${name} がありません`);
+  return { icon, name, category: category.name, desc: skill.desc };
+});
 ---
 
 <Layout
@@ -322,15 +297,38 @@ const skillHighlights = [
             description="Figmaを使う実務現場でそのまま活用できる実践的スキル集であると同時に、自分の業務に合わせて改善・開発する教材にもなる。"
           />
         </div>
-
-        <!-- bottom weight: supporting banner image -->
-        <ImageLightbox
-          image={skillsDiagram}
-          thumbAlt="収録スキル同士の関係性を示した全体相関図"
-          expandedAlt="収録スキル同士の関係性を示した全体相関図（拡大）"
-          caption="スキル同士は組み合わせて使えるように設計されており、全体のワークフローを俯瞰できる。クリックで拡大表示。"
-        />
       </div>
+    </section>
+
+    <!-- ============ FLOWS ============ -->
+    <section
+      id="flows"
+      aria-labelledby="flows-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="flows-heading" class="max-w-xl text-ink text-left">
+        組み合わせ例
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        スキルは単体でも使えますが、流れで使うと効果が大きくなります。パイプライン系のスキル（mockup-pipeline・lp-pipeline・full-pipeline・figma-pipeline）は、こうした流れをまとめて実行します。
+      </p>
+
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        {
+          bundleFlows.map((flow) => (
+            <FlowCard goal={flow.goal} chain={flow.chain} desc={flow.desc} />
+          ))
+        }
+      </div>
+      <a
+        href="/skills/#counterparts"
+        class="inline-flex items-center gap-1 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        Claude版とFigma版の対応表を見る
+        <ArrowRight size={14} stroke-width={2} />
+      </a>
     </section>
 
     <!-- ============ SKILL HIGHLIGHTS ============ -->

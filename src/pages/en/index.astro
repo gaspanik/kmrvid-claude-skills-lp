@@ -15,6 +15,7 @@ import PackageCard from "@/components/PackageCard.astro";
 import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
+import { bundleFlows } from "@/data/flows";
 import {
   claudeCategories,
   claudeSkillsCount,
@@ -31,38 +32,11 @@ import {
 
 const bundle = products.bundle.en;
 
-const flows = [
-  {
-    goal: "From requirements to a Figma layout",
-    chain: ["brief-me", "create-multi-pattern"],
-    desc: "Interview for a BRIEF, then generate several structurally different layouts to compare. Use create-single-page for a no-questions, one-pass run.",
-  },
-  {
-    goal: "Clean up a messy Figma frame in one go",
-    chain: ["figma-systematize", "figma-enhance"],
-    desc: "Layer names, tokens and components in a single pass, then a further audit of the whole page. Or pick the steps yourself with hey-optimize-me.",
-  },
-  {
-    goal: "Check a design before handing it to code",
-    chain: ["figma-audit", "figma-contrast-check", "coding-prompter"],
-    desc: "Score how well AI can implement the frame, check contrast, then generate the implementation prompt for your coding agent.",
-  },
-  {
-    goal: "Build a UI in code and polish it",
-    chain: ["create-mockup", "mobile-polish", "visual-polish", "click-to-fix"],
-    desc: "Build from scratch without Figma, add mobile navigation, let the agent self-correct from screenshots, then fix details by clicking in the browser.",
-  },
-  {
-    goal: "Turn a Figma design into working code",
-    chain: ["figma-audit", "figma-workflow"],
-    desc: "Audit first, fix low-scoring spots in Figma, then implement, review and optimize through sub-agents.",
-  },
-  {
-    goal: "Keep code and Figma tokens in sync",
-    chain: ["tailwind-to-figma", "figma-to-tailwind"],
-    desc: "Push Tailwind @theme tokens into Figma Variables, or pull Figma Variables back into @theme, depending on which side is the master.",
-  },
-];
+const flows = bundleFlows.map((flow) => ({
+  goal: flow.goalEn,
+  chain: flow.chain,
+  desc: flow.descEn,
+}));
 ---
 
 <Layout

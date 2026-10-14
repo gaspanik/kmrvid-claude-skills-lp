@@ -3,11 +3,9 @@ import { ArrowLeft, ArrowRight, Tag } from "@lucide/astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Callout from "@/components/Callout.astro";
-import ImageLightbox from "@/components/ImageLightbox.astro";
 import CategorySkills from "@/components/CategorySkills.astro";
 import CounterpartTable from "@/components/CounterpartTable.astro";
 import Layout from "@/layouts/Layout.astro";
-import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
 import {
   claudeCategories,
   claudeSkills,
@@ -74,13 +72,6 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         でも動作するスキルを移植。Figma
         に最適化された専用スキルを追加しました（{figmaSkillsCount}スキル／2026年9月20日現在）。Figma内での作業効率を大幅に向上させるカスタムスキルです。
       </p>
-
-      <ImageLightbox
-        image={skillsDiagram}
-        thumbAlt="収録スキル同士の関係性を示した全体相関図"
-        expandedAlt="収録スキル同士の関係性を示した全体相関図（拡大）"
-        caption="スキル同士の組み合わせ・依存関係を俯瞰した全体相関図。クリックで拡大表示。"
-      />
     </section>
 
     <!-- ============ PACKAGE NAV ============ -->

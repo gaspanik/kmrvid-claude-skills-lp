@@ -56,7 +56,7 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 │   │   ├── FeatureCard.astro  # 「講座の中身」セクション用カード
 │   │   ├── FaqItem.astro      # FAQの <details> アコーディオン項目
 │   │   ├── Callout.astro      # Puzzleアイコン付き注記ボックス
-│   │   └── ImageLightbox.astro # サムネイル→拡大表示ライトボックス(vanilla JS)
+│   │   └── ImageLightbox.astro # サムネイル→拡大表示ライトボックス(vanilla JS。現在は未使用・再利用用)
 │   ├── layouts/
 │   │   └── Layout.astro # ルートの HTML シェル — グローバル CSS はここで import
 │   ├── pages/

@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  ExternalLink,
   FileText,
   MessageCircleQuestionMark,
   SquareTerminal,
@@ -145,6 +146,18 @@ const flows = [
             class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
           >
             Browse the skills
+          </a>
+        </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href={AGENSI_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Try before you buy: free skills and free trial runs on Agensi
+            <ExternalLink size={14} stroke-width={2} />
           </a>
         </div>
       </div>

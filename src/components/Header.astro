@@ -31,6 +31,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '/#author', label: '講師紹介' },
         { href: '/#pricing', label: '料金' },
         { href: '/#faq', label: 'FAQ' },
+        { href: '/changelog/', label: '更新履歴' },
       ],
     },
     claude: {
@@ -41,6 +42,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '#categories', label: '収録スキル' },
         { href: '#pricing', label: '料金' },
         { href: '#faq', label: 'FAQ' },
+        { href: '/changelog/', label: '更新履歴' },
       ],
     },
     figma: {
@@ -52,6 +54,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '#how-to', label: '使い方' },
         { href: '#combos', label: '組み合わせ例' },
         { href: '#pricing', label: '料金' },
+        { href: '/changelog/', label: '更新履歴' },
       ],
     },
   },
@@ -65,6 +68,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '/en/#pricing', label: 'Pricing' },
         { href: '/en/#author', label: 'Creator' },
         { href: '/en/#faq', label: 'FAQ' },
+        { href: '/en/changelog/', label: 'Changelog' },
       ],
     },
     claude: {
@@ -75,6 +79,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '#categories', label: 'Skills' },
         { href: '#pricing', label: 'Pricing' },
         { href: '#faq', label: 'FAQ' },
+        { href: '/en/changelog/', label: 'Changelog' },
       ],
     },
     figma: {
@@ -86,6 +91,7 @@ const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
         { href: '#how-to', label: 'Get started' },
         { href: '#pricing', label: 'Pricing' },
         { href: '#faq', label: 'FAQ' },
+        { href: '/en/changelog/', label: 'Changelog' },
       ],
     },
   },
@@ -151,7 +157,7 @@ const productName = (key: ProductKey) =>
 
     <nav
       aria-label={t.mainNav}
-      class="hidden lg:flex items-center gap-6 text-sm"
+      class="hidden xl:flex items-center gap-6 text-sm"
     >
       <ul class="flex items-center gap-6 **:hover:text-accent **:transition-colors">
         {
@@ -207,7 +213,7 @@ const productName = (key: ProductKey) =>
         aria-label={t.openMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="lg:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
+        class="xl:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
       >
         <Menu size={24} stroke-width={1.75} />
       </button>

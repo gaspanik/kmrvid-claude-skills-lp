@@ -65,6 +65,19 @@ const pains = [
   "うまくいった手順を、チームや将来の自分に共有できない",
 ];
 
+const flowGroups = [
+  {
+    key: "figma",
+    title: "Figma Design Agent版の組み合わせ",
+    note: "Figmaの中で、キャンバス上で選択したフレームに対して動かす流れです。",
+  },
+  {
+    key: "claude",
+    title: "Claude Code版の組み合わせ",
+    note: "Claude Codeで、実装コードやFigmaのURLを対象に動かす流れです。",
+  },
+] as const;
+
 // 代表的なスキル。説明とカテゴリ名は skills.ts から引く（手書きしない）
 const highlightPicks = [
   { name: "css-to-tailwind", icon: Wand },
@@ -315,10 +328,26 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
         スキルは単体でも使えますが、流れで使うと効果が大きくなります。パイプライン系のスキル（mockup-pipeline・lp-pipeline・full-pipeline・figma-pipeline）は、こうした流れをまとめて実行します。
       </p>
 
-      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+      <div class="flex flex-col gap-14 mt-10">
         {
-          bundleFlows.map((flow) => (
-            <FlowCard goal={flow.goal} chain={flow.chain} desc={flow.desc} />
+          flowGroups.map((group) => (
+            <div>
+              <h3 class="text-xl text-left">{group.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-left leading-snug">
+                {group.note}
+              </p>
+              <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-6">
+                {bundleFlows
+                  .filter((flow) => flow.edition === group.key)
+                  .map((flow) => (
+                    <FlowCard
+                      goal={flow.goal}
+                      chain={flow.chain}
+                      desc={flow.desc}
+                    />
+                  ))}
+              </div>
+            </div>
           ))
         }
       </div>

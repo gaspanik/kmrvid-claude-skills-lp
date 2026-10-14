@@ -32,7 +32,21 @@ import {
 
 const bundle = products.bundle.en;
 
+const flowGroups = [
+  {
+    key: "figma",
+    title: "Figma Design Agent edition",
+    note: "Run inside Figma, on the frames you select on the canvas.",
+  },
+  {
+    key: "claude",
+    title: "Claude Code edition",
+    note: "Run in Claude Code, on your code and on Figma URLs.",
+  },
+] as const;
+
 const flows = bundleFlows.map((flow) => ({
+  edition: flow.edition,
   goal: flow.goalEn,
   chain: flow.chain,
   desc: flow.descEn,
@@ -174,8 +188,28 @@ const flows = bundleFlows.map((flow) => ({
           the steps for you.
         </p>
 
-        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
-          {flows.map((flow) => <FlowCard {...flow} />)}
+        <div class="flex flex-col gap-14 mt-10">
+          {
+            flowGroups.map((group) => (
+              <div>
+                <h3 class="text-xl text-left">{group.title}</h3>
+                <p class="mt-2 text-ink-soft text-base text-left leading-snug">
+                  {group.note}
+                </p>
+                <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-6">
+                  {flows
+                    .filter((flow) => flow.edition === group.key)
+                    .map((flow) => (
+                      <FlowCard
+                        goal={flow.goal}
+                        chain={flow.chain}
+                        desc={flow.desc}
+                      />
+                    ))}
+                </div>
+              </div>
+            ))
+          }
         </div>
 
         <a

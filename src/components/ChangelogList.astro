@@ -1,0 +1,75 @@
+---
+import type { ChangelogEntry } from '@/data/changelog'
+import { type Lang, ui } from '@/i18n/ui'
+
+interface Props {
+  entries: ChangelogEntry[]
+  lang?: Lang
+}
+
+const { entries, lang = 'ja' } = Astro.props
+const t = ui[lang]
+const en = lang === 'en'
+
+const productLabel = {
+  claude: en ? 'Claude' : 'Claude版',
+  figma: en ? 'Figma' : 'Figma版',
+} as const
+
+const formatDate = (date: string) => {
+  const [y, m, d] = date.split('-').map(Number)
+  return en
+    ? new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      })
+    : `${y}/${String(m).padStart(2, '0')}/${String(d).padStart(2, '0')}`
+}
+
+const kindClass = {
+  new: 'bg-accent-soft text-accent-dark',
+  update: 'bg-surface-alt text-ink',
+  fix: 'bg-surface-alt text-ink-soft',
+} as const
+---
+
+<ul class="*:py-5 *:border-border *:border-b">
+  {
+    entries
+      .filter((entry) => (en ? true : entry.ja !== undefined))
+      .map((entry) => (
+        <li data-product={entry.product}>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <time datetime={entry.date} class="font-mono text-ink-soft text-sm">
+              {formatDate(entry.date)}
+            </time>
+            <span class="bg-ink px-2.5 py-0.5 rounded-full text-sm text-white">
+              {productLabel[entry.product]}
+            </span>
+            <span
+              class:list={[
+                'px-2.5 py-0.5 rounded-full text-sm',
+                kindClass[entry.kind],
+              ]}
+            >
+              {t.kind[entry.kind]}
+            </span>
+          </div>
+          <p class="mt-2 text-base text-justify leading-snug">
+            {en ? entry.en : entry.ja}
+          </p>
+          {entry.skills.length > 0 && (
+            <ul class="flex flex-wrap gap-1.5 mt-2">
+              {entry.skills.map((skill) => (
+                <li class="bg-surface-alt px-2 py-0.5 rounded-full font-mono text-sm">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+  }
+</ul>

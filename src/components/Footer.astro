@@ -1,5 +1,6 @@
 ---
 import { type ProductKey, products } from '@/data/products';
+import { type Lang, langOf } from '@/i18n/ui';
 
 interface Props {
   variant?: ProductKey;
@@ -7,8 +8,12 @@ interface Props {
 
 const { variant = 'bundle' } = Astro.props;
 
+const lang: Lang = langOf(Astro.url.pathname);
+const en = lang === 'en';
 const LINE_URL = 'https://lin.ee/EOgmkKQ';
-const isSkillsPage = Astro.url.pathname === '/skills';
+const path = Astro.url.pathname.replace(/\/+$/, '');
+const isSkillsPage = path === '/skills' || path === '/en/skills';
+const isChangelogPage = path === '/changelog' || path === '/en/changelog';
 
 interface FooterConfig {
   description: string;
@@ -16,19 +21,20 @@ interface FooterConfig {
   sub: { href: string; label: string } | null;
 }
 
-const configs: Record<ProductKey, FooterConfig> = {
+const jaConfigs: Record<ProductKey, FooterConfig> = {
   bundle: {
     description:
       'Claude Code版・Figma版の全スキルを収録した、実務の現場に立ち続けるWeb制作者が形にしたオリジナルスキル講座。',
     menu: [
       { href: '/#included', label: '講座内容' },
       { href: '/#skills', label: '収録スキル' },
-      { href: '/skills', label: 'スキル一覧', current: isSkillsPage },
+      { href: '/skills/', label: 'スキル一覧', current: isSkillsPage },
+      { href: '/changelog/', label: '更新履歴', current: isChangelogPage },
       { href: '/#author', label: '講師紹介' },
       { href: '/#pricing', label: '料金' },
       { href: '/#packages', label: '個別パッケージ' },
-      { href: '/claude', label: 'KMRVID Claude Skills' },
-      { href: '/figma', label: 'KMRVID Figma Skills' },
+      { href: '/claude/', label: 'KMRVID Claude Skills' },
+      { href: '/figma/', label: 'KMRVID Figma Skills' },
       { href: '/#faq', label: 'FAQ' },
     ],
     sub: null,
@@ -41,8 +47,9 @@ const configs: Record<ProductKey, FooterConfig> = {
       { href: '#categories', label: '収録スキル' },
       { href: '#pricing', label: '料金' },
       { href: '#faq', label: 'FAQ' },
-      { href: '/skills', label: 'スキル一覧' },
-      { href: '/figma', label: 'KMRVID Figma Skills' },
+      { href: '/skills/', label: 'スキル一覧' },
+      { href: '/changelog/', label: '更新履歴' },
+      { href: '/figma/', label: 'KMRVID Figma Skills' },
     ],
     sub: {
       href: '/',
@@ -58,7 +65,8 @@ const configs: Record<ProductKey, FooterConfig> = {
       { href: '#how-to', label: '使い方' },
       { href: '#combos', label: '組み合わせ例' },
       { href: '#pricing', label: '料金' },
-      { href: '/claude', label: 'KMRVID Claude Skills' },
+      { href: '/changelog/', label: '更新履歴' },
+      { href: '/claude/', label: 'KMRVID Claude Skills' },
     ],
     sub: {
       href: '/',
@@ -67,8 +75,60 @@ const configs: Record<ProductKey, FooterConfig> = {
   },
 };
 
-const { description, menu, sub } = configs[variant];
-const { name, url: PURCHASE_URL } = products[variant];
+const enConfigs: Record<ProductKey, FooterConfig> = {
+  bundle: {
+    description:
+      'Every skill from the Claude Code and Figma Design Agent editions, from a working web designer and frontend engineer.',
+    menu: [
+      { href: '/en/#included', label: 'What’s inside' },
+      { href: '/en/#flows', label: 'Workflows' },
+      { href: '/en/skills/', label: 'All skills', current: isSkillsPage },
+      { href: '/en/changelog/', label: 'Changelog', current: isChangelogPage },
+      { href: '/en/#pricing', label: 'Pricing' },
+      { href: '/en/claude/', label: 'KMRVID Claude Skills' },
+      { href: '/en/figma/', label: 'KMRVID Figma Skills' },
+      { href: '/en/#faq', label: 'FAQ' },
+    ],
+    sub: null,
+  },
+  claude: {
+    description:
+      `${products.claude.skills} skills for Claude Code, from a working web designer and frontend engineer.`,
+    menu: [
+      { href: '#overview', label: 'Overview' },
+      { href: '#categories', label: 'Skills' },
+      { href: '#pricing', label: 'Pricing' },
+      { href: '#faq', label: 'FAQ' },
+      { href: '/en/skills/', label: 'All skills' },
+      { href: '/en/changelog/', label: 'Changelog' },
+      { href: '/en/figma/', label: 'KMRVID Figma Skills' },
+    ],
+    sub: {
+      href: '/en/',
+      label: `See ${products.bundle.en.name} (all ${products.bundle.skills} skills)`,
+    },
+  },
+  figma: {
+    description:
+      `${products.figma.skills} custom skills for Figma’s Design Agent, from a working web designer and frontend engineer.`,
+    menu: [
+      { href: '#diff', label: 'How it works' },
+      { href: '#skills', label: 'Skills' },
+      { href: '#how-to', label: 'Get started' },
+      { href: '#pricing', label: 'Pricing' },
+      { href: '/en/changelog/', label: 'Changelog' },
+      { href: '/en/claude/', label: 'KMRVID Claude Skills' },
+    ],
+    sub: {
+      href: '/en/',
+      label: `See ${products.bundle.en.name} (all ${products.bundle.skills} skills)`,
+    },
+  },
+};
+
+const { description, menu, sub } = (en ? enConfigs : jaConfigs)[variant];
+const name = en ? products[variant].en.name : products[variant].name;
+const PURCHASE_URL = en ? products[variant].en.url : products[variant].url;
 ---
 
 <footer class="bg-ink text-canvas">
@@ -81,7 +141,7 @@ const { name, url: PURCHASE_URL } = products[variant];
         </p>
       </div>
 
-      <nav aria-label="フッターナビゲーション">
+      <nav aria-label={en ? 'Footer navigation' : 'フッターナビゲーション'}>
         <p class="text-white/40 text-sm uppercase tracking-loose">Menu</p>
         <ul
           class="flex flex-col mt-4 text-sm **:flex **:items-center **:min-h-11 **:transition-colors **:hover:text-accent"
@@ -108,7 +168,7 @@ const { name, url: PURCHASE_URL } = products[variant];
             href={PURCHASE_URL}
             class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
           >
-            今すぐ申し込む
+            {en ? 'Buy on Gumroad' : '今すぐ申し込む'}
           </a>
           {
             sub && (
@@ -120,12 +180,16 @@ const { name, url: PURCHASE_URL } = products[variant];
               </a>
             )
           }
-          <a
-            href={LINE_URL}
-            class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
-          >
-            公式LINEで10%OFFクーポンを受け取る
-          </a>
+          {
+            !en && (
+              <a
+                href={LINE_URL}
+                class="inline-flex items-center min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
+              >
+                公式LINEで10%OFFクーポンを受け取る
+              </a>
+            )
+          }
         </div>
       </div>
     </div>
@@ -133,9 +197,13 @@ const { name, url: PURCHASE_URL } = products[variant];
     <div
       class="flex sm:flex-row flex-col justify-between gap-4 mt-12 pt-8 border-white/10 border-t text-white/50 text-sm"
     >
-      <p>&copy; kmrvid.com — {name}</p>
+      <p>&copy; {en ? 'Masaaki Komori' : 'kmrvid.com'} — {name}</p>
       <p class="max-w-xl text-base text-justify">
-        本パッケージに付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。
+        {
+          en
+            ? 'These skills may not work as expected depending on your environment and tool versions. Individual skill fixes and one-to-one troubleshooting are not offered.'
+            : '本パッケージに付属するオリジナルスキルは、利用環境やツールのバージョンによって正常に動作しない場合があります。個別のスキル修正・動作サポート対応は行っておりません。'
+        }
       </p>
     </div>
   </div>

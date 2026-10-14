@@ -1,16 +1,26 @@
 ---
-import { formatYen, type ProductKey, products } from "@/data/products";
+import {
+  formatUsd,
+  formatYen,
+  type ProductKey,
+  products,
+} from "@/data/products";
+import type { Lang } from "@/i18n/ui";
 
 interface Props {
   product: ProductKey;
+  /** en のとき海外版（USD）の価格を表示する */
+  lang?: Lang;
 }
 
-const { product } = Astro.props;
-const { price, campaign } = products[product];
+const { product, lang = "ja" } = Astro.props;
+const { price, campaign, en } = products[product];
 ---
 
 {
-  campaign ? (
+  lang === "en" ? (
+    formatUsd(en.priceUsd)
+  ) : campaign ? (
     <>
       <span class="campaign-ended:hidden">{formatYen(campaign.price)}</span>
       <span class="hidden campaign-ended:inline">{formatYen(price)}</span>

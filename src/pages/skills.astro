@@ -4,12 +4,16 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Callout from "@/components/Callout.astro";
 import ImageLightbox from "@/components/ImageLightbox.astro";
-import SkillCard from "@/components/SkillCard.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CounterpartTable from "@/components/CounterpartTable.astro";
 import Layout from "@/layouts/Layout.astro";
 import skillsDiagram from "@/assets/images/KMRVID_Skill_Map.webp";
 import {
-  categories,
+  claudeCategories,
+  claudeSkills,
   claudeSkillsCount,
+  figmaCategories,
+  figmaSkills,
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
@@ -21,7 +25,10 @@ const PRICE = formatYen(products.bundle.price);
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 ---
 
-<Layout title="収録スキル一覧 — KMRVID Skills - All-in-One Bundle">
+<Layout
+  title="収録スキル一覧 — KMRVID Skills - All-in-One Bundle"
+  translated
+>
   <Header />
 
   <main>
@@ -76,55 +83,142 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
       />
     </section>
 
-    {
-      categories.map((category) => (
-        <section class="mx-auto px-6 py-14 md:py-20 max-w-5xl">
-          <div class="flex items-center gap-3">
-            <category.icon size={22} stroke-width={1.75} class="text-accent" />
-            <h2 class="text-ink text-left">{category.name}</h2>
-          </div>
-          <p class="mt-3 text-ink-soft text-sm">
-            収録パッケージ：
-            <a
-              href={products[category.product].href}
-              class="text-accent-dark hover:text-accent underline underline-offset-4 transition"
-            >
-              {products[category.product].name}
-            </a>
-          </p>
-          <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
-            {category.tagline}
-          </p>
+    <!-- ============ PACKAGE NAV ============ -->
+    <nav
+      aria-label="パッケージ別ナビゲーション"
+      class="mx-auto mt-10 px-6 max-w-5xl"
+    >
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li>
+          <a
+            href="#claude"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Claude Code版（{claudeSkillsCount}）
+          </a>
+        </li>
+        <li>
+          <a
+            href="#figma"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Figma Design Agent版（{figmaSkillsCount}）
+          </a>
+        </li>
+        <li>
+          <a
+            href="#counterparts"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Claude版とFigma版の対応表
+          </a>
+        </li>
+        <li>
+          <a
+            href="/changelog/"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            更新履歴
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-          {category.note && (
-            <div class="mt-6">
-              <Callout>{category.note}</Callout>
-            </div>
-          )}
+    <!-- ============ CLAUDE ============ -->
+    <section
+      id="claude"
+      aria-labelledby="claude-heading"
+      class="mx-auto px-6 py-14 md:py-20 max-w-5xl scroll-mt-20"
+    >
+      <p class="text-ink-soft text-sm uppercase tracking-widest">
+        Claude Code 向け
+      </p>
+      <h2 id="claude-heading" class="mt-2 text-ink text-left">
+        KMRVID Claude Skills（{claudeSkillsCount}スキル）
+      </h2>
+      <p
+        class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Claude Code で動くスキルの単体パッケージです。セットアップからモックアップ作成、Figma連携、Tailwindの整理、仕上げの品質チェックまで、コードを書く側の工程を一通りカバーします。
+      </p>
+      <a
+        href="/claude/"
+        class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        KMRVID Claude Skills の詳細を見る
+        <ArrowRight size={14} stroke-width={2} />
+      </a>
 
-          {category.ctaHref && (
-            <a
-              href={category.ctaHref}
-              class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-            >
-              {category.ctaLabel}
-              <ArrowRight size={14} stroke-width={2} />
-            </a>
-          )}
+      <div class="mt-10">
+        {
+          claudeCategories.map((category) => (
+            <CategorySkills
+              category={category}
+              lang="ja"
+              known={claudeSkills.map((skill) => skill.name)}
+            />
+          ))
+        }
+      </div>
+    </section>
 
-          <div class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-8 *:p-6 *:border *:border-border *:rounded-2xl">
-            {category.skills.map((skill) => (
-              <SkillCard
-                name={skill.name}
-                desc={skill.desc}
-                liteUrl={skill.liteUrl}
-                liteLabel={skill.liteLabel}
+    <!-- ============ FIGMA ============ -->
+    <section
+      id="figma"
+      aria-labelledby="figma-heading"
+      class="bg-surface-alt py-14 md:py-20 scroll-mt-20"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p class="text-ink-soft text-sm uppercase tracking-widest">
+          Figma Design Agent 向け
+        </p>
+        <h2 id="figma-heading" class="mt-2 text-ink text-left">
+          KMRVID Figma Skills（{figmaSkillsCount}スキル）
+        </h2>
+        <p
+          class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Figma の Design Agent（カスタムスキル登録機能）の中で動くスキルの単体パッケージです。キャンバス上で選択して呼び出すだけで使え、確認・質問・レポートはすべて日本語で表示されます。
+        </p>
+        <a
+          href="/figma/"
+          class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          KMRVID Figma Skills の詳細を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+
+        <div class="mt-10">
+          {
+            figmaCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="ja"
+                known={figmaSkills.map((skill) => skill.name)}
+                otherPackage="KMRVID Claude Skills"
               />
-            ))}
-          </div>
-        </section>
-      ))
-    }
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTERPARTS ============ -->
+    <section
+      id="counterparts"
+      aria-labelledby="counterparts-heading"
+      class="mx-auto px-6 py-14 md:py-20 max-w-5xl scroll-mt-20"
+    >
+      <h2 id="counterparts-heading" class="text-ink text-left">
+        Claude版とFigma版の対応表
+      </h2>
+      <p
+        class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        同名、または役割が対応するスキルの一覧です。基本の違いは入力方式で、Claude版はFigma URLを渡してFigma MCP経由で動作し、Figma版はキャンバス上で選択したノードに対してPlugin APIで直接動作します。Claude版にしかない・Figma版にしかないスキルは、この表には載せていません。
+      </p>
+      <CounterpartTable lang="ja" anchors />
+    </section>
 
     <!-- ============ TRIAL NOTE ============ -->
     <section class="flex flex-col gap-4 mx-auto px-6 pb-14 md:pb-20 max-w-5xl">

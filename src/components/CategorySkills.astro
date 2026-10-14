@@ -1,0 +1,64 @@
+---
+import Callout from '@/components/Callout.astro'
+import SkillCard from '@/components/SkillCard.astro'
+import type { Category } from '@/data/skills'
+import { type Lang, ui } from '@/i18n/ui'
+
+interface Props {
+  category: Category
+  lang?: Lang
+  /** 見出しのレベル（ページ構造に合わせる） */
+  level?: 'h2' | 'h3'
+  /** このパッケージのスキル名一覧（依存スキルの「別パッケージ」判定用） */
+  known?: string[]
+  otherPackage?: string
+}
+
+const { category, lang = 'ja', level = 'h3', known, otherPackage } = Astro.props
+const Heading = level
+const en = lang === 'en'
+---
+
+<section class="mt-12 first:mt-0">
+  <div class="flex items-center gap-3">
+    <category.icon size={22} stroke-width={1.75} class="text-accent" />
+    <Heading class="text-ink text-left">
+      {en ? category.nameEn : category.name}
+    </Heading>
+    <span class="text-ink-soft text-sm">
+      {category.skills.length}{en ? ' ' : ''}{en ? ui.en.skillsUnit : ui.ja.skillsUnit}
+    </span>
+  </div>
+  <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+    {en ? category.taglineEn : category.tagline}
+  </p>
+
+  {
+    (en ? category.noteEn : category.note) && (
+      <div class="mt-4">
+        <Callout>{en ? category.noteEn : category.note}</Callout>
+      </div>
+    )
+  }
+
+  <div
+    class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-6 *:p-6 *:border *:border-border *:rounded-2xl"
+  >
+    {
+      category.skills.map((skill) => (
+        <SkillCard
+          id={`${category.product}-${skill.name}`}
+          name={skill.name}
+          desc={en ? skill.en : skill.desc}
+          lang={lang}
+          lite={skill.lite}
+          deps={skill.deps}
+          depsNote={en ? skill.depsNoteEn : skill.depsNote}
+          deprecated={skill.deprecated}
+          known={known}
+          otherPackage={otherPackage}
+        />
+      ))
+    }
+  </div>
+</section>

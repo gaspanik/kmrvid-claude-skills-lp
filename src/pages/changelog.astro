@@ -1,0 +1,114 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import ChangelogList from "@/components/ChangelogList.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { changelogSorted, RECENT_FROM } from "@/data/changelog";
+
+const recent = changelogSorted.filter((entry) => entry.date >= RECENT_FROM);
+const older = changelogSorted.filter((entry) => entry.date < RECENT_FROM);
+---
+
+<Layout
+  title="更新履歴 — KMRVID Skills"
+  description="KMRVID Claude Skills・KMRVID Figma Skills の更新履歴（簡易版）。詳細は各パッケージ同梱の README を参照してください。"
+  translated
+>
+  <Header />
+
+  <main class="mx-auto px-6 pt-14 md:pt-20 pb-20 md:pb-28 max-w-3xl">
+    <a
+      href="/skills/"
+      class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm transition"
+    >
+      <ArrowLeft size={16} stroke-width={2} />
+      スキル一覧に戻る
+    </a>
+
+    <h1 class="mt-8 text-ink max-sm:text-2xl text-left">更新履歴</h1>
+    <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+      KMRVID Claude Skills と KMRVID Figma Skills の更新履歴です。購入済みの方は、更新されたスキルを差し替えてご利用ください。ここでは要点だけを載せています。詳細は各パッケージに同梱の README を参照してください。
+    </p>
+
+    <fieldset class="mt-8 border-0 p-0 min-w-0">
+      <legend class="sr-only">表示するパッケージ</legend>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-all"
+            value="all"
+            checked
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >すべて</span
+          >
+        </label>
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-claude"
+            value="claude"
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >Claude版</span
+          >
+        </label>
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-figma"
+            value="figma"
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >Figma版</span
+          >
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="changelog" class="mt-6">
+      <h2 class="text-ink text-xl text-left">
+        最近の更新
+        <span class="font-body font-normal text-ink-soft text-sm">
+          （{RECENT_FROM.slice(0, 4)}年{Number(RECENT_FROM.slice(5, 7))}月以降）
+        </span>
+      </h2>
+      <ChangelogList entries={recent} lang="ja" />
+
+      {
+        older.length > 0 && (
+          <details class="group mt-10">
+            <summary class="flex items-center gap-2 min-h-11 font-medium text-ink text-base cursor-pointer">
+              それ以前の更新履歴（{older.length}件）
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <ChangelogList entries={older} lang="ja" />
+          </details>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* パッケージ絞り込み（JS不要）。選択した以外のパッケージの項目を隠す */
+  body:has(#f-claude:checked) #changelog [data-product="figma"],
+  body:has(#f-figma:checked) #changelog [data-product="claude"] {
+    display: none;
+  }
+</style>

@@ -1,32 +1,72 @@
 ---
 import { ExternalLink } from '@lucide/astro'
+import DepList from '@/components/DepList.astro'
+import type { Dep } from '@/data/skills'
+import { type Lang, ui } from '@/i18n/ui'
 
 interface Props {
   name: string
   desc: string
-  liteUrl?: string
-  liteLabel?: string
+  id?: string
+  lang?: Lang
+  lite?: { url: string; ja: string; en: string }
+  deps?: Dep[]
+  depsNote?: string
+  deprecated?: boolean
+  /** 依存スキルの表示に使う。このパッケージのスキル名一覧 */
+  known?: string[]
+  otherPackage?: string
 }
 
-const { name, desc, liteUrl, liteLabel } = Astro.props
+const {
+  name,
+  desc,
+  id,
+  lang = 'ja',
+  lite,
+  deps,
+  depsNote,
+  deprecated,
+  known,
+  otherPackage,
+} = Astro.props
 ---
 
-<div>
-  <p class="font-mono font-bold text-base text-left leading-snug">{name}</p>
+<div id={id} class="scroll-mt-24">
+  <p class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono font-bold text-base text-left leading-snug">
+    {name}
+    {
+      deprecated && (
+        <span class="bg-surface-alt px-2 py-0.5 rounded-full font-body font-normal text-ink-soft text-sm">
+          {ui[lang].deprecated}
+        </span>
+      )
+    }
+  </p>
   <p class="flex-1 mt-2 text-ink-soft text-base text-justify leading-snug">
     {desc}
   </p>
   {
-    liteUrl && (
+    lite && (
       <a
-        href={liteUrl}
+        href={lite.url}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-1.5 mt-3 min-h-11 text-accent-dark text-sm underline underline-offset-4 hover:text-accent transition"
       >
-        {liteLabel}
+        {lite[lang]}
         <ExternalLink size={14} stroke-width={2} />
       </a>
+    )
+  }
+  {
+    deps && deps.length > 0 && (
+      <DepList deps={deps} lang={lang} known={known} otherPackage={otherPackage} />
+    )
+  }
+  {
+    depsNote && (
+      <p class="mt-2 text-ink-soft text-sm text-left leading-snug">{depsNote}</p>
     )
   }
 </div>

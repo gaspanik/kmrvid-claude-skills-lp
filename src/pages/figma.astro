@@ -20,10 +20,10 @@ import FeatureCard from "@/components/FeatureCard.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
-import SkillCard from "@/components/SkillCard.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { figmaSkills } from "@/data/skills";
+import { figmaCategories, figmaSkills } from "@/data/skills";
 import {
   bundleSaving,
   formatDuration,
@@ -131,7 +131,10 @@ const combos = [
 const totalSkills = skills.length;
 ---
 
-<Layout title="KMRVID Figma Skills — Figma Design Agent専用カスタムスキル集">
+<Layout
+  title="KMRVID Figma Skills — Figma Design Agent専用カスタムスキル集"
+  translated
+>
   <Header variant="figma" />
 
   <main id="top">
@@ -338,16 +341,14 @@ const totalSkills = skills.length;
           }個のカスタムスキルです。
         </p>
 
-        <div
-          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
-        >
+        <div class="mt-12">
           {
-            skills.map((skill) => (
-              <SkillCard
-                name={skill.name}
-                desc={skill.desc}
-                liteUrl={skill.liteUrl}
-                liteLabel={skill.liteLabel}
+            figmaCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="ja"
+                known={skills.map((skill) => skill.name)}
+                otherPackage="KMRVID Claude Skills"
               />
             ))
           }

@@ -7,20 +7,23 @@ import {
   type ProductKey,
   products,
 } from "@/data/products";
+import type { Lang } from "@/i18n/ui";
 
 interface Props {
   product: ProductKey;
   description: string;
+  lang?: Lang;
 }
 
-const { product, description } = Astro.props;
-const { name, env, href, url, price, skills, videos, campaign } =
+const { product, description, lang = "ja" } = Astro.props;
+const { name, env, href, url, price, skills, videos, campaign, en } =
   products[product];
+const isEn = lang === "en";
 ---
 
 <div class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
   {
-    campaign && (
+    !isEn && campaign && (
       <p class="campaign-ended:hidden self-start flex items-center gap-1.5 bg-accent-soft mb-3 px-3 py-1 rounded-full font-medium text-accent-dark text-sm">
         <BadgePercent size={14} stroke-width={2} class="flex-none" />
         発売記念価格 {campaign.endsAtShort}まで
@@ -28,55 +31,98 @@ const { name, env, href, url, price, skills, videos, campaign } =
     )
   }
   <p class="text-ink-soft text-sm uppercase tracking-wide">{env}</p>
-  <h3 class="mt-1 text-xl text-left leading-snug">{name}</h3>
+  <h3 class="mt-1 text-xl text-left leading-snug">
+    {isEn ? en.name : name}
+  </h3>
   <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
     {description}
   </p>
 
-  <dl
-    class="gap-4 grid grid-cols-3 mt-6 pt-6 border-t border-border text-left"
-  >
-    <div>
-      <dt class="text-ink-soft text-sm">スキル</dt>
-      <dd class="mt-1 font-heading text-2xl">{skills}<span class="ml-0.5 font-body text-ink-soft text-sm">個</span></dd>
-    </div>
-    <div>
-      <dt class="text-ink-soft text-sm">解説動画</dt>
-      <dd class="mt-1 font-heading text-2xl">{videos}<span class="ml-0.5 font-body text-ink-soft text-sm">本</span></dd>
-    </div>
-    <div>
-      <dt class="text-ink-soft text-sm">総時間</dt>
-      <dd class="mt-1 font-body text-base leading-snug">
-        {formatDuration(products[product])}
-      </dd>
-    </div>
-  </dl>
+  {
+    isEn ? (
+      <dl class="gap-4 grid grid-cols-2 mt-6 pt-6 border-t border-border text-left">
+        <div>
+          <dt class="text-ink-soft text-sm">Skills</dt>
+          <dd class="mt-1 font-heading text-2xl">{skills}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-soft text-sm">Includes</dt>
+          <dd class="mt-1 font-body text-base leading-snug">
+            README (PDF) + free lifetime updates
+          </dd>
+        </div>
+      </dl>
+    ) : (
+      <dl class="gap-4 grid grid-cols-3 mt-6 pt-6 border-t border-border text-left">
+        <div>
+          <dt class="text-ink-soft text-sm">スキル</dt>
+          <dd class="mt-1 font-heading text-2xl">
+            {skills}
+            <span class="ml-0.5 font-body text-ink-soft text-sm">個</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-ink-soft text-sm">解説動画</dt>
+          <dd class="mt-1 font-heading text-2xl">
+            {videos}
+            <span class="ml-0.5 font-body text-ink-soft text-sm">本</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-ink-soft text-sm">総時間</dt>
+          <dd class="mt-1 font-body text-base leading-snug">
+            {formatDuration(products[product])}
+          </dd>
+        </div>
+      </dl>
+    )
+  }
 
   <p class="mt-6 font-heading text-4xl">
-    <Price product={product} /><span class="ml-1 text-lg">円</span>
-    <span class="ml-1 font-body text-ink-soft text-sm">税込・買い切り</span>
     {
-      campaign && (
-        <span class="campaign-ended:hidden ml-2 font-body text-ink-soft text-sm line-through">
-          通常 {formatYen(price)}円
-        </span>
+      isEn ? (
+        <>
+          <Price product={product} lang="en" />
+          <span class="ml-1 font-body text-ink-soft text-sm">
+            one-time purchase
+          </span>
+        </>
+      ) : (
+        <>
+          <Price product={product} />
+          <span class="ml-1 text-lg">円</span>
+          <span class="ml-1 font-body text-ink-soft text-sm">税込・買い切り</span>
+          {campaign && (
+            <span class="campaign-ended:hidden ml-2 font-body text-ink-soft text-sm line-through">
+              通常 {formatYen(price)}円
+            </span>
+          )}
+        </>
       )
     }
   </p>
 
   <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
     <a
-      href={url}
+      href={isEn ? en.url : url}
       class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-5 py-3 rounded-full min-h-11 font-medium text-white text-sm transition"
     >
-      <span><Price product={product} />円で申し込む</span>
+      {
+        isEn ? (
+          <span>Buy on Gumroad</span>
+        ) : (
+          <span>
+            <Price product={product} />円で申し込む
+          </span>
+        )
+      }
       <ArrowRight size={16} stroke-width={2} />
     </a>
     <a
-      href={href}
+      href={isEn ? en.href : href}
       class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
     >
-      詳細を見る
+      {isEn ? "See details" : "詳細を見る"}
       <ArrowUpRight size={14} stroke-width={2} />
     </a>
   </div>

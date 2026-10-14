@@ -1,6 +1,7 @@
 ---
-import { Menu, X } from '@lucide/astro';
+import { Languages, Menu, X } from '@lucide/astro';
 import { type ProductKey, products } from '@/data/products';
+import { altPath, type Lang, langOf } from '@/i18n/ui';
 
 interface Props {
   variant?: ProductKey;
@@ -8,51 +9,131 @@ interface Props {
 
 const { variant = 'bundle' } = Astro.props;
 
+const lang: Lang = langOf(Astro.url.pathname);
+const en = lang === 'en';
+const altHref = altPath(Astro.url.pathname);
+
+interface NavConfig {
+  brand: string;
+  home: string;
+  links: { href: string; label: string }[];
+}
+
 // ページ内アンカー（ページごとに異なる）
-const configs = {
-  bundle: {
-    brand: 'All-in-One Bundle',
-    home: '/',
-    links: [
-      { href: '/#included', label: '講座内容' },
-      { href: '/#skills', label: '収録スキル' },
-      { href: '/#author', label: '講師紹介' },
-      { href: '/#pricing', label: '料金' },
-      { href: '/#faq', label: 'FAQ' },
-    ],
+const configs: Record<Lang, Record<ProductKey, NavConfig>> = {
+  ja: {
+    bundle: {
+      brand: 'All-in-One Bundle',
+      home: '/',
+      links: [
+        { href: '/#included', label: '講座内容' },
+        { href: '/#skills', label: '収録スキル' },
+        { href: '/#author', label: '講師紹介' },
+        { href: '/#pricing', label: '料金' },
+        { href: '/#faq', label: 'FAQ' },
+      ],
+    },
+    claude: {
+      brand: 'Claude Skills',
+      home: '/claude/',
+      links: [
+        { href: '#overview', label: '特長' },
+        { href: '#categories', label: '収録スキル' },
+        { href: '#pricing', label: '料金' },
+        { href: '#faq', label: 'FAQ' },
+      ],
+    },
+    figma: {
+      brand: 'Figma Skills',
+      home: '/figma/',
+      links: [
+        { href: '#diff', label: '違い' },
+        { href: '#skills', label: '収録スキル' },
+        { href: '#how-to', label: '使い方' },
+        { href: '#combos', label: '組み合わせ例' },
+        { href: '#pricing', label: '料金' },
+      ],
+    },
   },
-  claude: {
-    brand: 'Claude Skills',
-    home: '/claude',
-    links: [
-      { href: '#overview', label: '特長' },
-      { href: '#categories', label: '収録スキル' },
-      { href: '#pricing', label: '料金' },
-      { href: '#faq', label: 'FAQ' },
-    ],
-  },
-  figma: {
-    brand: 'Figma Skills',
-    home: '/figma',
-    links: [
-      { href: '#diff', label: '違い' },
-      { href: '#skills', label: '収録スキル' },
-      { href: '#how-to', label: '使い方' },
-      { href: '#combos', label: '組み合わせ例' },
-      { href: '#pricing', label: '料金' },
-    ],
+  en: {
+    bundle: {
+      brand: 'Skills Bundle',
+      home: '/en/',
+      links: [
+        { href: '/en/#included', label: 'What’s inside' },
+        { href: '/en/#flows', label: 'Workflows' },
+        { href: '/en/#pricing', label: 'Pricing' },
+        { href: '/en/#author', label: 'Creator' },
+        { href: '/en/#faq', label: 'FAQ' },
+      ],
+    },
+    claude: {
+      brand: 'Claude Skills',
+      home: '/en/claude/',
+      links: [
+        { href: '#overview', label: 'Overview' },
+        { href: '#categories', label: 'Skills' },
+        { href: '#pricing', label: 'Pricing' },
+        { href: '#faq', label: 'FAQ' },
+      ],
+    },
+    figma: {
+      brand: 'Figma Skills',
+      home: '/en/figma/',
+      links: [
+        { href: '#diff', label: 'How it works' },
+        { href: '#skills', label: 'Skills' },
+        { href: '#how-to', label: 'Get started' },
+        { href: '#pricing', label: 'Pricing' },
+        { href: '#faq', label: 'FAQ' },
+      ],
+    },
   },
 };
 
 // 全ページ共通の商品リンク（現在のページを強調）
-const productLinks: { key: ProductKey; label: string }[] = [
-  { key: 'bundle', label: 'All-in-One' },
-  { key: 'claude', label: 'Claude版' },
-  { key: 'figma', label: 'Figma版' },
-];
+const productLinks: { key: ProductKey; label: string }[] = en
+  ? [
+      { key: 'bundle', label: 'Bundle' },
+      { key: 'claude', label: 'Claude' },
+      { key: 'figma', label: 'Figma' },
+    ]
+  : [
+      { key: 'bundle', label: 'All-in-One' },
+      { key: 'claude', label: 'Claude版' },
+      { key: 'figma', label: 'Figma版' },
+    ];
 
-const { brand, home, links: navLinks } = configs[variant];
-const PURCHASE_URL = products[variant].url;
+const t = en
+  ? {
+      mainNav: 'Main navigation',
+      products: 'Products',
+      cta: 'Buy on Gumroad',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      menuLabel: 'Navigation menu',
+      mobileNav: 'Mobile navigation',
+      switchTo: 'Japanese',
+      switchLabel: '日本語',
+    }
+  : {
+      mainNav: 'メインナビゲーション',
+      products: '商品',
+      cta: '今すぐ申し込む',
+      openMenu: 'メニューを開く',
+      closeMenu: 'メニューを閉じる',
+      menuLabel: 'ナビゲーションメニュー',
+      mobileNav: 'モバイルナビゲーション',
+      switchTo: 'English',
+      switchLabel: 'English',
+    };
+
+const { brand, home, links: navLinks } = configs[lang][variant];
+const PURCHASE_URL = en ? products[variant].en.url : products[variant].url;
+const productHref = (key: ProductKey) =>
+  en ? products[key].en.href : products[key].href;
+const productName = (key: ProductKey) =>
+  en ? products[key].en.name : products[key].name;
 ---
 
 <header
@@ -69,7 +150,7 @@ const PURCHASE_URL = products[variant].url;
     </a>
 
     <nav
-      aria-label="メインナビゲーション"
+      aria-label={t.mainNav}
       class="hidden lg:flex items-center gap-6 text-sm"
     >
       <ul class="flex items-center gap-6 **:hover:text-accent **:transition-colors">
@@ -82,14 +163,14 @@ const PURCHASE_URL = products[variant].url;
         }
       </ul>
       <ul
-        aria-label="商品"
+        aria-label={t.products}
         class="flex items-center gap-6 pl-6 border-border border-l **:hover:text-accent **:transition-colors"
       >
         {
           productLinks.map((item) => (
             <li>
               <a
-                href={products[item.key].href}
+                href={productHref(item.key)}
                 aria-current={item.key === variant ? 'page' : undefined}
                 class:list={[
                   item.key === variant && 'font-medium text-accent',
@@ -105,16 +186,25 @@ const PURCHASE_URL = products[variant].url;
 
     <div class="flex items-center gap-2">
       <a
+        href={altHref}
+        hreflang={en ? 'ja' : 'en'}
+        lang={en ? 'ja' : 'en'}
+        class="inline-flex items-center gap-1.5 px-2 min-h-11 text-ink-soft hover:text-accent text-sm transition-colors"
+      >
+        <Languages size={16} stroke-width={1.75} />
+        {t.switchLabel}
+      </a>
+      <a
         href={PURCHASE_URL}
         class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 shadow-xs px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm whitespace-nowrap transition"
       >
-        今すぐ申し込む
+        {t.cta}
       </a>
 
       <button
         type="button"
         id="menu-toggle"
-        aria-label="メニューを開く"
+        aria-label={t.openMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
         class="lg:hidden flex justify-center items-center min-w-11 min-h-11 text-ink"
@@ -130,20 +220,20 @@ const PURCHASE_URL = products[variant].url;
   class="hidden top-0 right-0 bottom-0 left-0 z-50 fixed bg-ink overflow-y-auto"
   role="dialog"
   aria-modal="true"
-  aria-label="ナビゲーションメニュー"
+  aria-label={t.menuLabel}
 >
   <div class="flex justify-between items-center px-6 py-4">
     <span class="font-heading text-base text-canvas leading-none">KMRVID</span>
     <button
       type="button"
       id="menu-close"
-      aria-label="メニューを閉じる"
+      aria-label={t.closeMenu}
       class="flex justify-center items-center min-w-11 min-h-11 text-canvas"
     >
       <X size={24} stroke-width={1.75} />
     </button>
   </div>
-  <nav aria-label="モバイルナビゲーション">
+  <nav aria-label={t.mobileNav}>
     <ul
       class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
     >
@@ -159,29 +249,38 @@ const PURCHASE_URL = products[variant].url;
       Products
     </p>
     <ul
-      aria-label="商品"
+      aria-label={t.products}
       class="flex flex-col px-6 *:border-white/10 *:border-b **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
     >
       {
         productLinks.map((item) => (
           <li>
             <a
-              href={products[item.key].href}
+              href={productHref(item.key)}
               aria-current={item.key === variant ? 'page' : undefined}
               class:list={[item.key === variant && 'font-medium text-accent!']}
             >
-              {products[item.key].name}
+              {productName(item.key)}
             </a>
           </li>
         ))
       }
+    </ul>
+    <ul
+      class="flex flex-col mt-6 px-6 *:border-white/10 *:border-y **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"
+    >
+      <li>
+        <a href={altHref} hreflang={en ? 'ja' : 'en'} lang={en ? 'ja' : 'en'}>
+          {t.switchLabel}
+        </a>
+      </li>
     </ul>
     <div class="px-6 py-6">
       <a
         href={PURCHASE_URL}
         class="flex justify-center items-center gap-1.5 bg-accent hover:brightness-110 px-6 py-3.5 rounded-full w-full font-medium text-white transition"
       >
-        今すぐ申し込む
+        {t.cta}
       </a>
     </div>
   </nav>

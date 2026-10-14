@@ -1,15 +1,33 @@
 ---
 import "@/styles/global.css";
 import { campaignEndsAt } from "@/data/products";
+import { altPath, langOf } from "@/i18n/ui";
 
 interface Props {
   title?: string;
+  description?: string;
+  /** 日英の同等ページがあるとき true（hreflang を出力する） */
+  translated?: boolean;
+  /** 検索エンジンに載せないページ */
+  noindex?: boolean;
 }
 
-const { title = "Astro 7 + Tailwind CSS 4 Starter" } = Astro.props;
+const {
+  title = "Astro 7 + Tailwind CSS 4 Starter",
+  description,
+  translated = false,
+  noindex = false,
+} = Astro.props;
+
+const lang = langOf(Astro.url.pathname);
+const withSlash = (pathname: string) =>
+  pathname.endsWith("/") ? pathname : `${pathname}/`;
+const canonical = new URL(withSlash(Astro.url.pathname), Astro.site);
+const alternate = new URL(altPath(Astro.url.pathname), Astro.site);
+const [jaUrl, enUrl] = lang === "ja" ? [canonical, alternate] : [alternate, canonical];
 ---
 
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -17,6 +35,18 @@ const { title = "Astro 7 + Tailwind CSS 4 Starter" } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical.href} />
+    {
+      translated && (
+        <>
+          <link rel="alternate" hreflang="ja" href={jaUrl.href} />
+          <link rel="alternate" hreflang="en" href={enUrl.href} />
+          <link rel="alternate" hreflang="x-default" href={jaUrl.href} />
+        </>
+      )
+    }
+    {noindex && <meta name="robots" content="noindex" />}
     {
       campaignEndsAt && (
         <script is:inline define:vars={{ campaignEndsAt }}>

@@ -1,0 +1,73 @@
+---
+import { counterparts } from '@/data/counterparts'
+import type { Lang } from '@/i18n/ui'
+
+interface Props {
+  lang?: Lang
+  /** 同じページ内にスキルカードがあるとき、スキル名をアンカーリンクにする */
+  anchors?: boolean
+}
+
+const { lang = 'ja', anchors = false } = Astro.props
+const en = lang === 'en'
+---
+
+<div class="mt-6 border border-border rounded-2xl overflow-x-auto">
+  <table class="w-full text-left text-base">
+    <caption class="sr-only">
+      {
+        en
+          ? 'Skills that share a name or a role in the Claude Code and Figma Design Agent editions'
+          : 'Claude Code版とFigma Design Agent版で、同名または対応するスキル'
+      }
+    </caption>
+    <thead class="bg-surface-alt text-ink-soft text-sm">
+      <tr>
+        <th scope="col" class="px-4 py-3 font-medium">
+          {en ? 'Claude Code edition' : 'Claude Code版'}
+        </th>
+        <th scope="col" class="px-4 py-3 font-medium">
+          {en ? 'Figma Design Agent edition' : 'Figma Design Agent版'}
+        </th>
+        <th scope="col" class="px-4 py-3 font-medium">
+          {en ? 'Notes' : '補足'}
+        </th>
+      </tr>
+    </thead>
+    <tbody class="*:border-border *:border-t align-top">
+      {
+        counterparts.map((row) => (
+          <tr>
+            <th scope="row" class="px-4 py-3 font-mono font-normal text-base">
+              {anchors ? (
+                <a
+                  href={`#claude-${row.claude}`}
+                  class="underline underline-offset-4 hover:text-accent"
+                >
+                  {row.claude}
+                </a>
+              ) : (
+                row.claude
+              )}
+            </th>
+            <td class="px-4 py-3 font-mono text-base">
+              {anchors ? (
+                <a
+                  href={`#figma-${row.figma}`}
+                  class="underline underline-offset-4 hover:text-accent"
+                >
+                  {row.figma}
+                </a>
+              ) : (
+                row.figma
+              )}
+            </td>
+            <td class="px-4 py-3 min-w-64 text-ink-soft text-sm leading-snug">
+              {en ? row.en : row.ja}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

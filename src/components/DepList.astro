@@ -1,0 +1,49 @@
+---
+import type { Dep } from '@/data/skills'
+import { type Lang, ui } from '@/i18n/ui'
+
+interface Props {
+  deps: Dep[]
+  lang?: Lang
+  /** このパッケージに収録されているスキル名。含まれない依存は「別パッケージ」と表示する */
+  known?: string[]
+  /** 別パッケージの名称（例: KMRVID Claude Skills） */
+  otherPackage?: string
+}
+
+const { deps, lang = 'ja', known, otherPackage } = Astro.props
+const t = ui[lang]
+
+const label = (dep: Dep) =>
+  dep.anyOf ? t.anyOf : dep.optional ? t.optional : t.required
+---
+
+<dl class="flex flex-col gap-1.5 mt-3 pt-3 border-border border-t text-sm">
+  {
+    deps.map((dep) => (
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <dt
+          class:list={[
+            'min-w-14 text-sm',
+            dep.optional ? 'text-ink-soft' : 'font-medium text-accent-dark',
+          ]}
+        >
+          {label(dep)}
+        </dt>
+        <dd class="flex flex-wrap gap-1.5">
+          {dep.names.map((name) => (
+            <span class="bg-surface-alt px-2 py-0.5 rounded-full font-mono text-sm">
+              {name}
+              {known && otherPackage && !known.includes(name) && (
+                <span class="font-body text-ink-soft">
+                  {' '}
+                  ({t.otherPackage(otherPackage)})
+                </span>
+              )}
+            </span>
+          ))}
+        </dd>
+      </div>
+    ))
+  }
+</dl>

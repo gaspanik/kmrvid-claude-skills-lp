@@ -13,7 +13,6 @@ import {
   Tag,
   Workflow,
 } from "@lucide/astro";
-import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
@@ -201,78 +200,43 @@ const totalSkills = skills.length;
             Figma Communityで無料のスキルを先に試す
             <ExternalLink size={14} stroke-width={2} />
           </a>
-
-          <a
-            href="https://x.com/cipher/status/2087497917284385192"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 -mt-2 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-          >
-            Figma版スキルの使いどころ、便利なところ
-            <ExternalLink size={14} stroke-width={2} />
-          </a>
-
-          <a
-            href="https://youtube.com/live/Sy8Jn6qMsqY?feature=share"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 -mt-2 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-          >
-            使い方をYouTubeでライブ配信しました（その1）
-            <ExternalLink size={14} stroke-width={2} />
-          </a>
-
-          <a
-            href="https://youtube.com/live/AH47JM3NYEI?feature=share"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 -mt-2 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-          >
-            使い方をYouTubeでライブ配信しました（その2）
-            <ExternalLink size={14} stroke-width={2} />
-          </a>
         </div>
       </div>
 
-      <!-- Bottom-up payload: numeral block + supporting image -->
+      <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
       <div class="bg-ink mt-14 md:mt-20 text-canvas">
         <div
-          class="items-center gap-10 grid grid-cols-1 md:grid-cols-[1fr_1.1fr] mx-auto px-6 py-12 md:py-16 max-w-5xl"
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
         >
-          <div class="text-left">
-            <div class="gap-8 grid grid-cols-2">
-              <div>
-                <p
-                  class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
-                >
-                  {totalSkills}
-                  <span class="font-body text-white/50 text-lg">個</span>
-                </p>
-                <p class="mt-2 text-white/60 text-sm">収録スキル数</p>
-              </div>
-              <div>
-                <p
-                  class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
-                >
-                  {totalSkills}
-                  <span class="font-body text-white/50 text-lg">個</span>
-                </p>
-                <p class="mt-2 text-white/60 text-sm">Figma実機動作確認済み</p>
-              </div>
-            </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {totalSkills}
+              <span class="font-body text-white/50 text-lg">個</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">収録スキル数</p>
           </div>
-
-          <figure
-            class="border border-white/10 rounded-2xl aspect-video overflow-hidden"
-          >
-            <Image
-              src={figmaWireframe}
-              alt="MacBookの画面に表示されたワイヤーフレームデザイン"
-              width={1200}
-              height={800}
-              class="w-full h-full object-cover"
-            />
-          </figure>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {product.videos}
+              <span class="font-body text-white/50 text-lg">本</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">解説動画の本数</p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {product.hours}<span class="text-4xl md:text-5xl">h</span
+              >{product.minutes}<span class="text-4xl md:text-5xl">m</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">
+              総再生時間（{STATS_AS_OF}時点）
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -358,6 +322,13 @@ const totalSkills = skills.length;
           }スキルすべてFigma上での実機動作を確認済みです。Figma Design Agent
           は現在β版です。状況によっては正常に動作しない場合があります。
         </p>
+        <a
+          href="/changelog/"
+          class="inline-flex items-center gap-1 mt-4 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          更新履歴を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
       </div>
     </section>
 

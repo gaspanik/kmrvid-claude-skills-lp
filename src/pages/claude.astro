@@ -29,6 +29,7 @@ import {
   claudeSkillsCount,
 } from "@/data/skills";
 import {
+  AGENSI_URL,
   bundleSaving,
   formatDuration,
   formatYen,
@@ -510,6 +511,19 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
               こちらの記事
             </a>
             でも動画付きで紹介しています。
+          </FaqItem>
+
+          <FaqItem question="スキルを1つずつ購入することはできますか？">
+            Claude Code版の一部のスキルは、スキル販売サービス「Agensi」で単体購入できます（無料のものもあり、有料のスキルは3回まで無料で試せます）。購入手続きの画面は英語です。スキルの内容は英語ですが、日本語で指示して使うこともできます。Figma版のスキルは、Agensiでは販売していません。
+            <a
+              href={AGENSI_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
+            >
+              Agensiのクリエイターページ
+            </a>
+            から確認できます。
           </FaqItem>
 
           <FaqItem question="プログラミング未経験でも受講できますか？">

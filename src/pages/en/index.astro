@@ -22,7 +22,12 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import { bundleSavingUsd, formatUsd, products } from "@/data/products";
+import {
+  AGENSI_URL,
+  bundleSavingUsd,
+  formatUsd,
+  products,
+} from "@/data/products";
 
 const bundle = products.bundle.en;
 
@@ -327,6 +332,21 @@ const flows = [
             source on GitHub.
           </FaqItem>
 
+          <FaqItem question="Can I buy a single skill?">
+            Yes. A selection of the Claude Code skills is sold individually on
+            Agensi. Some are free, and every paid skill has 3 free trial runs.
+            The Figma edition is not sold there. See the
+            <a
+              href={AGENSI_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent underline underline-offset-4"
+            >
+              creator page on Agensi
+            </a>
+            for what is available. This package includes all {claudeSkillsCount}
+            Claude Code skills together.
+          </FaqItem>
           <FaqItem question="Is support available?">
             One-to-one troubleshooting is not offered. If something breaks, pass
             the SKILL.md and the error log to your agent; the skills are plain

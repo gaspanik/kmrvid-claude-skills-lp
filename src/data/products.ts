@@ -106,6 +106,9 @@ export const campaignEndsAt = Object.values(products).find(
   (product) => product.campaign,
 )?.campaign?.endsAt
 
+/** Claude Code版の一部スキルを単体販売しているクリエイターページ（Figma版は掲載なし） */
+export const AGENSI_URL = 'https://www.agensi.io/creators/masaaki-komori'
+
 export const formatYen = (price: number) => price.toLocaleString('ja-JP')
 
 export const formatDuration = ({ hours, minutes }: Product) =>

@@ -18,7 +18,7 @@ import {
   totalSkills,
 } from "@/data/skills";
 import Price from "@/components/Price.astro";
-import { formatYen, products } from "@/data/products";
+import { AGENSI_URL, formatYen, products } from "@/data/products";
 
 const PURCHASE_URL = products.bundle.url;
 const PRICE = formatYen(products.bundle.price);
@@ -222,6 +222,17 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
 
     <!-- ============ TRIAL NOTE ============ -->
     <section class="flex flex-col gap-4 mx-auto px-6 pb-14 md:pb-20 max-w-5xl">
+      <Callout>
+        Claude Code版の一部のスキルは、スキル販売サービス「Agensi」で単体購入もできます（無料のものもあり、有料のスキルは3回まで無料で試せます。Figma版はありません）。
+        <a
+          href={AGENSI_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline underline-offset-4"
+        >
+          Agensiのクリエイターページ
+        </a>
+      </Callout>
       <Callout>
         購入前に動作を試したい方向けに、軽量版スキル「create-mockup-lite」を
         <a

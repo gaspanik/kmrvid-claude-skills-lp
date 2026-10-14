@@ -27,7 +27,6 @@
     "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "2.5.15",
     "@types/node": "^26.6.5",
-    "js-yaml": "^5.4.3",
     "typescript": "^6.0.3",
     "wrangler": "^4.149.0"
   },

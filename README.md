@@ -9,9 +9,11 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 | `/` | 「KMRVID Skills - All-in-One Bundle」のメインLP(Hero / 課題提起 / 講座内容 / スキルハイライト / 講師紹介 / 料金 / 個別パッケージ / FAQ / 最終CTA) |
 | `/claude` | 単体パッケージ「KMRVID Claude Skills」(Claude Code版)のLP |
 | `/figma` | 単体パッケージ「KMRVID Figma Skills」(Figma Design Agent版)のLP |
-| `/skills` | 全スキルをカテゴリ別に一覧表示するスキル紹介ページ |
+| `/skills` | 全スキルをパッケージ別・カテゴリ別に一覧表示（説明・依存スキル・Claude版とFigma版の対応表） |
+| `/changelog` | 更新履歴（簡易版。パッケージ別に絞り込み可） |
+| `/en/` `/en/claude/` `/en/figma/` `/en/skills/` `/en/changelog/` | 上記の英語版（海外版・Gumroad向け。USD・動画なし） |
 
-価格・動画本数・総再生時間は `src/data/products.ts`、スキル一覧は `src/data/skills.ts` に集約しています。
+価格・動画本数・総再生時間は `src/data/products.ts`（日本語版はkmrvid.com・円建て、`en` に海外版のGumroad・USD）、スキルの説明（日英）と依存関係は `src/data/skills.ts`、Claude版とFigma版の対応は `src/data/counterparts.ts`、更新履歴は `src/data/changelog.ts` に集約しています。言語は URL（`/en/` 配下かどうか）で判定し（`src/i18n/ui.ts`）、`Layout` が `lang`・canonical・hreflang を出力します。
 
 ## スタック
 
@@ -42,7 +44,15 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 │   ├── components/
 │   │   ├── Header.astro       # グローバルヘッダー(variant: bundle / claude / figma)
 │   │   ├── Footer.astro       # グローバルフッター(同上)
-│   │   ├── PackageCard.astro  # 商品(パッケージ)紹介カード
+│   │   ├── PackageCard.astro  # 商品(パッケージ)紹介カード（lang: ja / en）
+│   │   ├── SkillCard.astro    # スキル1件のカード（説明・依存スキル・廃止予定バッジ）
+│   │   ├── CategorySkills.astro # カテゴリ見出し + スキルカードのグリッド
+│   │   ├── DepList.astro      # 依存スキル（必須 / オプション / いずれか）
+│   │   ├── CounterpartTable.astro # Claude版とFigma版の対応表
+│   │   ├── ChangelogList.astro # 更新履歴の一覧
+│   │   ├── PricingCard.astro  # 海外版の料金カード
+│   │   ├── CreatorBio.astro   # 海外版の著者紹介
+│   │   ├── FlowCard.astro     # 海外版の組み合わせ例カード
 │   │   ├── FeatureCard.astro  # 「講座の中身」セクション用カード
 │   │   ├── FaqItem.astro      # FAQの <details> アコーディオン項目
 │   │   ├── Callout.astro      # Puzzleアイコン付き注記ボックス
@@ -53,7 +63,9 @@ Claude Code向けオリジナルスキル講座「[KMRVID Claude Skills](https:/
 │   │   ├── index.astro   # All-in-One Bundle LP
 │   │   ├── claude.astro  # Claude Skills LP
 │   │   ├── figma.astro   # Figma Skills LP
-│   │   └── skills.astro  # スキル一覧ページ
+│   │   ├── skills.astro  # スキル一覧ページ
+│   │   ├── changelog.astro # 更新履歴ページ
+│   │   └── en/           # 英語版（index / claude / figma / skills / changelog）
 │   └── styles/
 │       └── global.css   # @import "tailwindcss" + @theme トークン
 ├── AGENTS.md            # AI エージェント向けガイドライン(OpenAI Codex / 汎用)

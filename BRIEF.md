@@ -1,17 +1,19 @@
 # BRIEF
 
 ## サイト種別
-Claude Code / Figma向けオリジナルスキル講座の販促用LP群（全4ページ）。2026年9月20日時点で、以下3つの商品を販売している。
+Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日本語5ページ＋英語5ページ。英語版は `/en/` 配下）。2026年10月14日時点で、以下3つの商品を販売している（日本語版・kmrvid.com）。海外版（Gumroad）は下記「海外版」を参照。
 
 | 商品 | LP | 商品ページ | 定価（税込） | スキル数 | 動画 | 総時間 |
 |---|---|---|---|---|---|---|
-| KMRVID Skills - All-in-One Bundle | `/` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 76個（Claude版46＋Figma版30） | 60本 | 約6時間5分 |
-| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 46個 | 40本 | 約4時間10分 |
+| KMRVID Skills - All-in-One Bundle | `/` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 78個（Claude版48＋Figma版30） | 60本 | 約6時間5分 |
+| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 48個 | 40本 | 約4時間10分 |
 | KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 30個 | 20本 | 約1時間55分 |
 
 - トップページ（`/`）は主力商品「All-in-One Bundle」の紹介ページ。Claude版・Figma版の個別ページへの導線（「個別パッケージ」セクション、ヘッダー、ヒーローのバッジ）を持つ。
-- `/skills` は Bundle 収録の全スキルをカテゴリ別に一覧表示するスキル紹介ページ。各カテゴリがどのパッケージに含まれるかを併記する。
+- `/skills` は Bundle 収録の全スキルを、パッケージ別（Claude Code版 → Figma Design Agent版）・カテゴリ別に一覧表示するスキル紹介ページ。各スキルの説明・依存スキル（必須 / オプション / いずれか）を併記し、末尾に「Claude版とFigma版の対応表」を置く。
+- `/changelog` は更新履歴（簡易版）。直近（`RECENT_FROM` 以降）を開いて表示し、それ以前は折りたたむ。パッケージ別の絞り込みつき。詳細は各パッケージ同梱のREADMEが持つ。
 - 価格・動画本数・総再生時間は `src/data/products.ts` に集約（動画本数・時間は2026年9月20日時点の集計）。スキル数は `src/data/skills.ts` から自動集計する。
+- スキルの日英説明・依存関係は `src/data/skills.ts`、Claude版とFigma版の対応は `src/data/counterparts.ts`、更新履歴は `src/data/changelog.ts` が持つ。スキル数をコピーして書かない（BRIEF.md・DESIGN.md の数字は手書きなので、スキルを増減したら更新する）。
 - Bundle は Claude版とFigma版を通常価格で個別に購入するより5,400円お得（19,800円＋15,400円−29,800円）。
 
 インターネット黎明期から活動し、数多くのWeb制作関連の記事・書籍の執筆/監修を手がけ、今なお現役で実務の現場に立つ著者（こもりまさあき）が、最新の技術スタックを駆使して制作時間の短縮・自身の時間単価の最大化のために生み出したオリジナルスキル群を一挙公開する講座。
@@ -39,6 +41,20 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（全4�
 
 ビジュアル資産: スキル同士の組み合わせ・依存関係を俯瞰する全体相関図（イラスト）を用意済み。トップページ「講座の中身」セクションとスキル紹介ページ（一覧の直前）に掲載しており、クリックで拡大表示できる（vanilla JSのライトボックス、ライブラリ不使用）。全スキルを対象とした図のため、Claude版・Figma版の個別ページには載せていない。
 
+## 海外版（英語・Gumroad）
+日本語版とは販売先を分けている。LP（`/en/` 配下）は、海外版の商品説明だけでは紹介しきれない全スキルの説明・依存関係・更新履歴を案内するために置く。
+
+| 商品 | LP | Gumroad | 価格 |
+|---|---|---|---|
+| KMRVID Skills Bundle | `/en/` | https://gaspanik.gumroad.com/l/kmrvid-bundle | $199 |
+| KMRVID Claude Skills | `/en/claude/` | https://gaspanik.gumroad.com/l/kmrvid-claudeskills | $137 |
+| KMRVID Figma Skills | `/en/figma/` | https://gaspanik.gumroad.com/l/kmrvid-figmaskills | $87 |
+
+- 海外版は**スキルのみ**（解説動画なし）。スキル本文・質問・レポートは基本すべて英語。`create-jp-lp` など日本の文化・慣習に特化したスキルだけ、ルール本文が日本語のまま。
+- 付属物はREADME（PDF）と無料の生涯アップデート。LINEクーポン・キャンペーンは日本語版のみ。
+- Bundleの差額は $25（$137＋$87−$199）。
+- 英語説明の出所はGumroadの各商品ページ。価格を扱う前にGumroadの現在価格を確認すること。
+
 ## ターゲット
 Web制作者・フリーランスを主体としつつ、企業（AI導入を検討中の制作会社など）の意思決定者も対象に含める。
 
@@ -58,11 +74,11 @@ Web制作者・フリーランスを主体としつつ、企業（AI導入を検
 
 ## 競合・差別化ポイント
 - 専門性・実績で差別化（著者の長年のWeb制作現場での実績・執筆/監修実績）
-- 内容量・網羅性で差別化（Bundleはスキル76個×動画60本という圧倒的ボリューム）
+- 内容量・網羅性で差別化（Bundleはスキル78個×動画60本という圧倒的ボリューム）
 - 実務即活用可能さで差別化（プロンプト中心ではなく、エージェントが理解できるスキル形式での提供）
 
 ## 規模感
-Bundleに含まれる76スキル・60本の動画のうち、トップページでは代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
+Bundleに含まれる78スキル・60本の動画のうち、トップページでは代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
 
 ## デバイス優先度
 PC・スマートフォンともにほぼ半々を想定し、しっかり対応する。
@@ -75,6 +91,7 @@ PC・スマートフォンともにほぼ半々を想定し、しっかり対応
 
 ## 留意点
 - 信頼性・実績を重視したトーン：誇大表現を避け、著者の実績に基づいた落ち着いた説得トーンにする。
+- カテゴリ名：Claude版の「Figma連携系」は、Claude CodeからFigma MCP経由でFigmaを読み書きするスキル群。Figma版（Figma Design Agent内で動く）と混同しないよう、「Figma系」とは呼ばない。
 - 商品名の使い分け：「KMRVID Claude Skills」はClaude Code版の単体パッケージを指す（以前はこの名称が全スキル入りの商品名だったが、現在は「KMRVID Skills - All-in-One Bundle」に改称）。文言では両者を混同しないこと。
 - 発売記念キャンペーン（終了済み）：KMRVID Claude Skills（単体）を2026年9月23日（水）23:59まで、特別価格15,400円（税込）で販売した（通常価格19,800円）。2026年9月24日に `src/data/products.ts` の `products.claude.campaign` ブロックを削除し、通常価格表示に戻した。しくみ（`Campaign` 型・`CountdownTimer`・`Price` コンポーネント・`campaign-ended` バリアント）は次回以降のキャンペーンでも再利用できるようコードに残してある。同種のキャンペーンを再度行う場合は、同じ場所に `campaign` ブロックを足すだけでよい。Bundleの「個別購入よりお得」の金額は通常価格ベース（5,400円）で表記している。
 - 価格改定の履歴（参考）：2026年8月10日に旧「KMRVID Claude Skills」を19,800円から27,500円に改定。その後、Claude版単体（19,800円）とFigma版単体（15,400円）を独立商品化し、全スキル入りをBundle（29,800円）に改称・改定した（2026年9月20日時点）。割引コードは使用しない。

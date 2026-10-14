@@ -1,0 +1,431 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Code,
+  FileText,
+  Languages,
+  MessageCircleQuestionMark,
+  MousePointerClick,
+  SquareTerminal,
+  Tag,
+} from "@lucide/astro";
+import Callout from "@/components/Callout.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CreatorBio from "@/components/CreatorBio.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import FlowCard from "@/components/FlowCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import PricingCard from "@/components/PricingCard.astro";
+import Price from "@/components/Price.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  figmaCategories,
+  figmaSkills,
+  figmaSkillsCount,
+} from "@/data/skills";
+import { bundleSavingUsd, formatUsd, products } from "@/data/products";
+
+const product = products.figma.en;
+
+const differences = [
+  {
+    icon: MousePointerClick,
+    title: "Works on your canvas selection",
+    description:
+      "No Figma URL to paste. Select a frame or section, then call the skill from the chat.",
+  },
+  {
+    icon: Code,
+    title: "Runs through the Plugin API",
+    description:
+      "Everything happens through Figma’s own script-execution tool. No external MCP tools are involved.",
+  },
+  {
+    icon: FileText,
+    title: "One self-contained file",
+    description:
+      "Register a single SKILL.md and it works. No reference files to carry along.",
+  },
+  {
+    icon: Languages,
+    title: "Questions and reports in English",
+    description:
+      "Confirmation tables, questions and reports are all shown in English.",
+  },
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Register the SKILL.md",
+    desc: "Use Figma’s custom-skill registration feature in the Design Agent and register the skill you want.",
+  },
+  {
+    n: "02",
+    title: "Select the target",
+    desc: "Select the frame or section on the canvas. Several skills also support multi-selection, and some need no selection at all (the interview and generation skills, slot-table-maker, agent-handoff and hey-be-careful).",
+  },
+  {
+    n: "03",
+    title: "Run it from the chat",
+    desc: "The skill confirms with you at its own checkpoints before changing anything.",
+  },
+];
+
+const flows = [
+  {
+    goal: "From requirements to a layout",
+    chain: ["brief-me", "create-multi-pattern"],
+    desc: "Pin down requirements, then generate several structurally different layouts. Swap in create-single-page for a no-questions run.",
+  },
+  {
+    goal: "Clean up a messy frame in one go",
+    chain: ["figma-systematize"],
+    desc: "Layer names, tokens and components in one pass. Or pick the steps yourself with hey-optimize-me.",
+  },
+  {
+    goal: "Check before you hand off",
+    chain: ["figma-audit", "figma-contrast-check", "coding-prompter"],
+    desc: "Score AI-implementation readiness, check WCAG contrast, then build the implementation prompt for a coding agent.",
+  },
+  {
+    goal: "Rewrite the copy to a brief",
+    chain: ["brief-me", "rewrite-me"],
+    desc: "Rewrites the text nodes in a selected frame to match the BRIEF without touching layout or structure.",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID Figma Skills — ${figmaSkillsCount} skills for Figma’s Design Agent`}
+  description={`${figmaSkillsCount} custom skills that take a Figma frame from brief to handoff: pin down requirements, generate pages, clean up structure, check accessibility and hand a coding agent a prompt it can use.`}
+  translated
+>
+  <Header variant="figma" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="/en/"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Want the Claude Code side too? See the bundle
+        </a>
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Skills for Figma’s Design Agent
+        </p>
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-2xl text-left"
+        >
+          {figmaSkillsCount} custom skills that take a frame
+          <span class="text-accent">from brief to handoff</span>
+        </h1>
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          KMRVID Figma Skills adds a disciplined pipeline to Figma’s Design
+          Agent: pin down requirements, generate pages, clean up structure
+          (layers, tokens, components), check accessibility, and hand a coding
+          agent a prompt it can actually use. Each skill is a single SKILL.md
+          that you register with Figma’s custom-skill feature.
+        </p>
+
+        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+          <a
+            href={product.url}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            <span>Get the skills · <Price product="figma" lang="en" /></span>
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            Browse the skills
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">{figmaSkillsCount}</p>
+            <p class="mt-2 text-white/60 text-sm">
+              Skills, each a single self-contained SKILL.md
+            </p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">
+              {figmaCategories.length}
+            </p>
+            <p class="mt-2 text-white/60 text-sm">Categories, by stage of the work</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">PDF</p>
+            <p class="mt-2 text-white/60 text-sm">
+              README with usage notes and free lifetime updates
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section
+      id="diff"
+      aria-labelledby="diff-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="diff-heading" class="max-w-xl text-ink text-left">
+        Built for the Design Agent, not ported as-is
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Many of these skills have a counterpart in the Claude Code edition.
+        These are the differences.
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        {
+          differences.map((item) => (
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+          ))
+        }
+      </div>
+
+      <div class="mt-6">
+        <Callout>
+          create-multi-pattern, hey-polish-me and create-jp-lp can use
+          cognitive-ui-design as an optional companion. That skill is in the
+          Claude Skills package and the bundle, not in this Figma-only edition.
+        </Callout>
+      </div>
+
+      <a
+        href="/en/skills/#counterparts"
+        class="inline-flex items-center gap-1 mt-4 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        See the Claude Code / Figma comparison table
+        <ArrowRight size={14} stroke-width={2} />
+      </a>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="max-w-xl text-ink text-left">
+          The {figmaSkillsCount} skills
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          All {figmaSkillsCount} skills were verified on Figma’s actual runtime
+          as of September 2026. Figma’s Design Agent is currently in beta, so
+          behavior can vary.
+        </p>
+
+        <div class="mt-12">
+          {
+            figmaCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="en"
+                known={figmaSkills.map((skill) => skill.name)}
+                otherPackage="KMRVID Claude Skills"
+              />
+            ))
+          }
+        </div>
+
+        <a
+          href="/en/changelog/"
+          class="inline-flex items-center gap-1 mt-10 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          See the changelog
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO ============ -->
+    <section
+      id="how-to"
+      aria-labelledby="how-to-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="how-to-heading" class="max-w-xl text-ink text-left">
+        Get started in 3 steps
+      </h2>
+      <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+        {
+          steps.map((step) => (
+            <li class="bg-canvas p-6 border border-border rounded-2xl">
+              <p class="font-heading text-accent text-3xl">{step.n}</p>
+              <h3 class="mt-3 text-lg text-left leading-snug">{step.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                {step.desc}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p
+        class="flex items-start gap-3 mt-8 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        <SquareTerminal size={18} stroke-width={2} class="flex-none mt-1" />
+        <span>
+          Skills that restructure a file (tidy-up, figma-componentize,
+          figma-systematize and the like) change your canvas. Duplicate the
+          frame or file first on anything important. Each skill checks its own
+          work with screenshots and node checks and asks before big steps, but
+          a copy is the safest undo.
+        </span>
+      </p>
+    </section>
+
+    <!-- ============ FLOWS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="combos-heading" class="max-w-xl text-ink text-left">
+          Flows that work well together
+        </h2>
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+          {flows.map((flow) => <FlowCard {...flow} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <p
+        class="flex items-center gap-2 mb-4 text-accent-dark text-sm uppercase tracking-widest"
+      >
+        <Tag size={18} stroke-width={2} />
+        Pricing
+      </p>
+      <h2 id="pricing-heading" class="text-ink text-left">
+        KMRVID Figma Skills
+      </h2>
+      <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+        All {figmaSkillsCount} skills, the README (PDF) and free lifetime
+        updates for {formatUsd(product.priceUsd)}.
+      </p>
+
+      <PricingCard
+        product="figma"
+        benefits={[
+          `${figmaSkillsCount} custom skills for Figma’s Design Agent`,
+          "A README (PDF) with a skill reference and usage notes",
+          "Free lifetime updates",
+          "Plain-text SKILL.md files you can read and adapt",
+        ]}
+      />
+    </section>
+
+    <!-- ============ CROSS-SELL ============ -->
+    <section
+      aria-labelledby="cross-sell-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="cross-sell-heading" class="max-w-xl text-ink text-left">
+          Want the Claude Code side too?
+        </h2>
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+          <PackageCard
+            product="claude"
+            lang="en"
+            description="Skills for Claude Code: setup and pipelines, mockups, Figma integration, Tailwind and finishing."
+          />
+          <PackageCard
+            product="bundle"
+            lang="en"
+            description="Both editions together. Cheaper than buying them separately."
+          />
+        </div>
+        <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+          The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+          the two editions separately.
+        </p>
+      </div>
+    </section>
+
+    <CreatorBio />
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-heading" class="py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-3xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">
+          Frequently asked questions
+        </h2>
+        <div class="mt-8 *:border-border *:border-b">
+          <FaqItem question="Do I need Claude Code to use these?">
+            No. These skills run inside Figma’s Design Agent and do not need
+            Claude Code. If you also build in code with Claude Code, the Claude
+            edition covers that side.
+          </FaqItem>
+          <FaqItem question="Will the skills change my Figma file?">
+            Skills that restructure a file change your canvas. Duplicate the
+            frame or file first on anything important. Each skill asks before
+            big steps.
+          </FaqItem>
+          <FaqItem question="Are the skills in English?">
+            Yes. A few that encode Japanese-specific conventions, such as
+            create-jp-lp and figma-japanese-web-guideline, keep their rule text
+            in Japanese so the agent does not misread it. Their questions and
+            reports are in English.
+          </FaqItem>
+          <FaqItem question="Can I try something before buying?">
+            Some of these skills are free on Figma Community, and some are open
+            source on GitHub. They are marked on the skill cards above.
+          </FaqItem>
+          <FaqItem question="Does it include video lessons?">
+            No. The package contains the skills and a README (PDF).
+          </FaqItem>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="figma" />
+</Layout>

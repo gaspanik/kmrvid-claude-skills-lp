@@ -1,0 +1,68 @@
+---
+import { ExternalLink, GraduationCap } from "@lucide/astro";
+import { Image } from "astro:assets";
+import authorPhoto from "@/assets/images/IMG_8341_square.png";
+
+const socialLinks = [
+  { label: "X", href: "https://x.com/cipher/" },
+  { label: "GitHub", href: "https://github.com/gaspanik" },
+  { label: "YouTube", href: "https://www.youtube.com/@kmrvid" },
+];
+---
+
+<section
+  id="author"
+  aria-labelledby="author-heading"
+  class="bg-surface-alt py-20 md:py-28"
+>
+  <div class="mx-auto px-6 max-w-5xl">
+    <div
+      class="items-start md:items-center gap-8 grid grid-cols-1 md:grid-cols-[auto_1fr]"
+    >
+      <div
+        class="border border-border rounded-full w-36 md:w-44 aspect-square overflow-hidden shrink-0"
+      >
+        <Image
+          src={authorPhoto}
+          alt="Portrait of Masaaki Komori"
+          width={400}
+          height={400}
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="max-w-2xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <GraduationCap size={18} stroke-width={2} />
+          About the creator
+        </p>
+        <h2 id="author-heading" class="text-ink text-left">Masaaki Komori</h2>
+        <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+          Independent UI/UX designer and frontend engineer since 2001. Author of
+          numerous web design books in Japan, Figma instructor, and design
+          system consultant specializing in AI-augmented workflows and design
+          tokens. Also ranked among the top 500 all-time most viewed and
+          downloaded creators globally on Unsplash.
+        </p>
+        <ul class="flex flex-wrap gap-2 mt-4">
+          {
+            socialLinks.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 bg-canvas px-3 py-1.5 border border-border hover:border-accent rounded-full min-h-11 text-ink-soft hover:text-accent text-sm leading-tight transition"
+                >
+                  {social.label}
+                  <ExternalLink size={12} stroke-width={2} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

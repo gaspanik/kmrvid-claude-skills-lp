@@ -1,0 +1,120 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import ChangelogList from "@/components/ChangelogList.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { changelogSorted, RECENT_FROM } from "@/data/changelog";
+
+const recent = changelogSorted.filter((entry) => entry.date >= RECENT_FROM);
+const older = changelogSorted.filter((entry) => entry.date < RECENT_FROM);
+
+const since = new Date(`${RECENT_FROM}T00:00:00Z`).toLocaleDateString(
+  "en-US",
+  { year: "numeric", month: "long", timeZone: "UTC" },
+);
+---
+
+<Layout
+  title="Changelog — KMRVID Skills"
+  description="What changed in KMRVID Claude Skills and KMRVID Figma Skills, in brief. The full detail is in the README that ships with each package."
+  translated
+>
+  <Header />
+
+  <main class="mx-auto px-6 pt-14 md:pt-20 pb-20 md:pb-28 max-w-3xl">
+    <a
+      href="/en/skills/"
+      class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm transition"
+    >
+      <ArrowLeft size={16} stroke-width={2} />
+      Back to all skills
+    </a>
+
+    <h1 class="mt-8 text-ink max-sm:text-2xl text-left">Changelog</h1>
+    <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+      What changed in KMRVID Claude Skills and KMRVID Figma Skills, in brief.
+      Updates are free; replace the updated skills in your skills folder. The
+      full detail is in the README that ships with each package.
+    </p>
+
+    <fieldset class="mt-8 border-0 p-0 min-w-0">
+      <legend class="sr-only">Package to show</legend>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-all"
+            value="all"
+            checked
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >All</span
+          >
+        </label>
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-claude"
+            value="claude"
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >Claude Code</span
+          >
+        </label>
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-figma"
+            value="figma"
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >Figma</span
+          >
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="changelog" class="mt-6">
+      <h2 class="text-ink text-xl text-left">
+        Recent updates
+        <span class="font-body font-normal text-ink-soft text-sm">
+          (since {since})
+        </span>
+      </h2>
+      <ChangelogList entries={recent} lang="en" />
+
+      {
+        older.length > 0 && (
+          <details class="group mt-10">
+            <summary class="flex items-center gap-2 min-h-11 font-medium text-ink text-base cursor-pointer">
+              Earlier updates ({older.length})
+              <span class="text-ink-soft group-open:rotate-180 transition-transform">
+                ▾
+              </span>
+            </summary>
+            <ChangelogList entries={older} lang="en" />
+          </details>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  body:has(#f-claude:checked) #changelog [data-product="figma"],
+  body:has(#f-figma:checked) #changelog [data-product="claude"] {
+    display: none;
+  }
+</style>

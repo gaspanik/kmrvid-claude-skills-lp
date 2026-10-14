@@ -91,3 +91,11 @@
     color: var(--color-ink);
   }
 }
+
+/*
+ * 英語ページでは両端揃えにしない（単語間が不均等に空くため）。
+ * 日本語ページの text-justify はそのまま。
+ */
+:lang(en) .text-justify {
+  text-align: left;
+}

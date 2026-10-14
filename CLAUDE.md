@@ -50,6 +50,8 @@ Use this tool over training-data knowledge for Astro-specific APIs, integrations
 - `src/layouts/Layout.astro` — root HTML shell; import global CSS here
 - `src/pages/` — each `.astro` file becomes a route automatically
 - `src/components/` — reusable `.astro` components
+- `src/data/` — single source of truth: `products.ts` (JA price/URL, `en` = Gumroad USD), `skills.ts` (JA/EN descriptions, dependencies), `counterparts.ts`, `changelog.ts`. Never hand-copy skill counts; they are derived from `skills.ts`
+- `src/i18n/ui.ts` — language is decided by URL (`/en/` prefix). English pages live in `src/pages/en/`; `Layout` emits `lang`, canonical and hreflang (pass `translated` when a JA/EN pair exists)
 - `src/assets/` — static assets processed by Vite (use `import` to reference)
 - `public/` — assets served as-is (favicon, etc.)
 

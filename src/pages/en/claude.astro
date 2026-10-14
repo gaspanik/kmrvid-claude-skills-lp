@@ -1,0 +1,469 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  FileText,
+  MessageCircleQuestionMark,
+  SquareTerminal,
+  Tag,
+  Workflow,
+} from "@lucide/astro";
+import { Image } from "astro:assets";
+import codeScreen from "@/assets/images/code-screen.jpg";
+import Callout from "@/components/Callout.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CreatorBio from "@/components/CreatorBio.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import FlowCard from "@/components/FlowCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import PricingCard from "@/components/PricingCard.astro";
+import Price from "@/components/Price.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  claudeCategories,
+  claudeSkills,
+  claudeSkillsCount,
+} from "@/data/skills";
+import { bundleSavingUsd, formatUsd, products } from "@/data/products";
+
+const product = products.claude.en;
+
+const steps = [
+  {
+    n: "01",
+    title: "Copy the skills",
+    desc: "Into ~/.claude/skills/ for all projects, or into .claude/skills/ for one project. A skill in the project folder wins over the same name in the global one.",
+  },
+  {
+    n: "02",
+    title: "Call one with a slash command",
+    desc: "Type /skill-name in Claude Code, for example /create-mockup or /tailwind-review. The skill asks for whatever it needs, so running it with no arguments is fine.",
+  },
+  {
+    n: "03",
+    title: "Install what it depends on",
+    desc: "Some skills call other skills. Install the ones a skill depends on in the same place. Every dependency is listed below and in the README.",
+  },
+];
+
+const flows = [
+  {
+    goal: "Build a UI and polish it",
+    chain: ["create-mockup", "mobile-polish", "visual-polish", "click-to-fix"],
+    desc: "Build from scratch without Figma, add mobile navigation, self-correct from screenshots, then fix details by clicking in the browser.",
+  },
+  {
+    goal: "Requirements first",
+    chain: ["brief-me", "create-mockup"],
+    desc: "A BRIEF.md written up front is picked up automatically by the mockup skills, so the copy and structure reflect your target and goal.",
+  },
+  {
+    goal: "Astro quality pass",
+    chain: ["tailwind-review", "astro-doctor"],
+    desc: "Tidy Tailwind classes and accessibility structure, then optimize component granularity.",
+  },
+  {
+    goal: "Check a Figma design before coding",
+    chain: ["figma-audit", "figma-workflow"],
+    desc: "Score the frame, fix low-scoring spots in Figma, then implement, review and optimize through sub-agents.",
+  },
+  {
+    goal: "Keep code and Figma tokens in sync",
+    chain: ["tailwind-to-figma", "figma-to-tailwind"],
+    desc: "Start from whichever side is the master: code to Figma, or Figma back to Tailwind @theme.",
+  },
+  {
+    goal: "Hand it to a pipeline",
+    chain: ["mockup-pipeline", "lp-pipeline", "full-pipeline"],
+    desc: "The pipeline skills chain setup, mockup, mobile polish, Tailwind review and Astro checks for you.",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID Claude Skills — ${claudeSkillsCount} skills for Claude Code`}
+  description={`${claudeSkillsCount} Claude Code skills for a frontend project, from first brief to finished code: set up a project, build mockups, sync design tokens with Figma, clean up Tailwind, polish Astro code and check accessibility.`}
+  translated
+>
+  <Header variant="claude" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="/en/"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Want the Figma side too? See the bundle
+        </a>
+
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Skills for Claude Code
+        </p>
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-2xl text-left"
+        >
+          {claudeSkillsCount} Claude Code skills,
+          <br />
+          <span class="text-accent">from first brief to finished code</span>
+        </h1>
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          KMRVID Claude Skills covers the whole loop of building a site with
+          Claude Code: set up a project, build mockups, sync design tokens with
+          Figma, clean up Tailwind, polish Astro code and check accessibility.
+          Each skill is a folder of instructions (SKILL.md) that you call with a
+          slash command. Run them one at a time, or chain them with the
+          pipeline skills.
+        </p>
+
+        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+          <a
+            href={product.url}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            <span>Get the skills · <Price product="claude" lang="en" /></span>
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#categories"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            Browse the skills
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">{claudeSkillsCount}</p>
+            <p class="mt-2 text-white/60 text-sm">Skill folders, each with a SKILL.md</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">
+              {claudeCategories.length}
+            </p>
+            <p class="mt-2 text-white/60 text-sm">Categories, by stage of the work</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">PDF</p>
+            <p class="mt-2 text-white/60 text-sm">
+              README with dependencies and free lifetime updates
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section
+      id="overview"
+      aria-labelledby="overview-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="overview-heading" class="max-w-xl text-ink text-left">
+        Repeatable steps instead of re-writing prompts
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Built for designers and frontend developers who work with Astro, Vite or
+        React and Tailwind CSS v4, and who want to save a procedure that worked
+        and call it again.
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        <FeatureCard
+          icon={SquareTerminal}
+          title="Skills for each stage of the work"
+          description="Setup, mockups, Figma integration, Tailwind, finishing and pipeline design, each as a folder you call with a slash command."
+        />
+        <FeatureCard
+          icon={FileText}
+          title="A README you can work from"
+          description="A PDF with a skill reference, the dependency list, ready-made skill combinations and install steps ships alongside the ZIP."
+        />
+        <FeatureCard
+          icon={Workflow}
+          title="Readable, adaptable skills"
+          description="Every skill is plain text, so you can also use the package as study material for writing your own."
+        />
+      </div>
+
+      <div class="mt-6">
+        <Callout>
+          The skills that run inside Figma’s Design Agent are not in this
+          package. They are in KMRVID Figma Skills, and in the bundle together
+          with these.
+        </Callout>
+      </div>
+    </section>
+
+    <!-- ============ GET STARTED ============ -->
+    <section
+      aria-labelledby="steps-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="steps-heading" class="max-w-xl text-ink text-left">
+          Get started in 3 steps
+        </h2>
+        <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          {
+            steps.map((step) => (
+              <li class="bg-canvas p-6 border border-border rounded-2xl">
+                <p class="font-heading text-accent text-3xl">{step.n}</p>
+                <h3 class="mt-3 text-lg text-left leading-snug">
+                  {step.title}
+                </h3>
+                <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                  {step.desc}
+                </p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FLOWS ============ -->
+    <section
+      aria-labelledby="flows-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="flows-heading" class="max-w-xl text-ink text-left">
+        Flows that work well together
+      </h2>
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        {flows.map((flow) => <FlowCard {...flow} />)}
+      </div>
+    </section>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section
+      id="categories"
+      aria-labelledby="categories-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="categories-heading" class="max-w-xl text-ink text-left">
+          The {claudeSkillsCount} skills
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Grouped by stage of the work. Each card shows what the skill does and
+          which other skills it needs. See the
+          <a
+            href="/en/skills/#counterparts"
+            class="text-accent underline underline-offset-4"
+          >
+            comparison table
+          </a>
+          for how these relate to the Figma Design Agent edition.
+        </p>
+
+        <div class="mt-12">
+          {
+            claudeCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="en"
+                known={claudeSkills.map((skill) => skill.name)}
+              />
+            ))
+          }
+        </div>
+
+        <a
+          href="/en/changelog/"
+          class="inline-flex items-center gap-1 mt-10 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          See the changelog
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ GOOD TO KNOW ============ -->
+    <section
+      aria-labelledby="know-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-3xl"
+    >
+      <h2 id="know-heading" class="text-ink text-left">Good to know</h2>
+      <ul
+        class="flex flex-col gap-4 mt-8 text-ink-soft text-base text-justify leading-relaxed list-disc pl-6"
+      >
+        <li>
+          Written for Claude Code (CLI, Desktop and the VS Code extension) on
+          macOS, Linux and Windows (WSL or PowerShell). Using them in another
+          agent such as Cursor or Codex means adapting the Claude-specific
+          parts; the README explains what to change.
+        </li>
+        <li>
+          Tested on real projects, but agents and tool versions move quickly,
+          so results can vary in your setup. One-to-one troubleshooting is not
+          offered. If something breaks, pass the SKILL.md and the error log to
+          your agent; the skills are plain text and easy to adapt.
+        </li>
+        <li>
+          A few skills that encode Japanese-specific conventions, such as
+          create-jp-lp, keep their rule text in Japanese. Their questions and
+          reports are in English.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-accent-dark text-sm uppercase tracking-widest"
+        >
+          <Tag size={18} stroke-width={2} />
+          Pricing
+        </p>
+        <h2 id="pricing-heading" class="text-ink text-left">
+          KMRVID Claude Skills
+        </h2>
+        <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+          All {claudeSkillsCount} skills, the README (PDF) and free lifetime
+          updates for {formatUsd(product.priceUsd)}.
+        </p>
+
+        <PricingCard
+          product="claude"
+          benefits={[
+            `${claudeSkillsCount} skills for Claude Code`,
+            "A README (PDF) with a skill reference, dependency list, ready-made combinations and install steps",
+            "Free lifetime updates",
+            "Plain-text SKILL.md files you can read and adapt",
+          ]}
+        />
+      </div>
+    </section>
+
+    <!-- ============ CROSS-SELL ============ -->
+    <section
+      aria-labelledby="cross-sell-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="cross-sell-heading" class="max-w-xl text-ink text-left">
+        Want the Figma side too?
+      </h2>
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        <PackageCard
+          product="figma"
+          lang="en"
+          description="Custom skills you register in Figma’s Design Agent: requirements, page generation, structure clean-up, accessibility checks and a prompt for your coding agent."
+        />
+        <PackageCard
+          product="bundle"
+          lang="en"
+          description="Both editions together. Cheaper than buying them separately."
+        />
+      </div>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+        The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+        the Claude and Figma editions separately.
+      </p>
+    </section>
+
+    <CreatorBio />
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-heading" class="py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-3xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">
+          Frequently asked questions
+        </h2>
+        <div class="mt-8 *:border-border *:border-b">
+          <FaqItem question="Which projects is this for?">
+            Frontend projects built with Astro, Vite or React and Tailwind CSS
+            v4. Some skills, such as click-to-fix, also work outside that
+            stack, but the package assumes it.
+          </FaqItem>
+          <FaqItem question="Do the Figma skills here need the Figma edition?">
+            No. The Figma integration skills in this package work from Claude
+            Code through the Figma MCP. The Figma edition is a separate set of
+            skills that run inside Figma’s Design Agent.
+          </FaqItem>
+          <FaqItem question="Does it include video lessons?">
+            No. The package contains the skills and a README (PDF).
+          </FaqItem>
+          <FaqItem question="Can I try something before buying?">
+            Some skills are open source on GitHub, and some are free on Figma
+            Community.
+          </FaqItem>
+          <FaqItem question="Can I edit the skills?">
+            Yes. Every skill is plain text, so you can adapt it to your own
+            workflow, or read it to learn how to write your own.
+          </FaqItem>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section
+      aria-labelledby="final-cta-heading"
+      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+    >
+      <Image
+        src={codeScreen}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/85"></div>
+      <div
+        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          {claudeSkillsCount} skills for {formatUsd(product.priceUsd)}
+        </h2>
+        <a
+          href={product.url}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          <span>Buy on Gumroad</span>
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href="/en/"
+          class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
+        >
+          See the bundle with the Figma edition
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="claude" />
+</Layout>

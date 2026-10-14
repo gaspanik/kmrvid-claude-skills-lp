@@ -1,0 +1,236 @@
+---
+import { ArrowLeft, ArrowRight, Tag } from "@lucide/astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CounterpartTable from "@/components/CounterpartTable.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  claudeCategories,
+  claudeSkills,
+  claudeSkillsCount,
+  figmaCategories,
+  figmaSkills,
+  figmaSkillsCount,
+  totalSkills,
+} from "@/data/skills";
+import { formatUsd, products } from "@/data/products";
+
+const bundle = products.bundle.en;
+---
+
+<Layout
+  title={`All ${totalSkills} skills — KMRVID Skills Bundle`}
+  description={`Every skill in KMRVID Skills Bundle: ${claudeSkillsCount} for Claude Code and ${figmaSkillsCount} for Figma’s Design Agent, with dependencies and a comparison of the two editions.`}
+  translated
+>
+  <Header />
+
+  <main>
+    <section class="mx-auto px-6 pt-14 md:pt-20 max-w-5xl">
+      <a
+        href="/en/#included"
+        class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm transition"
+      >
+        <ArrowLeft size={16} stroke-width={2} />
+        Back to the bundle
+      </a>
+
+      <p class="mt-8 text-ink-soft text-sm uppercase tracking-widest">
+        All skills
+      </p>
+      <h1 class="max-w-2xl text-ink max-sm:text-2xl text-left">
+        {totalSkills} skills across two editions
+      </h1>
+      <p
+        class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        {claudeSkillsCount} skills for Claude Code and {figmaSkillsCount}
+        custom skills for Figma’s Design Agent. Each card shows what the skill
+        does and which other skills it needs. Install the skills a skill
+        depends on in the same place.
+      </p>
+    </section>
+
+    <nav
+      aria-label="Jump to a package"
+      class="mx-auto mt-10 px-6 max-w-5xl"
+    >
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li>
+          <a
+            href="#claude"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Claude Code edition ({claudeSkillsCount})
+          </a>
+        </li>
+        <li>
+          <a
+            href="#figma"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Figma Design Agent edition ({figmaSkillsCount})
+          </a>
+        </li>
+        <li>
+          <a
+            href="#counterparts"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Comparison table
+          </a>
+        </li>
+        <li>
+          <a
+            href="/en/changelog/"
+            class="inline-flex items-center px-4 border border-border hover:border-accent rounded-full min-h-11 transition"
+          >
+            Changelog
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ============ CLAUDE ============ -->
+    <section
+      id="claude"
+      aria-labelledby="claude-heading"
+      class="mx-auto px-6 py-14 md:py-20 max-w-5xl scroll-mt-20"
+    >
+      <p class="text-ink-soft text-sm uppercase tracking-widest">
+        For Claude Code
+      </p>
+      <h2 id="claude-heading" class="mt-2 text-ink text-left">
+        KMRVID Claude Skills ({claudeSkillsCount} skills)
+      </h2>
+      <p
+        class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        The whole loop of building a frontend with Claude Code: set up a
+        project, build mockups, sync tokens with Figma, clean up Tailwind and
+        polish the result.
+      </p>
+      <a
+        href="/en/claude/"
+        class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        About KMRVID Claude Skills
+        <ArrowRight size={14} stroke-width={2} />
+      </a>
+
+      <div class="mt-10">
+        {
+          claudeCategories.map((category) => (
+            <CategorySkills
+              category={category}
+              lang="en"
+              known={claudeSkills.map((skill) => skill.name)}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ FIGMA ============ -->
+    <section
+      id="figma"
+      aria-labelledby="figma-heading"
+      class="bg-surface-alt py-14 md:py-20 scroll-mt-20"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p class="text-ink-soft text-sm uppercase tracking-widest">
+          For Figma’s Design Agent
+        </p>
+        <h2 id="figma-heading" class="mt-2 text-ink text-left">
+          KMRVID Figma Skills ({figmaSkillsCount} skills)
+        </h2>
+        <p
+          class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Custom skills you register in Figma’s Design Agent. Select a frame on
+          the canvas and call the skill from the chat; questions and reports
+          are in English.
+        </p>
+        <a
+          href="/en/figma/"
+          class="inline-flex items-center gap-1 mt-3 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          About KMRVID Figma Skills
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+
+        <div class="mt-10">
+          {
+            figmaCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="en"
+                known={figmaSkills.map((skill) => skill.name)}
+                otherPackage="KMRVID Claude Skills"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTERPARTS ============ -->
+    <section
+      id="counterparts"
+      aria-labelledby="counterparts-heading"
+      class="mx-auto px-6 py-14 md:py-20 max-w-5xl scroll-mt-20"
+    >
+      <h2 id="counterparts-heading" class="text-ink text-left">
+        Claude Code and Figma editions compared
+      </h2>
+      <p
+        class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Skills that share a name or a role. The basic difference is the input:
+        the Claude edition takes a Figma URL and works through the Figma MCP,
+        while the Figma edition works on the nodes you select on the canvas
+        through the Plugin API. Skills that exist in only one edition are not
+        listed here.
+      </p>
+      <CounterpartTable lang="en" anchors />
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="bg-ink py-20 md:py-28 text-canvas">
+      <div
+        class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <h2 class="text-canvas">
+          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}
+        </h2>
+        <a
+          href={bundle.url}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          <span>Buy the bundle on Gumroad</span>
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <p class="text-white/60 text-sm">
+          Single editions:
+          <a
+            href="/en/claude/"
+            class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
+          >
+            Claude Skills ({formatUsd(products.claude.en.priceUsd)})
+          </a>
+          /
+          <a
+            href="/en/figma/"
+            class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
+          >
+            Figma Skills ({formatUsd(products.figma.en.priceUsd)})
+          </a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

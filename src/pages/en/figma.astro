@@ -3,6 +3,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Code,
+  ExternalLink,
   FileText,
   Languages,
   MessageCircleQuestionMark,
@@ -27,7 +28,12 @@ import {
   figmaSkills,
   figmaSkillsCount,
 } from "@/data/skills";
-import { bundleSavingUsd, formatUsd, products } from "@/data/products";
+import {
+  bundleSavingUsd,
+  FIGMA_COMMUNITY_URL,
+  formatUsd,
+  products,
+} from "@/data/products";
 
 const product = products.figma.en;
 
@@ -155,6 +161,18 @@ const flows = [
             Browse the skills
           </a>
         </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href={FIGMA_COMMUNITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Try before you buy: free skills on Figma Community
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
       </div>
 
       <div class="bg-ink mt-14 md:mt-20 text-canvas">
@@ -261,13 +279,6 @@ const flows = [
           }
         </div>
 
-        <a
-          href="/en/changelog/"
-          class="inline-flex items-center gap-1 mt-10 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-        >
-          See the changelog
-          <ArrowRight size={14} stroke-width={2} />
-        </a>
       </div>
     </section>
 

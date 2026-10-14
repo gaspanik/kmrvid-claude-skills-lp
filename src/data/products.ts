@@ -106,6 +106,9 @@ export const campaignEndsAt = Object.values(products).find(
   (product) => product.campaign,
 )?.campaign?.endsAt
 
+/** Figma Community の著者プロフィール（無料版・機能限定版のスキルを公開している） */
+export const FIGMA_COMMUNITY_URL = 'https://www.figma.com/@masaakikomori'
+
 /** Claude Code版の一部スキルを単体販売しているクリエイターページ（Figma版は掲載なし） */
 export const AGENSI_URL = 'https://www.agensi.io/creators/masaaki-komori'
 

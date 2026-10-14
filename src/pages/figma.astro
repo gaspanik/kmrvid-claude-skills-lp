@@ -26,6 +26,7 @@ import { Image } from "astro:assets";
 import { figmaCategories, figmaSkills } from "@/data/skills";
 import {
   bundleSaving,
+  FIGMA_COMMUNITY_URL,
   formatDuration,
   formatYen,
   products,
@@ -192,10 +193,20 @@ const totalSkills = skills.length;
 
         <div class="flex flex-col items-start">
           <a
-            href="https://x.com/cipher/status/2087497917284385192"
+            href={FIGMA_COMMUNITY_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Figma Communityで無料のスキルを先に試す
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+
+          <a
+            href="https://x.com/cipher/status/2087497917284385192"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 -mt-2 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
           >
             Figma版スキルの使いどころ、便利なところ
             <ExternalLink size={14} stroke-width={2} />
@@ -360,13 +371,6 @@ const totalSkills = skills.length;
           }スキルすべてFigma上での実機動作を確認済みです。Figma Design Agent
           は現在β版です。状況によっては正常に動作しない場合があります。
         </p>
-        <a
-          href="/changelog/"
-          class="inline-flex items-center gap-1 mt-4 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-        >
-          更新履歴を見る
-          <ArrowRight size={14} stroke-width={2} />
-        </a>
       </div>
     </section>
 

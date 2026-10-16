@@ -48,11 +48,11 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 |---|---|---|---|
 | KMRVID Skills Bundle | `/en/` | https://gaspanik.gumroad.com/l/kmrvid-bundle | $199 |
 | KMRVID Claude Skills | `/en/claude/` | https://gaspanik.gumroad.com/l/kmrvid-claudeskills | $137 |
-| KMRVID Figma Skills | `/en/figma/` | https://gaspanik.gumroad.com/l/kmrvid-figmaskills | $87 |
+| KMRVID Figma Skills | `/en/figma/` | https://gaspanik.gumroad.com/l/kmrvid-figmaskills | $97 |
 
 - 海外版は**スキルのみ**（解説動画なし）。スキル本文・質問・レポートは基本すべて英語。`create-jp-lp` など日本の文化・慣習に特化したスキルだけ、ルール本文が日本語のまま。
 - 付属物はREADME（PDF）と無料の生涯アップデート。LINEクーポン・キャンペーンは日本語版のみ。
-- Bundleの差額は $25（$137＋$87−$199）。
+- Bundleの差額は $35（$137＋$97−$199）。
 - 英語説明の出所はGumroadの各商品ページ。価格を扱う前にGumroadの現在価格を確認すること。
 
 ## ターゲット

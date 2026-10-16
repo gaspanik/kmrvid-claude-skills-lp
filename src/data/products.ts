@@ -96,7 +96,7 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Figma Skills',
       href: '/en/figma/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-figmaskills',
-      priceUsd: 87,
+      priceUsd: 97,
     },
   },
 }

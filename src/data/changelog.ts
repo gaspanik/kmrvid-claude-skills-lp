@@ -22,6 +22,36 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-10 ============
   {
+    date: '2026-10-25',
+    product: 'claude',
+    kind: 'new',
+    skills: ['create-figma-page'],
+    ja: 'コードもモックアップも挟まず、Figmaのキャンバスへ直接ページを生成する create-figma-page を追加。',
+    en: 'Added create-figma-page, which builds a page directly on the Figma canvas with no code or mockup step.',
+  },
+  {
+    date: '2026-10-25',
+    product: 'claude',
+    kind: 'update',
+    skills: [
+      'create-figma-page',
+      'figma-tidy-up',
+      'figma-componentize',
+      'figma-enhance',
+      'code-to-figma',
+    ],
+    ja: 'create-figma-page に複数パターン（ページ全体／セクション別）のモードを追加。4スキルを含む5スキルの失敗回避ルールを追加（複数行テキストのFILL幅、配置は MAX など）。',
+    en: 'create-figma-page gained a multi-pattern mode (whole page or one section). Five skills, including four others, gained more failure-avoidance rules (e.g. multi-line text set to FILL width, MAX for alignment).',
+  },
+  {
+    date: '2026-10-19',
+    product: 'figma',
+    kind: 'new',
+    skills: ['motion-composer'],
+    ja: '選択したフレームのモーションを対話で設計し、Web実装用の注釈まで書き込む motion-composer を追加。',
+    en: 'Added motion-composer, which designs motion for a selected frame and writes web implementation annotations.',
+  },
+  {
     date: '2026-10-06',
     product: 'claude',
     kind: 'fix',

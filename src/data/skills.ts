@@ -603,10 +603,8 @@ export const categories: Category[] = [
         deps: [
           opt('brief-me', 'cognitive-ui-design', 'japanese-web-guideline'),
         ],
-        depsNote:
-          'Figma公式プラグインの figma-use・figma-generate-design が必要です（本パッケージには含まれません）。',
-        depsNoteEn:
-          'Requires the official Figma plugin skills figma-use and figma-generate-design (not included in this package).',
+        depsNote: 'Figma MCPサーバーとの接続が必要です。',
+        depsNoteEn: 'Requires a connection to the Figma MCP server.',
       },
       {
         name: 'code-to-figma',

@@ -295,6 +295,11 @@ export const categories: Category[] = [
         en: 'Two-way sync between a Figma file and a DESIGN.md (Google design.md spec).',
         lite: figmaFree('https://www.figma.com/community/skill/93189'),
       },
+      {
+        name: 'motion-composer',
+        desc: '選択したフレームのモーションを、1ターン1問のウィザード形式で設計。Web実装の方針・プリセット・開始条件などを確認し、最終承認後に適用して、Web実装用の仕様をDev Mode注釈として書き込む',
+        en: 'Designs motion for a selected frame one question at a time, applies it after final approval, and writes the web implementation spec as Dev Mode annotations.',
+      },
     ],
   },
   {
@@ -590,6 +595,18 @@ export const categories: Category[] = [
         desc: 'figma-update-checker での変更検知後、ページ全体を作り直さず変更箇所だけをピンポイント修正',
         en: 'Patches only the part that changed instead of rebuilding the page.',
         deps: [req('figma-update-checker')],
+      },
+      {
+        name: 'create-figma-page',
+        desc: 'コードもモックアップも挟まず、BRIEF から Figma のキャンバスへ直接ページを生成。接続済みライブラリのコンポーネント・変数・スタイルも利用。構造の異なる複数パターンや、1セクションの複数案も作れる',
+        en: 'Builds a page directly on the Figma canvas from a BRIEF, with no code or mockup step. Reuses connected libraries, and can lay out several structurally different patterns side by side.',
+        deps: [
+          opt('brief-me', 'cognitive-ui-design', 'japanese-web-guideline'),
+        ],
+        depsNote:
+          'Figma公式プラグインの figma-use・figma-generate-design が必要です（本パッケージには含まれません）。',
+        depsNoteEn:
+          'Requires the official Figma plugin skills figma-use and figma-generate-design (not included in this package).',
       },
       {
         name: 'code-to-figma',

@@ -5,9 +5,9 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 
 | 商品 | LP | 商品ページ | 定価（税込） | スキル数 | 動画 | 総時間 |
 |---|---|---|---|---|---|---|
-| KMRVID Skills - All-in-One Bundle | `/` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 78個（Claude版48＋Figma版30） | 60本 | 約6時間5分 |
-| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 48個 | 40本 | 約4時間10分 |
-| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 30個 | 20本 | 約1時間55分 |
+| KMRVID Skills - All-in-One Bundle | `/` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 80個（Claude版49＋Figma版31） | 60本 | 約6時間5分 |
+| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 49個 | 40本 | 約4時間10分 |
+| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 31個 | 20本 | 約1時間55分 |
 
 - トップページ（`/`）は主力商品「All-in-One Bundle」の紹介ページ。Claude版・Figma版の個別ページへの導線（「個別パッケージ」セクション、ヘッダー、ヒーローのバッジ）を持つ。
 - `/skills` は Bundle 収録の全スキルを、パッケージ別（Claude Code版 → Figma Design Agent版）・カテゴリ別に一覧表示するスキル紹介ページ。各スキルの説明・依存スキル（必須 / オプション / いずれか）を併記し、末尾に「Claude版とFigma版の対応表」を置く。
@@ -74,11 +74,11 @@ Web制作者・フリーランスを主体としつつ、企業（AI導入を検
 
 ## 競合・差別化ポイント
 - 専門性・実績で差別化（著者の長年のWeb制作現場での実績・執筆/監修実績）
-- 内容量・網羅性で差別化（Bundleはスキル78個×動画60本という圧倒的ボリューム）
+- 内容量・網羅性で差別化（Bundleはスキル80個×動画60本という圧倒的ボリューム）
 - 実務即活用可能さで差別化（プロンプト中心ではなく、エージェントが理解できるスキル形式での提供）
 
 ## 規模感
-Bundleに含まれる78スキル・60本の動画のうち、トップページでは代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
+Bundleに含まれる80スキル・60本の動画のうち、トップページでは代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
 
 ## デバイス優先度
 PC・スマートフォンともにほぼ半々を想定し、しっかり対応する。

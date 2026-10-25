@@ -598,8 +598,8 @@ export const categories: Category[] = [
       },
       {
         name: 'create-figma-page',
-        desc: 'コードもモックアップも挟まず、BRIEF から Figma のキャンバスへ直接ページを生成。接続済みライブラリのコンポーネント・変数・スタイルも利用。構造の異なる複数パターンや、1セクションの複数案も作れる',
-        en: 'Builds a page directly on the Figma canvas from a BRIEF, with no code or mockup step. Reuses connected libraries, and can lay out several structurally different patterns side by side.',
+        desc: 'Figma版の create-single-page と create-multi-pattern の機能をまとめて、Claude Code から実行できるスキル。コードもモックアップも挟まず、BRIEF から Figma のキャンバスへ直接ページを生成。接続済みライブラリも利用でき、構造の異なる複数パターンや1セクションの複数案も作れる',
+        en: 'Runs the Figma edition’s create-single-page and create-multi-pattern from Claude Code. Builds a page directly on the Figma canvas from a BRIEF, with no code or mockup step, reusing connected libraries, in one layout or several side by side.',
         deps: [
           opt('brief-me', 'cognitive-ui-design', 'japanese-web-guideline'),
         ],

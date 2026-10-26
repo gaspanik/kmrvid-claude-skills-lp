@@ -22,6 +22,14 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-10 ============
   {
+    date: '2026-10-26',
+    product: 'claude',
+    kind: 'fix',
+    skills: ['create-figma-page'],
+    ja: 'create-figma-page の冒頭のモード質問（1ページ／複数パターン／セクション別）が、「LP」などの記載だけで飛ばされることがあったのを修正。モードや数がはっきり書かれているときだけ省略する。',
+    en: 'create-figma-page no longer skips its opening mode question (one page / several patterns / section variations) just because the request says "landing page"; it is skipped only when the mode or a count is stated explicitly.',
+  },
+  {
     date: '2026-10-25',
     product: 'claude',
     kind: 'new',

@@ -22,6 +22,30 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-10 ============
   {
+    date: '2026-10-30',
+    product: 'figma',
+    kind: 'new',
+    skills: ['cognitive-ui-design'],
+    ja: 'これまでClaude版のみだった cognitive-ui-design を同梱（Claude版と同じ内容）。create-multi-pattern などが任意のコンパニオンスキルとして参照する。',
+    en: 'Bundled cognitive-ui-design, previously Claude-only, with the same content as the Claude edition. create-multi-pattern and others use it as an optional companion.',
+  },
+  {
+    date: '2026-10-30',
+    product: 'figma',
+    kind: 'update',
+    skills: ['create-multi-pattern'],
+    ja: 'cognitive-ui-design の最新仕様（5点宣言・ゲストのマイクロパターン・狙い文）に対応。最後にパターンログをチャットへ出力するか確認し、前回のログは最初に貼り付けられる。',
+    en: 'create-multi-pattern follows the latest cognitive-ui-design (five-point declarations, guest micro-patterns, aim statements). It now offers to print a pattern log in the chat, and you can paste the previous log at the start.',
+  },
+  {
+    date: '2026-10-29',
+    product: 'claude',
+    kind: 'update',
+    skills: ['cognitive-ui-design', 'create-multi-mockup', 'create-figma-page'],
+    ja: 'cognitive-ui-design を拡張：複数パターンの各候補をコンバージョン動線を加えた5点で宣言し、狙い文を添える。読ませるセクションにはゲストのマイクロパターンも使え、任意の pattern-log.md で過去の組み合わせの繰り返しを避けられる。create-multi-mockup と create-figma-page の複数パターン生成にも反映。',
+    en: 'Extended cognitive-ui-design: each candidate is declared on five points, now including the conversion path, with an aim statement. Reading sections may use guest micro-patterns, and an optional pattern-log.md avoids repeating past combinations. create-multi-mockup and create-figma-page follow it in multi-pattern runs.',
+  },
+  {
     date: '2026-10-28',
     product: 'claude',
     kind: 'new',

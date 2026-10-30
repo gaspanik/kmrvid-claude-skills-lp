@@ -487,7 +487,7 @@ const combos = [
         Muse版のスキルセットは、Claude版・Figma版・All-in-One Bundleの各商品に、これからも特典として含まれます。Muse以外の環境（Claude CodeやFigma Design Agent）でも使いたい方は、既存のスキルをご購入いただくほうがお得です。Museだけで十分という方は、本商品をお選びください。
       </p>
 
-      <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
         <PackageCard
           product="claude"
           description="Claude Codeで動く、セットアップ・モックアップ作成・Figma連携・Tailwind最適化・仕上げまでを網羅したスキル群。Muse版を特典として同梱。"
@@ -496,10 +496,12 @@ const combos = [
           product="figma"
           description="FigmaのDesign Agent専用に最適化したカスタムスキル集。Muse版を特典として同梱。"
         />
-        <PackageCard
-          product="bundle"
-          description="Claude版とFigma版の全スキルを収録したセット。Muse版も特典として同梱。"
-        />
+        <div class="md:col-span-2">
+          <PackageCard
+            product="bundle"
+            description="Claude版とFigma版の全スキルを収録したセット。Muse版も特典として同梱。"
+          />
+        </div>
       </div>
 
       <p

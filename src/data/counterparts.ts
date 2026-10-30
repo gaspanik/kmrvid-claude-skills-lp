@@ -40,6 +40,12 @@ export const counterparts: Counterpart[] = [
     en: 'Both propose improvements without editing the original. The Claude edition measures the running page; the Figma edition analyzes the frame.',
   },
   { claude: 'create-multi-mockup', figma: 'create-multi-pattern' },
+  {
+    claude: 'cognitive-ui-design',
+    figma: 'cognitive-ui-design',
+    ja: '両版とも同じ内容です（SKILL.mdは英文のまま）。Figma版ではパターンログがファイルに残らないため、チャットに出力されます。',
+    en: 'Both editions carry the same content (SKILL.md stays in English). On Figma the pattern log is printed in the chat, since no file can be kept.',
+  },
   { claude: 'figma-audit', figma: 'figma-audit' },
   { claude: 'figma-component-audit', figma: 'figma-component-audit' },
   { claude: 'figma-contrast-check', figma: 'figma-contrast-check' },

@@ -8,7 +8,6 @@ import {
   FileText,
   Languages,
   MousePointerClick,
-  Plus,
   SquareTerminal,
   Tag,
   Workflow,
@@ -122,9 +121,8 @@ const combos = [
   },
   {
     goal: "人間の特性を考慮したページデザインにしたい",
-    chain: ["create-multi-pattern"],
-    claudeSkill: "cognitive-ui-design",
-    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、Claude版限定の`cognitive-ui-design`が担当。Figma版の`create-multi-pattern`と併用すると、コンパニオンスキルとして裏で呼び出され、生成する複数パターンの質をさらに引き上げられます。",
+    chain: ["create-multi-pattern", "cognitive-ui-design"],
+    desc: "視線誘導パターン（Z型・F型・バナーブラインドネス回避など）や認知バイアスを踏まえたレイアウト設計は、`cognitive-ui-design`が担当。登録しておくと`create-multi-pattern`などがコンパニオンスキルとして裏で呼び出し、生成する複数パターンの質をさらに引き上げられます。",
   },
 ];
 
@@ -279,8 +277,8 @@ const totalSkills = skills.length;
       <div class="mt-6">
         <Callout>
           `cognitive-ui-design` は、Claude Code版の「KMRVID Claude
-          Skills」（およびAll-in-One
-          Bundle）に含まれるスキルで、Figma専用版には含まれません。レイアウトの定石崩しなどのガイドラインは、その内容が重要であるためClaude版のみでの提供です。
+          Skills」に含まれる同名スキルと同じ内容を同梱しています（Figma専用の書き換えはなく、SKILL.mdは英文のままです）。`create-single-page`・`create-multi-pattern`・`create-jp-lp`・`hey-polish-me`
+          が任意のコンパニオンスキルとして参照します。
         </Callout>
       </div>
     </section>
@@ -395,25 +393,13 @@ const totalSkills = skills.length;
         >
           スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
         </p>
-        <p class="flex items-center gap-2 mt-3 text-ink-soft text-sm">
-          <span
-            class="inline-block border border-accent/30 rounded-full w-3 h-3 bg-accent-soft"
-          ></span>
-          色付きのカードは、Claude版「KMRVID Claude Skills」限定スキルとの組み合わせ例です
-        </p>
 
         <div
           class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 mt-10 *:p-6 *:border *:rounded-2xl"
         >
           {
             combos.map((combo) => (
-              <div
-                class={
-                  combo.claudeSkill
-                    ? "bg-accent-soft border-accent/30"
-                    : "bg-canvas border-border"
-                }
-              >
+              <div class="bg-canvas border-border">
                 <h3 class="text-lg text-left leading-snug">{combo.goal}</h3>
                 <div class="flex flex-wrap items-center gap-2 mt-3">
                   {combo.chain.map((skill, i) => (
@@ -430,31 +416,10 @@ const totalSkills = skills.length;
                       </span>
                     </>
                   ))}
-                  {combo.claudeSkill && (
-                    <>
-                      <Plus
-                        size={14}
-                        stroke-width={2}
-                        class="text-accent-dark"
-                      />
-                      <span class="bg-accent px-2.5 py-1 rounded-full font-mono text-white text-xs">
-                        {combo.claudeSkill}
-                      </span>
-                    </>
-                  )}
                 </div>
                 <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
                   {combo.desc}
                 </p>
-                {combo.claudeSkill && (
-                  <a
-                    href="/claude"
-                    class="inline-flex items-center self-start gap-1.5 mt-4 min-h-11 hover:text-accent text-sm underline underline-offset-4 transition text-accent-dark"
-                  >
-                    Claude版の詳細を見る
-                    <ArrowUpRight size={14} stroke-width={2} />
-                  </a>
-                )}
               </div>
             ))
           }

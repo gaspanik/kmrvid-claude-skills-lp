@@ -110,7 +110,7 @@ export const categories: Category[] = [
       },
       {
         name: 'create-multi-pattern',
-        desc: '複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当にも対応',
+        desc: '複数レイアウトパターンを一括生成・比較。BRIEF を渡すことでより精緻な画面を生成可能。cognitive-ui-design と連携したトポロジーモデル割当（5点宣言・狙い文）にも対応し、パターンログをチャットへ出力できる',
         en: 'Generates several structurally different layouts to compare. A BRIEF makes the screens more refined.',
         deps: [opt('cognitive-ui-design', 'figma-japanese-web-guideline')],
       },
@@ -144,6 +144,11 @@ export const categories: Category[] = [
         name: 'japanese-lp-seasoning',
         desc: 'フルブリード演出・カルーセル/バナースライダー・縦書きを、静的フレームでの見た目として選択・提案（スクロール連動アニメーションは対象外）、簡易実装処理まで',
         en: 'Full-bleed, carousels, banner sliders and vertical text, as static looks.',
+      },
+      {
+        name: 'cognitive-ui-design',
+        desc: '視線誘導トポロジーと認知バイアス対策で、定番レイアウト・無難な配色への安易な依存を崩すガイドライン。複数パターンでは5点宣言と狙い文を付け、パターンログはチャットに出力。Claude版と同じ内容（英文）',
+        en: 'Breaks generic layout and color defaults using eye-tracking patterns. Same content as the Claude edition.',
       },
       {
         name: 'figma-japanese-web-guideline',
@@ -680,7 +685,7 @@ export const categories: Category[] = [
       },
       {
         name: 'cognitive-ui-design',
-        desc: '視線誘導トポロジーと認知バイアス対策で、定番レイアウト・無難な配色への安易な依存を崩すガイドライン',
+        desc: '視線誘導トポロジーと認知バイアス対策で、定番レイアウト・無難な配色への安易な依存を崩すガイドライン。複数パターンでは5点宣言と狙い文を付け、読ませるセクションにはゲストのマイクロパターンも使える',
         en: 'Breaks generic layout and color defaults using eye-tracking patterns.',
       },
       {

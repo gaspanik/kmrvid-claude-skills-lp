@@ -1,0 +1,490 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Cloud,
+  Coins,
+  ExternalLink,
+  Languages,
+  LayoutTemplate,
+  MessageCircleQuestionMark,
+  MessageSquare,
+  ShieldCheck,
+  SquareTerminal,
+  Tag,
+} from "@lucide/astro";
+import Callout from "@/components/Callout.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CreatorBio from "@/components/CreatorBio.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import FlowCard from "@/components/FlowCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import PricingCard from "@/components/PricingCard.astro";
+import Price from "@/components/Price.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  MUSE_DEMO_URL,
+  MUSE_PLAYLIST_URL,
+  MUSE_VERIFIED_ON,
+  museCategories,
+  museSkills,
+  museSkillsCount,
+} from "@/data/muse";
+import {
+  bundleSavingUsd,
+  FIGMA_COMMUNITY_URL,
+  formatUsd,
+  products,
+} from "@/data/products";
+
+const product = products.muse.en;
+
+const features = [
+  {
+    icon: Coins,
+    title: "No Figma AI credits",
+    description:
+      "Everything goes through the Figma connector, so run a skill as often as you like. (For reference, the same optimization pipeline costs roughly 500 credits per file with Figma’s own agent.)",
+  },
+  {
+    icon: Cloud,
+    title: "One uniform environment",
+    description:
+      "Muse runs in a cloud Linux environment that barely varies between users, so behavior verified on the development side reproduces far more reliably than with locally installed tools.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Name the skill in chat",
+    description:
+      "Custom skills in Muse are not slash commands. Name the skill and add the Figma URL. No code editor, no terminal.",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "Generate new pages too",
+    description:
+      "create-figma-page builds a page from a brief, single or several patterns. For several, each candidate is declared up front (layout model, density, image treatment, type voice, CTA placement) so they don’t converge on the same layout.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Every write is approved",
+    description:
+      "Each change to Figma asks for your approval in Muse first. Review it, then approve to proceed.",
+  },
+  {
+    icon: Languages,
+    title: "English skills, bilingual README",
+    description:
+      "The skills are written in English. The README in the ZIP is bilingual (Japanese / English) and covers a skill reference and usage notes.",
+  },
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Put the skills in Muse",
+    desc: `Unzip and place the ${museSkillsCount} skill folders in your Muse custom-skills location. If you are not sure where that is, hand the unzipped folders to Muse and ask it to install them for you.`,
+  },
+  {
+    n: "02",
+    title: "Connect Figma",
+    desc: "Connect the Figma connector in Muse, and make sure you have edit permission on the target file.",
+  },
+  {
+    n: "03",
+    title: "Name the skill in chat",
+    desc: "Say, for example, “Run figma-tidy-up on this file” plus the Figma URL. Every write to Figma asks for your approval first.",
+  },
+];
+
+const flows = [
+  {
+    goal: "Clean up a messy file in one go",
+    chain: ["figma-optimize"],
+    desc: "tidy-up → layer-rename → tokenize → componentize → enhance, in dependency order. You pick which steps to run.",
+  },
+  {
+    goal: "From requirements to a layout",
+    chain: ["brief-me", "create-figma-page"],
+    desc: "Pin down requirements, then generate the page. Several structurally different patterns are possible, declared up front so they don’t converge on the same layout.",
+  },
+  {
+    goal: "Check before you hand off",
+    chain: ["figma-audit", "figma-contrast-check", "figma-alt-suggest"],
+    desc: "Score the design on four dimensions, check WCAG contrast, and get image alt-text proposals written as Accessibility annotations.",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID Muse Skills — ${museSkillsCount} Figma skills for Muse`}
+  description={`${museSkillsCount} Figma skills that run from a Muse chat through the Figma connector, from brief to handoff: clean up layers, tokens and components, check accessibility and generate pages, with no Figma AI credits used.`}
+  translated
+>
+  <Header variant="muse" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="#editions"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Own another edition? These skills are already included
+        </a>
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Skills for Muse
+        </p>
+        <h1
+          id="hero-heading"
+          class="max-w-3xl font-semibold text-ink max-sm:text-2xl text-left"
+        >
+          {museSkillsCount} Figma skills that run from a Muse chat, with <span class="text-accent">zero Figma AI credits</span>
+        </h1>
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          KMRVID Muse Skills ports the Figma skills from the KMRVID Claude /
+          Figma editions to Muse. Name a skill in chat, add the Figma URL, and
+          Muse does the work through the Figma connector: pin down
+          requirements, generate pages, clean up structure (layers, tokens,
+          components), translate frames and check accessibility, without
+          consuming any Figma AI credits.
+        </p>
+
+        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+          <a
+            href={product.url}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            <span>Get the skills · <Price product="muse" lang="en" /></span>
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            Browse the skills
+          </a>
+        </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href={FIGMA_COMMUNITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Try before you buy: free skills on Figma Community
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">{museSkillsCount}</p>
+            <p class="mt-2 text-white/60 text-sm">
+              Skills, each a self-contained folder
+            </p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">0</p>
+            <p class="mt-2 text-white/60 text-sm">Figma AI credits consumed</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">JA/EN</p>
+            <p class="mt-2 text-white/60 text-sm">
+              Bilingual README in the ZIP
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NOTICE ============ -->
+    <section aria-label="If you already own an edition" class="mx-auto px-6 pt-12 max-w-5xl">
+      <Callout>
+        This skill set is also included as a bonus with KMRVID Claude Skills,
+        KMRVID Figma Skills and the All-in-One Bundle. If you already own one of
+        those, you already have these skills. Please don’t buy them twice.
+      </Callout>
+    </section>
+
+    <!-- ============ WHY ============ -->
+    <section
+      id="why"
+      aria-labelledby="why-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="why-heading" class="max-w-xl font-medium text-ink text-left">
+        Built to run in Muse
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        These are the Figma skills from the Claude and Figma editions, ported so
+        they run from a Muse chat.
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        {
+          features.map((item) => (
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="max-w-xl font-medium text-ink text-left">
+          The {museSkillsCount} skills
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          All {museSkillsCount} skills were confirmed working on the actual Muse
+          + Figma connector runtime as of {MUSE_VERIFIED_ON.en}.
+        </p>
+
+        <div class="mt-12">
+          {
+            museCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="en"
+                known={museSkills.map((skill) => skill.name)}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO ============ -->
+    <section
+      id="how-to"
+      aria-labelledby="how-to-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="how-to-heading" class="max-w-xl font-medium text-ink text-left">
+        Get started in 3 steps
+      </h2>
+      <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+        {
+          steps.map((step) => (
+            <li class="bg-canvas p-6 border border-border rounded-2xl">
+              <p class="font-heading text-accent text-3xl">{step.n}</p>
+              <h3 class="mt-3 text-lg text-left leading-snug">{step.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                {step.desc}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p
+        class="flex items-start gap-3 mt-8 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        <SquareTerminal size={18} stroke-width={2} class="flex-none mt-1" />
+        <span>
+          Skills that restructure a file (figma-tidy-up, figma-tokenize,
+          figma-componentize and the like) change your Figma file. Duplicate the
+          file first, or make sure version history is available. Each skill
+          verifies its own work, but a copy is the safest undo.
+        </span>
+      </p>
+
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+        See it in use:
+        <a
+          href={MUSE_DEMO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 text-accent-dark hover:text-accent underline underline-offset-4 transition"
+        >
+          the demo video
+          <ExternalLink size={14} stroke-width={2} />
+        </a>.
+        More walkthroughs are on
+        <a
+          href={MUSE_PLAYLIST_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 text-accent-dark hover:text-accent underline underline-offset-4 transition"
+        >
+          this YouTube playlist
+          <ExternalLink size={14} stroke-width={2} />
+        </a>. The videos are in Japanese, with English subtitles (CC) on most of
+        them.
+      </p>
+    </section>
+
+    <!-- ============ FLOWS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="combos-heading" class="max-w-xl font-medium text-ink text-left">
+          Flows that work well together
+        </h2>
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          {flows.map((flow) => <FlowCard {...flow} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDITIONS ============ -->
+    <section
+      id="editions"
+      aria-labelledby="editions-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="editions-heading" class="max-w-xl font-medium text-ink text-left">
+        Muse only, or other environments too?
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        The Muse skill set stays included as a bonus with the Claude Skills,
+        Figma Skills and Bundle editions. If you also want to work in Claude
+        Code or Figma’s Design Agent, one of those editions is the better
+        value. If Muse is all you need, this standalone package is for you.
+      </p>
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+        <PackageCard
+          product="claude"
+          lang="en"
+          description="Skills for Claude Code: setup and pipelines, mockups, Figma integration, Tailwind and finishing. Includes the Muse skills as a bonus."
+        />
+        <PackageCard
+          product="figma"
+          lang="en"
+          description="Custom skills for Figma’s Design Agent. Includes the Muse skills as a bonus."
+        />
+        <PackageCard
+          product="bundle"
+          lang="en"
+          description="Both editions together, with the Muse skills as a bonus. Cheaper than buying them separately."
+        />
+      </div>
+      <p
+        class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+        the Claude and Figma editions separately.
+      </p>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+        >
+          <Tag size={18} stroke-width={2} />
+          Pricing
+        </p>
+        <h2 id="pricing-heading" class="font-medium text-ink text-left">
+          KMRVID Muse Skills
+        </h2>
+        <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+          All {museSkillsCount} skills, the bilingual README and free lifetime
+          updates for {formatUsd(product.priceUsd)}.
+        </p>
+
+        <PricingCard
+          product="muse"
+          benefits={[
+            `${museSkillsCount} Figma skills for Muse`,
+            "No Figma AI credits used",
+            "A bilingual (Japanese / English) README with a skill reference and usage notes",
+            "Free lifetime updates",
+          ]}
+        />
+
+        <p class="mt-6 max-w-xl text-ink-soft text-sm text-justify leading-relaxed">
+          Note: This runs in Muse through the Figma connector. Muse and Figma
+          plan fees are not included in this product’s price.
+        </p>
+      </div>
+    </section>
+
+    <CreatorBio />
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-heading" class="py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-3xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">
+          Frequently asked questions
+        </h2>
+        <div class="mt-8 *:border-border *:border-b">
+          <FaqItem question="I already own another KMRVID edition. Do I need this?">
+            No. This skill set is included as a bonus with KMRVID Claude Skills,
+            KMRVID Figma Skills and the All-in-One Bundle, so if you own one of
+            them you already have these skills.
+          </FaqItem>
+          <FaqItem question="What do I need to run the skills?">
+            A Muse account, the Figma connector connected in Muse, and edit
+            permission on the target Figma file. Muse and Figma plan fees are
+            not included in the price.
+          </FaqItem>
+          <FaqItem question="Will the skills change my Figma file?">
+            Skills that restructure a file change it. Duplicate the file first,
+            or make sure version history is available. Each write asks for your
+            approval in Muse first.
+          </FaqItem>
+          <FaqItem question="Does it include video lessons?">
+            No. The package contains the skills and a bilingual README. The
+            YouTube playlist linked above has walkthroughs, in Japanese with
+            English subtitles on most of them.
+          </FaqItem>
+          <FaqItem question="Do you offer support?">
+            The skills were tested on real Figma files through Muse, but agents
+            and tool versions move quickly, so results can vary. One-to-one
+            troubleshooting is not offered. If something breaks, pass the
+            SKILL.md and the error to your agent; the skills are plain text and
+            easy to adapt.
+          </FaqItem>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="muse" />
+</Layout>

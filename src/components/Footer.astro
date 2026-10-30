@@ -73,6 +73,24 @@ const jaConfigs: Record<ProductKey, FooterConfig> = {
       label: `${products.bundle.name}（全${products.bundle.skills}スキル）を見る`,
     },
   },
+  muse: {
+    description:
+      'Muse のチャットから Figma コネクタ経由で動かす、Figma連携スキル集。Figma AIクレジットは消費しません。',
+    menu: [
+      { href: '#why', label: '特長' },
+      { href: '#skills', label: '収録スキル' },
+      { href: '#how-to', label: '使い方' },
+      { href: '#combos', label: '組み合わせ例' },
+      { href: '#editions', label: '他の商品との関係' },
+      { href: '#pricing', label: '料金' },
+      { href: '/changelog/', label: '更新履歴' },
+      { href: '/figma/', label: 'KMRVID Figma Skills' },
+    ],
+    sub: {
+      href: '/',
+      label: `${products.bundle.name}（全${products.bundle.skills}スキル）を見る`,
+    },
+  },
 };
 
 const enConfigs: Record<ProductKey, FooterConfig> = {
@@ -118,6 +136,23 @@ const enConfigs: Record<ProductKey, FooterConfig> = {
       { href: '#pricing', label: 'Pricing' },
       { href: '/en/changelog/', label: 'Changelog' },
       { href: '/en/claude/', label: 'KMRVID Claude Skills' },
+    ],
+    sub: {
+      href: '/en/',
+      label: `See ${products.bundle.en.name} (all ${products.bundle.skills} skills)`,
+    },
+  },
+  muse: {
+    description:
+      `${products.muse.skills} Figma skills that run from a Muse chat through the Figma connector, with no Figma AI credits used.`,
+    menu: [
+      { href: '#why', label: 'Overview' },
+      { href: '#skills', label: 'Skills' },
+      { href: '#how-to', label: 'Get started' },
+      { href: '#editions', label: 'Other editions' },
+      { href: '#pricing', label: 'Pricing' },
+      { href: '/en/changelog/', label: 'Changelog' },
+      { href: '/en/figma/', label: 'KMRVID Figma Skills' },
     ],
     sub: {
       href: '/en/',

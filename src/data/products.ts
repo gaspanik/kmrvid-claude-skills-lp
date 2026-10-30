@@ -1,6 +1,7 @@
+import { museSkillsCount } from './muse'
 import { claudeSkillsCount, figmaSkillsCount, totalSkills } from './skills'
 
-export type ProductKey = 'bundle' | 'claude' | 'figma'
+export type ProductKey = 'bundle' | 'claude' | 'figma' | 'muse'
 
 /** 期間限定の特別価格。キャンペーン終了後は該当の `campaign` を削除すれば全ページが通常価格に戻る */
 interface Campaign {
@@ -97,6 +98,24 @@ export const products: Record<ProductKey, Product> = {
       href: '/en/figma/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-figmaskills',
       priceUsd: 97,
+    },
+  },
+  // Claude版・Figma版・Bundle には特典として同梱。動画は付属しない（YouTube の解説プレイリストで代替）
+  muse: {
+    name: 'KMRVID Muse Skills',
+    env: 'Muse',
+    href: '/muse',
+    url: 'https://kmrvid.com/products/kmrvid-muse-skills',
+    price: 7700,
+    skills: museSkillsCount,
+    videos: 0,
+    hours: 0,
+    minutes: 0,
+    en: {
+      name: 'KMRVID Muse Skills',
+      href: '/en/muse/',
+      url: 'https://gaspanik.gumroad.com/l/kmrvid-museskills',
+      priceUsd: 49,
     },
   },
 }

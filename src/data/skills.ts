@@ -61,7 +61,7 @@ export interface SkillItem {
 
 export interface Category {
   icon: typeof Palette
-  product: 'claude' | 'figma'
+  product: 'claude' | 'figma' | 'muse'
   name: string
   nameEn: string
   tagline: string

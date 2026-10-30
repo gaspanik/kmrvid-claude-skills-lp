@@ -1,0 +1,667 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CircleCheck,
+  Cloud,
+  Coins,
+  Combine,
+  ExternalLink,
+  Languages,
+  LayoutTemplate,
+  MessageSquare,
+  ShieldCheck,
+  Tag,
+  Workflow,
+} from "@lucide/astro";
+import codeScreen from "@/assets/images/code-screen.jpg";
+import Callout from "@/components/Callout.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import {
+  MUSE_PLAYLIST_URL,
+  MUSE_VERIFIED_ON,
+  museCategories,
+  museSkills,
+  museSkillsCount,
+} from "@/data/muse";
+import {
+  bundleSaving,
+  FIGMA_COMMUNITY_URL,
+  formatYen,
+  products,
+} from "@/data/products";
+
+const product = products.muse;
+const PURCHASE_URL = product.url;
+const PRICE = formatYen(product.price);
+const LINE_URL = "https://lin.ee/EOgmkKQ";
+
+const features = [
+  {
+    icon: Coins,
+    title: "Figma AIクレジット不使用",
+    description:
+      "処理はFigmaコネクタ経由。クレジット残量を気にせず何度でも回せます。（参考: 同じ最適化工程をFigmaのエージェント側で実行すると、1ファイルあたり約500クレジット規模）",
+  },
+  {
+    icon: Cloud,
+    title: "環境がほぼ共通",
+    description:
+      "Museの実行環境はクラウド上のLinuxで、利用者ごとに大きく変わりません。開発側で検証した結果が、そのまま再現しやすい設計です。",
+  },
+  {
+    icon: MessageSquare,
+    title: "チャットで名前を伝えるだけ",
+    description:
+      "スラッシュコマンドではなく、スキル名とFigmaのURLを伝えるだけ。コードエディタもターミナルも不要です。",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "新規ページ作成も",
+    description:
+      "ブリーフからページを新規作成できます（単一ページ／複数パターン）。複数パターンのときは各案の切り口（レイアウトモデル・密度・画像の扱い・文字の声・CTA配置）を宣言して作り分けるので、似たような案ばかりになりません。",
+  },
+  {
+    icon: ShieldCheck,
+    title: "書き込みは都度承認",
+    description:
+      "Figmaへの変更は、その都度Museの画面で承認を求められます。内容を確認してから実行できます。",
+  },
+  {
+    icon: Languages,
+    title: "スキルは英文、READMEは日英",
+    description:
+      "スキル本文は英語です。同梱のREADMEは日本語と英語の両方で、スキルの一覧と使い方をまとめています。",
+  },
+];
+
+const pains = [
+  "Frame 12 Rectangle 7 のような自動生成レイヤー名を、あとから手でリネームし直す",
+  "色やフォントサイズをその場でベタ打ちしてしまい、あとで変数化するのが面倒",
+  "「とりあえず1パターン」で作り込んでから、実は別レイアウトも見たかったと気づく",
+  "ダミーテキストのまま渡してしまい、後工程で文言を直す往復が発生する",
+  "FigmaのAIエージェントに頼むたびにAIクレジットが減っていく",
+];
+
+const audience = [
+  "FigmaのAIクレジット消費を抑えたい人",
+  "デザイナー1人〜少人数チームで、レビュー前の下ごしらえを高速化したい人",
+  "「とりあえず作ってみる」前に、複数案を並べて比較検討したい人",
+  "レイヤー命名やトークン化など、地味だが積み重なる作業を自動化したい人",
+  "スキルそのものの作り方を含めた学習・研究用途で使いたい人",
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "スキルをMuseに入れる",
+    desc: "解凍した{count}個のスキルフォルダを、Museのカスタムスキルの置き場所に配置します。場所がわからなければ、解凍したフォルダをMuseに渡して、インストールを頼むこともできます。",
+  },
+  {
+    n: "02",
+    title: "Figmaコネクタをつなぐ",
+    desc: "MuseでFigmaコネクタを接続し、対象のFigmaファイルに編集権限があることを確認します。",
+  },
+  {
+    n: "03",
+    title: "チャットでスキル名を伝える",
+    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Museのカスタムスキルはスラッシュコマンドではありません。Figmaへの書き込みは、その都度承認を求められます。",
+  },
+].map((step) => ({
+  ...step,
+  desc: step.desc.replace("{count}", String(museSkillsCount)),
+}));
+
+const combos = [
+  {
+    goal: "散らかったファイルを一気に整えたい",
+    chain: ["figma-optimize"],
+    desc: "tidy-up → layer-rename → tokenize → componentize → enhance を、依存順に実行します。どの工程を実行するかは選べます。",
+  },
+  {
+    goal: "要件から新しいページを作りたい",
+    chain: ["brief-me", "create-figma-page"],
+    desc: "要件をヒアリングしてBRIEFを作成後、それを引き継いでページを生成。構造の異なる複数パターンも作れ、各案の切り口を先に宣言するので、似たレイアウトに収束しません。",
+  },
+  {
+    goal: "引き渡す前にチェックしたい",
+    chain: ["figma-audit", "figma-contrast-check", "figma-alt-suggest"],
+    desc: "4観点の採点、WCAGのコントラストチェック、画像の代替テキストの提案（Accessibility注釈として書き込み）までをまとめて確認できます。",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID Muse Skills — Muse用Figma連携スキル集（${museSkillsCount}スキル）`}
+  description={`Museのチャットでスキル名を伝えるだけ。Figmaコネクタ経由で、レイヤー整理・トークン化・コンポーネント化・ページ生成・アクセシビリティチェックまで、Figma AIクレジットを消費せずに実行できる${museSkillsCount}個のスキル。`}
+  translated
+>
+  <Header variant="muse" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="#editions"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Claude版・Figma版・Bundleをお持ちの方は、すでに含まれています
+        </a>
+
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Muse用 Figma連携スキルセット
+        </p>
+
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-2xl text-left"
+        >
+          Museのチャットで、
+          <br />
+          Figmaの<span class="text-accent">下ごしらえ</span>を片づける
+        </h1>
+
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          コードエディタもターミナルも不要。Museのチャットでスキル名を伝えるだけで、Figmaファイルのレイヤー整理・トークン化・コンポーネント化・複数レイアウトパターン生成・コピーライティングまでAIにまかせられます。処理はFigmaコネクタ経由で行うため、FigmaのAIクレジットは消費しません。
+        </p>
+
+        <div
+          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+        >
+          <a
+            href={PURCHASE_URL}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            {PRICE}円で申し込む
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            収録スキルを見る
+          </a>
+        </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href={FIGMA_COMMUNITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Figma Communityで無料のスキルを先に試す
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {museSkillsCount}
+              <span class="font-body text-white/50 text-lg">個</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">収録スキル数</p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              0
+              <span class="font-body text-white/50 text-lg">クレジット</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">消費するFigma AIクレジット</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">日英</p>
+            <p class="mt-2 text-white/60 text-sm">READMEを同梱</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NOTICE ============ -->
+    <section
+      aria-label="すでにお持ちの方へ"
+      class="mx-auto px-6 pt-12 max-w-5xl"
+    >
+      <Callout>
+        このスキルセットは、「KMRVID Claude Skills」「KMRVID Figma Skills」「KMRVID Skills - All-in-One Bundle」の各商品に特典として含まれています。すでに上記商品をご購入の方は、本商品を重複してご購入いただく必要はありません。
+      </Callout>
+    </section>
+
+    <!-- ============ WHY ============ -->
+    <section
+      id="why"
+      aria-labelledby="why-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="why-heading" class="max-w-xl text-ink text-left">
+        Muse版は何が新しいのか
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        KMRVID Claude Skills / Figma Skillsに収録されているスキルを、Muse上でそのまま使える形に移植したものです。
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        {
+          features.map((item) => (
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+          ))
+        }
+      </div>
+
+      <div class="gap-10 grid grid-cols-1 md:grid-cols-2 mt-16">
+        <div>
+          <h3 class="text-ink text-lg text-left leading-snug">
+            Figmaでデザインしていて、こんな手戻りに時間を溶かしていませんか？
+          </h3>
+          <ul
+            class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 mt-4 *:[&_svg]:text-accent text-ink-soft text-base leading-snug"
+          >
+            {
+              pains.map((pain) => (
+                <li>
+                  <CircleCheck size={18} stroke-width={2} />
+                  <span>{pain}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-4 text-ink text-base text-justify leading-snug">
+            これらはすべて、MuseからFigmaを操作することで、AIクレジットを消費せずに解決できます。
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-ink text-lg text-left leading-snug">
+            こんな人におすすめ
+          </h3>
+          <ul
+            class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 mt-4 *:[&_svg]:text-accent text-ink-soft text-base leading-snug"
+          >
+            {
+              audience.map((item) => (
+                <li>
+                  <CircleCheck size={18} stroke-width={2} />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS GRID ============ -->
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="max-w-xl text-ink text-left">
+          収録{museSkillsCount}スキル
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Museのチャットで名前を伝えて呼び出す、{
+            museSkillsCount
+          }個のスキルです。本パッケージはFigma連携スキルに絞った構成です。
+        </p>
+
+        <div class="mt-12">
+          {
+            museCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="ja"
+                known={museSkills.map((skill) => skill.name)}
+              />
+            ))
+          }
+        </div>
+
+        <p class="mt-6 text-ink-soft text-sm">
+          {MUSE_VERIFIED_ON.ja}時点で、{
+            museSkillsCount
+          }スキルすべてMuse + Figmaコネクタの実機で動作を確認済みです。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO USE ============ -->
+    <section
+      id="how-to"
+      aria-labelledby="how-to-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <div
+        class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+      >
+        <Workflow size={18} stroke-width={2} />
+        使い方
+      </div>
+      <h2 id="how-to-heading" class="max-w-xl text-ink text-left">
+        3ステップで動かせる
+      </h2>
+
+      <ol class="gap-6 grid grid-cols-1 sm:grid-cols-3 mt-10">
+        {
+          steps.map((step) => (
+            <li class="bg-canvas p-6 border border-border rounded-2xl">
+              <p class="font-heading text-accent text-3xl">{step.n}</p>
+              <h3 class="mt-3 text-lg text-left leading-snug">{step.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                {step.desc}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="flex flex-col gap-4 mt-10">
+        <Callout>
+          ファイルの構造を変えるスキル（`figma-tidy-up`・`figma-tokenize`・`figma-componentize`
+          など）は、対象のFigmaファイルを変更します。実行前に、ファイルを複製するか、バージョン履歴で戻れる状態にしておくことをおすすめします。各スキルは自分の作業を検証しますが、複製がいちばん確実な取り消し手段です。
+        </Callout>
+        <p class="text-ink-soft text-base text-justify leading-snug">
+          使い方は、YouTubeのプレイリストでも確認できます（専用の解説動画はなく、Figma Skillsの使い方動画とほぼ共通の内容です）。
+          <a
+            href={MUSE_PLAYLIST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-accent-dark hover:text-accent underline underline-offset-4 transition"
+          >
+            プレイリストを見る
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ COMBOS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <div
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <Combine size={18} stroke-width={2} />
+          Combination
+        </div>
+        <h2 id="combos-heading" class="max-w-xl text-ink text-left">
+          こういう時は<br class="sm:hidden" />このスキルを使おう
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
+        </p>
+
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 *:p-6 *:border *:rounded-2xl"
+        >
+          {
+            combos.map((combo) => (
+              <div class="bg-canvas border-border">
+                <h3 class="text-lg text-left leading-snug">{combo.goal}</h3>
+                <div class="flex flex-wrap items-center gap-2 mt-3">
+                  {combo.chain.map((skill, i) => (
+                    <>
+                      {i > 0 && (
+                        <ArrowRight
+                          size={14}
+                          stroke-width={2}
+                          class="text-ink-soft"
+                        />
+                      )}
+                      <span class="bg-surface-alt px-2.5 py-1 rounded-full font-mono text-xs">
+                        {skill}
+                      </span>
+                    </>
+                  ))}
+                </div>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {combo.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDITIONS ============ -->
+    <section
+      id="editions"
+      aria-labelledby="editions-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <p class="mb-3 text-ink-soft text-sm uppercase tracking-widest">
+        他の商品との関係
+      </p>
+      <h2 id="editions-heading" class="max-w-xl text-ink text-left">
+        Museだけで十分か、他の環境でも使うか
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Muse版のスキルセットは、Claude版・Figma版・All-in-One Bundleの各商品に、これからも特典として含まれます。Muse以外の環境（Claude CodeやFigma Design Agent）でも使いたい方は、既存のスキルをご購入いただくほうがお得です。Museだけで十分という方は、本商品をお選びください。
+      </p>
+
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+        <PackageCard
+          product="claude"
+          description="Claude Codeで動く、セットアップ・モックアップ作成・Figma連携・Tailwind最適化・仕上げまでを網羅したスキル群。Muse版を特典として同梱。"
+        />
+        <PackageCard
+          product="figma"
+          description="FigmaのDesign Agent専用に最適化したカスタムスキル集。Muse版を特典として同梱。"
+        />
+        <PackageCard
+          product="bundle"
+          description="Claude版とFigma版の全スキルを収録したセット。Muse版も特典として同梱。"
+        />
+      </div>
+
+      <p
+        class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより{
+          formatYen(bundleSaving)
+        }円お得です。
+      </p>
+      <a
+        href="/skills"
+        class="inline-flex items-center gap-1.5 mt-2 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        全スキル一覧を見る
+        <ExternalLink size={14} stroke-width={2} />
+      </a>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <div class="max-w-xl">
+          <p
+            class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+          >
+            <Tag size={18} stroke-width={2} />
+            料金
+          </p>
+          <h2 id="pricing-heading" class="text-ink text-left">
+            KMRVID <br class="sm:hidden" /> Muse Skills
+          </h2>
+          <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+            単体パッケージとして、{
+              museSkillsCount
+            }個のMuse用スキルを、{PRICE}円（税込）の買い切りでご利用いただけます。
+          </p>
+        </div>
+
+        <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
+          <div
+            class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
+          >
+            <div>
+              <p
+                class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+              >
+                {PRICE}<span class="text-2xl">円</span>
+              </p>
+              <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
+
+              <a
+                href={PURCHASE_URL}
+                class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
+              >
+                {PRICE}円で申し込む
+                <ArrowRight size={18} stroke-width={2} />
+              </a>
+            </div>
+
+            <ul
+              class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 md:pl-8 md:border-white/10 md:border-l text-white/80 *:[&_svg]:text-accent text-base"
+            >
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>Muse用のFigma連携スキル{museSkillsCount}個</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>Figma AIクレジットは消費しない</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>日英のREADME付き</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>買い切り・アップデートは無償</span>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t"
+          >
+            <p class="text-white/70 text-sm">
+              公式LINE友だち登録で、10%OFFクーポンも配布中
+            </p>
+            <a
+              href={LINE_URL}
+              class="inline-flex items-center min-h-11 text-white text-sm underline underline-offset-4"
+            >
+              LINEで10%OFFクーポンを受け取る
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col gap-3 mt-6 max-w-2xl text-ink-soft text-sm text-justify leading-relaxed"
+        >
+          <p class="text-ink text-base">
+            ご購入前にお読みください：スキルの動作環境に関するご注意
+          </p>
+          <p>
+            本商品に付属するオリジナルスキルは、Muse向けに開発されたものです。動作には、Museのアカウントと、Figmaコネクタの接続、および対象Figmaファイルへの編集権限が必要です。MuseおよびFigmaコネクタの仕様は変更される場合があり、ご利用時の状況によっては正常に動作しない、またツール自体の提供が終了する可能性があります。お使いの環境での完全な動作を保証するものではありません。個別のスキル修正・動作サポート対応はいたしかねますので、あらかじめご了承ください。
+          </p>
+          <p>
+            書き込み系スキルは対象Figmaファイルを変更します。実行前に、対象ファイルの複製、またはバージョン履歴で戻れる状態にしておくことを推奨します。
+          </p>
+          <p>
+            本製品の価格には、MuseおよびFigmaの利用料金は含まれません。
+          </p>
+          <p>
+            一部のスキルは一般公開しておりますが、本商品内だけで配布しているスキルについては無断転載・販売は禁止とさせていただきます。詳しくはスキルのフォルダに同梱されているLICENSEをご確認ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA (full-bleed) ============ -->
+    <section
+      aria-labelledby="final-cta-heading"
+      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+    >
+      <Image
+        src={codeScreen}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/85"></div>
+      <div
+        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          {PRICE}円で
+          <br class="sm:hidden" />
+          Museから始める
+        </h2>
+        <p
+          class="max-w-md text-white/70 text-base text-justify leading-relaxed"
+        >
+          {
+            museSkillsCount
+          }個のスキルを、{PRICE}円（税込）の買い切りで、Museのチャットから呼び出せます。
+        </p>
+        <a
+          href={PURCHASE_URL}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          {PRICE}円で申し込む
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href="#editions"
+          class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
+        >
+          Claude版・Figma版・Bundleとの違いを見る
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="muse" />
+</Layout>

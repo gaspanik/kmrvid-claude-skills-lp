@@ -379,7 +379,7 @@ const flows = [
         Code or Figma’s Design Agent, one of those editions is the better
         value. If Muse is all you need, this standalone package is for you.
       </p>
-      <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
         <PackageCard
           product="claude"
           lang="en"
@@ -390,11 +390,13 @@ const flows = [
           lang="en"
           description="Custom skills for Figma’s Design Agent. Includes the Muse skills as a bonus."
         />
-        <PackageCard
-          product="bundle"
-          lang="en"
-          description="Both editions together, with the Muse skills as a bonus. Cheaper than buying them separately."
-        />
+        <div class="md:col-span-2">
+          <PackageCard
+            product="bundle"
+            lang="en"
+            description="Both editions together, with the Muse skills as a bonus. Cheaper than buying them separately."
+          />
+        </div>
       </div>
       <p
         class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"

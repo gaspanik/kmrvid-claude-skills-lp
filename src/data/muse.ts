@@ -44,6 +44,11 @@ export const museCategories: Category[] = [
         desc: '上記を依存順に実行する統合スキル（実行する工程は選択式）',
         en: 'Runs the pipeline above in dependency order; you choose which steps to run.',
       },
+      {
+        name: 'figma-night-cruise',
+        desc: 'figma-optimize を無人・予約実行する。質問は事前に一括で済ませ、夜間などに自動実行して完了レポートを返す（Muse版専用）',
+        en: 'Runs figma-optimize unattended on a schedule. All questions are settled up front; it runs overnight and returns a completion report (Muse edition only).',
+      },
     ],
   },
   {
@@ -78,6 +83,11 @@ export const museCategories: Category[] = [
         name: 'create-figma-page',
         desc: 'ブリーフからページを新規作成する（Figma AIクレジット不使用）。単一ページにも、構造の異なる複数パターンにも対応',
         en: 'Creates a new page from a brief, single or several structurally different patterns. No Figma AI credits used.',
+      },
+      {
+        name: 'create-figma-pages',
+        desc: 'create-figma-page を束ね、1つのFigmaファイルに複数ページ（レイアウト違い／ページ種別違い）を並列で作成する。基盤と決定事項は共有',
+        en: 'Orchestrates create-figma-page: builds several pages (layout patterns or different page types) in one Figma file in parallel on shared foundations.',
       },
       {
         name: 'rewrite-me',

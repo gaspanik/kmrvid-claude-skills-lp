@@ -612,6 +612,14 @@ export const categories: Category[] = [
         depsNoteEn: 'Requires a connection to the Figma MCP server.',
       },
       {
+        name: 'create-figma-pages',
+        desc: 'create-figma-page を束ねるオーケストレーター。1つのFigmaファイルに複数ページ（レイアウト違い／トップ＋詳細＋一覧などページ種別違い）を並列で作成。ヒアリングと基盤づくりは1回だけ共有し、最後に全ページをまとめて検証',
+        en: 'An orchestrator over create-figma-page. Builds several pages in one Figma file in parallel (layout patterns, or different page types such as top, detail and listing), sharing one intake and one foundations build, then verifies every page at the end.',
+        deps: [req('create-figma-page')],
+        depsNote: 'Figma MCPサーバーとの接続が必要です。',
+        depsNoteEn: 'Requires a connection to the Figma MCP server.',
+      },
+      {
         name: 'code-to-figma',
         desc: '実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）。自動でエクスポート設定も',
         en: 'Sends implemented code back to Figma, from a quick capture to full components.',

@@ -81,6 +81,19 @@ const since = new Date(`${RECENT_FROM}T00:00:00Z`).toLocaleDateString(
             >Figma</span
           >
         </label>
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="package"
+            id="f-muse"
+            value="muse"
+            class="peer sr-only"
+          />
+          <span
+            class="inline-flex items-center px-4 border border-border peer-checked:border-accent peer-checked:bg-accent-soft peer-focus-visible:outline-2 rounded-full min-h-11"
+            >Muse</span
+          >
+        </label>
       </div>
     </fieldset>
 
@@ -113,8 +126,9 @@ const since = new Date(`${RECENT_FROM}T00:00:00Z`).toLocaleDateString(
 </Layout>
 
 <style is:global>
-  body:has(#f-claude:checked) #changelog [data-product="figma"],
-  body:has(#f-figma:checked) #changelog [data-product="claude"] {
+  body:has(#f-claude:checked) #changelog [data-product]:not([data-product="claude"]),
+  body:has(#f-figma:checked) #changelog [data-product]:not([data-product="figma"]),
+  body:has(#f-muse:checked) #changelog [data-product]:not([data-product="muse"]) {
     display: none;
   }
 </style>

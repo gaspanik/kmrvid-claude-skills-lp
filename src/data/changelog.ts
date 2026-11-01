@@ -8,7 +8,7 @@ export type ChangelogKind = 'new' | 'update' | 'fix'
 export interface ChangelogEntry {
   /** YYYY-MM-DD */
   date: string
-  product: 'claude' | 'figma'
+  product: 'claude' | 'figma' | 'muse'
   kind: ChangelogKind
   /** 対象スキル。空なら全スキル */
   skills: string[]
@@ -20,7 +20,48 @@ export interface ChangelogEntry {
 export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
+  // ============ 2026-11 ============
+  {
+    date: '2026-11-01',
+    product: 'claude',
+    kind: 'new',
+    skills: ['create-figma-pages'],
+    ja: 'create-figma-page を束ね、1つのFigmaファイルに複数ページ（レイアウト違い／トップ＋詳細＋一覧などのページ種別違い）を並列で作る create-figma-pages を追加。ヒアリングと基盤づくりは1回だけ共有する。',
+    en: 'Added create-figma-pages, an orchestrator over create-figma-page that builds several pages in one Figma file in parallel (layout patterns or different page types such as top, detail and listing) on one shared intake and foundations build.',
+  },
+  {
+    date: '2026-11-01',
+    product: 'muse',
+    kind: 'new',
+    skills: ['create-figma-pages', 'figma-night-cruise'],
+    ja: '複数ページを並列で作る create-figma-pages と、figma-optimize を無人・予約実行する figma-night-cruise（Muse版専用）を追加。',
+    en: 'Added create-figma-pages, which builds several pages in parallel, and figma-night-cruise (Muse edition only), which runs figma-optimize unattended on a schedule.',
+  },
+  {
+    date: '2026-10-31',
+    product: 'claude',
+    kind: 'update',
+    skills: ['create-figma-page'],
+    ja: 'create-figma-page に、BRIEF を Figma の Spec として置くかを選べる任意のステップを追加。既存の Spec を更新するときは日付の注記も更新する。',
+    en: 'create-figma-page gained an optional step to place the BRIEF as a Figma Spec. When it updates an existing Spec, it refreshes the date note too.',
+  },
+  {
+    date: '2026-10-31',
+    product: 'muse',
+    kind: 'update',
+    skills: ['create-figma-page'],
+    ja: 'create-figma-page に、BRIEF を Figma の Spec として置くかを選べる任意のステップを追加。',
+    en: 'create-figma-page gained an optional step to place the BRIEF as a Figma Spec.',
+  },
   // ============ 2026-10 ============
+  {
+    date: '2026-10-30',
+    product: 'muse',
+    kind: 'new',
+    skills: [],
+    ja: 'Muse（Figma コネクタ経由）で使える Figma 連携スキルを、単体商品「KMRVID Muse Skills」として販売開始。Claude版・Figma版・Bundle には特典として同梱。',
+    en: 'KMRVID Muse Skills, the Figma-related skills for Muse (via the Figma connector), is now sold on its own. It also remains bundled as a bonus with the Claude, Figma and Bundle editions.',
+  },
   {
     date: '2026-10-30',
     product: 'figma',

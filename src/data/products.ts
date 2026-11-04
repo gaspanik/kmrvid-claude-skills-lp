@@ -115,7 +115,7 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Muse Skills',
       href: '/en/muse/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-museskills',
-      priceUsd: 49,
+      priceUsd: 59,
     },
   },
 }

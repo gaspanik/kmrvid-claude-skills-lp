@@ -22,6 +22,29 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
+    date: '2026-11-03',
+    product: 'claude',
+    kind: 'update',
+    skills: ['astro-doctor'],
+    ja: 'astro-doctor に、画像のレスポンシブ最適化を任意で行う --images オプションを追加。レベル（light / medium / deep）とは独立で、既定ではオフ。',
+    en: 'astro-doctor gained an opt-in --images flag for responsive-image optimization. It is independent of the level (light / medium / deep) and off by default.',
+  },
+  {
+    date: '2026-11-03',
+    product: 'muse',
+    kind: 'new',
+    skills: [
+      'create-jp-lp',
+      'design-brief-me',
+      'figma-mobile-convert',
+      'figma-typescale',
+      'hey-brief-me',
+      'hey-polish-me',
+    ],
+    ja: '日本のLPを作る create-jp-lp、モバイル版を生成する figma-mobile-convert、タイプスケールを作る figma-typescale、コピーを磨く hey-polish-me、デザイン設定のヒアリング design-brief-me と入口の hey-brief-me を追加（Muse版は23スキルに）。',
+    en: 'Added create-jp-lp, figma-mobile-convert, figma-typescale, hey-polish-me, design-brief-me and its entry point hey-brief-me (the Muse edition is now 23 skills).',
+  },
+  {
     date: '2026-11-01',
     product: 'claude',
     kind: 'new',

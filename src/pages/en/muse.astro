@@ -28,6 +28,7 @@ import Layout from "@/layouts/Layout.astro";
 import {
   MUSE_DEMO_URL,
   MUSE_PLAYLIST_URL,
+  MUSE_TIDY_UP_FREE_URL,
   MUSE_VERIFIED_ON,
   museCategories,
   museSkills,
@@ -183,6 +184,15 @@ const flows = [
             class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
           >
             Try before you buy: free skills on Figma Community
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+          <a
+            href={MUSE_TIDY_UP_FREE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Or try figma-tidy-up free on GitHub
             <ExternalLink size={14} stroke-width={2} />
           </a>
         </div>

@@ -25,6 +25,7 @@ import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
   MUSE_PLAYLIST_URL,
+  MUSE_TIDY_UP_FREE_URL,
   MUSE_VERIFIED_ON,
   museCategories,
   museSkills,
@@ -204,6 +205,15 @@ const combos = [
             class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
           >
             Figma Communityで無料のスキルを先に試す
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+          <a
+            href={MUSE_TIDY_UP_FREE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            figma-tidy-up をGitHubで無料で試す
             <ExternalLink size={14} stroke-width={2} />
           </a>
         </div>

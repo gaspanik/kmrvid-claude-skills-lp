@@ -1,5 +1,9 @@
 import { Compass, Eye, FileText, Layers } from '@lucide/astro'
-import type { Category } from './skills'
+import { type Category, githubFree } from './skills'
+
+/** figma-tidy-up の無料版（機能制限なし）の公開先 */
+export const MUSE_TIDY_UP_FREE_URL =
+  'https://github.com/gaspanik/muse-tidy-up-skill'
 
 /**
  * KMRVID Muse Skills（単体販売）の収録スキル。
@@ -18,6 +22,7 @@ export const museCategories: Category[] = [
         name: 'figma-tidy-up',
         desc: 'フレームをオートレイアウト化し、構造を整える',
         en: 'Converts frames to auto layout and structures the tree.',
+        lite: githubFree(MUSE_TIDY_UP_FREE_URL),
       },
       {
         name: 'figma-layer-rename',

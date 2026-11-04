@@ -38,6 +38,12 @@ const figmaLimited = (url: string): Lite => ({
   ja: '機能限定版をFigmaで直接インストール',
   en: 'Limited version on Figma Community',
 })
+/** 機能制限のない無料版をGitHubで公開しているもの */
+export const githubFree = (url: string): Lite => ({
+  url,
+  ja: '無料版（機能制限なし）をGitHubからダウンロード',
+  en: 'Free version (no feature limits) on GitHub',
+})
 const githubLimited = (url: string): Lite => ({
   url,
   ja: '機能限定版をGitHubからダウンロード',

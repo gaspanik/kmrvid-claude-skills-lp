@@ -49,6 +49,11 @@ export const museCategories: Category[] = [
         desc: 'figma-optimize を無人・予約実行する。質問は事前に一括で済ませ、夜間などに自動実行して完了レポートを返す（Muse版専用）',
         en: 'Runs figma-optimize unattended on a schedule. All questions are settled up front; it runs overnight and returns a completion report (Muse edition only).',
       },
+      {
+        name: 'figma-typescale',
+        desc: 'DESIGN_BRIEF（基準サイズと比率）をもとに、タイプスケール（フォントサイズ変数）と余白スケールを生成する',
+        en: 'Generates a type scale (font-size variables) and a spacing scale from a base size and ratio in a DESIGN_BRIEF.',
+      },
     ],
   },
   {
@@ -90,6 +95,21 @@ export const museCategories: Category[] = [
         en: 'Orchestrates create-figma-page: builds several pages (layout patterns or different page types) in one Figma file in parallel on shared foundations.',
       },
       {
+        name: 'create-jp-lp',
+        desc: '日本の商業LPを、ジャンル判定（世界観訴求型／直販型）と業種別の配色設計から Figma に新規作成する',
+        en: 'Builds a Japanese commercial landing page in Figma, from genre judgment (brand-world vs. direct-sales) and industry-specific palette design.',
+      },
+      {
+        name: 'figma-mobile-convert',
+        desc: 'デスクトップ版フレームから 390px のモバイル版を生成する。ナビは種別と項目数から判定',
+        en: 'Generates a 390px mobile version from a desktop frame; the nav pattern is chosen from site type and item count.',
+      },
+      {
+        name: 'hey-polish-me',
+        desc: 'フレームを複製し、コピーを磨いた提案版を、変更理由の注釈つきで横に並べる（原本は無変更）',
+        en: 'Duplicates a frame and builds a polished-copy proposal beside it, each change annotated with its reason (the original is untouched).',
+      },
+      {
         name: 'rewrite-me',
         desc: 'BRIEFに沿ってFigmaフレーム内のコピー（見出し・本文・CTA）を書き換える',
         en: 'Rewrites the copy (headings, body, CTAs) inside a Figma frame to match a BRIEF.',
@@ -128,6 +148,16 @@ export const museCategories: Category[] = [
         name: 'brief-me',
         desc: '制作前の要件ヒアリングを行い、BRIEF.mdを作成する',
         en: 'A requirements interview that produces a BRIEF.md before production starts.',
+      },
+      {
+        name: 'design-brief-me',
+        desc: '制作前にデザイン設定（タイポグラフィ等）のヒアリングを行い、DESIGN_BRIEF を作成する',
+        en: 'A design-settings interview (typography and more) that produces a DESIGN_BRIEF before design work begins.',
+      },
+      {
+        name: 'hey-brief-me',
+        desc: 'brief-me と design-brief-me の入口。必要な方（両方も可）を選んで実行する',
+        en: 'An entry point for brief-me and design-brief-me: pick one or both to run.',
       },
     ],
   },

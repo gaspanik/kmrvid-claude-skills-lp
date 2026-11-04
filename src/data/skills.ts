@@ -683,8 +683,8 @@ export const categories: Category[] = [
       },
       {
         name: 'astro-doctor',
-        desc: 'Astroコードを最新仕様に照合しコンポーネント粒度を最適化',
-        en: 'Astro spec compliance and component granularity.',
+        desc: 'Astroコードを最新仕様に照合しコンポーネント粒度を最適化。任意で画像のレスポンシブ最適化（--images）も実行',
+        en: 'Astro spec compliance and component granularity, with optional responsive-image optimization (--images).',
       },
       {
         name: 'japanese-web-guideline',

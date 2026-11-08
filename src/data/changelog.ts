@@ -22,6 +22,14 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
+    date: '2026-11-09',
+    product: 'muse',
+    kind: 'update',
+    skills: [],
+    ja: 'Muse スキルの解説動画3本（紹介とインストール、figma-tidy-up の実行、複数スキルの連続実行）を追加。講座内のほか YouTube でも公開。',
+    en: 'Added three walkthrough videos for the Muse skills (introduction and install, running figma-tidy-up, running several skills in a row). They are also public on YouTube.',
+  },
+  {
     date: '2026-11-03',
     product: 'claude',
     kind: 'update',

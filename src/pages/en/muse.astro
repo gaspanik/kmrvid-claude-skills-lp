@@ -28,6 +28,7 @@ import Layout from "@/layouts/Layout.astro";
 import {
   MUSE_DEMO_URL,
   MUSE_PLAYLIST_URL,
+  MUSE_VIDEOS,
   MUSE_TIDY_UP_FREE_URL,
   MUSE_VERIFIED_ON,
   museCategories,
@@ -354,6 +355,24 @@ const flows = [
         </a>. The videos are in Japanese, with English subtitles (CC) on most of
         them.
       </p>
+
+      <ul class="flex flex-col gap-2 mt-4 max-w-2xl text-ink-soft text-base leading-snug">
+        {
+          MUSE_VIDEOS.map((video) => (
+            <li>
+              <a
+                href={video.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-accent-dark hover:text-accent underline underline-offset-4 transition"
+              >
+                {video.en}
+                <ExternalLink size={14} stroke-width={2} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <!-- ============ FLOWS ============ -->
@@ -486,8 +505,8 @@ const flows = [
           </FaqItem>
           <FaqItem question="Does it include video lessons?">
             No. The package contains the skills and a bilingual README. The
-            YouTube playlist linked above has walkthroughs, in Japanese with
-            English subtitles on most of them.
+            walkthrough videos listed above are free on YouTube, in Japanese
+            with English subtitles on most of them.
           </FaqItem>
           <FaqItem question="Do you offer support?">
             The skills were tested on real Figma files through Muse, but agents

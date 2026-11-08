@@ -179,3 +179,22 @@ export const MUSE_VERIFIED_ON = { ja: '2026年10月29日', en: 'October 29, 2026
 export const MUSE_DEMO_URL = 'https://youtu.be/JPPOy0U4qL4'
 export const MUSE_PLAYLIST_URL =
   'https://www.youtube.com/playlist?list=PLJ_bPOBVpGbI'
+
+/** 解説動画（講座内と YouTube で公開。動画は日本語、英語は字幕） */
+export const MUSE_VIDEOS = [
+  {
+    url: 'https://youtu.be/kDwd1b0H5rw',
+    ja: 'Museスキルの紹介とインストール',
+    en: 'Introduction to the Muse skills and how to install them',
+  },
+  {
+    url: 'https://youtu.be/fOyvw9n6Aws',
+    ja: 'スキルの使い方。figma-tidy-up を実行してみよう',
+    en: 'How to use a skill: running figma-tidy-up',
+  },
+  {
+    url: 'https://youtu.be/cjVb3EDQW88',
+    ja: '複数スキルの連続実行。5ページを並列で生成する',
+    en: 'Running several skills in a row: generating 5 pages in parallel',
+  },
+]

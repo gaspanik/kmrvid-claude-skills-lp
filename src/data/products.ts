@@ -100,13 +100,13 @@ export const products: Record<ProductKey, Product> = {
       priceUsd: 97,
     },
   },
-  // Claude版・Figma版・Bundle には特典として同梱。動画は付属しない（YouTube の解説プレイリストで代替）
+  // Claude版・Figma版・Bundle には特典として同梱。動画は付属しない（講座内の解説動画3本は YouTube でも公開）
   muse: {
     name: 'KMRVID Muse Skills',
     env: 'Muse',
     href: '/muse',
     url: 'https://kmrvid.com/products/kmrvid-muse-skills',
-    price: 7700,
+    price: 9900,
     skills: museSkillsCount,
     videos: 0,
     hours: 0,

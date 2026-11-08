@@ -17,8 +17,8 @@ export interface Dep {
   anyOf?: boolean
 }
 
-const req = (...names: string[]): Dep => ({ names })
-const opt = (...names: string[]): Dep => ({ names, optional: true })
+export const req = (...names: string[]): Dep => ({ names })
+export const opt = (...names: string[]): Dep => ({ names, optional: true })
 const anyOf = (...names: string[]): Dep => ({ names, anyOf: true })
 
 /** 無料版・機能限定版の配布先 */

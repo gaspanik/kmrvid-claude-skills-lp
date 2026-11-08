@@ -1,5 +1,5 @@
 import { Compass, Eye, FileText, Layers } from '@lucide/astro'
-import { type Category, githubFree } from './skills'
+import { type Category, githubFree, opt, req } from './skills'
 
 /** figma-tidy-up の無料版（機能制限なし）の公開先 */
 export const MUSE_TIDY_UP_FREE_URL =
@@ -22,6 +22,7 @@ export const museCategories: Category[] = [
         name: 'figma-tidy-up',
         desc: 'フレームをオートレイアウト化し、構造を整える',
         en: 'Converts frames to auto layout and structures the tree.',
+        deps: [opt('figma-tokenize')],
         lite: githubFree(MUSE_TIDY_UP_FREE_URL),
       },
       {
@@ -33,11 +34,13 @@ export const museCategories: Category[] = [
         name: 'figma-tokenize',
         desc: '色・文字サイズ・余白を変数化し、テキストスタイルを生成する',
         en: 'Turns colors, font sizes and spacing into variables; generates text styles.',
+        deps: [opt('figma-layer-rename')],
       },
       {
         name: 'figma-componentize',
         desc: '繰り返し要素をコンポーネント/バリアント化する',
         en: 'Converts repeated elements into components and variants.',
+        deps: [opt('figma-tokenize')],
       },
       {
         name: 'figma-enhance',
@@ -48,16 +51,29 @@ export const museCategories: Category[] = [
         name: 'figma-optimize',
         desc: '上記を依存順に実行する統合スキル（実行する工程は選択式）',
         en: 'Runs the pipeline above in dependency order; you choose which steps to run.',
+        deps: [
+          req(
+            'figma-tidy-up',
+            'figma-layer-rename',
+            'figma-tokenize',
+            'figma-componentize',
+            'figma-enhance',
+          ),
+        ],
+        depsNote: '選んだ工程に応じて呼び出されます',
+        depsNoteEn: 'Calls only the steps you select.',
       },
       {
         name: 'figma-night-cruise',
         desc: 'figma-optimize を無人・予約実行する。質問は事前に一括で済ませ、夜間などに自動実行して完了レポートを返す（Muse版専用）',
         en: 'Runs figma-optimize unattended on a schedule. All questions are settled up front; it runs overnight and returns a completion report (Muse edition only).',
+        deps: [req('figma-optimize')],
       },
       {
         name: 'figma-typescale',
         desc: 'DESIGN_BRIEF（基準サイズと比率）をもとに、タイプスケール（フォントサイズ変数）と余白スケールを生成する',
         en: 'Generates a type scale (font-size variables) and a spacing scale from a base size and ratio in a DESIGN_BRIEF.',
+        deps: [opt('design-brief-me')],
       },
     ],
   },
@@ -93,31 +109,54 @@ export const museCategories: Category[] = [
         name: 'create-figma-page',
         desc: 'ブリーフからページを新規作成する（Figma AIクレジット不使用）。単一ページにも、構造の異なる複数パターンにも対応',
         en: 'Creates a new page from a brief, single or several structurally different patterns. No Figma AI credits used.',
+        deps: [
+          opt(
+            'brief-me',
+            'cognitive-ui-design',
+            'figma-japanese-web-guideline',
+          ),
+        ],
       },
       {
         name: 'create-figma-pages',
         desc: 'create-figma-page を束ね、1つのFigmaファイルに複数ページ（レイアウト違い／ページ種別違い）を並列で作成する。基盤と決定事項は共有',
         en: 'Orchestrates create-figma-page: builds several pages (layout patterns or different page types) in one Figma file in parallel on shared foundations.',
+        deps: [req('create-figma-page')],
       },
       {
         name: 'create-jp-lp',
         desc: '日本の商業LPを、ジャンル判定（世界観訴求型／直販型）と業種別の配色設計から Figma に新規作成する',
         en: 'Builds a Japanese commercial landing page in Figma, from genre judgment (brand-world vs. direct-sales) and industry-specific palette design.',
+        deps: [opt('cognitive-ui-design', 'figma-japanese-web-guideline')],
       },
       {
         name: 'figma-mobile-convert',
         desc: 'デスクトップ版フレームから 390px のモバイル版を生成する。ナビは種別と項目数から判定',
         en: 'Generates a 390px mobile version from a desktop frame; the nav pattern is chosen from site type and item count.',
+        deps: [opt('figma-optimize')],
+        depsNote:
+          '整備状況が不十分な場合は、先に figma-optimize を勧められます',
+        depsNoteEn:
+          'If the frame is not yet organized, it recommends running figma-optimize first.',
       },
       {
         name: 'hey-polish-me',
         desc: 'フレームを複製し、コピーを磨いた提案版を、変更理由の注釈つきで横に並べる（原本は無変更）',
         en: 'Duplicates a frame and builds a polished-copy proposal beside it, each change annotated with its reason (the original is untouched).',
+        deps: [
+          opt(
+            'cognitive-ui-design',
+            'create-figma-page',
+            'rewrite-me',
+            'create-jp-lp',
+          ),
+        ],
       },
       {
         name: 'rewrite-me',
         desc: 'BRIEFに沿ってFigmaフレーム内のコピー（見出し・本文・CTA）を書き換える',
         en: 'Rewrites the copy (headings, body, CTAs) inside a Figma frame to match a BRIEF.',
+        deps: [opt('brief-me', 'figma-layer-rename')],
       },
     ],
   },
@@ -163,6 +202,7 @@ export const museCategories: Category[] = [
         name: 'hey-brief-me',
         desc: 'brief-me と design-brief-me の入口。必要な方（両方も可）を選んで実行する',
         en: 'An entry point for brief-me and design-brief-me: pick one or both to run.',
+        deps: [req('brief-me', 'design-brief-me')],
       },
     ],
   },

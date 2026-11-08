@@ -175,7 +175,7 @@ export const museSkillsCount = museSkills.length
 /** 実機（Muse + Figma コネクタ）での動作確認日 */
 export const MUSE_VERIFIED_ON = { ja: '2026年10月29日', en: 'October 29, 2026' }
 
-/** 使い方の紹介動画（2026-10-28 公開）と、YouTube の解説プレイリスト */
+/** 使い方の紹介動画（2026-10-28 公開）と、YouTube の解説プレイリスト（Figma Skills 用。実行内容は共通、呼び出し方だけ Muse と異なる） */
 export const MUSE_DEMO_URL = 'https://youtu.be/JPPOy0U4qL4'
 export const MUSE_PLAYLIST_URL =
   'https://www.youtube.com/playlist?list=PLJ_bPOBVpGbI'

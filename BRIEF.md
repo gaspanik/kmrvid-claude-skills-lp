@@ -8,7 +8,7 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID Skills - All-in-One Bundle | `/` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 82個（Claude版50＋Figma版32） | 60本 | 約6時間5分 |
 | KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 50個 | 40本 | 約4時間10分 |
 | KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 32個 | 20本 | 約1時間55分 |
-| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円 | 23個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
+| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円 | 25個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
 - トップページ（`/`）は主力商品「All-in-One Bundle」の紹介ページ。Claude版・Figma版の個別ページへの導線（「個別パッケージ」セクション、ヘッダー、ヒーローのバッジ）を持つ。

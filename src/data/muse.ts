@@ -101,6 +101,11 @@ export const museCategories: Category[] = [
         en: 'Looks at each image in a frame, judges whether it needs alt text, and writes proposals as Accessibility annotations.',
       },
       {
+        name: 'figma-annotate',
+        desc: 'フレーム内の構造を検出し、開発・アクセシビリティ・コンテンツの注釈をFigma注釈として書き込む',
+        en: 'Walks a frame’s structure and writes development, accessibility and content notes as native Figma annotations.',
+      },
+      {
         name: 'figma-i18n-translator',
         desc: 'フレームを複製し、テキストを指定した言語に翻訳した多言語版を作る（原本は無変更）',
         en: 'Duplicates a frame and translates its texts into the language you specify (the original is left untouched).',
@@ -127,6 +132,12 @@ export const museCategories: Category[] = [
         name: 'create-jp-lp',
         desc: '日本の商業LPを、ジャンル判定（世界観訴求型／直販型）と業種別の配色設計から Figma に新規作成する',
         en: 'Builds a Japanese commercial landing page in Figma, from genre judgment (brand-world vs. direct-sales) and industry-specific palette design.',
+        deps: [opt('cognitive-ui-design', 'figma-japanese-web-guideline')],
+      },
+      {
+        name: 'japanese-lp-seasoning',
+        desc: '日本語LPに演出（フルブリード、カルーセル、縦書きなど）を加える。既存フレームへの直接適用と、新規作成への引き継ぎの両対応',
+        en: 'Adds flourishes (full-bleed sections, carousels, vertical text) to a Japanese LP, applied directly to an existing frame or handed off to page creation.',
         deps: [opt('cognitive-ui-design', 'figma-japanese-web-guideline')],
       },
       {

@@ -24,6 +24,7 @@ import PackageCard from "@/components/PackageCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
+  MUSE_HANDSON,
   MUSE_PLAYLIST_URL,
   MUSE_VIDEOS,
   MUSE_TIDY_UP_FREE_URL,
@@ -43,6 +44,7 @@ const product = products.muse;
 const PURCHASE_URL = product.url;
 const PRICE = formatYen(product.price);
 const LINE_URL = "https://lin.ee/EOgmkKQ";
+const showHandson = Date.now() < Date.parse(MUSE_HANDSON.endsAt);
 
 const features = [
   {
@@ -255,6 +257,40 @@ const combos = [
         </div>
       </div>
     </section>
+
+    <!-- ============ HANDS-ON EVENT ============ -->
+    {
+      showHandson && (
+        <section
+          id="handson"
+          aria-label="ハンズオンセッションのご案内"
+          data-ends-at={MUSE_HANDSON.endsAt}
+          class="mx-auto px-6 pt-12 max-w-5xl"
+        >
+          <a
+            href={MUSE_HANDSON.url}
+            class="group flex sm:flex-row flex-col sm:items-center gap-3 sm:gap-6 bg-surface-alt p-5 sm:px-6 border border-border rounded-2xl transition hover:border-ink/30"
+          >
+            <span class="flex-none font-medium text-accent text-sm uppercase tracking-widest">
+              Hands-on session
+            </span>
+            <span class="flex-1 text-ink text-base leading-snug">
+              Museスキル ハンズオンセッション（オンライン）
+              <span class="block mt-1 text-ink-soft text-sm">
+                {MUSE_HANDSON.dateLabel}・定員{MUSE_HANDSON.capacity}名・先着順
+              </span>
+            </span>
+            <span class="inline-flex flex-none items-center gap-1.5 font-medium text-ink text-sm underline underline-offset-4 group-hover:text-accent">
+              詳細を見る
+              <ArrowRight size={16} stroke-width={2} />
+            </span>
+          </a>
+          <script is:inline>
+            {`(function(){var e=document.getElementById('handson');if(e&&Date.now()>=Date.parse(e.dataset.endsAt))e.hidden=true})()`}
+          </script>
+        </section>
+      )
+    }
 
     <!-- ============ NOTICE ============ -->
     <section

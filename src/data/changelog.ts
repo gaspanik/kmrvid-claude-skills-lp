@@ -22,6 +22,29 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
+    date: '2026-11-10',
+    product: 'muse',
+    kind: 'new',
+    skills: ['figma-annotate', 'japanese-lp-seasoning'],
+    ja: 'フレームの構造から開発・アクセシビリティ・コンテンツの注釈を書き込む figma-annotate と、日本語LPに演出を加える japanese-lp-seasoning を追加（Muse版は25スキルに）。',
+    en: 'Added figma-annotate, which writes development, accessibility and content notes as Figma annotations, and japanese-lp-seasoning, which adds flourishes to a Japanese LP (the Muse edition is now 25 skills).',
+  },
+  {
+    date: '2026-11-10',
+    product: 'muse',
+    kind: 'update',
+    skills: [
+      'create-figma-page',
+      'create-figma-pages',
+      'figma-alt-suggest',
+      'figma-componentize',
+      'figma-enhance',
+      'figma-tidy-up',
+    ],
+    ja: 'ヘッダー／フッターの上下余白ルールと監査チェックを追加（create-figma-page、create-figma-pages と、共通リファレンスを使う figma-tidy-up、figma-componentize、figma-enhance）。figma-alt-suggest は注釈カテゴリの扱いを figma-annotate と統一し、出力言語を利用者の言語に合わせるよう変更。',
+    en: 'Added a header/footer vertical-padding rule and audit check (create-figma-page, create-figma-pages, and figma-tidy-up, figma-componentize and figma-enhance through the shared reference). figma-alt-suggest now handles annotation categories the same way as figma-annotate and writes in the user’s language.',
+  },
+  {
     date: '2026-11-09',
     product: 'muse',
     kind: 'update',

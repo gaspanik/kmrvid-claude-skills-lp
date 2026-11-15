@@ -502,6 +502,11 @@ export const categories: Category[] = [
         en: 'Scores how well AI can implement a frame (4 dimensions) and writes a report.',
       },
       {
+        name: 'figma-checklist',
+        desc: 'フレーム1つから、そのプロジェクトで用意しておくと良い画面・コンポーネント状態のチェックリストを作る（読み取り専用。不足の断定はしない）',
+        en: 'Builds a checklist of screens and component states worth preparing, inferred from a single frame (read-only; never declares anything missing).',
+      },
+      {
         name: 'figma-component-audit',
         desc: 'コンポーネント単位でのチェックはこちら。コンポーネント構造・バリアントを5観点で監査',
         en: 'Audits component structure and variants.',
@@ -538,6 +543,11 @@ export const categories: Category[] = [
         name: 'figma-enhance',
         desc: '変数化・コンポーネント化済みのファイルをさらに監査（バリアント統合・プロパティ追加・バインド漏れ等）して実装',
         en: 'Audits an already structured file for further improvements and applies what you approve.',
+      },
+      {
+        name: 'figma-describe',
+        desc: '説明文が空のコンポーネントに、利用者の言語で説明文を書き足す（既存の説明は上書きしない）',
+        en: 'Fills in descriptions for components whose description is empty, in the user’s language (existing descriptions are never overwritten).',
       },
       {
         name: 'figma-optimize',

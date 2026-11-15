@@ -20,6 +20,14 @@ export interface ChangelogEntry {
 export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
+  {
+    date: '2026-11-16',
+    product: 'muse',
+    kind: 'new',
+    skills: ['space-guideline'],
+    ja: 'Muse のスペース（Webアーティファクト）を作る・直すときの指針をまとめた space-guideline を追加（Muse版は28スキルに）。',
+    en: 'Added space-guideline, a self-contained guide for building and revising Muse spaces (web artifacts) (the Muse edition is now 28 skills).',
+  },
   // ============ 2026-11 ============
   {
     date: '2026-11-15',

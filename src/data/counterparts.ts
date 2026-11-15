@@ -54,5 +54,17 @@ export const counterparts: Counterpart[] = [
   { claude: 'figma-tokenize', figma: 'figma-tokenize' },
   { claude: 'figma-componentize', figma: 'figma-componentize' },
   { claude: 'figma-enhance', figma: 'figma-enhance' },
+  {
+    claude: 'figma-describe',
+    figma: 'figma-describe',
+    ja: 'Claude版はFigmaファイルのURLを渡して実行します。Figma版は開いているファイル全体が対象で、ページを指定することもできます。',
+    en: 'The Claude edition takes a Figma file URL. The Figma edition works on the file you have open, and you can narrow it to a page.',
+  },
+  {
+    claude: 'figma-checklist',
+    figma: 'figma-checklist',
+    ja: 'Claude版はフレームのURLを渡して実行します。Figma版は画面を指定するか、キャンバス上で選択して実行します。',
+    en: 'The Claude edition takes a frame URL. The Figma edition takes a screen you name or one you select on the canvas.',
+  },
   { claude: 'figma-optimize', figma: 'hey-optimize-me' },
 ]

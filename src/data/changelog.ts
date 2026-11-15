@@ -22,6 +22,44 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
+    date: '2026-11-15',
+    product: 'muse',
+    kind: 'new',
+    skills: ['figma-checklist', 'figma-describe'],
+    ja: 'フレーム1つから用意しておくと良い画面・状態のチェックリストを作る figma-checklist と、説明文が空のコンポーネントに利用者の言語で説明文を書き足す figma-describe を追加（Muse版は27スキルに）。',
+    en: 'Added figma-checklist, which builds a checklist of screens and component states worth preparing from a single frame, and figma-describe, which fills in empty component descriptions in the user’s language (the Muse edition is now 27 skills).',
+  },
+  {
+    date: '2026-11-13',
+    product: 'muse',
+    kind: 'update',
+    skills: [
+      'figma-alt-suggest',
+      'figma-annotate',
+      'hey-polish-me',
+      'figma-componentize',
+      'figma-i18n-translator',
+      'figma-enhance',
+      'rewrite-me',
+      'figma-contrast-check',
+    ],
+    ja: 'オーケストレーター経由で推奨値モードを指定した実行では、起動をもって承認済みとして書き込みまで進めるよう変更（figma-alt-suggest、figma-annotate、hey-polish-me、figma-componentize、figma-i18n-translator、figma-enhance、rewrite-me、figma-contrast-check）。直接実行時の承認フローは従来どおり。',
+    en: 'When launched by an orchestrator in recommended-values mode, the launch now counts as prior approval and the skill proceeds through the write step with its recommended set (figma-alt-suggest, figma-annotate, hey-polish-me, figma-componentize, figma-i18n-translator, figma-enhance, rewrite-me, figma-contrast-check). The confirmation flow in direct use is unchanged.',
+  },
+  {
+    date: '2026-11-13',
+    product: 'muse',
+    kind: 'update',
+    skills: [
+      'create-figma-page',
+      'create-figma-pages',
+      'create-jp-lp',
+      'figma-tidy-up',
+    ],
+    ja: '生成レポートに生成物の宣言を追加し、連続実行時の figma-tidy-up は最後のページだけでなく生成した全ページを対象にするよう変更（create-figma-page、create-figma-pages、create-jp-lp、figma-tidy-up）。',
+    en: 'Generation reports now declare the pages they produced, and a figma-tidy-up invoked in sequence targets all of the declared pages instead of only the last one (create-figma-page, create-figma-pages, create-jp-lp, figma-tidy-up).',
+  },
+  {
     date: '2026-11-10',
     product: 'muse',
     kind: 'new',

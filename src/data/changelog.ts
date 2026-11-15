@@ -23,6 +23,14 @@ export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
     date: '2026-11-15',
+    product: 'figma',
+    kind: 'new',
+    skills: ['figma-checklist', 'figma-describe'],
+    ja: '1つの画面から用意しておくと良い画面・状態のチェックリストを作る figma-checklist と、説明が空のコンポーネントに説明を書き足す figma-describe を追加（Figma版は34スキルに）。',
+    en: 'Added figma-checklist, which suggests screens and component states worth preparing from a single screen, and figma-describe, which fills in empty component descriptions (the Figma edition is now 34 skills).',
+  },
+  {
+    date: '2026-11-15',
     product: 'claude',
     kind: 'new',
     skills: ['figma-checklist', 'figma-describe'],

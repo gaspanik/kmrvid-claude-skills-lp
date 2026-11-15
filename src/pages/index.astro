@@ -30,6 +30,7 @@ import PackageCard from "@/components/PackageCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { bundleFlows } from "@/data/flows";
+import { museSkillsCount } from "@/data/muse";
 import {
   claudeCategories,
   claudeSkillsCount,
@@ -101,7 +102,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
 ---
 
 <Layout
-  title="KMRVID Skills - All-in-One Bundle — Claude Code・Figma向けオリジナルスキル講座"
+  title={`KMRVID Skills - All-in-One Bundle — Claude Code・Figma Agent・Muse向けオリジナルスキル講座（${totalSkills + museSkillsCount}スキル）`}
   translated
 >
   <Header />

@@ -16,6 +16,7 @@ import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { bundleFlows } from "@/data/flows";
+import { museSkillsCount } from "@/data/muse";
 import {
   claudeCategories,
   claudeSkillsCount,
@@ -54,8 +55,8 @@ const flows = bundleFlows.map((flow) => ({
 ---
 
 <Layout
-  title={`KMRVID Skills Bundle — ${totalSkills} skills for Claude Code and Figma’s Design Agent`}
-  description={`${totalSkills} skills that take a project from first brief to finished code: ${claudeSkillsCount} for Claude Code and ${figmaSkillsCount} for Figma’s Design Agent.`}
+  title={`KMRVID Skills Bundle — ${totalSkills + museSkillsCount} skills for Claude Code, Figma’s Design Agent and Muse`}
+  description={`${totalSkills + museSkillsCount} skills that take a project from first brief to finished code: ${claudeSkillsCount} for Claude Code, ${figmaSkillsCount} for Figma’s Design Agent and ${museSkillsCount} for Muse.`}
   translated
 >
   <Header />

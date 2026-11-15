@@ -231,6 +231,11 @@ export const categories: Category[] = [
         en: 'Audits an already structured file for further improvements and applies what you approve.',
       },
       {
+        name: 'figma-describe',
+        desc: '説明（description）が空のコンポーネントに、証拠をもとにした説明を下書きし、承認されたものだけを書き込む（既存の説明は上書きしない）',
+        en: 'Drafts evidence-based descriptions for components whose description is empty and writes only the approved ones (existing descriptions are never overwritten).',
+      },
+      {
         name: 'hey-optimize-me',
         desc: 'tidy-up / figma-layer-rename / figma-tokenize / figma-componentize / figma-enhance の中から実行したいタスクを複数選択で選び、選ばれたものだけを固定順で実行するピッカー',
         en: 'A picker for the five clean-up skills, run in a fixed order.',
@@ -266,6 +271,11 @@ export const categories: Category[] = [
         name: 'figma-component-audit',
         desc: '選択したコンポーネント/コンポーネントセット単体を、バリアント定義・コンポーネントプロパティ・レイヤー命名・Auto-layout・カラー/タイポグラフィトークンの5観点で採点',
         en: 'Scores a component on 5 dimensions (variants, properties, naming, auto-layout, tokens).',
+      },
+      {
+        name: 'figma-checklist',
+        desc: '1つの画面から、そのプロジェクトで用意しておくと良い画面・コンポーネント状態を理由つきのチェックリストで出す（読み取り専用。不足の断定はしない）',
+        en: 'Suggests screens and component states worth preparing from a single screen, with reasons (read-only; never declares anything missing).',
       },
       {
         name: 'figma-contrast-check',

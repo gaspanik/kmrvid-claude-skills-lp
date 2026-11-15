@@ -23,6 +23,14 @@ export const changelog: ChangelogEntry[] = [
   // ============ 2026-11 ============
   {
     date: '2026-11-15',
+    product: 'claude',
+    kind: 'new',
+    skills: ['figma-checklist', 'figma-describe'],
+    ja: 'フレーム1つから用意しておくと良い画面・状態のチェックリストを作る figma-checklist と、説明文が空のコンポーネントに利用者の言語で説明文を書き足す figma-describe を追加（Claude版は52スキルに）。',
+    en: 'Added figma-checklist, which builds a checklist of screens and component states worth preparing from a single frame, and figma-describe, which fills in empty component descriptions in the user’s language (the Claude edition is now 52 skills).',
+  },
+  {
+    date: '2026-11-15',
     product: 'muse',
     kind: 'new',
     skills: ['figma-checklist', 'figma-describe'],

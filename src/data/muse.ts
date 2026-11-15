@@ -106,6 +106,16 @@ export const museCategories: Category[] = [
         en: 'Walks a frame’s structure and writes development, accessibility and content notes as native Figma annotations.',
       },
       {
+        name: 'figma-checklist',
+        desc: 'フレーム1つから、そのプロジェクトで用意しておくと良い画面・コンポーネント状態のチェックリストを作る（読み取り専用。不足の断定はしない）',
+        en: 'Builds a checklist of screens and component states worth preparing, inferred from a single frame (read-only; never declares anything missing).',
+      },
+      {
+        name: 'figma-describe',
+        desc: '説明文が空のコンポーネントに、利用者の言語で説明文を書き足す（既存の説明は上書きしない）',
+        en: 'Fills in descriptions for components whose description is empty, in the user’s language (existing descriptions are never overwritten).',
+      },
+      {
         name: 'figma-i18n-translator',
         desc: 'フレームを複製し、テキストを指定した言語に翻訳した多言語版を作る（原本は無変更）',
         en: 'Duplicates a frame and translates its texts into the language you specify (the original is left untouched).',
@@ -224,7 +234,10 @@ export const museSkills = museCategories.flatMap((category) => category.skills)
 export const museSkillsCount = museSkills.length
 
 /** 実機（Muse + Figma コネクタ）での動作確認日 */
-export const MUSE_VERIFIED_ON = { ja: '2026年10月29日', en: 'October 29, 2026' }
+export const MUSE_VERIFIED_ON = {
+  ja: '2026年11月15日',
+  en: 'November 15, 2026',
+}
 
 /** 使い方の紹介動画（2026-10-28 公開）と、YouTube の解説プレイリスト（Figma Skills 用。実行内容は共通、呼び出し方だけ Muse と異なる） */
 export const MUSE_DEMO_URL = 'https://youtu.be/JPPOy0U4qL4'

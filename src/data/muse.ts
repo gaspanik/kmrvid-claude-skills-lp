@@ -186,8 +186,8 @@ export const museCategories: Category[] = [
     product: 'muse',
     name: '補助ガイドライン',
     nameEn: 'Guidelines',
-    tagline: '他のスキルが参照する、設計と日本語組版の指針',
-    taglineEn: 'Design and typography guidance other skills draw on',
+    tagline: '設計・日本語組版・スペース制作の指針',
+    taglineEn: 'Guidance for design, Japanese typography and building spaces',
     skills: [
       {
         name: 'cognitive-ui-design',
@@ -198,6 +198,11 @@ export const museCategories: Category[] = [
         name: 'figma-japanese-web-guideline',
         desc: '日本語Webのタイポグラフィ/レイアウト指針（Figma版）',
         en: 'Japanese web typography and layout guidance (Figma edition).',
+      },
+      {
+        name: 'space-guideline',
+        desc: 'Muse のスペース（Webアーティファクト）を作る・直すときの指針。技術スタック、タイプスケール、日本語組版、認知特性への配慮、生成後の検証作法をまとめた自己完結のスキル（Muse版専用）',
+        en: 'Guidelines for building or revising Muse spaces (web artifacts): tech stack, type scale, Japanese typesetting, cognitive considerations and post-generation checks. Self-contained (Muse edition only).',
       },
     ],
   },

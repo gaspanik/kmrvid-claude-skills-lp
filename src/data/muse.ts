@@ -5,6 +5,10 @@ import { type Category, githubFree, opt, req } from './skills'
 export const MUSE_TIDY_UP_FREE_URL =
   'https://github.com/gaspanik/muse-tidy-up-skill'
 
+/** space-guideline の無料ダウンロード先（muse.ai） */
+export const MUSE_SPACE_GUIDELINE_FREE_URL =
+  'https://muse.ai/s/space-guideline-oo6xtvxgxhxp9wxk/GR4Doufzt_DBNTD7mgIfTp7magj-XWLGIyx71VI-3N0'
+
 /**
  * KMRVID Muse Skills（単体販売）の収録スキル。
  * Claude版・Figma版・Bundle には特典として同梱されているため、`skills.ts` の集計（全スキル数）には含めない。
@@ -203,6 +207,11 @@ export const museCategories: Category[] = [
         name: 'space-guideline',
         desc: 'Muse のスペース（Webアーティファクト）を作る・直すときの指針。技術スタック、タイプスケール、日本語組版、認知特性への配慮、生成後の検証作法をまとめた自己完結のスキル（Muse版専用）',
         en: 'Guidelines for building or revising Muse spaces (web artifacts): tech stack, type scale, Japanese typesetting, cognitive considerations and post-generation checks. Self-contained (Muse edition only).',
+        lite: {
+          url: MUSE_SPACE_GUIDELINE_FREE_URL,
+          ja: '無料でダウンロード',
+          en: 'Free download',
+        },
       },
     ],
   },

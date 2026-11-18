@@ -1,420 +1,208 @@
 ---
-import {
-  ArrowRight,
-  MessageCircleQuestionMark,
-  Tag,
-} from "@lucide/astro";
-import { Image } from "astro:assets";
-import codeScreen from "@/assets/images/code-screen.jpg";
+import { ArrowRight } from "@lucide/astro";
+import ChangelogList from "@/components/ChangelogList.astro";
 import CreatorBio from "@/components/CreatorBio.astro";
-import FaqItem from "@/components/FaqItem.astro";
-import FlowCard from "@/components/FlowCard.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import PackageCard from "@/components/PackageCard.astro";
-import PricingCard from "@/components/PricingCard.astro";
-import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
-import { bundleFlows } from "@/data/flows";
+import { changelogSorted } from "@/data/changelog";
+import { desktopSkillsCount } from "@/data/desktop";
 import { museSkillsCount } from "@/data/muse";
 import {
-  claudeCategories,
   claudeSkillsCount,
-  figmaCategories,
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import {
-  AGENSI_URL,
-  bundleSavingUsd,
-  formatUsd,
-  products,
-} from "@/data/products";
+import { formatUsd, type ProductKey, products } from "@/data/products";
 
-const bundle = products.bundle.en;
-
-const flowGroups = [
+const productCards: { key: ProductKey; title: string; desc: string }[] = [
   {
-    key: "figma",
-    title: "Figma Design Agent edition",
-    note: "Run inside Figma, on the frames you select on the canvas.",
+    key: "bundle",
+    title: "Claude and Figma together",
+    desc: `All ${totalSkills} skills: ${claudeSkillsCount} for Claude Code and ${figmaSkillsCount} for Figma’s Design Agent. The Muse edition comes as a bonus.`,
   },
   {
     key: "claude",
-    title: "Claude Code edition",
-    note: "Run in Claude Code, on your code and on Figma URLs.",
+    title: "Runs in Claude Code",
+    desc: "Skills that cover setup, mockups, Figma handoff, Tailwind cleanup and final polish.",
   },
-] as const;
+  {
+    key: "figma",
+    title: "Runs in Figma’s Design Agent",
+    desc: "Custom skills that tidy, tokenize, componentize and audit a file from inside Figma.",
+  },
+  {
+    key: "muse",
+    title: "Runs in the Muse chat",
+    desc: "Just name the skill in the Muse chat. It works through the Figma connector, so no Figma AI credits are used.",
+  },
+  {
+    key: "desktop",
+    title: "Runs in the Claude Desktop chat",
+    desc: "Registered as a plugin in the Claude Desktop chat. Nearly the same skills as the Muse edition, with reference files included.",
+  },
+];
 
-const flows = bundleFlows.map((flow) => ({
-  edition: flow.edition,
-  goal: flow.goalEn,
-  chain: flow.chain,
-  desc: flow.descEn,
-}));
+const aboutPoints = [
+  {
+    title: "What a skill is",
+    desc: "A skill is a written procedure the AI remembers: “do this task this way”. Name it once and you get the same quality of work without rewriting the prompt.",
+  },
+  {
+    title: "Born from real work",
+    desc: "Each skill packages a task I kept repeating in client work: tidying layers, creating variables, building mockups, reviewing code.",
+  },
+  {
+    title: "Tuned per environment",
+    desc: "Claude Code, Figma’s Design Agent, Muse and Claude Desktop each get an edition adjusted to run there.",
+  },
+];
+
+const recent = changelogSorted.slice(0, 5);
 ---
 
 <Layout
-  title={`KMRVID Skills Bundle — ${totalSkills + museSkillsCount} skills for Claude Code, Figma’s Design Agent and Muse`}
-  description={`${totalSkills + museSkillsCount} skills that take a project from first brief to finished code: ${claudeSkillsCount} for Claude Code, ${figmaSkillsCount} for Figma’s Design Agent and ${museSkillsCount} for Muse.`}
+  title="KMRVID Skills — Original skills for Claude Code, Figma, Muse and Claude Desktop"
+  description={`${totalSkills + museSkillsCount + desktopSkillsCount} skills born from real web production work, in editions for Claude Code, Figma’s Design Agent, Muse and Claude Desktop.`}
   translated
 >
   <Header />
 
   <main id="top">
-    <!-- ============ HERO ============ -->
-    <section
-      aria-labelledby="hero-heading"
-      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
-    >
-      <div class="mx-auto px-6 max-w-5xl">
-        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
-          For Claude Code and Figma’s Design Agent
-        </p>
-        <h1
-          id="hero-heading"
-          class="max-w-3xl font-semibold text-ink max-sm:text-2xl text-left"
-        >
-          {totalSkills} skills that take a project from <span class="text-accent">first brief to finished code</span>
-        </h1>
-        <p
-          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
-        >
-          One bundle with both editions: {claudeSkillsCount} skills for Claude
-          Code to set up projects, build mockups, sync tokens with Figma, clean
-          up Tailwind and polish Astro code, and {figmaSkillsCount} custom
-          skills for Figma’s Design Agent to pin down requirements, generate
-          pages and clean up structure. Each skill is a plain SKILL.md you can
-          read, adapt and learn from.
-        </p>
-
-        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
-          <a
-            href={bundle.url}
-            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
-          >
-            <span>Get the bundle · <Price product="bundle" lang="en" /></span>
-            <ArrowRight size={18} stroke-width={2} />
-          </a>
-          <a
-            href="/en/skills/"
-            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
-          >
-            Browse all skills
-          </a>
-        </div>
-
-        <a
-          href="/en/changelog/"
-          class="inline-flex items-center gap-1.5 mt-4 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-        >
-          Figma optimization skills now ported to Muse
-          <ArrowRight size={14} stroke-width={2} />
-        </a>
-      </div>
-
-      <div class="bg-ink mt-14 md:mt-20 text-canvas">
-        <div
-          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
-        >
-          <div>
-            <p class="font-heading text-6xl md:text-7xl">{totalSkills}</p>
-            <p class="mt-2 text-white/60 text-sm">Skills in total</p>
-          </div>
-          <div>
-            <p class="font-heading text-6xl md:text-7xl">
-              {claudeSkillsCount}<span class="text-white/50 text-3xl"
-                > + {figmaSkillsCount}</span
-              >
-            </p>
-            <p class="mt-2 text-white/60 text-sm">
-              Claude Code + Figma Design Agent
-            </p>
-          </div>
-          <div>
-            <p class="font-heading text-6xl md:text-7xl">PDF</p>
-            <p class="mt-2 text-white/60 text-sm">
-              README with dependencies and free lifetime updates
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ WHAT'S INSIDE ============ -->
-    <section
-      id="included"
-      aria-labelledby="included-heading"
-      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
-    >
-      <h2 id="included-heading" class="max-w-xl font-medium text-ink text-left">
-        Two editions in one bundle
-      </h2>
-      <p
-        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
-      >
-        Use the one that matches your tool, or both. Many skills exist in both
-        editions under the same or a matching name; the <a href="/en/skills/#counterparts" class="text-accent underline underline-offset-4">comparison table</a> shows how they differ.
+    <section aria-labelledby="hero-heading" class="mx-auto px-6 pt-14 md:pt-20 max-w-5xl">
+      <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+        KMRVID Skills
       </p>
-
-      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
-        <PackageCard
-          product="claude"
-          lang="en"
-          description={`${claudeSkillsCount} skills for Claude Code across ${claudeCategories.length} categories: setup and pipelines, mockups, Figma integration, Tailwind, finishing and pipeline design. Built for Astro, Vite or React with Tailwind CSS v4.`}
-        />
-        <PackageCard
-          product="figma"
-          lang="en"
-          description={`${figmaSkillsCount} custom skills you register in Figma’s Design Agent across ${figmaCategories.length} categories: plan and design, clean up, audit, hand off to code and working with the agent. Each is a single SKILL.md.`}
-        />
-      </div>
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-left">
+        Handing an AI a <span class="text-accent">skill</span> beats
+        re-explaining the task every time
+      </h1>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        Original skills born from real web production work, in editions for each environment. Start with the one that matches the tool you use.
+      </p>
     </section>
 
-    <!-- ============ WORKFLOWS ============ -->
     <section
-      id="flows"
-      aria-labelledby="flows-heading"
+      id="products"
+      aria-labelledby="products-heading"
+      class="mx-auto px-6 py-16 md:py-20 max-w-5xl"
+    >
+      <h2 id="products-heading" class="max-w-xl text-ink text-left">
+        Pick by environment
+      </h2>
+      <ul class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        {
+          productCards.map((card) => {
+            const product = products[card.key];
+            return (
+              <li
+                class:list={[
+                  "flex flex-col bg-canvas p-6 border border-border rounded-2xl",
+                  card.key === "bundle" && "md:col-span-2",
+                ]}
+              >
+                <p class="text-ink-soft text-sm uppercase tracking-wide">
+                  {product.env}
+                </p>
+                <h3 class="mt-1 text-xl text-left leading-snug">
+                  {product.en.name}
+                </h3>
+                <p class="mt-1 text-accent-dark text-sm">{card.title}</p>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {card.desc}
+                </p>
+                <p class="mt-4 text-ink-soft text-sm">
+                  {product.skills} skills ·{" "}
+                  <span class="font-heading text-ink text-xl">
+                    {formatUsd(product.en.priceUsd)}
+                  </span>
+                  <span class="ml-1">one-time purchase</span>
+                </p>
+                <a
+                  href={product.en.href}
+                  class="inline-flex items-center gap-1.5 mt-4 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+                >
+                  See details
+                  <ArrowRight size={14} stroke-width={2} />
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
       class="bg-surface-alt py-20 md:py-28"
     >
       <div class="mx-auto px-6 max-w-5xl">
-        <h2 id="flows-heading" class="max-w-xl font-medium text-ink text-left">
-          Workflows that work well together
+        <h2 id="skills-heading" class="max-w-xl text-ink text-left">
+          About the skills
         </h2>
-        <p
-          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 md:grid-cols-3 mt-10 *:bg-canvas *:p-6 *:border *:border-border *:rounded-2xl"
         >
-          Run skills one at a time, or chain them. The pipeline skills
-          (mockup-pipeline, lp-pipeline, full-pipeline, figma-pipeline) chain
-          the steps for you.
-        </p>
-
-        <div class="flex flex-col gap-14 mt-10">
           {
-            flowGroups.map((group) => (
+            aboutPoints.map((point) => (
               <div>
-                <h3 class="text-xl text-left">{group.title}</h3>
-                <p class="mt-2 text-ink-soft text-base text-left leading-snug">
-                  {group.note}
+                <h3 class="text-lg text-left leading-snug">{point.title}</h3>
+                <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                  {point.desc}
                 </p>
-                <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-6">
-                  {flows
-                    .filter((flow) => flow.edition === group.key)
-                    .map((flow) => (
-                      <FlowCard
-                        goal={flow.goal}
-                        chain={flow.chain}
-                        desc={flow.desc}
-                      />
-                    ))}
-                </div>
               </div>
             ))
           }
         </div>
-
-        <a
-          href="/en/changelog/"
-          class="inline-flex items-center gap-1 mt-8 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
-        >
-          See the changelog
-          <ArrowRight size={14} stroke-width={2} />
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ PRICING ============ -->
-    <section
-      id="pricing"
-      aria-labelledby="pricing-heading"
-      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
-    >
-      <div class="max-w-xl">
-        <p
-          class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
-        >
-          <Tag size={18} stroke-width={2} />
-          Pricing
-        </p>
-        <h2 id="pricing-heading" class="font-medium text-ink text-left">
-          KMRVID Skills Bundle
-        </h2>
-        <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}. Buying the
-          two editions separately costs {
-            formatUsd(
-              products.claude.en.priceUsd + products.figma.en.priceUsd,
-            )
-          }, so the bundle saves you {formatUsd(bundleSavingUsd)}.
-        </p>
-      </div>
-
-      <PricingCard
-        product="bundle"
-        benefits={[
-          `${claudeSkillsCount} skills for Claude Code and ${figmaSkillsCount} for Figma’s Design Agent`,
-          "A README (PDF) with a skill reference, dependency list, ready-made combinations and install steps",
-          "Free lifetime updates",
-          "Plain-text SKILL.md files you can read and adapt",
-        ]}
-      />
-
-      <p
-        class="mt-6 max-w-xl text-ink-soft text-sm text-justify leading-relaxed"
-      >
-        Tested on real projects, but agents and tool versions move quickly, so
-        results can vary in your setup. One-to-one troubleshooting is not
-        offered. If something breaks, pass the SKILL.md and the error log to
-        your agent.
-      </p>
-
-      <p
-        class="mt-3 max-w-xl text-ink-soft text-sm text-justify leading-relaxed"
-      >
-        Note: The Figma edition’s skills use Figma’s agent features and consume
-        Figma AI credits when run. Usage varies with the task. Figma plan fees
-        and AI credits are not included in this product’s price.
-      </p>
-
-      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-12">
-        <PackageCard
-          product="claude"
-          lang="en"
-          description="Only the Claude Code edition, if you do not work in Figma’s Design Agent."
-        />
-        <PackageCard
-          product="figma"
-          lang="en"
-          description="Only the Figma Design Agent edition, if you do not use Claude Code."
-        />
+        <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8">
+          <li>
+            <a
+              href="/en/skills/"
+              class="inline-flex items-center gap-1 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              All Claude and Figma skills ({totalSkills})
+              <ArrowRight size={14} stroke-width={2} />
+            </a>
+          </li>
+          <li>
+            <a
+              href="/en/muse/#skills"
+              class="inline-flex items-center gap-1 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              Muse edition skills ({museSkillsCount})
+              <ArrowRight size={14} stroke-width={2} />
+            </a>
+          </li>
+          <li>
+            <a
+              href="/en/desktop/#skills"
+              class="inline-flex items-center gap-1 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              Desktop edition skills ({desktopSkillsCount})
+              <ArrowRight size={14} stroke-width={2} />
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 
     <CreatorBio />
 
-    <!-- ============ FAQ ============ -->
-    <section id="faq" aria-labelledby="faq-heading" class="py-20 md:py-28">
-      <div class="mx-auto px-6 max-w-3xl">
-        <p
-          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
-        >
-          <MessageCircleQuestionMark size={18} stroke-width={2} />
-          FAQ
-        </p>
-        <h2 id="faq-heading" class="text-ink text-left">
-          Frequently asked questions
-        </h2>
-
-        <div class="mt-8 *:border-border *:border-b">
-          <FaqItem question="Where do the skills run?">
-            The Claude edition runs in Claude Code (CLI, Desktop and the VS Code
-            extension) on macOS, Linux and Windows (WSL or PowerShell). The
-            Figma edition runs in Figma’s Design Agent through its custom-skill
-            registration feature. Using the Claude edition in another agent such
-            as Cursor or Codex means adapting the Claude-specific parts.
-          </FaqItem>
-
-          <FaqItem question="Do I need both editions?">
-            No. Pick the edition that matches your tool, or take the bundle if
-            you work in both. The editions overlap in places, and a few skills
-            reference each other as optional companions.
-          </FaqItem>
-
-          <FaqItem question="Are the skills in English?">
-            Yes. Instructions, questions and reports are in English. A few
-            skills that encode Japanese-specific conventions, such as
-            create-jp-lp, keep their rule text in Japanese so the agent does
-            not misread it. Their questions and reports are still in English.
-          </FaqItem>
-
-          <FaqItem question="Does it include video lessons?">
-            No. The package contains the skills and a README (PDF) with a skill
-            reference, the dependency list, ready-made combinations and install
-            steps.
-          </FaqItem>
-
-          <FaqItem question="What happens when a skill changes?">
-            Updates are free for the lifetime of the package. The
-            <a
-              href="/en/changelog/"
-              class="text-accent underline underline-offset-4"
-            >
-              changelog
-            </a>
-            lists what changed and which skills it touched.
-          </FaqItem>
-
-          <FaqItem question="Can I try something before buying?">
-            Some of the skills are free on Figma Community, and some are open
-            source on GitHub. A selection of the Claude Code skills is also on
-            Agensi: some are free, and every paid skill has 3 free trial runs.
-            See the
-            <a
-              href={AGENSI_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-accent underline underline-offset-4"
-            >
-              creator page on Agensi
-            </a>.
-          </FaqItem>
-
-          <FaqItem question="Can I buy a single skill?">
-            Yes. A selection of the Claude Code skills is sold individually on
-            Agensi. Some are free, and every paid skill has 3 free trial runs.
-            The Figma edition is not sold there. See the
-            <a
-              href={AGENSI_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-accent underline underline-offset-4"
-            >
-              creator page on Agensi
-            </a>
-            for what is available. This package includes all {claudeSkillsCount}
-            Claude Code skills together.
-          </FaqItem>
-          <FaqItem question="Is support available?">
-            One-to-one troubleshooting is not offered. If something breaks, pass
-            the SKILL.md and the error log to your agent; the skills are plain
-            text and easy to adapt.
-          </FaqItem>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FINAL CTA ============ -->
     <section
-      aria-labelledby="final-cta-heading"
-      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+      id="changelog"
+      aria-labelledby="changelog-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-3xl"
     >
-      <Image
-        src={codeScreen}
-        alt=""
-        width={1920}
-        height={1080}
-        class="absolute inset-0 w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-ink/85"></div>
-      <div
-        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      <h2 id="changelog-heading" class="text-ink text-left">Changelog</h2>
+      <ChangelogList entries={recent} lang="en" />
+      <a
+        href="/en/changelog/"
+        class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
       >
-        <Tag size={28} stroke-width={1.75} class="text-accent" />
-        <h2 id="final-cta-heading" class="text-canvas">
-          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}
-        </h2>
-        <p class="max-w-md text-white/70 text-base leading-relaxed">
-          Claude Code and Figma’s Design Agent, one purchase, free lifetime
-          updates.
-        </p>
-        <a
-          href={bundle.url}
-          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
-        >
-          <span>Buy on Gumroad</span>
-          <ArrowRight size={18} stroke-width={2} />
-        </a>
-      </div>
+        See the full changelog
+        <ArrowRight size={14} stroke-width={2} />
+      </a>
     </section>
   </main>
 

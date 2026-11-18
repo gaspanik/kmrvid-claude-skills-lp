@@ -1,7 +1,7 @@
 ---
 import { ArrowRight } from "@lucide/astro";
 import { Image } from "astro:assets";
-import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
+import deskKeyboardDark from "@/assets/images/desk-keyboard-dark.jpg";
 import laptopWork from "@/assets/images/laptop-work.jpg";
 import ChangelogList from "@/components/ChangelogList.astro";
 import CreatorBio from "@/components/CreatorBio.astro";
@@ -88,12 +88,12 @@ const recent = changelogSorted.slice(0, 5);
         </div>
         <div class="border border-border rounded-3xl overflow-hidden">
           <Image
-            src={figmaWireframe}
+            src={deskKeyboardDark}
             alt=""
-            width={900}
-            height={720}
+            width={960}
+            height={1200}
             loading="eager"
-            class="w-full h-full max-md:max-h-72 object-cover"
+            class="w-full h-full max-md:max-h-80 object-cover"
           />
         </div>
       </div>

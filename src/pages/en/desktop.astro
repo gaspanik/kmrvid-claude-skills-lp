@@ -1,0 +1,459 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Package,
+  Coins,
+  ExternalLink,
+  Languages,
+  LayoutTemplate,
+  MessageCircleQuestionMark,
+  MessageSquare,
+  ShieldCheck,
+  SquareTerminal,
+  Tag,
+} from "@lucide/astro";
+import Callout from "@/components/Callout.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import CreatorBio from "@/components/CreatorBio.astro";
+import FaqItem from "@/components/FaqItem.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import FlowCard from "@/components/FlowCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import PricingCard from "@/components/PricingCard.astro";
+import Price from "@/components/Price.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  DESKTOP_VERIFIED_ON,
+  desktopCategories,
+  desktopSkills,
+  desktopSkillsCount,
+} from "@/data/desktop";
+import { museSkillsCount } from "@/data/muse";
+import { FIGMA_COMMUNITY_URL, formatUsd, products } from "@/data/products";
+
+const product = products.desktop.en;
+
+const features = [
+  {
+    icon: Coins,
+    title: "No Figma AI credits",
+    description:
+      "Everything goes through the Figma connector, so run a skill as often as you like. (For reference, the same optimization pipeline costs roughly 500 credits per file with Figma’s own agent.)",
+  },
+  {
+    icon: Package,
+    title: "Shipped as a plugin",
+    description:
+      "A regular custom skill can only be a single .md file. This package is a plugin, so reference files travel with the skills and everything is registered in one go.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Name the skill in chat",
+    description:
+      "Name the skill and add the Figma URL in the Claude Desktop chat. No code editor, no terminal.",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "Generate new pages too",
+    description:
+      "create-figma-page builds a page from a brief, single or several patterns. For several, each candidate is declared up front (layout model, density, image treatment, type voice, CTA placement) so they don’t converge on the same layout.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Every write is approved",
+    description:
+      "Each change to Figma asks for your approval in Claude Desktop first. Review it, then approve to proceed.",
+  },
+  {
+    icon: Languages,
+    title: "English skills, replies in your language",
+    description:
+      "The skills are written in English to save tokens, and Claude replies in the language you chat in. The bundled README covers a skill reference and usage notes.",
+  },
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Add the plugin to Claude Desktop",
+    desc: `Add the distributed plugin to Claude Desktop. All ${desktopSkillsCount} skills are registered together.`,
+  },
+  {
+    n: "02",
+    title: "Connect Figma",
+    desc: "Install the latest Figma plugin (it includes the connector) and sign in, then make sure you have edit permission on the target file. Prerequisite skills such as figma-use come with it.",
+  },
+  {
+    n: "03",
+    title: "Name the skill in chat",
+    desc: "Say, for example, “Run figma-tidy-up on this file” plus the Figma URL. Every write to Figma asks for your approval first.",
+  },
+];
+
+const flows = [
+  {
+    goal: "Clean up a messy file in one go",
+    chain: ["figma-optimize"],
+    desc: "tidy-up → layer-rename → tokenize → componentize → enhance, in dependency order. You pick which steps to run.",
+  },
+  {
+    goal: "From requirements to a layout",
+    chain: ["brief-me", "create-figma-page"],
+    desc: "Pin down requirements, then generate the page. Several structurally different patterns are possible, declared up front so they don’t converge on the same layout.",
+  },
+  {
+    goal: "Check before you hand off",
+    chain: ["figma-audit", "figma-contrast-check", "figma-alt-suggest"],
+    desc: "Score the design on four dimensions, check WCAG contrast, and get image alt-text proposals written as Accessibility annotations.",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID CDC Skills — ${desktopSkillsCount} Figma skills for Claude Desktop`}
+  description={`${desktopSkillsCount} Figma skills that run from the Claude Desktop chat through the Figma connector, shipped as a plugin: clean up layers, tokens and components, check accessibility and generate pages, with no Figma AI credits used.`}
+  translated
+>
+  <Header variant="desktop" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="#editions"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Nearly the same skills as the Muse edition, for Claude Desktop
+        </a>
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Skills for Claude Desktop
+        </p>
+        <h1
+          id="hero-heading"
+          class="max-w-3xl font-semibold text-ink max-sm:text-2xl text-left"
+        >
+          {desktopSkillsCount} Figma skills that run from a Claude Desktop chat, with <span class="text-accent">zero Figma AI credits</span>
+        </h1>
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          KMRVID CDC Skills (Claude Desktop Chat Skills) is a plugin that brings
+          nearly the same skills as the Muse edition to the Claude Desktop chat.
+          Name a skill in chat, add the Figma URL, and Claude does the work
+          through the Figma connector: pin down requirements, generate pages,
+          clean up structure (layers, tokens, components), translate frames and
+          check accessibility, without consuming any Figma AI credits.
+        </p>
+
+        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8">
+          <a
+            href={product.url}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            <span>Get the skills · <Price product="desktop" lang="en" /></span>
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            Browse the skills
+          </a>
+        </div>
+
+        <div class="flex flex-col items-start">
+          <a
+            href={FIGMA_COMMUNITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            Try before you buy: free skills on Figma Community
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">{desktopSkillsCount}</p>
+            <p class="mt-2 text-white/60 text-sm">
+              Skills in one plugin
+            </p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">0</p>
+            <p class="mt-2 text-white/60 text-sm">Figma AI credits consumed</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">1</p>
+            <p class="mt-2 text-white/60 text-sm">Plugin, registered in one go</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHY ============ -->
+    <section
+      id="why"
+      aria-labelledby="why-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="why-heading" class="max-w-xl font-medium text-ink text-left">
+        Built to run in Claude Desktop
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Nearly the same skills as KMRVID Muse Skills, packaged as a plugin for
+        the Claude Desktop chat.
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        {
+          features.map((item) => (
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="max-w-xl font-medium text-ink text-left">
+          The {desktopSkillsCount} skills
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          As of {DESKTOP_VERIFIED_ON.en}, create-figma-page, create-figma-pages
+          and figma-night-cruise are confirmed working in the Claude Desktop chat.
+        </p>
+
+        <div class="mt-12">
+          {
+            desktopCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="en"
+                known={desktopSkills.map((skill) => skill.name)}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO ============ -->
+    <section
+      id="how-to"
+      aria-labelledby="how-to-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="how-to-heading" class="max-w-xl font-medium text-ink text-left">
+        Get started in 3 steps
+      </h2>
+      <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+        {
+          steps.map((step) => (
+            <li class="bg-canvas p-6 border border-border rounded-2xl">
+              <p class="font-heading text-accent text-3xl">{step.n}</p>
+              <h3 class="mt-3 text-lg text-left leading-snug">{step.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                {step.desc}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p
+        class="flex items-start gap-3 mt-8 max-w-2xl text-ink-soft text-base text-justify leading-snug"
+      >
+        <SquareTerminal size={18} stroke-width={2} class="flex-none mt-1" />
+        <span>
+          Skills that restructure a file (figma-tidy-up, figma-tokenize,
+          figma-componentize and the like) change your Figma file. Duplicate the
+          file first, or make sure version history is available. Each skill
+          verifies its own work, but a copy is the safest undo.
+        </span>
+      </p>
+
+    </section>
+
+    <!-- ============ FLOWS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="combos-heading" class="max-w-xl font-medium text-ink text-left">
+          Flows that work well together
+        </h2>
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          {flows.map((flow) => <FlowCard {...flow} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDITIONS ============ -->
+    <section
+      id="editions"
+      aria-labelledby="editions-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="editions-heading" class="max-w-xl font-medium text-ink text-left">
+        Pick by the environment you use
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Use this edition in the Claude Desktop chat, the Muse edition in the
+        Muse chat, and the Claude, Figma or Bundle editions in Claude Code or
+        Figma’s Design Agent.
+      </p>
+      <div class="mt-8 max-w-2xl">
+        <Callout>
+          The difference from the Muse edition is the skill list and the
+          packaging. figma-annotate, japanese-lp-seasoning and space-guideline
+          are only in the Muse edition, so this edition has {desktopSkillsCount} skills
+          against {museSkillsCount}.
+        </Callout>
+      </div>
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        <PackageCard
+          product="claude"
+          lang="en"
+          description="Skills for Claude Code: setup and pipelines, mockups, Figma integration, Tailwind and finishing."
+        />
+        <PackageCard
+          product="figma"
+          lang="en"
+          description="Custom skills for Figma’s Design Agent."
+        />
+        <div class="md:col-span-2">
+          <PackageCard
+            product="bundle"
+            lang="en"
+            description="Both editions together. Cheaper than buying them separately."
+          />
+        </div>
+      </div>
+      <a
+        href="/en/muse/"
+        class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+      >
+        See the Muse edition
+        <ArrowUpRight size={14} stroke-width={2} />
+      </a>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+        >
+          <Tag size={18} stroke-width={2} />
+          Pricing
+        </p>
+        <h2 id="pricing-heading" class="font-medium text-ink text-left">
+          KMRVID CDC Skills
+        </h2>
+        <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
+          All {desktopSkillsCount} skills, the README and free lifetime
+          updates for {formatUsd(product.priceUsd)}.
+        </p>
+
+        <PricingCard
+          product="desktop"
+          benefits={[
+            `${desktopSkillsCount} Figma skills for Claude Desktop, as a plugin`,
+            "No Figma AI credits used",
+            "A README with a skill reference and usage notes",
+            "Free lifetime updates",
+          ]}
+        />
+
+        <p class="mt-6 max-w-xl text-ink-soft text-sm text-justify leading-relaxed">
+          Note: This runs in Claude Desktop through the Figma connector. Claude
+          Desktop and Figma plan fees are not included in this product’s price.
+        </p>
+      </div>
+    </section>
+
+    <CreatorBio />
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-heading" class="py-20 md:py-28">
+      <div class="mx-auto px-6 max-w-3xl">
+        <p
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <MessageCircleQuestionMark size={18} stroke-width={2} />
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-ink text-left">
+          Frequently asked questions
+        </h2>
+        <div class="mt-8 *:border-border *:border-b">
+          <FaqItem question="How is this different from the Muse edition?">
+            Nearly the same skills, packaged as a plugin for the Claude Desktop
+            chat. figma-annotate, japanese-lp-seasoning and space-guideline are
+            only in the Muse edition.
+          </FaqItem>
+          <FaqItem question="What do I need to run the skills?">
+            A Claude Desktop account, the Figma plugin (with its connector)
+            installed and signed in, and edit permission on the target Figma
+            file. Claude Desktop and Figma plan fees are not included in the
+            price.
+          </FaqItem>
+          <FaqItem question="Will the skills change my Figma file?">
+            Skills that restructure a file change it. Duplicate the file first,
+            or make sure version history is available. Each write asks for your
+            approval in Claude Desktop first.
+          </FaqItem>
+          <FaqItem question="Does it include video lessons?">
+            No. The package contains the plugin and a README.
+          </FaqItem>
+          <FaqItem question="Do you offer support?">
+            The skills were tested on real Figma files through Claude Desktop, but agents
+            and tool versions move quickly, so results can vary. One-to-one
+            troubleshooting is not offered. If something breaks, pass the
+            SKILL.md and the error to your agent; the skills are plain text and
+            easy to adapt.
+          </FaqItem>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="desktop" />
+</Layout>

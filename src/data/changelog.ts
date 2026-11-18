@@ -8,7 +8,7 @@ export type ChangelogKind = 'new' | 'update' | 'fix'
 export interface ChangelogEntry {
   /** YYYY-MM-DD */
   date: string
-  product: 'claude' | 'figma' | 'muse'
+  product: 'claude' | 'figma' | 'muse' | 'desktop'
   kind: ChangelogKind
   /** 対象スキル。空なら全スキル */
   skills: string[]
@@ -20,6 +20,14 @@ export interface ChangelogEntry {
 export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
+  {
+    date: '2026-11-18',
+    product: 'desktop',
+    kind: 'new',
+    skills: [],
+    ja: 'Claude Desktop のチャット用に、KMRVID CDC Skills（Desktop版）を追加（25スキル、プラグイン形式）。',
+    en: 'Added KMRVID CDC Skills, the Desktop edition for the Claude Desktop chat (25 skills, shipped as a plugin).',
+  },
   {
     date: '2026-11-16',
     product: 'muse',

@@ -1,7 +1,8 @@
+import { desktopSkillsCount } from './desktop'
 import { museSkillsCount } from './muse'
 import { claudeSkillsCount, figmaSkillsCount, totalSkills } from './skills'
 
-export type ProductKey = 'bundle' | 'claude' | 'figma' | 'muse'
+export type ProductKey = 'bundle' | 'claude' | 'figma' | 'muse' | 'desktop'
 
 /** 期間限定の特別価格。キャンペーン終了後は該当の `campaign` を削除すれば全ページが通常価格に戻る */
 interface Campaign {
@@ -52,7 +53,7 @@ export const products: Record<ProductKey, Product> = {
   bundle: {
     name: 'KMRVID Skills - All-in-One Bundle',
     env: 'Claude Code + Figma Design Agent',
-    href: '/',
+    href: '/bundle/',
     url: 'https://kmrvid.com/products/kmrvid-skills-bundle',
     price: 29800,
     skills: totalSkills,
@@ -61,7 +62,7 @@ export const products: Record<ProductKey, Product> = {
     minutes: 5,
     en: {
       name: 'KMRVID Skills Bundle',
-      href: '/en/',
+      href: '/en/bundle/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-bundle',
       priceUsd: 199,
     },
@@ -115,6 +116,31 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Muse Skills',
       href: '/en/muse/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-museskills',
+      priceUsd: 59,
+    },
+  },
+  // Claude Desktop のチャット用。Muse版とほぼ同じスキルを、プラグイン形式（リファレンス同梱）で配布する
+  desktop: {
+    name: 'KMRVID CDC Skills',
+    env: 'Claude Desktop',
+    href: '/desktop/',
+    url: 'https://kmrvid.com/products/kmrvid-cdc-skills',
+    price: 9900,
+    skills: desktopSkillsCount,
+    videos: 0,
+    hours: 0,
+    minutes: 0,
+    // 発売記念価格（2026-11-27 まで）。終了後はこのブロックを削除する
+    campaign: {
+      price: 7700,
+      endsAt: '2026-11-27T23:59:00+09:00',
+      endsAtLabel: '2026年11月27日（金）23:59',
+      endsAtShort: '11/27（金）',
+    },
+    en: {
+      name: 'KMRVID CDC Skills',
+      href: '/en/desktop/',
+      url: 'https://gaspanik.gumroad.com/l/kmrvid-cdcskills',
       priceUsd: 59,
     },
   },

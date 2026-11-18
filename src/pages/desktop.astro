@@ -1,0 +1,722 @@
+---
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgePercent,
+  CircleCheck,
+  Coins,
+  Combine,
+  ExternalLink,
+  Languages,
+  LayoutTemplate,
+  MessageSquare,
+  Package,
+  ShieldCheck,
+  Tag,
+  Workflow,
+} from "@lucide/astro";
+import codeScreen from "@/assets/images/code-screen.jpg";
+import Callout from "@/components/Callout.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
+import CategorySkills from "@/components/CategorySkills.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PackageCard from "@/components/PackageCard.astro";
+import Price from "@/components/Price.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import {
+  DESKTOP_VERIFIED_ON,
+  desktopCategories,
+  desktopSkills,
+  desktopSkillsCount,
+} from "@/data/desktop";
+import { museSkillsCount } from "@/data/muse";
+import {
+  FIGMA_COMMUNITY_URL,
+  formatYen,
+  products,
+} from "@/data/products";
+
+const product = products.desktop;
+const PURCHASE_URL = product.url;
+const REGULAR_PRICE = formatYen(product.price);
+const campaign = product.campaign;
+const LINE_URL = "https://lin.ee/EOgmkKQ";
+
+const features = [
+  {
+    icon: Coins,
+    title: "Figma AIクレジット不使用",
+    description:
+      "処理はFigmaコネクタ経由。クレジット残量を気にせず何度でも回せます。（参考: 同じ最適化工程をFigmaのエージェント側で実行すると、1ファイルあたり約500クレジット規模）",
+  },
+  {
+    icon: Package,
+    title: "プラグイン形式で配布",
+    description:
+      "通常のスキルは .md ファイルしか登録できません。本商品は、リファレンスファイルなども含められるプラグイン形式で、まとめて登録できます。",
+  },
+  {
+    icon: MessageSquare,
+    title: "チャットで名前を伝えるだけ",
+    description:
+      "スキル名とFigmaのURLを伝えるだけ。コードエディタもターミナルも不要です。Claude Desktopのチャットから使えます。",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "新規ページ作成も",
+    description:
+      "ブリーフからページを新規作成できます（単一ページ／複数パターン）。複数パターンのときは各案の切り口（レイアウトモデル・密度・画像の扱い・文字の声・CTA配置）を宣言して作り分けるので、似たような案ばかりになりません。",
+  },
+  {
+    icon: ShieldCheck,
+    title: "書き込みは都度承認",
+    description:
+      "Figmaへの変更は、その都度Claude Desktopの画面で承認を求められます。内容を確認してから実行できます。",
+  },
+  {
+    icon: Languages,
+    title: "スキルは英文、READMEは日英",
+    description:
+      "スキル本文はトークン節約のために英語ですが、日本語で話しかければ日本語で応答がきます。同梱のREADMEに、スキルの一覧と使い方をまとめています。",
+  },
+];
+
+const pains = [
+  "Frame 12 Rectangle 7 のような自動生成レイヤー名を、あとから手でリネームし直す",
+  "色やフォントサイズをその場でベタ打ちしてしまい、あとで変数化するのが面倒",
+  "「とりあえず1パターン」で作り込んでから、実は別レイアウトも見たかったと気づく",
+  "ダミーテキストのまま渡してしまい、後工程で文言を直す往復が発生する",
+  "FigmaのAIエージェントに頼むたびにAIクレジットが減っていく",
+];
+
+const audience = [
+  "FigmaのAIクレジット消費を抑えたい人",
+  "デザイナー1人〜少人数チームで、レビュー前の下ごしらえを高速化したい人",
+  "「とりあえず作ってみる」前に、複数案を並べて比較検討したい人",
+  "レイヤー命名やトークン化など、地味だが積み重なる作業を自動化したい人",
+  "スキルそのものの作り方を含めた学習・研究用途で使いたい人",
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "プラグインをClaude Desktopに追加する",
+    desc: "配布されるプラグインを、Claude Desktopに追加します。{count}個のスキルがまとめて登録されます。",
+  },
+  {
+    n: "02",
+    title: "Figmaコネクタをつなぐ",
+    desc: "Figmaのプラグイン（コネクタ入り、最新版）を入れて認証を済ませ、対象のFigmaファイルに編集権限があることを確認します。`figma-use` などの前提スキルはそちらに入っています。",
+  },
+  {
+    n: "03",
+    title: "チャットでスキル名を伝える",
+    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Figmaへの書き込みは、その都度承認を求められます。",
+  },
+].map((step) => ({
+  ...step,
+  desc: step.desc.replace("{count}", String(desktopSkillsCount)),
+}));
+
+const combos = [
+  {
+    goal: "散らかったファイルを一気に整えたい",
+    chain: ["figma-optimize"],
+    desc: "tidy-up → layer-rename → tokenize → componentize → enhance を、依存順に実行します。どの工程を実行するかは選べます。",
+  },
+  {
+    goal: "要件から新しいページを作りたい",
+    chain: ["brief-me", "create-figma-page"],
+    desc: "要件をヒアリングしてBRIEFを作成後、それを引き継いでページを生成。構造の異なる複数パターンも作れ、各案の切り口を先に宣言するので、似たレイアウトに収束しません。",
+  },
+  {
+    goal: "引き渡す前にチェックしたい",
+    chain: ["figma-audit", "figma-contrast-check", "figma-alt-suggest"],
+    desc: "4観点の採点、WCAGのコントラストチェック、画像の代替テキストの提案（Accessibility注釈として書き込み）までをまとめて確認できます。",
+  },
+];
+---
+
+<Layout
+  title={`KMRVID CDC Skills — Claude Desktop用Figma連携スキル集（${desktopSkillsCount}スキル）`}
+  description={`Claude Desktopのチャットでスキル名を伝えるだけ。Figmaコネクタ経由で、レイヤー整理・トークン化・コンポーネント化・ページ生成・アクセシビリティチェックまで、Figma AIクレジットを消費せずに実行できる${desktopSkillsCount}個のスキル（プラグイン形式）。`}
+  translated
+>
+  <Header variant="desktop" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section
+      aria-labelledby="hero-heading"
+      class="relative pt-14 md:pt-20 pb-0 overflow-hidden"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <a
+          href="#editions"
+          class="inline-flex items-center gap-2 bg-ink mb-8 px-4 py-2 rounded-full font-medium text-white/90 text-sm"
+        >
+          <ArrowUpRight size={16} stroke-width={2} />
+          Muse版とほぼ同じスキルを、Claude Desktop用に
+        </a>
+
+        <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+          Claude Desktop用 Figma連携スキルセット
+        </p>
+
+        <h1
+          id="hero-heading"
+          class="max-w-3xl text-ink max-sm:text-2xl text-left"
+        >
+          Claude Desktopのチャットで、
+          <br />
+          Figmaの<span class="text-accent">下ごしらえ</span>を処理
+        </h1>
+
+        <p
+          class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          コードエディタもターミナルも不要。Claude Desktopのチャットでスキル名を伝えるだけで、Figmaファイルのレイヤー整理・トークン化・コンポーネント化・複数レイアウトパターン生成・コピーライティングまでAIにまかせられます。処理はFigmaコネクタ経由で行うため、FigmaのAIクレジットは消費しません。
+        </p>
+
+        {
+          campaign && (
+            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+              <p class="flex items-center gap-2 font-medium text-base">
+                <BadgePercent size={18} stroke-width={2} class="flex-none" />
+                発売記念価格 {REGULAR_PRICE}円 → {formatYen(campaign.price)}円（税込）
+              </p>
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="終了まで残り"
+                fallback={`${campaign.endsAtLabel}まで`}
+                class="mt-1 text-base"
+              />
+            </div>
+          )
+        }
+
+        <div
+          class:list={[
+            "flex sm:flex-row flex-col items-start sm:items-center gap-4",
+            campaign ? "mt-4 campaign-ended:mt-8" : "mt-8",
+          ]}
+        >
+          <a
+            href={PURCHASE_URL}
+            class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+          >
+            <span><Price product="desktop" />円で申し込む</span>
+            <ArrowRight size={18} stroke-width={2} />
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+          >
+            収録スキルを見る
+          </a>
+        </div>
+
+        <a
+          href={FIGMA_COMMUNITY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          Figma Communityで無料のスキルを先に試す
+          <ExternalLink size={14} stroke-width={2} />
+        </a>
+      </div>
+
+      <!-- Bottom-up payload: large numeral block carrying the first-viewport weight -->
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div
+          class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left"
+        >
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              {desktopSkillsCount}
+              <span class="font-body text-white/50 text-lg">個</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">収録スキル数</p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              0
+              <span class="font-body text-white/50 text-lg">クレジット</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">消費するFigma AIクレジット</p>
+          </div>
+          <div>
+            <p
+              class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
+            >
+              1
+              <span class="font-body text-white/50 text-lg">プラグイン</span>
+            </p>
+            <p class="mt-2 text-white/60 text-sm">全スキルをまとめて登録</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHY ============ -->
+    <section
+      id="why"
+      aria-labelledby="why-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <h2 id="why-heading" class="max-w-xl text-ink text-left">
+        Desktop版の特長
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        KMRVID Muse Skillsとほぼ同じスキルを、Claude Desktopのチャットで使える形にしたものです。
+      </p>
+
+      <div
+        class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 *:bg-canvas mt-10 *:p-6 *:border *:border-border *:rounded-2xl"
+      >
+        {
+          features.map((item) => (
+            <FeatureCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+          ))
+        }
+      </div>
+
+      <div class="flex flex-col gap-16 mt-20 max-w-3xl">
+        <div>
+          <h3 class="text-ink text-lg text-left leading-snug">
+            Figmaでデザインしていて、こんな手戻りに時間を溶かしていませんか？
+          </h3>
+          <ul
+            class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 mt-4 *:[&_svg]:mt-0.5 text-ink-soft *:[&_svg]:text-accent text-base leading-snug"
+          >
+            {
+              pains.map((pain) => (
+                <li>
+                  <CircleCheck size={18} stroke-width={2} />
+                  <span>{pain}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-4 text-ink text-base text-justify leading-snug">
+            これらはすべて、Claude DesktopからFigmaを操作することで、AIクレジットを消費せずに解決できます。
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-ink text-lg text-left leading-snug">
+            こんな人におすすめ
+          </h3>
+          <ul
+            class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 mt-4 *:[&_svg]:mt-0.5 text-ink-soft *:[&_svg]:text-accent text-base leading-snug"
+          >
+            {
+              audience.map((item) => (
+                <li>
+                  <CircleCheck size={18} stroke-width={2} />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS GRID ============ -->
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="max-w-xl text-ink text-left">
+          収録{desktopSkillsCount}スキル
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          Claude Desktopのチャットで名前を伝えて呼び出す、{
+            desktopSkillsCount
+          }個のスキルです。本パッケージはFigma連携スキルに絞った構成です。
+        </p>
+
+        <div class="mt-12">
+          {
+            desktopCategories.map((category) => (
+              <CategorySkills
+                category={category}
+                lang="ja"
+                known={desktopSkills.map((skill) => skill.name)}
+              />
+            ))
+          }
+        </div>
+
+        <p class="mt-6 text-ink-soft text-sm">
+          {DESKTOP_VERIFIED_ON.ja}時点で、create-figma-page・create-figma-pages・figma-night-cruise は、Claude Desktopのチャットで動作確認済みです。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO USE ============ -->
+    <section
+      id="how-to"
+      aria-labelledby="how-to-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <div
+        class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+      >
+        <Workflow size={18} stroke-width={2} />
+        使い方
+      </div>
+      <h2 id="how-to-heading" class="max-w-xl text-ink text-left">
+        3ステップで動かせる
+      </h2>
+
+      <ol class="gap-6 grid grid-cols-1 sm:grid-cols-3 mt-10">
+        {
+          steps.map((step) => (
+            <li class="bg-canvas p-6 border border-border rounded-2xl">
+              <p class="font-heading text-accent text-3xl">{step.n}</p>
+              <h3 class="mt-3 text-lg text-left leading-snug">{step.title}</h3>
+              <p class="mt-2 text-ink-soft text-base text-justify leading-snug">
+                {step.desc}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="flex flex-col gap-4 mt-10">
+        <Callout>
+          ファイルの構造を変えるスキル（`figma-tidy-up`・`figma-tokenize`・`figma-componentize`
+          など）は、対象のFigmaファイルを変更します。実行前に、ファイルを複製するか、バージョン履歴で戻れる状態にしておくことをおすすめします。各スキルは自分の作業を検証しますが、複製がいちばん確実な取り消し手段です。
+        </Callout>
+      </div>
+    </section>
+
+    <!-- ============ COMBOS ============ -->
+    <section
+      id="combos"
+      aria-labelledby="combos-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <div
+          class="flex items-center gap-2 mb-4 text-ink-soft text-sm uppercase tracking-widest"
+        >
+          <Combine size={18} stroke-width={2} />
+          Combination
+        </div>
+        <h2 id="combos-heading" class="max-w-xl text-ink text-left">
+          こういう時は<br class="sm:hidden" />このスキルを使おう
+        </h2>
+        <p
+          class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+        >
+          スキルは単体でも呼び出せますが、目的によっては複数のスキルを順番につなげることで、より効果的に問題を解決できます。代表的な組み合わせ例です。
+        </p>
+
+        <div
+          class="*:flex *:flex-col gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 *:p-6 *:border *:rounded-2xl"
+        >
+          {
+            combos.map((combo) => (
+              <div class="bg-canvas border-border">
+                <h3 class="text-lg text-left leading-snug">{combo.goal}</h3>
+                <div class="flex flex-wrap items-center gap-2 mt-3">
+                  {combo.chain.map((skill, i) => (
+                    <>
+                      {i > 0 && (
+                        <ArrowRight
+                          size={14}
+                          stroke-width={2}
+                          class="text-ink-soft"
+                        />
+                      )}
+                      <span class="bg-surface-alt px-2.5 py-1 rounded-full font-mono text-xs">
+                        {skill}
+                      </span>
+                    </>
+                  ))}
+                </div>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {combo.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDITIONS ============ -->
+    <section
+      id="editions"
+      aria-labelledby="editions-heading"
+      class="mx-auto px-6 py-20 md:py-28 max-w-5xl"
+    >
+      <p class="mb-3 text-ink-soft text-sm uppercase tracking-widest">
+        他の商品との関係
+      </p>
+      <h2 id="editions-heading" class="max-w-xl text-ink text-left">
+        使う環境に合わせて選ぶ
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed"
+      >
+        Claude Desktopのチャットで使うなら本商品、Museのチャットで使うならMuse版、Claude CodeやFigma Design Agentで使うならClaude版・Figma版・All-in-One Bundleが向いています。
+      </p>
+
+      <div class="mt-8">
+      <Callout>
+        Muse版との違いは、収録スキルと配布形態です。Muse版にだけ含まれるスキルは figma-annotate・japanese-lp-seasoning・space-guideline の3つで、本商品は{
+          desktopSkillsCount
+        }スキル（Muse版は{museSkillsCount}スキル）です。
+      </Callout>
+      </div>
+
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-2 mt-10">
+        <PackageCard
+          product="claude"
+          description="Claude Codeで動く、セットアップ・モックアップ作成・Figma連携・Tailwind最適化・仕上げまでを網羅したスキル群。"
+        />
+        <PackageCard
+          product="figma"
+          description="FigmaのDesign Agent専用に最適化したカスタムスキル集。"
+        />
+        <div class="md:col-span-2">
+          <PackageCard
+            product="bundle"
+            description="Claude版とFigma版の全スキルを収録したセット。"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6">
+        <a
+          href="/muse/"
+          class="inline-flex items-center gap-1.5 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          Muse版の詳細を見る
+          <ArrowUpRight size={14} stroke-width={2} />
+        </a>
+        <a
+          href="/skills/"
+          class="inline-flex items-center gap-1.5 min-h-11 text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          全スキル一覧を見る
+          <ExternalLink size={14} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      class="bg-surface-alt py-20 md:py-28"
+    >
+      <div class="mx-auto px-6 max-w-5xl">
+        <div class="max-w-xl">
+          <p
+            class="flex items-center gap-2 mb-4 text-sm uppercase tracking-widest text-accent-dark"
+          >
+            <BadgePercent
+              size={18}
+              stroke-width={2}
+              class="campaign-ended:hidden"
+            />
+            <Tag size={18} stroke-width={2} class="hidden campaign-ended:block" />
+            <span class="campaign-ended:hidden">発売記念価格</span>
+            <span class="hidden campaign-ended:inline">料金</span>
+          </p>
+          <h2 id="pricing-heading" class="text-ink text-left">
+            KMRVID <br class="sm:hidden" /> CDC Skills
+          </h2>
+          <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
+            単体パッケージとして、{
+              desktopSkillsCount
+            }個のClaude Desktop用スキルを、<Price product="desktop" />円（税込）の買い切りでご利用いただけます。
+            {
+              campaign && (
+                <span class="campaign-ended:hidden">
+                  発売記念として、{campaign.endsAtLabel}まで特別価格でご案内しています。
+                </span>
+              )
+            }
+          </p>
+          {
+            campaign && (
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="発売記念価格 終了まで残り"
+                fallback={`${campaign.endsAtLabel}まで`}
+                class="campaign-ended:hidden mt-4 text-base text-accent-dark"
+              />
+            )
+          }
+        </div>
+
+        <div class="bg-ink mt-10 rounded-3xl overflow-hidden text-canvas">
+          <div
+            class="gap-10 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] p-8 md:p-12"
+          >
+            <div>
+              {
+                campaign && (
+                  <p class="campaign-ended:hidden text-white/50 text-sm line-through">
+                    通常価格 {REGULAR_PRICE}円（税込）
+                  </p>
+                )
+              }
+              <p
+                class:list={[
+                  "flex items-baseline gap-2 font-heading text-6xl md:text-7xl",
+                  campaign && "mt-2 campaign-ended:mt-0",
+                ]}
+              >
+                <span><Price product="desktop" /></span><span class="text-2xl">円</span>
+              </p>
+              <p class="mt-2 text-white/60 text-sm">
+                税込・買い切り{
+                  campaign && (
+                    <span class="campaign-ended:hidden">
+                      （{campaign.endsAtLabel}まで発売記念価格）
+                    </span>
+                  )
+                }
+              </p>
+
+              <a
+                href={PURCHASE_URL}
+                class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
+              >
+                <span><Price product="desktop" />円で申し込む</span>
+                <ArrowRight size={18} stroke-width={2} />
+              </a>
+            </div>
+
+            <ul
+              class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 md:pl-8 md:border-white/10 md:border-l text-white/80 *:[&_svg]:text-accent text-base"
+            >
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>Claude Desktop用のFigma連携スキル{desktopSkillsCount}個（プラグイン形式）</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>Figma AIクレジットは消費しない</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>スキルの一覧と使い方をまとめたREADME付き</span>
+              </li>
+              <li>
+                <CircleCheck size={18} stroke-width={2} />
+                <span>買い切り・アップデートは無償</span>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-white/5 px-8 md:px-12 py-5 border-white/10 border-t"
+          >
+            <p class="text-white/70 text-sm">
+              公式LINE友だち登録で、10%OFFクーポンも配布中
+            </p>
+            <a
+              href={LINE_URL}
+              class="inline-flex items-center min-h-11 text-white text-sm underline underline-offset-4"
+            >
+              LINEで10%OFFクーポンを受け取る
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col gap-3 mt-6 max-w-2xl text-ink-soft text-sm text-justify leading-relaxed"
+        >
+          <p class="text-ink text-base">
+            ご購入前にお読みください：スキルの動作環境に関するご注意
+          </p>
+          <p>
+            本商品に付属するオリジナルスキルは、Claude Desktopのチャット向けに調整されたものです。動作には、Claude Desktopのアカウントと、Figmaコネクタ（Figmaプラグイン）の接続、および対象Figmaファイルへの編集権限が必要です。Claude DesktopおよびFigmaコネクタの仕様は変更される場合があり、ご利用時の状況によっては正常に動作しない、またツール自体の提供が終了する可能性があります。お使いの環境での完全な動作を保証するものではありません。個別のスキル修正・動作サポート対応はいたしかねますので、あらかじめご了承ください。
+          </p>
+          <p>
+            書き込み系スキルは対象Figmaファイルを変更します。実行前に、対象ファイルの複製、またはバージョン履歴で戻れる状態にしておくことを推奨します。
+          </p>
+          <p>
+            本製品の価格には、Claude DesktopおよびFigmaの利用料金は含まれません。
+          </p>
+          <p>
+            一部のスキルは一般公開しておりますが、本商品内だけで配布しているスキルについては無断転載・販売は禁止とさせていただきます。詳しくはスキルのフォルダに同梱されているLICENSEをご確認ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA (full-bleed) ============ -->
+    <section
+      aria-labelledby="final-cta-heading"
+      class="relative py-24 md:py-32 overflow-hidden text-canvas"
+    >
+      <Image
+        src={codeScreen}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/85"></div>
+      <div
+        class="z-10 relative flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center"
+      >
+        <Tag size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          <Price product="desktop" />円で
+          <br class="sm:hidden" />
+          Claude Desktopから始める
+        </h2>
+        <p
+          class="max-w-md text-white/70 text-base text-justify leading-relaxed"
+        >
+          {
+            desktopSkillsCount
+          }個のスキルを、買い切りで、Claude Desktopのチャットから呼び出せます。
+        </p>
+        <a
+          href={PURCHASE_URL}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          <span><Price product="desktop" />円で申し込む</span>
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href="#editions"
+          class="inline-flex items-center min-h-11 text-white/60 hover:text-white text-sm underline underline-offset-4"
+        >
+          Muse版・Claude版・Figma版との違いを見る
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer variant="desktop" />
+</Layout>

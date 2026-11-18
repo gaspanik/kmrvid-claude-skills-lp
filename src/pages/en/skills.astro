@@ -25,12 +25,12 @@ const bundle = products.bundle.en;
   description={`Every skill in KMRVID Skills Bundle: ${claudeSkillsCount} for Claude Code and ${figmaSkillsCount} for Figma’s Design Agent, with dependencies and a comparison of the two editions.`}
   translated
 >
-  <Header />
+  <Header variant="bundle" />
 
   <main>
     <section class="mx-auto px-6 pt-14 md:pt-20 max-w-5xl">
       <a
-        href="/en/#included"
+        href="/en/bundle/#included"
         class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm transition"
       >
         <ArrowLeft size={16} stroke-width={2} />
@@ -250,5 +250,5 @@ const bundle = products.bundle.en;
     </section>
   </main>
 
-  <Footer />
+  <Footer variant="bundle" />
 </Layout>

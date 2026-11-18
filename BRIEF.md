@@ -9,7 +9,7 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 52個 | 40本 | 約4時間10分 |
 | KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 34個 | 20本 | 約1時間55分 |
 | KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円 | 28個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
-| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 9,900円（発売記念 7,700円、2026年11月27日（金）23:59まで） | 25個（`src/data/desktop.ts`。Muse版から figma-annotate・japanese-lp-seasoning・space-guideline を除いて派生。総数には含めない） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
+| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 9,900円（発売記念 7,700円、2026年11月27日（金）23:59まで） | 27個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
 - CDC Skills（Desktop版）は Claude Desktop のチャット用の単体商品で、プラグイン形式で配布する（通常のスキルは .md のみ登録可能で、リファレンスファイルを含められないため）。**単体販売のみ**で、Claude版・Figma版・Bundle・Muse版には含まれない。既存スキル所有者への2,200円割引を日本語版のみで検討中（未確定。LPには未記載）。海外版は Gumroad（`kmrvid-cdcskills`）、USD価格は $59（2026-11-18 確定）。

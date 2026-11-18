@@ -97,8 +97,8 @@ const steps = [
   },
   {
     n: "02",
-    title: "Connect Figma",
-    desc: "Install the latest Figma plugin (it includes the connector) and sign in, then make sure you have edit permission on the target file. Prerequisite skills such as figma-use come with it.",
+    title: "Add the Figma plugin",
+    desc: "Search “Plugins” for Figma and add the one labelled “Community” (it bundles the connector and skills), then sign in. The “verified” result that shows up first is an older, connector-only version and is not enough on its own. Also make sure you have edit permission on the target file.",
   },
   {
     n: "03",
@@ -368,8 +368,8 @@ const flows = [
         <Callout>
           This edition is sold on its own and is not included in the Claude,
           Figma or Bundle editions. The difference from the Muse edition is the
-          skill list and the packaging. figma-annotate, japanese-lp-seasoning and space-guideline
-          are only in the Muse edition, so this edition has {desktopSkillsCount} skills
+          skill list and the packaging. space-guideline
+          is only in the Muse edition, so this edition has {desktopSkillsCount} skills
           against {museSkillsCount}.
         </Callout>
       </div>
@@ -456,12 +456,11 @@ const flows = [
         <div class="mt-8 *:border-border *:border-b">
           <FaqItem question="How is this different from the Muse edition?">
             Nearly the same skills, packaged as a plugin for the Claude Desktop
-            chat. figma-annotate, japanese-lp-seasoning and space-guideline are
-            only in the Muse edition.
+            chat. space-guideline is only in the Muse edition.
           </FaqItem>
           <FaqItem question="What do I need to run the skills?">
-            A Claude Desktop account, the Figma plugin (with its connector)
-            installed and signed in, and edit permission on the target Figma
+            A Claude Desktop account, the Community Figma plugin (with the
+            connector and skills) installed and signed in, and edit permission on the target Figma
             file. Claude Desktop and Figma plan fees are not included in the
             price.
           </FaqItem>

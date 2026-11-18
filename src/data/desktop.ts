@@ -7,11 +7,7 @@ import type { Category } from './skills'
  * Muse版にあって CDC に無いスキルを足したときは、ここに追加する。
  * マスター: ~/Documents/projects/kmrvid/kmrvid-cdc-skills-en
  */
-const MUSE_ONLY = new Set([
-  'figma-annotate',
-  'japanese-lp-seasoning',
-  'space-guideline',
-])
+const MUSE_ONLY = new Set(['space-guideline'])
 
 export const desktopCategories: Category[] = museCategories
   .map((category) => ({

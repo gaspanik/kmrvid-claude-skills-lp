@@ -25,8 +25,8 @@ export const changelog: ChangelogEntry[] = [
     product: 'desktop',
     kind: 'new',
     skills: [],
-    ja: 'Claude Desktop のチャット用に、KMRVID CDC Skills（Desktop版）を追加（25スキル、プラグイン形式）。',
-    en: 'Added KMRVID CDC Skills, the Desktop edition for the Claude Desktop chat (25 skills, shipped as a plugin).',
+    ja: 'Claude Desktop のチャット用に、KMRVID CDC Skills（Desktop版）を追加（27スキル、プラグイン形式）。',
+    en: 'Added KMRVID CDC Skills, the Desktop edition for the Claude Desktop chat (27 skills, shipped as a plugin).',
   },
   {
     date: '2026-11-16',

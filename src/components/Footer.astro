@@ -14,6 +14,7 @@ const en = lang === 'en';
 const LINE_URL = 'https://lin.ee/EOgmkKQ';
 const path = Astro.url.pathname.replace(/\/+$/, '');
 const isSkillsPage = path === '/skills' || path === '/en/skills';
+const isHomePage = path === '' || path === '/en'
 const isChangelogPage = path === '/changelog' || path === '/en/changelog';
 
 interface FooterConfig {
@@ -312,7 +313,24 @@ const PURCHASE_URL =
     <div
       class="flex sm:flex-row flex-col justify-between gap-4 mt-12 pt-8 border-white/10 border-t text-white/50 text-sm"
     >
-      <p>&copy; {en ? 'Masaaki Komori' : 'kmrvid.com'} — {name}</p>
+      <div>
+        <p>&copy; {en ? 'Masaaki Komori' : 'kmrvid.com'} — {name}</p>
+        {
+          isHomePage && (
+            <p class="mt-1">
+              Photo:{' '}
+              <a
+                href="https://unsplash.com/photos/Rns_A8bJ_dQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline underline-offset-4 hover:text-white"
+              >
+                Ján Vlačuha / Unsplash
+              </a>
+            </p>
+          )
+        }
+      </div>
       <p class="max-w-xl text-base text-justify">
         {
           en

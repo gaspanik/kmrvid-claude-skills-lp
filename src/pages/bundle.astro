@@ -481,10 +481,20 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
           </p>
 
           <a
-            href={BOOKS_URL}
+            href="https://gaspanik.com"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 mt-6 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            <ExternalLink size={16} stroke-width={2} />
+            プロフィールサイト（gaspanik.com）
+          </a>
+          <br />
+          <a
+            href={BOOKS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 mt-1 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
           >
             <BookOpen size={16} stroke-width={2} />
             これまでの執筆・監修書籍一覧（Amazon）

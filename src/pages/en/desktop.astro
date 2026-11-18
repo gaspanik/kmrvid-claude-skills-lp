@@ -31,7 +31,7 @@ import {
   desktopSkills,
   desktopSkillsCount,
 } from "@/data/desktop";
-import { museSkillsCount } from "@/data/muse";
+import { MUSE_PLAYLIST_URL, museSkillsCount } from "@/data/muse";
 import { FIGMA_COMMUNITY_URL, formatUsd, products } from "@/data/products";
 
 const product = products.desktop.en;
@@ -79,7 +79,7 @@ const steps = [
   {
     n: "01",
     title: "Add the plugin to Claude Desktop",
-    desc: `Add the distributed plugin to Claude Desktop. All ${desktopSkillsCount} skills are registered together.`,
+    desc: `Attach the plugin file in the Claude Desktop chat and say “install this plugin”, or add it yourself from the settings screen. All ${desktopSkillsCount} skills are registered together.`,
   },
   {
     n: "02",
@@ -301,6 +301,21 @@ const flows = [
         </span>
       </p>
 
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+        What each skill does is covered in the
+        <a
+          href={MUSE_PLAYLIST_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 text-accent-dark hover:text-accent underline underline-offset-4 transition"
+        >
+          Figma Skills YouTube playlist
+          <ExternalLink size={14} stroke-width={2} />
+        </a>. The skills do the same work there as in Claude Desktop; only the
+        way you invoke them differs. The videos are in Japanese, with English
+        subtitles (CC) on most of them.
+      </p>
+
     </section>
 
     <!-- ============ FLOWS ============ -->
@@ -337,8 +352,9 @@ const flows = [
       </p>
       <div class="mt-8 max-w-2xl">
         <Callout>
-          The difference from the Muse edition is the skill list and the
-          packaging. figma-annotate, japanese-lp-seasoning and space-guideline
+          This edition is sold on its own and is not included in the Claude,
+          Figma or Bundle editions. The difference from the Muse edition is the
+          skill list and the packaging. figma-annotate, japanese-lp-seasoning and space-guideline
           are only in the Muse edition, so this edition has {desktopSkillsCount} skills
           against {museSkillsCount}.
         </Callout>

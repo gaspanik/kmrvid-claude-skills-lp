@@ -32,7 +32,7 @@ import {
   desktopSkills,
   desktopSkillsCount,
 } from "@/data/desktop";
-import { museSkillsCount } from "@/data/muse";
+import { MUSE_PLAYLIST_URL, museSkillsCount } from "@/data/muse";
 import {
   FIGMA_COMMUNITY_URL,
   formatYen,
@@ -104,7 +104,7 @@ const steps = [
   {
     n: "01",
     title: "プラグインをClaude Desktopに追加する",
-    desc: "配布されるプラグインを、Claude Desktopに追加します。{count}個のスキルがまとめて登録されます。",
+    desc: "Claude Desktopのチャットにプラグインファイルを添付して「このプラグインをインストールして」と伝えるだけです。設定画面から自分で追加することもできます。{count}個のスキルがまとめて登録されます。",
   },
   {
     n: "02",
@@ -408,6 +408,18 @@ const combos = [
           ファイルの構造を変えるスキル（`figma-tidy-up`・`figma-tokenize`・`figma-componentize`
           など）は、対象のFigmaファイルを変更します。実行前に、ファイルを複製するか、バージョン履歴で戻れる状態にしておくことをおすすめします。各スキルは自分の作業を検証しますが、複製がいちばん確実な取り消し手段です。
         </Callout>
+        <p class="text-ink-soft text-base text-justify leading-snug">
+          各スキルが何をするかは、YouTubeのFigma Skills解説プレイリストで確認できます。スキルの実行内容はFigma版と同じで、呼び出し方だけがClaude Desktopでは異なります。
+          <a
+            href={MUSE_PLAYLIST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 hover:text-accent underline underline-offset-4 transition text-accent-dark"
+          >
+            Figma Skillsのプレイリストを見る
+            <ExternalLink size={14} stroke-width={2} />
+          </a>
+        </p>
       </div>
     </section>
 
@@ -486,7 +498,7 @@ const combos = [
 
       <div class="mt-8">
       <Callout>
-        Muse版との違いは、収録スキルと配布形態です。Muse版にだけ含まれるスキルは figma-annotate・japanese-lp-seasoning・space-guideline の3つで、本商品は{
+        本商品は単体販売のみで、Claude版・Figma版・All-in-One Bundleには含まれません。Muse版との違いは、収録スキルと配布形態です。Muse版にだけ含まれるスキルは figma-annotate・japanese-lp-seasoning・space-guideline の3つで、本商品は{
           desktopSkillsCount
         }スキル（Muse版は{museSkillsCount}スキル）です。
       </Callout>

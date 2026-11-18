@@ -1,5 +1,8 @@
 ---
 import { ArrowRight } from "@lucide/astro";
+import { Image } from "astro:assets";
+import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
+import laptopWork from "@/assets/images/laptop-work.jpg";
 import ChangelogList from "@/components/ChangelogList.astro";
 import CreatorBio from "@/components/CreatorBio.astro";
 import Footer from "@/components/Footer.astro";
@@ -69,17 +72,48 @@ const recent = changelogSorted.slice(0, 5);
   <Header />
 
   <main id="top">
-    <section aria-labelledby="hero-heading" class="mx-auto px-6 pt-14 md:pt-20 max-w-5xl">
-      <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+    <section aria-labelledby="hero-heading" class="relative pt-14 md:pt-20 pb-0 overflow-hidden">
+      <div class="items-center gap-10 grid grid-cols-1 md:grid-cols-[1.5fr_1fr] mx-auto px-6 max-w-5xl">
+        <div>
+          <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
         KMRVID Skills
       </p>
-      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-left">
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-balance text-left">
         Handing an AI a <span class="text-accent">skill</span> beats
         re-explaining the task every time
       </h1>
       <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
         Original skills born from real web production work, in editions for each environment. Start with the one that matches the tool you use.
       </p>
+        </div>
+        <div class="border border-border rounded-3xl overflow-hidden">
+          <Image
+            src={figmaWireframe}
+            alt=""
+            width={900}
+            height={720}
+            loading="eager"
+            class="w-full h-full max-md:max-h-72 object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left">
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">4</p>
+            <p class="mt-2 text-white/60 text-sm">Environments: Claude Code, Figma, Muse, Claude Desktop</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">5</p>
+            <p class="mt-2 text-white/60 text-sm">Products: one per environment, plus the Bundle</p>
+          </div>
+          <div>
+            <p class="font-heading text-6xl md:text-7xl">{totalSkills}</p>
+            <p class="mt-2 text-white/60 text-sm">Skills in the Bundle</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section
@@ -132,10 +166,29 @@ const recent = changelogSorted.slice(0, 5);
       </ul>
     </section>
 
+    <section aria-label="Concept" class="relative py-20 md:py-28 overflow-hidden text-canvas">
+      <Image
+        src={laptopWork}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/80"></div>
+      <div class="z-10 relative mx-auto px-6 max-w-5xl">
+        <p class="max-w-2xl font-heading text-2xl md:text-3xl text-balance text-left leading-snug">
+          Skills born in real production work,<br class="sm:hidden" /> tuned for each environment.
+        </p>
+        <p class="mt-4 max-w-xl text-white/70 text-base text-balance text-left leading-relaxed">
+          The same task, with the same quality, in Claude Code, Figma, Muse or Claude Desktop.
+        </p>
+      </div>
+    </section>
+
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      class="bg-surface-alt py-20 md:py-28"
+      class="py-20 md:py-28"
     >
       <div class="mx-auto px-6 max-w-5xl">
         <h2 id="skills-heading" class="max-w-xl text-ink text-left">

@@ -2,6 +2,8 @@
 import { ArrowRight, BookOpen, ExternalLink, GraduationCap } from "@lucide/astro";
 import { Image } from "astro:assets";
 import authorPhoto from "@/assets/images/IMG_8341_square.png";
+import figmaWireframe from "@/assets/images/figma-wireframe.jpg";
+import laptopWork from "@/assets/images/laptop-work.jpg";
 import ChangelogList from "@/components/ChangelogList.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
@@ -88,11 +90,13 @@ const recent = changelogSorted
 
   <main id="top">
     <!-- ============ HERO ============ -->
-    <section aria-labelledby="hero-heading" class="mx-auto px-6 pt-14 md:pt-20 max-w-5xl">
-      <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+    <section aria-labelledby="hero-heading" class="relative pt-14 md:pt-20 pb-0 overflow-hidden">
+      <div class="items-center gap-10 grid grid-cols-1 md:grid-cols-[1.5fr_1fr] mx-auto px-6 max-w-5xl">
+        <div>
+          <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
         KMRVID Skills
       </p>
-      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-left">
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-balance text-left">
         AIには、
         <br class="sm:hidden" />
         毎回"指示"するより
@@ -102,9 +106,37 @@ const recent = changelogSorted
       <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
         Web制作の実務から生まれたオリジナルスキルを、お使いの環境に合わせてお選びいただけます。まずは環境にあった商品をご覧ください。
       </p>
+        </div>
+        <div class="border border-border rounded-3xl overflow-hidden">
+          <Image
+            src={figmaWireframe}
+            alt=""
+            width={900}
+            height={720}
+            loading="eager"
+            class="w-full h-full max-md:max-h-72 object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="bg-ink mt-14 md:mt-20 text-canvas">
+        <div class="gap-8 grid grid-cols-1 sm:grid-cols-3 mx-auto px-6 py-12 md:py-16 max-w-5xl text-left">
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">4<span class="font-body text-white/50 text-lg">環境</span></p>
+            <p class="mt-2 text-white/60 text-sm">Claude Code・Figma・Muse・Claude Desktop</p>
+          </div>
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">5<span class="font-body text-white/50 text-lg">商品</span></p>
+            <p class="mt-2 text-white/60 text-sm">環境ごとの単体版と、全部入りのBundle</p>
+          </div>
+          <div>
+            <p class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl">{totalSkills}<span class="font-body text-white/50 text-lg">個</span></p>
+            <p class="mt-2 text-white/60 text-sm">Bundleに収録のスキル数</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- ============ PRODUCTS ============ -->
     <section
       id="products"
       aria-labelledby="products-heading"
@@ -160,11 +192,30 @@ const recent = changelogSorted
       </ul>
     </section>
 
+    <section aria-label="コンセプト" class="relative py-20 md:py-28 overflow-hidden text-canvas">
+      <Image
+        src={laptopWork}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/80"></div>
+      <div class="z-10 relative mx-auto px-6 max-w-5xl">
+        <p class="max-w-2xl font-heading text-2xl md:text-3xl text-balance text-left leading-snug">
+          実務の現場から生まれたスキルを、<br class="sm:hidden" />環境ごとに最適化して。
+        </p>
+        <p class="mt-4 max-w-xl text-white/70 text-base text-balance text-left leading-relaxed">
+          同じ作業を、Claude Code・Figma・Muse・Claude Desktopのどこでも同じ品質で。
+        </p>
+      </div>
+    </section>
+
     <!-- ============ ABOUT THE SKILLS ============ -->
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      class="bg-surface-alt py-20 md:py-28"
+      class="py-20 md:py-28"
     >
       <div class="mx-auto px-6 max-w-5xl">
         <h2 id="skills-heading" class="max-w-xl text-ink text-left">

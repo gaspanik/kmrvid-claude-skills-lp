@@ -12,7 +12,7 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 9,900円（発売記念 7,700円、2026年11月27日（金）23:59まで） | 25個（`src/data/desktop.ts`。Muse版から figma-annotate・japanese-lp-seasoning・space-guideline を除いて派生。総数には含めない） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
-- CDC Skills（Desktop版）は Claude Desktop のチャット用の単体商品で、プラグイン形式で配布する（通常のスキルは .md のみ登録可能で、リファレンスファイルを含められないため）。**単体販売のみ**で、Claude版・Figma版・Bundle・Muse版には含まれない。既存スキル所有者への2,200円割引を日本語版のみで検討中（未確定。LPには未記載）。海外版は Gumroad（`kmrvid-cdcskills`）、USD価格は仮置きの $59（要確認）。
+- CDC Skills（Desktop版）は Claude Desktop のチャット用の単体商品で、プラグイン形式で配布する（通常のスキルは .md のみ登録可能で、リファレンスファイルを含められないため）。**単体販売のみ**で、Claude版・Figma版・Bundle・Muse版には含まれない。既存スキル所有者への2,200円割引を日本語版のみで検討中（未確定。LPには未記載）。海外版は Gumroad（`kmrvid-cdcskills`）、USD価格は $59（2026-11-18 確定）。
 - トップページ（`/`）は各商品への入口。「環境にあわせて選ぶ」（5商品）・「各スキルについて」・「講師紹介」・「更新履歴（最新5件）」を持つ。All-in-One Bundle の紹介ページは `/bundle`（旧トップの内容）。Header / Footer は全ページ共通メニュー（スキルについて・講師紹介・更新履歴＋5商品へのリンク）で、`variant` は購入ボタンと現在ページの強調だけを切り替える。商品固有のページ内リンクはフッターに置く。
 - `/skills` は Bundle 収録の全スキルを、パッケージ別（Claude Code版 → Figma Design Agent版）・カテゴリ別に一覧表示するスキル紹介ページ。各スキルの説明・依存スキル（必須 / オプション / いずれか）を併記し、末尾に「Claude版とFigma版の対応表」を置く。
 - `/changelog` は更新履歴（簡易版）。直近（`RECENT_FROM` 以降）を開いて表示し、それ以前は折りたたむ。パッケージ別の絞り込みつき。詳細は各パッケージ同梱のREADMEが持つ。
@@ -53,7 +53,7 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID Skills Bundle | `/en/bundle/` | https://gaspanik.gumroad.com/l/kmrvid-bundle | $199 |
 | KMRVID Claude Skills | `/en/claude/` | https://gaspanik.gumroad.com/l/kmrvid-claudeskills | $137 |
 | KMRVID Figma Skills | `/en/figma/` | https://gaspanik.gumroad.com/l/kmrvid-figmaskills | $97 |
-| KMRVID CDC Skills | `/en/desktop/` | https://gaspanik.gumroad.com/l/kmrvid-cdcskills | $59（仮置き。要確認） |
+| KMRVID CDC Skills | `/en/desktop/` | https://gaspanik.gumroad.com/l/kmrvid-cdcskills | $59 |
 
 - 海外版は**スキルのみ**（解説動画なし）。スキル本文・質問・レポートは基本すべて英語。`create-jp-lp` など日本の文化・慣習に特化したスキルだけ、ルール本文が日本語のまま。
 - 付属物はREADME（PDF）と無料の生涯アップデート。LINEクーポン・キャンペーンは日本語版のみ。

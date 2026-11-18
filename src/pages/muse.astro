@@ -75,9 +75,9 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "書き込みは都度承認",
+    title: "書き込みの承認は選べる",
     description:
-      "Figmaへの変更は、その都度Museの画面で承認を求められます。内容を確認してから実行できます。",
+      "Figmaへの変更は、通常はその都度Museの画面で承認を求められ、内容を確認してから実行できます。「すべて承認」を選べば、自動で承認することもできます。",
   },
   {
     icon: Languages,
@@ -129,7 +129,7 @@ const steps = [
   {
     n: "03",
     title: "チャットでスキル名を伝える",
-    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Museのカスタムスキルはスラッシュコマンドではありません。Figmaへの書き込みは、その都度承認を求められます。",
+    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Museのカスタムスキルはスラッシュコマンドではありません。Figmaへの書き込みは、通常はその都度承認を求められます。",
   },
 ].map((step) => ({
   ...step,

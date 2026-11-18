@@ -73,9 +73,9 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "Every write is approved",
+    title: "You choose how writes are approved",
     description:
-      "Each change to Figma asks for your approval in Muse first. Review it, then approve to proceed.",
+      "By default, each change to Figma asks for your approval in Muse first, so you can review it before it runs. Choose “approve all” and approvals happen automatically.",
   },
   {
     icon: Languages,
@@ -111,7 +111,7 @@ const steps = [
   {
     n: "03",
     title: "Name the skill in chat",
-    desc: "Say, for example, “Run figma-tidy-up on this file” plus the Figma URL. Every write to Figma asks for your approval first.",
+    desc: "Say, for example, “Run figma-tidy-up on this file” plus the Figma URL. By default, every write to Figma asks for your approval first.",
   },
 ];
 
@@ -515,8 +515,9 @@ const flows = [
           </FaqItem>
           <FaqItem question="Will the skills change my Figma file?">
             Skills that restructure a file change it. Duplicate the file first,
-            or make sure version history is available. Each write asks for your
-            approval in Muse first.
+            or make sure version history is available. By default, each write asks
+            for your approval in Muse first. If you turn on “approve all”, writes run
+            without asking, so a duplicate matters even more.
           </FaqItem>
           <FaqItem question="Does it include video lessons?">
             No. The package contains the skills and a bilingual README. The

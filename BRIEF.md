@@ -8,10 +8,11 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 86個（Claude版52＋Figma版34） | 60本 | 約6時間5分 |
 | KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 52個 | 40本 | 約4時間10分 |
 | KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 34個 | 20本 | 約1時間55分 |
-| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円 | 28個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
-| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 9,900円（発売記念 7,700円、2026年11月27日（金）23:59まで） | 27個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
+| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円（2026年11月28日 0:00 JSTから15,400円に改定） | 28個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
+| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 発売記念 7,700円（2026年11月27日（金）23:59まで）。11月28日 0:00 JSTから通常価格15,400円 | 27個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
+- 価格改定（2026-11-28 0:00 JST）: Muse版・CDC版とも、収録スキルの追加にともない通常価格を15,400円（海外版は両方$97）に引き上げる。CDC版の発売記念価格7,700円（海外版は$59）は改定前日まで。LPはブラウザ側の自動切替（`data-campaign-ended`）で、`products.muse.campaign`（`kind: 'increase'`、改定前の価格9,900円）と `products.desktop.campaign`（`kind: 'launch'`）の `endsAt` を過ぎると `product.price`・`en.priceUsd` の表示に変わる。改定前の期間は取り消し線の「通常価格」を使わず、「11/28から15,400円」と予告表示する（15,400円での販売実績がない間の二重価格表示を避けるため）。切り替え後は、両方の `campaign` と `priceUsdBefore` を削除して再デプロイし、改定の予告を片づける。
 - CDC Skills（Desktop版）は Claude Desktop のチャット用の単体商品で、プラグイン形式で配布する（通常のスキルは .md のみ登録可能で、リファレンスファイルを含められないため）。**単体販売のみ**で、Claude版・Figma版・Bundle・Muse版には含まれない。既存スキル所有者への2,200円割引を日本語版のみで検討中（未確定。LPには未記載）。海外版は Gumroad（`kmrvid-cdcskills`）、USD価格は $59（2026-11-18 確定）。
 - トップページ（`/`）は各商品への入口。「環境にあわせて選ぶ」（5商品）・「各スキルについて」・「講師紹介」・「更新履歴（最新5件）」を持つ。All-in-One Bundle の紹介ページは `/bundle`（旧トップの内容）。Header / Footer は全ページ共通メニュー（スキルについて・講師紹介・更新履歴＋5商品へのリンク）で、`variant` は購入ボタンと現在ページの強調だけを切り替える。商品固有のページ内リンクはフッターに置く。
 - `/skills` は Bundle 収録の全スキルを、パッケージ別（Claude Code版 → Figma Design Agent版）・カテゴリ別に一覧表示するスキル紹介ページ。各スキルの説明・依存スキル（必須 / オプション / いずれか）を併記し、末尾に「Claude版とFigma版の対応表」を置く。
@@ -53,7 +54,7 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 | KMRVID Skills Bundle | `/en/bundle/` | https://gaspanik.gumroad.com/l/kmrvid-bundle | $199 |
 | KMRVID Claude Skills | `/en/claude/` | https://gaspanik.gumroad.com/l/kmrvid-claudeskills | $137 |
 | KMRVID Figma Skills | `/en/figma/` | https://gaspanik.gumroad.com/l/kmrvid-figmaskills | $97 |
-| KMRVID CDC Skills | `/en/desktop/` | https://gaspanik.gumroad.com/l/kmrvid-cdcskills | $59 |
+| KMRVID CDC Skills | `/en/desktop/` | https://gaspanik.gumroad.com/l/kmrvid-cdcskills | $59（2026年11月28日から$97） |
 
 - 海外版は**スキルのみ**（解説動画なし）。スキル本文・質問・レポートは基本すべて英語。`create-jp-lp` など日本の文化・慣習に特化したスキルだけ、ルール本文が日本語のまま。
 - 付属物はREADME（PDF）と無料の生涯アップデート。LINEクーポン・キャンペーンは日本語版のみ。

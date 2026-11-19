@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgePercent,
   CalendarClock,
   Copy,
   CircleCheck,
@@ -18,6 +19,8 @@ import {
 } from "@lucide/astro";
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
+import Price from "@/components/Price.astro";
 import CategorySkills from "@/components/CategorySkills.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
 import Footer from "@/components/Footer.astro";
@@ -39,12 +42,13 @@ import {
   bundleSaving,
   FIGMA_COMMUNITY_URL,
   formatYen,
+  NEW_PRICE_FROM,
   products,
 } from "@/data/products";
 
 const product = products.muse;
 const PURCHASE_URL = product.url;
-const PRICE = formatYen(product.price);
+const campaign = product.campaign;
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 const showHandson = Date.now() < Date.parse(MUSE_HANDSON.endsAt);
 
@@ -196,14 +200,34 @@ const combos = [
           コードエディタもターミナルも不要。Museのチャットでスキル名を伝えるだけで、Figmaファイルのレイヤー整理・トークン化・コンポーネント化・複数レイアウトパターン生成・コピーライティングまでAIにまかせられます。処理はFigmaコネクタ経由で行うため、FigmaのAIクレジットは消費しません。
         </p>
 
+        {
+          campaign && (
+            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+              <p class="flex items-center gap-2 font-medium text-base">
+                <BadgePercent size={18} stroke-width={2} class="flex-none" />
+                {NEW_PRICE_FROM}から{formatYen(product.price)}円（税込）に改定します
+              </p>
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="現在の価格で買えるのは残り"
+                fallback={`現在の価格は${campaign.endsAtLabel}まで`}
+                class="mt-1 text-base"
+              />
+            </div>
+          )
+        }
+
         <div
-          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+          class:list={[
+            "flex sm:flex-row flex-col items-start sm:items-center gap-4",
+            campaign ? "mt-4 campaign-ended:mt-8" : "mt-8",
+          ]}
         >
           <a
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            {PRICE}円で申し込む
+            <span><Price product="muse" />円で申し込む</span>
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -623,7 +647,14 @@ const combos = [
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               museSkillsCount
-            }個のMuse用スキルを、{PRICE}円（税込）の買い切りでご利用いただけます。
+            }個のMuse用スキルを、<Price product="muse" />円（税込）の買い切りでご利用いただけます。
+            {
+              campaign && (
+                <span class="campaign-ended:hidden">
+                  {NEW_PRICE_FROM}から{formatYen(product.price)}円に改定します（現在の価格は{campaign.endsAtLabel}まで）。
+                </span>
+              )
+            }
           </p>
         </div>
 
@@ -635,7 +666,7 @@ const combos = [
               <p
                 class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
               >
-                {PRICE}<span class="text-2xl">円</span>
+                <Price product="muse" /><span class="text-2xl">円</span>
               </p>
               <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
@@ -643,7 +674,7 @@ const combos = [
                 href={PURCHASE_URL}
                 class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
               >
-                {PRICE}円で申し込む
+                <span><Price product="muse" />円で申し込む</span>
                 <ArrowRight size={18} stroke-width={2} />
               </a>
             </div>
@@ -725,7 +756,7 @@ const combos = [
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          {PRICE}円で
+          <Price product="muse" />円で
           <br class="sm:hidden" />
           Museから始める
         </h2>
@@ -734,13 +765,13 @@ const combos = [
         >
           {
             museSkillsCount
-          }個のスキルを、{PRICE}円（税込）の買い切りで、Museのチャットから呼び出せます。
+          }個のスキルを、<Price product="muse" />円（税込）の買い切りで、Museのチャットから呼び出せます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          {PRICE}円で申し込む
+          <span><Price product="muse" />円で申し込む</span>
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

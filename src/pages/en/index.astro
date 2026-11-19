@@ -7,6 +7,7 @@ import ChangelogList from "@/components/ChangelogList.astro";
 import CreatorBio from "@/components/CreatorBio.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { changelogSorted } from "@/data/changelog";
 import { desktopSkillsCount } from "@/data/desktop";
@@ -16,7 +17,7 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import { formatUsd, type ProductKey, products } from "@/data/products";
+import { type ProductKey, products } from "@/data/products";
 
 const productCards: { key: ProductKey; title: string; desc: string }[] = [
   {
@@ -148,7 +149,7 @@ const recent = changelogSorted.slice(0, 5);
                 <p class="mt-4 text-ink-soft text-sm">
                   {product.skills} skills ·{" "}
                   <span class="font-heading text-ink text-xl">
-                    {formatUsd(product.en.priceUsd)}
+                    <Price product={card.key} lang="en" />
                   </span>
                   <span class="ml-1">one-time purchase</span>
                 </p>

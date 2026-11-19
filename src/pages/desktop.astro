@@ -38,12 +38,13 @@ import { MUSE_PLAYLIST_URL, museSkillsCount } from "@/data/muse";
 import {
   FIGMA_COMMUNITY_URL,
   formatYen,
+  NEW_PRICE_FROM,
   products,
 } from "@/data/products";
 
 const product = products.desktop;
 const PURCHASE_URL = product.url;
-const REGULAR_PRICE = formatYen(product.price);
+const NEW_PRICE = formatYen(product.price);
 const campaign = product.campaign;
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 
@@ -200,7 +201,7 @@ const combos = [
             <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
               <p class="flex items-center gap-2 font-medium text-base">
                 <BadgePercent size={18} stroke-width={2} class="flex-none" />
-                発売記念価格 {REGULAR_PRICE}円 → {formatYen(campaign.price)}円（税込）
+                発売記念価格 {formatYen(campaign.price)}円（税込）・{NEW_PRICE_FROM}から{NEW_PRICE}円
               </p>
               <CountdownTimer
                 endsAt={campaign.endsAt}
@@ -583,7 +584,7 @@ const combos = [
             {
               campaign && (
                 <span class="campaign-ended:hidden">
-                  発売記念として、{campaign.endsAtLabel}まで特別価格でご案内しています。
+                  発売記念として、{campaign.endsAtLabel}まで特別価格でご案内しています。{NEW_PRICE_FROM}から{NEW_PRICE}円になります。
                 </span>
               )
             }
@@ -607,8 +608,8 @@ const combos = [
             <div>
               {
                 campaign && (
-                  <p class="campaign-ended:hidden text-white/50 text-sm line-through">
-                    通常価格 {REGULAR_PRICE}円（税込）
+                  <p class="campaign-ended:hidden text-white/50 text-sm">
+                    {NEW_PRICE_FROM}から{NEW_PRICE}円（税込）
                   </p>
                 )
               }

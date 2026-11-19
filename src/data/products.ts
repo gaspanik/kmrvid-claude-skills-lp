@@ -4,11 +4,17 @@ import { claudeSkillsCount, figmaSkillsCount, totalSkills } from './skills'
 
 export type ProductKey = 'bundle' | 'claude' | 'figma' | 'muse' | 'desktop'
 
-/** 期間限定の特別価格。キャンペーン終了後は該当の `campaign` を削除すれば全ページが通常価格に戻る */
+/**
+ * 期間限定の価格。`endsAt` を過ぎると、ブラウザ側で `product.price` の表示に切り替わる。
+ * 切り替え後の整理として、該当の `campaign` を削除して再デプロイする。
+ * - `launch`: 発売記念価格（終了後は通常価格）
+ * - `increase`: 値上げ前の価格（終了後は改定後の価格。`product.price` が改定後）
+ */
 interface Campaign {
-  /** 特別価格（税込・円） */
+  kind: 'launch' | 'increase'
+  /** 期間中の価格（税込・円） */
   price: number
-  /** 終了日時（ISO 8601、JST） */
+  /** 終了日時（ISO 8601、JST）。新価格の開始時刻でもある */
   endsAt: string
   /** 表示用の終了日時 */
   endsAtLabel: string
@@ -23,8 +29,10 @@ interface EnMarket {
   href: string
   /** Gumroad の商品ページ */
   url: string
-  /** 価格（USD） */
+  /** 価格（USD）。`priceUsdBefore` があるときは、キャンペーン終了後の価格 */
   priceUsd: number
+  /** キャンペーン終了前の価格（USD）。終了後は `priceUsd` に切り替わる */
+  priceUsdBefore?: number
 }
 
 interface Product {
@@ -107,16 +115,25 @@ export const products: Record<ProductKey, Product> = {
     env: 'Muse',
     href: '/muse',
     url: 'https://kmrvid.com/products/kmrvid-muse-skills',
-    price: 9900,
+    // 2026-11-28 0:00 JST から 15,400円（海外版は $97）に改定。それまでは 9,900円（$59）
+    price: 15400,
     skills: museSkillsCount,
     videos: 0,
     hours: 0,
     minutes: 0,
+    campaign: {
+      kind: 'increase',
+      price: 9900,
+      endsAt: '2026-11-28T00:00:00+09:00',
+      endsAtLabel: '2026年11月27日（金）23:59',
+      endsAtShort: '11/27（金）',
+    },
     en: {
       name: 'KMRVID Muse Skills',
       href: '/en/muse/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-museskills',
-      priceUsd: 59,
+      priceUsd: 97,
+      priceUsdBefore: 59,
     },
   },
   // Claude Desktop のチャット用。Muse版とほぼ同じスキルを、プラグイン形式（リファレンス同梱）で配布する
@@ -125,15 +142,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Desktop',
     href: '/desktop/',
     url: 'https://kmrvid.com/products/kmrvid-cdc-skills',
-    price: 9900,
+    // 通常価格は 2026-11-28 0:00 JST から 15,400円（海外版は $97）。それまでは発売記念価格 7,700円（$59）
+    price: 15400,
     skills: desktopSkillsCount,
     videos: 0,
     hours: 0,
     minutes: 0,
-    // 発売記念価格（2026-11-27 まで）。終了後はこのブロックを削除する
     campaign: {
+      kind: 'launch',
       price: 7700,
-      endsAt: '2026-11-27T23:59:00+09:00',
+      endsAt: '2026-11-28T00:00:00+09:00',
       endsAtLabel: '2026年11月27日（金）23:59',
       endsAtShort: '11/27（金）',
     },
@@ -141,7 +159,8 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID CDC Skills',
       href: '/en/desktop/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-cdcskills',
-      priceUsd: 59,
+      priceUsd: 97,
+      priceUsdBefore: 59,
     },
   },
 }
@@ -156,6 +175,10 @@ export const FIGMA_COMMUNITY_URL = 'https://www.figma.com/@masaakikomori'
 
 /** Claude Code版の一部スキルを単体販売しているクリエイターページ（Figma版は掲載なし） */
 export const AGENSI_URL = 'https://www.agensi.io/creators/masaaki-komori'
+
+/** 価格改定・キャンペーン終了の翌日（新価格の開始日）の表示 */
+export const NEW_PRICE_FROM = '11/28（土）'
+export const NEW_PRICE_FROM_EN = 'November 28, 2026 (JST)'
 
 export const formatYen = (price: number) => price.toLocaleString('ja-JP')
 

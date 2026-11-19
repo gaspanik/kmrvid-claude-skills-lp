@@ -17,7 +17,12 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import { type ProductKey, products } from "@/data/products";
+import {
+  formatYen,
+  NEW_PRICE_FROM,
+  type ProductKey,
+  products,
+} from "@/data/products";
 
 const BOOKS_URL = "https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks";
 
@@ -174,7 +179,9 @@ const recent = changelogSorted
                   <span class="ml-1">税込・買い切り</span>
                   {product.campaign && (
                     <span class="campaign-ended:hidden ml-2 bg-accent-soft px-2.5 py-0.5 rounded-full font-medium text-accent-dark">
-                      発売記念価格 {product.campaign.endsAtShort}まで
+                      {product.campaign.kind === "launch"
+                        ? `発売記念価格 ${product.campaign.endsAtShort}まで・${NEW_PRICE_FROM}から${formatYen(product.price)}円`
+                        : `${NEW_PRICE_FROM}から${formatYen(product.price)}円に改定`}
                     </span>
                   )}
                 </p>

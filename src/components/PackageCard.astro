@@ -4,6 +4,7 @@ import Price from "@/components/Price.astro";
 import {
   formatDuration,
   formatYen,
+  NEW_PRICE_FROM,
   type ProductKey,
   products,
 } from "@/data/products";
@@ -26,7 +27,9 @@ const isEn = lang === "en";
     !isEn && campaign && (
       <p class="campaign-ended:hidden self-start flex items-center gap-1.5 bg-accent-soft mb-3 px-3 py-1 rounded-full font-medium text-accent-dark text-sm">
         <BadgePercent size={14} stroke-width={2} class="flex-none" />
-        発売記念価格 {campaign.endsAtShort}まで
+        {campaign.kind === "launch"
+          ? `発売記念価格 ${campaign.endsAtShort}まで`
+          : `${NEW_PRICE_FROM}から${formatYen(price)}円に改定`}
       </p>
     )
   }
@@ -93,8 +96,8 @@ const isEn = lang === "en";
           <span class="ml-1 text-lg">円</span>
           <span class="ml-1 font-body text-ink-soft text-sm">税込・買い切り</span>
           {campaign && (
-            <span class="campaign-ended:hidden ml-2 font-body text-ink-soft text-sm line-through">
-              通常 {formatYen(price)}円
+            <span class="campaign-ended:hidden ml-2 font-body text-ink-soft text-sm">
+              {NEW_PRICE_FROM}から{formatYen(price)}円
             </span>
           )}
         </>

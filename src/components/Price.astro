@@ -19,7 +19,14 @@ const { price, campaign, en } = products[product];
 
 {
   lang === "en" ? (
-    formatUsd(en.priceUsd)
+    en.priceUsdBefore !== undefined ? (
+      <>
+        <span class="campaign-ended:hidden">{formatUsd(en.priceUsdBefore)}</span>
+        <span class="hidden campaign-ended:inline">{formatUsd(en.priceUsd)}</span>
+      </>
+    ) : (
+      formatUsd(en.priceUsd)
+    )
   ) : campaign ? (
     <>
       <span class="campaign-ended:hidden">{formatYen(campaign.price)}</span>

@@ -1,0 +1,54 @@
+---
+import { ArrowRight } from "@lucide/astro";
+import type { HandsOn } from "@/data/handson";
+
+interface Item extends HandsOn {
+  /** 例: "Figma" → 「Figmaスキル ハンズオンセッション（オンライン）」 */
+  label: string;
+}
+
+interface Props {
+  /** 上から順に並べる。終了済みのものは出さない */
+  items: Item[];
+}
+
+const { items } = Astro.props;
+const now = Date.now();
+const active = items.filter((item) => now < Date.parse(item.endsAt));
+---
+
+{
+  active.length > 0 && (
+    <section
+      aria-label="ハンズオンセッションのご案内"
+      data-handson-group
+      class="flex flex-col gap-4 mx-auto px-6 pt-12 max-w-5xl"
+    >
+      {active.map((item) => (
+        <a
+          href={item.url}
+          data-handson
+          data-ends-at={item.endsAt}
+          class="group flex sm:flex-row flex-col sm:items-center gap-3 sm:gap-6 bg-surface-alt p-5 sm:px-6 border border-border hover:border-ink/30 rounded-2xl transition"
+        >
+          <span class="flex-none font-medium text-accent text-sm uppercase tracking-widest">
+            Hands-on session
+          </span>
+          <span class="flex-1 text-ink text-base leading-snug">
+            {item.label}スキル ハンズオンセッション（オンライン）
+            <span class="block mt-1 text-ink-soft text-sm">
+              {item.dateLabel}・定員{item.capacity}名・先着順
+            </span>
+          </span>
+          <span class="inline-flex flex-none items-center gap-1.5 font-medium text-ink text-sm underline underline-offset-4 group-hover:text-accent">
+            詳細を見る
+            <ArrowRight size={16} stroke-width={2} />
+          </span>
+        </a>
+      ))}
+      <script is:inline>
+        {`(function(){var g=document.currentScript.parentElement;var n=0;g.querySelectorAll('[data-handson]').forEach(function(e){if(Date.now()>=Date.parse(e.dataset.endsAt))e.hidden=true;else n++});if(!n)g.hidden=true})()`}
+      </script>
+    </section>
+  )
+}

@@ -16,10 +16,12 @@ import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
 import Footer from "@/components/Footer.astro";
+import HandsOn from "@/components/HandsOn.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import CategorySkills from "@/components/CategorySkills.astro";
 import Layout from "@/layouts/Layout.astro";
+import { FIGMA_HANDSON } from "@/data/handson";
 import { Image } from "astro:assets";
 import { figmaCategories, figmaSkills } from "@/data/skills";
 import {
@@ -238,6 +240,9 @@ const totalSkills = skills.length;
         </div>
       </div>
     </section>
+
+    <!-- ============ HANDS-ON EVENT ============ -->
+    <HandsOn items={[{ label: "Figma", ...FIGMA_HANDSON }]} />
 
     <!-- ============ DIFFERENCES ============ -->
     <section

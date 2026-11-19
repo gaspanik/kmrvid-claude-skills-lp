@@ -120,6 +120,26 @@ export const museCategories: Category[] = [
         en: 'Fills in descriptions for components whose description is empty, in the user’s language (existing descriptions are never overwritten).',
       },
       {
+        name: 'figma-spec-sync',
+        desc: 'FigmaのSpec（キャンバス上のMarkdown書類）を新規追加する／手元の書類（BRIEF.mdなど）と同期させる',
+        en: 'Adds a Figma Spec (a Markdown document on the canvas), or syncs an existing Spec with its document (a BRIEF.md and the like).',
+      },
+      {
+        name: 'figma-export-assets',
+        desc: 'フレーム内の画像を抽出し、形式（PNG/JPG/SVG/PDF）と倍率（または横幅）を選んで、書き出し設定を一括で付ける。書き込む前に対象の一覧を表示する',
+        en: 'Finds the images in a frame and attaches export settings to them at once, with a format (PNG/JPG/SVG/PDF) and a scale or width of your choice. The list is shown before anything is written.',
+      },
+      {
+        name: 'figma-dark-mode',
+        desc: '色変数コレクションにDarkモードを追加する。問題になりそうな変数の事前チェックと結び直し、Dark値の仮置き、確認用の複製フレーム作成まで',
+        en: 'Adds a Dark mode to a color variable collection: a problem-variable scan and re-binding first, rule-derived provisional Dark values, and a dark review duplicate.',
+      },
+      {
+        name: 'figma-diff-report',
+        desc: 'スキル実行や編集の前後でスクショと構造を比較し、変更点のレポート（.md）を作る（読み取り専用）',
+        en: 'Compares screenshots and structure before and after a skill run or edit, and writes a Markdown report of what changed (read-only).',
+      },
+      {
         name: 'figma-i18n-translator',
         desc: 'フレームを複製し、テキストを指定した言語に翻訳した多言語版を作る（原本は無変更）',
         en: 'Duplicates a frame and translates its texts into the language you specify (the original is left untouched).',
@@ -248,6 +268,8 @@ export const museSkills = museCategories.flatMap((category) => category.skills)
 export const museSkillsCount = museSkills.length
 
 /** 実機（Muse + Figma コネクタ）での動作確認日 */
+export const MUSE_VERIFIED_COUNT = 28
+
 export const MUSE_VERIFIED_ON = {
   ja: '2026年11月16日',
   en: 'November 16, 2026',

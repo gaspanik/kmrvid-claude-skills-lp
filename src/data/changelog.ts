@@ -21,12 +21,33 @@ export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2026-11-19',
+    product: 'muse',
+    kind: 'new',
+    skills: [
+      'figma-spec-sync',
+      'figma-export-assets',
+      'figma-dark-mode',
+      'figma-diff-report',
+    ],
+    ja: 'FigmaのSpecの追加・同期の専用スキル figma-spec-sync、画像の書き出し設定を一括で付ける figma-export-assets、色変数にDarkモードを追加する figma-dark-mode、変更点のレポートを作る figma-diff-report を追加（Muse版は32スキルに）。',
+    en: 'Added figma-spec-sync (add a Figma Spec or sync it with its document), figma-export-assets (attach export settings to every image in a frame at once), figma-dark-mode (add a Dark mode to color variables) and figma-diff-report (write a report of what changed) (the Muse edition is now 32 skills).',
+  },
+  {
+    date: '2026-11-19',
+    product: 'muse',
+    kind: 'update',
+    skills: ['create-figma-page'],
+    ja: 'Specの単独操作と書類との同期は、専用スキル figma-spec-sync へ案内するよう変更。',
+    en: 'Spec-only work and Spec/document syncing are now pointed to the standalone figma-spec-sync skill.',
+  },
+  {
     date: '2026-11-18',
     product: 'desktop',
     kind: 'new',
     skills: [],
-    ja: 'Claude Desktop のチャット用に、KMRVID CDC Skills（Desktop版）を追加（27スキル、プラグイン形式）。',
-    en: 'Added KMRVID CDC Skills, the Desktop edition for the Claude Desktop chat (27 skills, shipped as a plugin).',
+    ja: 'Claude Desktop のチャット用に、KMRVID CDC Skills（Desktop版）を追加（31スキル、プラグイン形式）。',
+    en: 'Added KMRVID CDC Skills, the Desktop edition for the Claude Desktop chat (31 skills, shipped as a plugin).',
   },
   {
     date: '2026-11-16',

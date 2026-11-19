@@ -33,6 +33,7 @@ import {
   MUSE_PLAYLIST_URL,
   MUSE_VIDEOS,
   MUSE_TIDY_UP_FREE_URL,
+  MUSE_VERIFIED_COUNT,
   MUSE_VERIFIED_ON,
   museCategories,
   museSkills,
@@ -442,9 +443,9 @@ const combos = [
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          {MUSE_VERIFIED_ON.ja}時点で、{
-            museSkillsCount
-          }スキルすべてMuse + Figmaコネクタの実機で動作を確認済みです。
+          {MUSE_VERIFIED_ON.ja}時点の{
+            MUSE_VERIFIED_COUNT
+          }スキルは、Muse + Figmaコネクタの実機で動作を確認済みです。
         </p>
       </div>
     </section>

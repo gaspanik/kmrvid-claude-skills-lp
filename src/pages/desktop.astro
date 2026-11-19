@@ -13,6 +13,7 @@ import {
   LayoutTemplate,
   MessageSquare,
   Package,
+  Users,
   ShieldCheck,
   Tag,
   Workflow,
@@ -29,6 +30,7 @@ import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
+  DESKTOP_LICENSE_PACK,
   DESKTOP_VERIFIED_ON,
   desktopCategories,
   desktopSkills,
@@ -673,6 +675,38 @@ const combos = [
               class="inline-flex items-center min-h-11 text-white text-sm underline underline-offset-4"
             >
               LINEで10%OFFクーポンを受け取る
+            </a>
+          </div>
+        </div>
+
+        <div
+          id="team-license"
+          class="bg-canvas mt-6 p-6 md:p-8 border border-border rounded-2xl"
+        >
+          <p class="flex items-center gap-2 mb-2 text-ink-soft text-sm uppercase tracking-widest">
+            <Users size={18} stroke-width={2} />
+            Team license
+          </p>
+          <h3 class="text-ink text-xl text-left leading-snug">
+            チーム・法人でのご利用
+          </h3>
+          <p class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+            5名分をまとめてご利用いただける「5ライセンスパック」を用意しています。購入された方がシートマネージャーとなり、メールアドレスで席を割り当てます。割り当てた席は、その学習者専用です。会社名を入力すれば、領収書も発行できます。6名以上でご利用の場合は、お問い合わせフォームからご相談ください。
+          </p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+            <a
+              href={DESKTOP_LICENSE_PACK.url}
+              class="inline-flex items-center gap-1.5 min-h-11 font-medium text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              5ライセンスパックを見る
+              <ArrowRight size={14} stroke-width={2} />
+            </a>
+            <a
+              href={DESKTOP_LICENSE_PACK.noticeUrl}
+              class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+            >
+              詳細はお知らせをご覧ください
+              <ArrowUpRight size={14} stroke-width={2} />
             </a>
           </div>
         </div>

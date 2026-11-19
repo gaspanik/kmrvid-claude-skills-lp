@@ -27,6 +27,13 @@ export const desktopCategories: Category[] = museCategories
   }))
   .filter((category) => category.skills.length > 0)
 
+/** 法人・チーム向けの5ライセンスパック（日本語版のみ）。金額は変わるため、LPには載せず商品ページに任せる */
+export const DESKTOP_LICENSE_PACK = {
+  url: 'https://kmrvid.com/products/kmrvid-cdc-skills-5%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9%E3%83%91%E3%83%83%E3%82%AF',
+  /** 販売開始のお知らせ（2026-11-20） */
+  noticeUrl: 'https://kmrvid.com/blogs/news/kmrvid-license-pack-20261120',
+}
+
 export const desktopSkills = desktopCategories.flatMap(
   (category) => category.skills,
 )

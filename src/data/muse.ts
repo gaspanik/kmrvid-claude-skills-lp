@@ -268,11 +268,9 @@ export const museSkills = museCategories.flatMap((category) => category.skills)
 export const museSkillsCount = museSkills.length
 
 /** 実機（Muse + Figma コネクタ）での動作確認日 */
-export const MUSE_VERIFIED_COUNT = 28
-
 export const MUSE_VERIFIED_ON = {
-  ja: '2026年11月16日',
-  en: 'November 16, 2026',
+  ja: '2026年11月19日',
+  en: 'November 19, 2026',
 }
 
 /** 使い方の紹介動画（2026-10-28 公開）と、YouTube の解説プレイリスト（Figma Skills 用。実行内容は共通、呼び出し方だけ Muse と異なる） */

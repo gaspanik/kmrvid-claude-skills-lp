@@ -29,7 +29,6 @@ import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
-  DESKTOP_VERIFIED_COUNT,
   DESKTOP_VERIFIED_ON,
   desktopCategories,
   desktopSkills,
@@ -76,9 +75,9 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "戻せる状態で、安心して実行",
+    title: "書き込みの承認は選べる",
     description:
-      "Claude Desktopのチャットでは、Figmaへの書き込みごとの承認画面は出ません。実行前に、ファイルを複製するか、バージョン履歴で戻せる状態にしておくと安心です。",
+      "Figmaへの変更は、通常はその都度Claude Desktopの画面で承認を求められ、内容を確認してから実行できます。オートモードにすれば、自動で承認することもできます。",
   },
   {
     icon: Languages,
@@ -130,7 +129,7 @@ const steps = [
   {
     n: "03",
     title: "チャットでスキル名を伝える",
-    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Figmaへの書き込みを行うスキルは、事前にファイルの複製を取っておくと安心です。",
+    desc: "「このファイルで figma-tidy-up を実行して」と、FigmaのURLを添えて伝えます。Figmaへの書き込みは、通常はその都度承認を求められます。",
   },
 ].map((step) => ({
   ...step,
@@ -384,7 +383,7 @@ const combos = [
         </div>
 
         <p class="mt-6 text-ink-soft text-sm">
-          {DESKTOP_VERIFIED_ON.ja}時点の{DESKTOP_VERIFIED_COUNT}スキルは、Claude Desktopのチャットで動作確認済みです。
+          {DESKTOP_VERIFIED_ON.ja}時点で、{desktopSkillsCount}スキルすべてClaude Desktopのチャットで動作確認済みです。
         </p>
       </div>
     </section>

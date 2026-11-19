@@ -33,11 +33,8 @@ export const desktopSkills = desktopCategories.flatMap(
 
 export const desktopSkillsCount = desktopSkills.length
 
-/** 動作確認日と、その時点の確認済みスキル数（その後に追加したスキルは含まない） */
-export const DESKTOP_VERIFIED_COUNT = 27
-
 /** 実機（Claude Desktop チャット）での動作確認日 */
 export const DESKTOP_VERIFIED_ON = {
-  ja: '2026年11月18日',
-  en: 'November 18, 2026',
+  ja: '2026年11月19日',
+  en: 'November 19, 2026',
 }

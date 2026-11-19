@@ -47,7 +47,15 @@ const active = items.filter((item) => now < Date.parse(item.endsAt));
         </a>
       ))}
       <script is:inline>
-        {`(function(){var g=document.currentScript.parentElement;var n=0;g.querySelectorAll('[data-handson]').forEach(function(e){if(Date.now()>=Date.parse(e.dataset.endsAt))e.hidden=true;else n++});if(!n)g.hidden=true})()`}
+        (function () {
+          var g = document.currentScript.parentElement;
+          var n = 0;
+          g.querySelectorAll("[data-handson]").forEach(function (e) {
+            if (Date.now() >= Date.parse(e.dataset.endsAt)) e.hidden = true;
+            else n++;
+          });
+          if (!n) g.hidden = true;
+        })();
       </script>
     </section>
   )

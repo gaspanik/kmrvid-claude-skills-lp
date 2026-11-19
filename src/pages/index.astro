@@ -189,10 +189,17 @@ const recent = changelogSorted
                   </span>
                   <span class="ml-1">税込・買い切り</span>
                   {product.campaign && (
-                    <span class="campaign-ended:hidden ml-2 bg-accent-soft px-2.5 py-0.5 rounded-full font-medium text-accent-dark">
-                      {product.campaign.kind === "launch"
-                        ? `発売記念価格 ${product.campaign.endsAtShort}まで・${NEW_PRICE_FROM}から${formatYen(product.price)}円`
-                        : `${NEW_PRICE_FROM}から${formatYen(product.price)}円に改定`}
+                    <span class="campaign-ended:hidden flex flex-wrap items-center gap-x-3 gap-y-1 mt-2">
+                      <span class="bg-accent-soft px-2.5 py-0.5 rounded-full font-medium text-accent-dark whitespace-nowrap">
+                        {product.campaign.kind === "launch"
+                          ? `発売記念価格 ${product.campaign.endsAtShort}まで`
+                          : `${NEW_PRICE_FROM}から${formatYen(product.price)}円に改定`}
+                      </span>
+                      {product.campaign.kind === "launch" && (
+                        <span class="whitespace-nowrap">
+                          {NEW_PRICE_FROM}から{formatYen(product.price)}円
+                        </span>
+                      )}
                     </span>
                   )}
                 </p>

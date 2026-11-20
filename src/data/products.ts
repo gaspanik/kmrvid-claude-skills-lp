@@ -176,6 +176,10 @@ export const FIGMA_COMMUNITY_URL = 'https://www.figma.com/@masaakikomori'
 /** Claude Code版の一部スキルを単体販売しているクリエイターページ（Figma版は掲載なし） */
 export const AGENSI_URL = 'https://www.agensi.io/creators/masaaki-komori'
 
+export const BUNDLE_LICENSE_PACK = {
+  url: 'https://kmrvid.com/products/kmrvid-all-in-one-bundle-5%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9%E3%83%91%E3%83%83%E3%82%AF',
+}
+
 /** 価格改定・キャンペーン終了の翌日（新価格の開始日）の表示 */
 export const NEW_PRICE_FROM = '11/28（土）'
 export const NEW_PRICE_FROM_EN = 'November 28, 2026 (JST)'

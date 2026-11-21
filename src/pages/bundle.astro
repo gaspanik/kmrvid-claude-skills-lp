@@ -613,6 +613,15 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
             </li>
             <li>
               <CircleCheck size={18} stroke-width={2} />
+              <span
+                >Claude版・Figma版の特典である Muse版スキル{
+                  museSkillsCount
+                }個もそのまま収録（合わせて全{totalSkills + museSkillsCount}
+                スキル）</span
+              >
+            </li>
+            <li>
+              <CircleCheck size={18} stroke-width={2} />
               <span>解説動画{bundle.videos}本・{formatDuration(bundle)}</span>
             </li>
             <li>

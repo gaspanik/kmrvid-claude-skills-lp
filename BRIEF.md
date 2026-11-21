@@ -5,11 +5,11 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 
 | 商品 | LP | 商品ページ | 定価（税込） | スキル数 | 動画 | 総時間 |
 |---|---|---|---|---|---|---|
-| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 86個（Claude版52＋Figma版34） | 60本 | 約6時間5分 |
-| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 52個 | 40本 | 約4時間10分 |
+| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 87個（Claude版53＋Figma版34） | 60本 | 約6時間5分 |
+| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 53個 | 40本 | 約4時間10分 |
 | KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 34個 | 20本 | 約1時間55分 |
-| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円（2026年11月28日 0:00 JSTから15,400円に改定） | 32個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
-| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 発売記念 7,700円（2026年11月27日（金）23:59まで）。11月28日 0:00 JSTから通常価格15,400円 | 31個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
+| KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円（2026年11月28日 0:00 JSTから15,400円に改定） | 33個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
+| KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 発売記念 7,700円（2026年11月27日（金）23:59まで）。11月28日 0:00 JSTから通常価格15,400円 | 32個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
 - 価格改定（2026-11-28 0:00 JST）: Muse版・CDC版とも、収録スキルの追加にともない通常価格を15,400円（海外版は両方$97）に引き上げる。CDC版の発売記念価格7,700円（海外版は$59）は改定前日まで。LPはブラウザ側の自動切替（`data-campaign-ended`）で、`products.muse.campaign`（`kind: 'increase'`、改定前の価格9,900円）と `products.desktop.campaign`（`kind: 'launch'`）の `endsAt` を過ぎると `product.price`・`en.priceUsd` の表示に変わる。改定前の期間は取り消し線の「通常価格」を使わず、「11/28から15,400円」と予告表示する（15,400円での販売実績がない間の二重価格表示を避けるため）。切り替え後は、両方の `campaign` と `priceUsdBefore` を削除して再デプロイし、改定の予告を片づける。
@@ -84,7 +84,7 @@ Web制作者・フリーランスを主体としつつ、企業（AI導入を検
 - 実務即活用可能さで差別化（プロンプト中心ではなく、エージェントが理解できるスキル形式での提供）
 
 ## 規模感
-Bundleに含まれる86スキル・60本の動画のうち、Bundleページ（`/bundle`）では代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
+Bundleに含まれる87スキル・60本の動画のうち、Bundleページ（`/bundle`）では代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
 
 ## デバイス優先度
 PC・スマートフォンともにほぼ半々を想定し、しっかり対応する。

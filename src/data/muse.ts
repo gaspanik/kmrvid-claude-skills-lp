@@ -249,6 +249,11 @@ export const museCategories: Category[] = [
         en: 'A requirements interview that produces a BRIEF.md before production starts.',
       },
       {
+        name: 'doc-brief-me',
+        desc: '手元の資料（制作指示書・ワイヤー・原稿など）を読み、不足分だけ質問して BRIEF.md を作る。資料が指定した内容は、後工程のガイドライン判断より優先される',
+        en: 'Reads documents you already have (instruction sheets, wireframes, drafts), asks only about the gaps, and writes BRIEF.md. What the documents specify outranks guideline judgment downstream.',
+      },
+      {
         name: 'design-brief-me',
         desc: '制作前にデザイン設定（タイポグラフィ等）のヒアリングを行い、DESIGN_BRIEF を作成する',
         en: 'A design-settings interview (typography and more) that produces a DESIGN_BRIEF before design work begins.',

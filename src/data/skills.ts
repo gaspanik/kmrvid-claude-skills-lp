@@ -426,6 +426,11 @@ export const categories: Category[] = [
         en: 'A business-requirements interview that writes BRIEF.md.',
       },
       {
+        name: 'doc-brief-me',
+        desc: '手元の資料（制作指示書・ワイヤー・原稿など）を読み、不足分だけ質問して BRIEF.md を作る。資料が指定した内容は、後工程のガイドライン判断より優先される',
+        en: 'Reads documents you already have (instruction sheets, wireframes, drafts), asks only about the gaps, and writes BRIEF.md. What the documents specify outranks guideline judgment downstream.',
+      },
+      {
         name: 'create-mockup',
         desc: 'FigmaなしでUIをゼロから構築。サイトの種類・デザインスタイル・ページ種別をヒアリングしてから実装を',
         en: 'Builds a UI from scratch, no Figma needed.',

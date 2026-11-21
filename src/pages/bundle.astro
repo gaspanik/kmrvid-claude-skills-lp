@@ -1,6 +1,7 @@
 ---
 import {
   ArrowRight,
+  ArrowUpRight,
   BookOpen,
   CircleCheck,
   ExternalLink,
@@ -41,6 +42,7 @@ import {
 import {
   AGENSI_URL,
   BUNDLE_LICENSE_PACK,
+  CONTACT_URL,
   bundleSaving,
   formatDuration,
   formatYen,
@@ -674,7 +676,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
         <p
           class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed"
         >
-          5名分をまとめてご利用いただける「5ライセンスパック」を用意しています。購入された方がシートマネージャーとなり、メールアドレスで席を割り当てます。割り当てた席は、その学習者専用です。会社名を入力すれば、領収書も発行できます。6名以上でご利用の場合は、お問い合わせフォームからご相談ください。
+          5名分をまとめてご利用いただける「5ライセンスパック」を用意しています。購入された方がシートマネージャーとなり、メールアドレスで席を割り当てます。割り当てた席は、その学習者専用です。会社名を入力すれば、領収書も発行できます。6名以上でご利用の場合は、<a href={CONTACT_URL} class="text-ink hover:text-accent underline underline-offset-4 transition">お問い合わせフォーム</a>からご相談ください。
         </p>
         <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
           <a
@@ -683,6 +685,13 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
           >
             5ライセンスパックを見る
             <ArrowRight size={14} stroke-width={2} />
+          </a>
+          <a
+            href={BUNDLE_LICENSE_PACK.noticeUrl}
+            class="inline-flex items-center gap-1.5 min-h-11 text-ink-soft hover:text-accent text-sm underline underline-offset-4 transition"
+          >
+            詳細はお知らせをご覧ください
+            <ArrowUpRight size={14} stroke-width={2} />
           </a>
         </div>
       </div>

@@ -42,6 +42,7 @@ import {
   formatYen,
   NEW_PRICE_FROM,
   products,
+  CONTACT_URL,
 } from "@/data/products";
 
 const product = products.desktop;
@@ -691,7 +692,7 @@ const combos = [
             チーム・法人でのご利用
           </h3>
           <p class="mt-3 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
-            5名分をまとめてご利用いただける「5ライセンスパック」を用意しています。購入された方がシートマネージャーとなり、メールアドレスで席を割り当てます。割り当てた席は、その学習者専用です。会社名を入力すれば、領収書も発行できます。6名以上でご利用の場合は、お問い合わせフォームからご相談ください。
+            5名分をまとめてご利用いただける「5ライセンスパック」を用意しています。購入された方がシートマネージャーとなり、メールアドレスで席を割り当てます。割り当てた席は、その学習者専用です。会社名を入力すれば、領収書も発行できます。6名以上でご利用の場合は、<a href={CONTACT_URL} class="text-ink hover:text-accent underline underline-offset-4 transition">お問い合わせフォーム</a>からご相談ください。
           </p>
           <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
             <a

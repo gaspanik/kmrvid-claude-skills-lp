@@ -20,6 +20,7 @@ import {
   totalSkills,
 } from "@/data/skills";
 import {
+  CONTACT_URL,
   formatYen,
   NEW_PRICE_FROM,
   type ProductKey,
@@ -215,6 +216,40 @@ const recent = changelogSorted
           })
         }
       </ul>
+
+      <div
+        id="team-license"
+        class="flex sm:flex-row flex-col sm:items-center gap-3 sm:gap-6 bg-surface-alt mt-8 p-5 sm:px-6 border border-border rounded-2xl"
+      >
+        <span class="flex-none font-medium text-accent text-sm uppercase tracking-widest">
+          Team license
+        </span>
+        <p class="flex-1 text-ink text-base leading-snug">
+          チーム・法人向けの「5ライセンスパック」の販売を始めました
+          <span class="block mt-1 text-ink-soft text-sm">
+            5名分をまとめてご利用いただけます。現在は All-in-One Bundle と Claude Desktop版が対象で、ほかのスキルパッケージも順次ご購入いただけるようになります。
+          </span>
+          <span class="block mt-1 text-ink-soft text-sm">
+            スキルの組み合わせやライセンス数のカスタマイズも、ご要望に応じて対応可能です。<a href={CONTACT_URL} class="text-ink hover:text-accent underline underline-offset-4 transition">お問い合わせ</a>ください。
+          </span>
+        </p>
+        <span class="flex flex-none sm:flex-col flex-wrap sm:items-start gap-x-6 gap-y-1 font-medium text-sm">
+          <a
+            href="/bundle/#team-license"
+            class="inline-flex items-center gap-1.5 min-h-11 text-ink hover:text-accent underline underline-offset-4 transition"
+          >
+            Bundleのパックを見る
+            <ArrowRight size={14} stroke-width={2} />
+          </a>
+          <a
+            href="/desktop/#team-license"
+            class="inline-flex items-center gap-1.5 min-h-11 text-ink hover:text-accent underline underline-offset-4 transition"
+          >
+            Desktop版のパックを見る
+            <ArrowRight size={14} stroke-width={2} />
+          </a>
+        </span>
+      </div>
     </section>
 
     <section aria-label="コンセプト" class="relative py-20 md:py-28 overflow-hidden text-canvas">

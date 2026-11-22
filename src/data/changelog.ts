@@ -21,6 +21,41 @@ export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2026-11-22',
+    product: 'figma',
+    kind: 'new',
+    skills: ['doc-brief-me'],
+    ja: '制作指示・原稿・PDF・スプレッドシート・画像・Figmaのワイヤーなど、手元の資料から制作にそのまま使えるBRIEFを作る doc-brief-me を追加（Figma版は35スキルに）。成果物はネイティブのFigma Spec。',
+    en: 'Added doc-brief-me, which builds a build-ready BRIEF from documents you already have (instructions, copy, PDFs, spreadsheets, images, Figma wireframes) as a native Figma Spec (the Figma edition is now 35 skills).',
+  },
+  {
+    date: '2026-11-22',
+    product: 'figma',
+    kind: 'update',
+    skills: [
+      'create-single-page',
+      'create-multi-pattern',
+      'create-jp-lp',
+      'rewrite-me',
+      'hey-polish-me',
+    ],
+    ja: 'BRIEF の確定事項（レイアウト・固定コピー・数値）を尊重するよう変更。MarkdownまたはネイティブのFigma Specを全文読み取り、既定ルールより優先する。rewrite-me は固定コピーを書き換え対象から外し、hey-polish-me は未指定または Open の部分だけを改善案の対象にする。',
+    en: 'Now respects what the BRIEF settles (layout, fixed copy, numbers): the BRIEF is read in full as Markdown or a native Figma Spec and takes priority over default rules. rewrite-me excludes fixed copy from rewriting, and hey-polish-me limits proposals to unspecified or Open parts.',
+  },
+  {
+    date: '2026-11-22',
+    product: 'figma',
+    kind: 'update',
+    skills: [
+      'create-single-page',
+      'create-multi-pattern',
+      'create-jp-lp',
+      'figma-mobile-convert',
+    ],
+    ja: 'ナビゲーション項目（ヘッダー・フッターのメニュー、ドロワー、ボトムタブなど）は、1項目＝1テキストノードで作るルールを追加。完了前にレイヤー構造を確認する。',
+    en: 'Added a rule that navigation items (header/footer menus, drawers, bottom tabs and the like) are created as one text node per item, with a layer-structure check before completion.',
+  },
+  {
     date: '2026-11-21',
     product: 'claude',
     kind: 'new',

@@ -93,6 +93,11 @@ export const categories: Category[] = [
         en: 'A business-requirements interview before design work begins. The BRIEF is output in the chat.',
       },
       {
+        name: 'doc-brief-me',
+        desc: '制作指示・原稿・PDF・スプレッドシート・画像・Figmaのワイヤーなど、手元の資料から制作にそのまま使えるBRIEFを作る。資料の書き起こしが中心で、資料に無い必要な部分だけを1問ずつ質問。成果物はネイティブのFigma Spec（希望すればチャットにもMarkdownを出力）。確定したレイアウト・固定コピーは後続スキルが尊重する',
+        en: 'Builds a build-ready BRIEF from the documents you already have (instructions, copy, PDFs, spreadsheets, images, Figma wireframes), asking only about gaps. Outputs a native Figma Spec, plus Markdown in the chat on request. Settled layout and fixed copy are respected downstream.',
+      },
+      {
         name: 'design-brief-me',
         desc: 'デザイン着手前の設定ヒアリング。結果のDESIGN_BRIEFを`brief-me`のBRIEFと一緒に貼り付けると、後続スキルの質問がすべて省略され完全無人実行が可能に',
         en: 'A design-settings interview (page type, type scale, base size). Paste its DESIGN_BRIEF with the BRIEF to skip every downstream question.',

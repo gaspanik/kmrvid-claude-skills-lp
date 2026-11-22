@@ -13,6 +13,12 @@ export interface Counterpart {
 
 export const counterparts: Counterpart[] = [
   { claude: 'brief-me', figma: 'brief-me' },
+  {
+    claude: 'doc-brief-me',
+    figma: 'doc-brief-me',
+    ja: 'Claude版は BRIEF.md をファイルとして保存し、Figma版はネイティブのFigma Specとして作成します（希望すればチャットにもMarkdownを出力）。',
+    en: 'The Claude edition saves BRIEF.md as a file; the Figma edition creates a native Figma Spec (and can also print Markdown in the chat).',
+  },
   { claude: 'rewrite-me', figma: 'rewrite-me' },
   {
     claude: 'create-jp-lp',

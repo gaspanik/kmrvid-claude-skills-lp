@@ -1,0 +1,14 @@
+---
+import { bundleSaving, bundleSavingBefore, formatYen } from "@/data/products";
+---
+
+{
+  bundleSaving === bundleSavingBefore ? (
+    formatYen(bundleSaving)
+  ) : (
+    <>
+      <span class="campaign-ended:hidden">{formatYen(bundleSavingBefore)}</span>
+      <span class="hidden campaign-ended:inline">{formatYen(bundleSaving)}</span>
+    </>
+  )
+}

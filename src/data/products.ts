@@ -54,6 +54,14 @@ interface Product {
   en: EnMarket
 }
 
+/** Bundle・Claude版・Figma版の価格改定（2026-11-28 0:00 JST）。改定前の期間は `campaign` で旧価格を表示する */
+const PRICE_REVISION_20261128 = {
+  kind: 'increase',
+  endsAt: '2026-11-28T00:00:00+09:00',
+  endsAtLabel: '2026年11月27日（金）23:59',
+  endsAtShort: '11/27（金）',
+} as const
+
 /** 動画本数・総再生時間の集計日 */
 export const STATS_AS_OF = '2026年9月20日'
 
@@ -63,11 +71,13 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code + Figma Design Agent',
     href: '/bundle/',
     url: 'https://kmrvid.com/products/kmrvid-skills-bundle',
-    price: 29800,
+    // 2026-11-28 0:00 JST から 35,200円に改定。それまでは 29,800円（海外版は据え置き）
+    price: 35200,
     skills: totalSkills,
     videos: 60,
     hours: 6,
     minutes: 5,
+    campaign: { ...PRICE_REVISION_20261128, price: 29800 },
     en: {
       name: 'KMRVID Skills Bundle',
       href: '/en/bundle/',
@@ -80,11 +90,13 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code',
     href: '/claude',
     url: 'https://kmrvid.com/products/kmrvid-claude-skills',
-    price: 19800,
+    // 2026-11-28 0:00 JST から 25,300円に改定。それまでは 19,800円（海外版は据え置き）
+    price: 25300,
     skills: claudeSkillsCount,
     videos: 40,
     hours: 4,
     minutes: 10,
+    campaign: { ...PRICE_REVISION_20261128, price: 19800 },
     en: {
       name: 'KMRVID Claude Skills',
       href: '/en/claude/',
@@ -97,11 +109,13 @@ export const products: Record<ProductKey, Product> = {
     env: 'Figma Design Agent',
     href: '/figma',
     url: 'https://kmrvid.com/products/kmrvid-figma-skills',
-    price: 15400,
+    // 2026-11-28 0:00 JST から 19,800円に改定。それまでは 15,400円（海外版は据え置き）
+    price: 19800,
     skills: figmaSkillsCount,
     videos: 20,
     hours: 1,
     minutes: 55,
+    campaign: { ...PRICE_REVISION_20261128, price: 15400 },
     en: {
       name: 'KMRVID Figma Skills',
       href: '/en/figma/',
@@ -193,9 +207,15 @@ export const formatYen = (price: number) => price.toLocaleString('ja-JP')
 export const formatDuration = ({ hours, minutes }: Product) =>
   `約${hours}時間${minutes}分`
 
-/** Claude版 + Figma版を個別に買う場合との差額 */
+/** Claude版 + Figma版を個別に買う場合との差額（改定後の価格ベース） */
 export const bundleSaving =
   products.claude.price + products.figma.price - products.bundle.price
+
+/** 同・改定前の価格ベース（2026-11-28 0:00 JST まで。`campaign.price` が旧価格） */
+export const bundleSavingBefore =
+  (products.claude.campaign?.price ?? products.claude.price) +
+  (products.figma.campaign?.price ?? products.figma.price) -
+  (products.bundle.campaign?.price ?? products.bundle.price)
 
 export const formatUsd = (price: number) => `$${price}`
 

@@ -16,10 +16,9 @@ import {
   totalSkills,
 } from "@/data/skills";
 import Price from "@/components/Price.astro";
-import { AGENSI_URL, formatYen, products } from "@/data/products";
+import { AGENSI_URL, products } from "@/data/products";
 
 const PURCHASE_URL = products.bundle.url;
-const PRICE = formatYen(products.bundle.price);
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 ---
 
@@ -257,18 +256,18 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          全{totalSkills}スキルを、<br class="sm:hidden" />{PRICE}円で
+          全{totalSkills}スキルを、<br class="sm:hidden" /><Price product="bundle" />円で
         </h2>
         <p
           class="max-w-md text-white/70 text-base sm:text-center text-justify leading-relaxed"
         >
-          「KMRVID Skills - All-in-One Bundle」は、{PRICE}円（税込）の買い切りでお申し込みいただけます。
+          「KMRVID Skills - All-in-One Bundle」は、<Price product="bundle" />円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          {PRICE}円で申し込む
+          <Price product="bundle" />円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <p class="text-white/70 text-sm text-center leading-relaxed">
@@ -293,7 +292,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
             href="/figma"
             class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
           >
-            Figma Skills（{formatYen(products.figma.price)}円）
+            Figma Skills（<Price product="figma" />円）
           </a>
         </p>
       </div>

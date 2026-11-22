@@ -27,6 +27,7 @@ import Footer from "@/components/Footer.astro";
 import HandsOn from "@/components/HandsOn.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
@@ -40,7 +41,6 @@ import {
   museSkillsCount,
 } from "@/data/muse";
 import {
-  bundleSaving,
   FIGMA_COMMUNITY_URL,
   formatYen,
   NEW_PRICE_FROM,
@@ -583,9 +583,7 @@ const combos = [
       <p
         class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
       >
-        All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより{
-          formatYen(bundleSaving)
-        }円お得です。
+        All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより<BundleSaving />円お得です。
       </p>
       <a
         href="/skills"

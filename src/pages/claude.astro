@@ -21,6 +21,7 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import Price from "@/components/Price.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
@@ -30,9 +31,9 @@ import {
 } from "@/data/skills";
 import {
   AGENSI_URL,
-  bundleSaving,
   formatDuration,
   formatYen,
+  NEW_PRICE_FROM,
   products,
   STATS_AS_OF,
 } from "@/data/products";
@@ -91,12 +92,14 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
             <div class="campaign-ended:hidden mt-8 p-4 rounded-2xl max-w-2xl bg-accent-soft text-accent-dark">
               <p class="flex items-center gap-2 font-medium text-base">
                 <BadgePercent size={18} stroke-width={2} class="flex-none" />
-                発売記念価格 {REGULAR_PRICE}円 → {formatYen(campaign.price)}円（税込）
+                {campaign.kind === "launch"
+                  ? `発売記念価格 ${REGULAR_PRICE}円 → ${formatYen(campaign.price)}円（税込）`
+                  : `${NEW_PRICE_FROM}から${REGULAR_PRICE}円（税込）に改定します`}
               </p>
               <CountdownTimer
                 endsAt={campaign.endsAt}
-                label="終了まで残り"
-                fallback={`${campaign.endsAtLabel}まで`}
+                label={campaign.kind === "launch" ? "終了まで残り" : "現在の価格で買えるのは残り"}
+                fallback={campaign.kind === "launch" ? `${campaign.endsAtLabel}まで` : `現在の価格は${campaign.endsAtLabel}まで`}
                 class="mt-1 text-base"
               />
             </div>
@@ -294,7 +297,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
                   stroke-width={2}
                   class="hidden campaign-ended:block"
                 />
-                <span class="campaign-ended:hidden">発売記念価格</span>
+                <span class="campaign-ended:hidden">{campaign.kind === "launch" ? "発売記念価格" : "料金"}</span>
                 <span class="hidden campaign-ended:inline">料金</span>
               </>
             ) : (
@@ -315,7 +318,9 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           {
             campaign && (
               <span class="campaign-ended:hidden">
-                発売記念として、{campaign.endsAtLabel}まで特別価格でご案内しています。
+                {campaign.kind === "launch"
+                  ? `発売記念として、${campaign.endsAtLabel}まで特別価格でご案内しています。`
+                  : `${NEW_PRICE_FROM}から${REGULAR_PRICE}円に改定します（現在の価格は${campaign.endsAtLabel}まで）。`}
               </span>
             )
           }
@@ -324,8 +329,8 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           campaign && (
             <CountdownTimer
               endsAt={campaign.endsAt}
-              label="発売記念価格 終了まで残り"
-              fallback={`${campaign.endsAtLabel}まで`}
+              label={campaign.kind === "launch" ? "発売記念価格 終了まで残り" : "現在の価格で買えるのは残り"}
+              fallback={campaign.kind === "launch" ? `${campaign.endsAtLabel}まで` : `現在の価格は${campaign.endsAtLabel}まで`}
               class="campaign-ended:hidden mt-4 text-base text-accent-dark"
             />
           )
@@ -338,7 +343,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         >
           <div>
             {
-              campaign && (
+              campaign?.kind === "launch" && (
                 <p class="campaign-ended:hidden text-white/50 text-sm line-through">
                   通常価格 {REGULAR_PRICE}円（税込）
                 </p>
@@ -347,7 +352,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
             <p
               class:list={[
                 "flex items-baseline gap-2 font-heading text-6xl md:text-7xl",
-                campaign && "mt-2 campaign-ended:mt-0",
+                campaign?.kind === "launch" && "mt-2 campaign-ended:mt-0",
               ]}
             >
               <span><Price product="claude" /></span><span class="text-2xl"
@@ -358,7 +363,9 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
               税込・買い切り{
                 campaign && (
                   <span class="campaign-ended:hidden">
-                    （{campaign.endsAtLabel}まで発売記念価格）
+                    {campaign.kind === "launch"
+                      ? `（${campaign.endsAtLabel}まで発売記念価格）`
+                      : `（${campaign.endsAtLabel}までの価格）`}
                   </span>
                 )
               }
@@ -454,9 +461,7 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
         <p
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
         >
-          All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより{
-            formatYen(bundleSaving)
-          }円お得です。
+          All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより<BundleSaving />円お得です。
         </p>
       </div>
     </section>
@@ -586,7 +591,9 @@ const LINE_URL = "https://lin.ee/EOgmkKQ";
           {
             campaign && (
               <span class="campaign-ended:hidden">
-                発売記念価格は{campaign.endsAtLabel}までです。
+                {campaign.kind === "launch"
+                  ? `発売記念価格は${campaign.endsAtLabel}までです。`
+                  : `${NEW_PRICE_FROM}から${REGULAR_PRICE}円に改定します（現在の価格は${campaign.endsAtLabel}まで）。`}
               </span>
             )
           }

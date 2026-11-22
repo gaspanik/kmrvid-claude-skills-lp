@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgePercent,
   CircleCheck,
   Combine,
   ExternalLink,
@@ -15,27 +16,30 @@ import {
 import codeScreen from "@/assets/images/code-screen.jpg";
 import Callout from "@/components/Callout.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
 import Footer from "@/components/Footer.astro";
 import HandsOn from "@/components/HandsOn.astro";
 import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import CategorySkills from "@/components/CategorySkills.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
+import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { FIGMA_HANDSON } from "@/data/handson";
 import { Image } from "astro:assets";
 import { figmaCategories, figmaSkills } from "@/data/skills";
 import {
-  bundleSaving,
   FIGMA_COMMUNITY_URL,
   formatDuration,
   formatYen,
+  NEW_PRICE_FROM,
   products,
   STATS_AS_OF,
 } from "@/data/products";
 
 const product = products.figma;
 const PURCHASE_URL = product.url;
-const PRICE = formatYen(product.price);
+const campaign = product.campaign;
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 
 const differences = [
@@ -172,14 +176,34 @@ const totalSkills = skills.length;
           Claude Code 版のスキルを Figma の Design Agent（カスタムスキル機能）で動作するよう最適化した専用パッケージです。チャットの往復は最小限。スキルを呼び出すだけで、新規のページ生成から複数のレイアウトパターンの生成、キャンバス上のレイヤー整理・トークン化・コンポーネント化まで、ほぼ全自動で完結できます。収録スキルの解説動画付き（{product.videos}本・{formatDuration(product)}／{STATS_AS_OF}現在）。
         </p>
 
+        {
+          campaign && (
+            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+              <p class="flex items-center gap-2 font-medium text-base">
+                <BadgePercent size={18} stroke-width={2} class="flex-none" />
+                {NEW_PRICE_FROM}から{formatYen(product.price)}円（税込）に改定します
+              </p>
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="現在の価格で買えるのは残り"
+                fallback={`現在の価格は${campaign.endsAtLabel}まで`}
+                class="mt-1 text-base"
+              />
+            </div>
+          )
+        }
+
         <div
-          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+          class:list={[
+            "flex sm:flex-row flex-col items-start sm:items-center gap-4",
+            campaign ? "mt-4 campaign-ended:mt-8" : "mt-8",
+          ]}
         >
           <a
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            {PRICE}円で受講をはじめる
+            <Price product="figma" />円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -452,7 +476,14 @@ const totalSkills = skills.length;
           <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
             単体パッケージとして、{
               totalSkills
-            }個のFigma専用スキルを、{PRICE}円（税込）の買い切りでご利用いただけます。
+            }個のFigma専用スキルを、<Price product="figma" />円（税込）の買い切りでご利用いただけます。
+            {
+              campaign && (
+                <span class="campaign-ended:hidden">
+                  {NEW_PRICE_FROM}から{formatYen(product.price)}円に改定します（現在の価格は{campaign.endsAtLabel}まで）。
+                </span>
+              )
+            }
           </p>
         </div>
 
@@ -464,7 +495,7 @@ const totalSkills = skills.length;
               <p
                 class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
               >
-                {PRICE}<span class="text-2xl">円</span>
+                <Price product="figma" /><span class="text-2xl">円</span>
               </p>
               <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
@@ -472,7 +503,7 @@ const totalSkills = skills.length;
                 href={PURCHASE_URL}
                 class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
               >
-                {PRICE}円で申し込む
+                <Price product="figma" />円で申し込む
                 <ArrowRight size={18} stroke-width={2} />
               </a>
             </div>
@@ -562,9 +593,7 @@ const totalSkills = skills.length;
       <p
         class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
       >
-        All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより{
-          formatYen(bundleSaving)
-        }円お得です。
+        All-in-One Bundleは、Claude版とFigma版を通常価格で個別に購入するより<BundleSaving />円お得です。
       </p>
       <a
         href="/skills"
@@ -593,7 +622,7 @@ const totalSkills = skills.length;
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          {PRICE}円で
+          <Price product="figma" />円で
           <br class="sm:hidden" />
           今日から始める
         </h2>
@@ -602,13 +631,13 @@ const totalSkills = skills.length;
         >
           {
             totalSkills
-          }個のカスタムスキルを、{PRICE}円（税込）の買い切りで、キャンバス上の選択だけで動かせます。
+          }個のカスタムスキルを、<Price product="figma" />円（税込）の買い切りで、キャンバス上の選択だけで動かせます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          {PRICE}円で申し込む
+          <Price product="figma" />円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

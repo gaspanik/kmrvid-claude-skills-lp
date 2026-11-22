@@ -2,6 +2,7 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgePercent,
   BookOpen,
   CircleCheck,
   ExternalLink,
@@ -27,8 +28,11 @@ import FeatureCard from "@/components/FeatureCard.astro";
 import FaqItem from "@/components/FaqItem.astro";
 import FlowCard from "@/components/FlowCard.astro";
 import Header from "@/components/Header.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
 import Footer from "@/components/Footer.astro";
 import PackageCard from "@/components/PackageCard.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
+import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { bundleFlows } from "@/data/flows";
@@ -43,16 +47,16 @@ import {
   AGENSI_URL,
   BUNDLE_LICENSE_PACK,
   CONTACT_URL,
-  bundleSaving,
   formatDuration,
   formatYen,
+  NEW_PRICE_FROM,
   products,
   STATS_AS_OF,
 } from "@/data/products";
 
 const bundle = products.bundle;
 const PURCHASE_URL = bundle.url;
-const PRICE = formatYen(bundle.price);
+const campaign = bundle.campaign;
 const LINE_URL = "https://lin.ee/EOgmkKQ";
 const BOOKS_URL = "https://www.amazon.co.jp/stores/author/B008Q05NQW/allbooks";
 
@@ -148,14 +152,34 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
           インターネット黎明期からWeb制作の現場に立ち続け、Web制作関連書籍の執筆・監修やFigmaの企業研修講師も務める著者が、実務の時間単価を最大化するために作ったオリジナルスキル群を一挙公開。プロンプトの書き方ではなく、エージェントが理解できる「スキル」の作り方・使い方を学ぶ講座です。
         </p>
 
+        {
+          campaign && (
+            <div class="campaign-ended:hidden bg-accent-soft mt-8 p-4 rounded-2xl max-w-2xl text-accent-dark">
+              <p class="flex items-center gap-2 font-medium text-base">
+                <BadgePercent size={18} stroke-width={2} class="flex-none" />
+                {NEW_PRICE_FROM}から{formatYen(bundle.price)}円（税込）に改定します
+              </p>
+              <CountdownTimer
+                endsAt={campaign.endsAt}
+                label="現在の価格で買えるのは残り"
+                fallback={`現在の価格は${campaign.endsAtLabel}まで`}
+                class="mt-1 text-base"
+              />
+            </div>
+          )
+        }
+
         <div
-          class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-8"
+          class:list={[
+            "flex sm:flex-row flex-col items-start sm:items-center gap-4",
+            campaign ? "mt-4 campaign-ended:mt-8" : "mt-8",
+          ]}
         >
           <a
             href={PURCHASE_URL}
             class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
           >
-            {PRICE}円で受講をはじめる
+            <Price product="bundle" />円で受講をはじめる
             <ArrowRight size={18} stroke-width={2} />
           </a>
           <a
@@ -454,7 +478,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
               href={PURCHASE_URL}
               class="inline-flex items-center gap-1.5 bg-accent hover:brightness-110 mt-4 px-4 py-2.5 rounded-full min-h-11 font-medium text-white text-sm transition"
             >
-              {PRICE}円で全スキルを見る
+              <Price product="bundle" />円で全スキルを見る
               <ArrowRight size={16} stroke-width={2} />
             </a>
           </div>
@@ -570,13 +594,20 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
           id="pricing-heading"
           class="text-ink text-left break-keep text-balance"
         >
-          {PRICE}円で、<br class="sm:hidden" />すべてのスキルを
+          <Price product="bundle" />円で、<br class="sm:hidden" />すべてのスキルを
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
           Claude Code版{claudeSkillsCount}スキルとFigma版{
             figmaSkillsCount
           }スキル、全{totalSkills}スキルを収録した「KMRVID Skills - All-in-One
-          Bundle」は、{PRICE}円（税込）の買い切りでお申し込みいただけます。
+          Bundle」は、<Price product="bundle" />円（税込）の買い切りでお申し込みいただけます。
+          {
+            campaign && (
+              <span class="campaign-ended:hidden">
+                {NEW_PRICE_FROM}から{formatYen(bundle.price)}円に改定します（現在の価格は{campaign.endsAtLabel}まで）。
+              </span>
+            )
+          }
         </p>
       </div>
 
@@ -589,7 +620,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
             <p
               class="flex items-baseline gap-2 font-heading text-6xl md:text-7xl"
             >
-              {PRICE}<span class="text-2xl">円</span>
+              <Price product="bundle" /><span class="text-2xl">円</span>
             </p>
             <p class="mt-2 text-white/60 text-sm">税込・買い切り</p>
 
@@ -597,7 +628,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
               href={PURCHASE_URL}
               class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 mt-8 px-6 py-3.5 rounded-full font-medium text-white transition"
             >
-              {PRICE}円で申し込む
+              <Price product="bundle" />円で申し込む
               <ArrowRight size={18} stroke-width={2} />
             </a>
           </div>
@@ -629,9 +660,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
             <li>
               <CircleCheck size={18} stroke-width={2} />
               <span
-                >Claude版とFigma版を通常価格で個別に購入するより{
-                  formatYen(bundleSaving)
-                }円お得</span
+                >Claude版とFigma版を通常価格で個別に購入するより<BundleSaving />円お得</span
               >
             </li>
             <li>
@@ -745,9 +774,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
           class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
         >
           両方使いたい場合は、All-in-One
-          Bundle（{PRICE}円）がおすすめです。通常価格で個別に購入するより{
-            formatYen(bundleSaving)
-          }円お得になります。
+          Bundle（<Price product="bundle" />円）がおすすめです。通常価格で個別に購入するより<BundleSaving />円お得になります。
         </p>
       </div>
     </section>
@@ -896,7 +923,7 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          {PRICE}円で
+          <Price product="bundle" />円で
           <br class="sm:hidden" />
           今日から始める
         </h2>
@@ -905,13 +932,13 @@ const skillHighlights = highlightPicks.map(({ name, icon }) => {
         >
           全{
             totalSkills
-          }スキルを収録した本バンドルを、{PRICE}円（税込）の買い切りでお申し込みいただけます。
+          }スキルを収録した本バンドルを、<Price product="bundle" />円（税込）の買い切りでお申し込みいただけます。
         </p>
         <a
           href={PURCHASE_URL}
           class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
         >
-          {PRICE}円で申し込む
+          <Price product="bundle" />円で申し込む
           <ArrowRight size={18} stroke-width={2} />
         </a>
         <a

@@ -22,6 +22,38 @@ export const RECENT_FROM = '2026-09-01'
 export const changelog: ChangelogEntry[] = [
   {
     date: '2026-11-22',
+    product: 'claude',
+    kind: 'update',
+    skills: ['doc-brief-me'],
+    ja: 'ワイヤーだけを渡したときに中身が埋まらず、追加の質問もされない傾向を修正。資料の文章を原稿とダミーに分類し（ダミーは中身として扱わない。原稿があれば文言は原稿、構造はワイヤーを優先）、ワイヤーのみ・原稿が薄い・コピーを作る必要がある・両者が食い違うときは、コンテンツの質問を必ず行う（省略せず、記憶から答えない）。回答はBRIEFの新しい Content Direction 欄に書き出す。質問は1回1問ずつ、毎回ゼロから実施。',
+    en: 'Fixed a tendency, when run with only a wireframe attached, to leave the content unfilled and skip follow-up questions. The skill now classifies each document’s text as manuscript or dummy (dummy is never content; when both exist, the manuscript wins for wording and the wire wins for structure) and makes content questions mandatory — never skipped, never answered from memory — whenever there is only a wire, the manuscript is thin, copy must be generated, or the two disagree. Answers are written to a new Content Direction section of the BRIEF. Questions are asked one per call, and every run starts from zero.',
+  },
+  {
+    date: '2026-11-22',
+    product: 'figma',
+    kind: 'update',
+    skills: ['doc-brief-me'],
+    ja: 'ワイヤーだけを渡したときに中身が埋まらず、追加の質問もされない傾向を修正。資料の文章を原稿とダミーに分類し（ダミーは中身として扱わない。原稿があれば文言は原稿、構造はワイヤーを優先）、ワイヤーのみ・原稿が薄い・コピーを作る必要がある・両者が食い違うときは、コンテンツの質問を必ず行う（省略せず、記憶から答えない）。回答はBRIEFの新しい Content Direction 欄に書き出す。質問は1回1問ずつ、毎回ゼロから実施。',
+    en: 'Fixed a tendency, when run with only a wireframe attached, to leave the content unfilled and skip follow-up questions. The skill now classifies each document’s text as manuscript or dummy (dummy is never content; when both exist, the manuscript wins for wording and the wire wins for structure) and makes content questions mandatory — never skipped, never answered from memory — whenever there is only a wire, the manuscript is thin, copy must be generated, or the two disagree. Answers are written to a new Content Direction section of the BRIEF. Questions are asked one per call, and every run starts from zero.',
+  },
+  {
+    date: '2026-11-22',
+    product: 'muse',
+    kind: 'update',
+    skills: ['doc-brief-me'],
+    ja: 'ワイヤーだけを渡したときに中身が埋まらず、追加の質問もされない傾向を修正。資料の文章を原稿とダミーに分類し（ダミーは中身として扱わない。原稿があれば文言は原稿、構造はワイヤーを優先）、ワイヤーのみ・原稿が薄い・コピーを作る必要がある・両者が食い違うときは、コンテンツの質問を必ず行う（省略せず、記憶から答えない）。回答はBRIEFの新しい Content Direction 欄に書き出す。質問は1回1問ずつ、毎回ゼロから実施。',
+    en: 'Fixed a tendency, when run with only a wireframe attached, to leave the content unfilled and skip follow-up questions. The skill now classifies each document’s text as manuscript or dummy (dummy is never content; when both exist, the manuscript wins for wording and the wire wins for structure) and makes content questions mandatory — never skipped, never answered from memory — whenever there is only a wire, the manuscript is thin, copy must be generated, or the two disagree. Answers are written to a new Content Direction section of the BRIEF. Questions are asked one per call, and every run starts from zero.',
+  },
+  {
+    date: '2026-11-22',
+    product: 'desktop',
+    kind: 'update',
+    skills: ['doc-brief-me'],
+    ja: 'ワイヤーだけを渡したときに中身が埋まらず、追加の質問もされない傾向を修正。資料の文章を原稿とダミーに分類し（ダミーは中身として扱わない。原稿があれば文言は原稿、構造はワイヤーを優先）、ワイヤーのみ・原稿が薄い・コピーを作る必要がある・両者が食い違うときは、コンテンツの質問を必ず行う（省略せず、記憶から答えない）。回答はBRIEFの新しい Content Direction 欄に書き出す。質問は1回1問ずつ、毎回ゼロから実施。',
+    en: 'Fixed a tendency, when run with only a wireframe attached, to leave the content unfilled and skip follow-up questions. The skill now classifies each document’s text as manuscript or dummy (dummy is never content; when both exist, the manuscript wins for wording and the wire wins for structure) and makes content questions mandatory — never skipped, never answered from memory — whenever there is only a wire, the manuscript is thin, copy must be generated, or the two disagree. Answers are written to a new Content Direction section of the BRIEF. Questions are asked one per call, and every run starts from zero.',
+  },
+  {
+    date: '2026-11-22',
     product: 'figma',
     kind: 'new',
     skills: ['doc-brief-me'],

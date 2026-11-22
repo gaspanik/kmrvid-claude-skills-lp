@@ -22,6 +22,7 @@ import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
   claudeCategories,
@@ -30,8 +31,8 @@ import {
 } from "@/data/skills";
 import {
   AGENSI_URL,
-  bundleSavingUsd,
   formatUsd,
+  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -365,7 +366,10 @@ const flows = [
         </h2>
         <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
           All {claudeSkillsCount} skills, the README (PDF) and free lifetime
-          updates for {formatUsd(product.priceUsd)}.
+          updates for <Price product="claude" lang="en" />.
+        </p>
+        <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
+          The price goes up to {formatUsd(products.claude.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
         </p>
 
         <PricingCard
@@ -401,7 +405,7 @@ const flows = [
         />
       </div>
       <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
-        The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+        The bundle saves you <BundleSaving lang="en" /> compared with buying
         the Claude and Figma editions separately.
       </p>
     </section>
@@ -488,7 +492,7 @@ const flows = [
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          {claudeSkillsCount} skills for {formatUsd(product.priceUsd)}
+          {claudeSkillsCount} skills for <Price product="claude" lang="en" />
         </h2>
         <a
           href={product.url}

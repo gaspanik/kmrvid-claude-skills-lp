@@ -26,6 +26,7 @@ import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
   MUSE_DEMO_URL,
@@ -38,7 +39,6 @@ import {
   museSkillsCount,
 } from "@/data/muse";
 import {
-  bundleSavingUsd,
   FIGMA_COMMUNITY_URL,
   formatUsd,
   NEW_PRICE_FROM_EN,
@@ -446,7 +446,7 @@ const flows = [
       <p
         class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug"
       >
-        The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+        The bundle saves you <BundleSaving lang="en" /> compared with buying
         the Claude and Figma editions separately.
       </p>
     </section>

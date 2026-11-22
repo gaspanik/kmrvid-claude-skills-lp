@@ -5,6 +5,7 @@ import CategorySkills from "@/components/CategorySkills.astro";
 import CounterpartTable from "@/components/CounterpartTable.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
   claudeCategories,
@@ -15,7 +16,7 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import { AGENSI_URL, formatUsd, products } from "@/data/products";
+import { AGENSI_URL, products } from "@/data/products";
 
 const bundle = products.bundle.en;
 ---
@@ -221,7 +222,7 @@ const bundle = products.bundle.en;
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 class="text-canvas">
-          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}
+          All {totalSkills} skills for <Price product="bundle" lang="en" />
         </h2>
         <a
           href={bundle.url}
@@ -236,14 +237,14 @@ const bundle = products.bundle.en;
             href="/en/claude/"
             class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
           >
-            Claude Skills ({formatUsd(products.claude.en.priceUsd)})
+            Claude Skills (<Price product="claude" lang="en" />)
           </a>
           /
           <a
             href="/en/figma/"
             class="inline-flex items-center min-h-11 hover:text-white underline underline-offset-4"
           >
-            Figma Skills ({formatUsd(products.figma.en.priceUsd)})
+            Figma Skills (<Price product="figma" lang="en" />)
           </a>
         </p>
       </div>

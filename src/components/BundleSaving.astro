@@ -1,14 +1,40 @@
 ---
-import { bundleSaving, bundleSavingBefore, formatYen } from "@/data/products";
+import {
+  bundleSaving,
+  bundleSavingBefore,
+  bundleSavingUsd,
+  bundleSavingUsdBefore,
+  formatUsd,
+  formatYen,
+  individualTotalUsd,
+  individualTotalUsdBefore,
+} from "@/data/products";
+import type { Lang } from "@/i18n/ui";
+
+interface Props {
+  /** en のとき USD で表示する */
+  lang?: Lang;
+  /** `total` は個別に買う場合の合計（USDのみ）。既定は差額 */
+  kind?: "saving" | "total";
+}
+
+const { lang = "ja", kind = "saving" } = Astro.props;
+
+const [before, after, format] =
+  lang === "en"
+    ? kind === "total"
+      ? [individualTotalUsdBefore, individualTotalUsd, formatUsd]
+      : [bundleSavingUsdBefore, bundleSavingUsd, formatUsd]
+    : [bundleSavingBefore, bundleSaving, formatYen];
 ---
 
 {
-  bundleSaving === bundleSavingBefore ? (
-    formatYen(bundleSaving)
+  before === after ? (
+    format(after)
   ) : (
     <>
-      <span class="campaign-ended:hidden">{formatYen(bundleSavingBefore)}</span>
-      <span class="hidden campaign-ended:inline">{formatYen(bundleSaving)}</span>
+      <span class="campaign-ended:hidden">{format(before)}</span>
+      <span class="hidden campaign-ended:inline">{format(after)}</span>
     </>
   )
 }

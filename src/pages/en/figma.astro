@@ -22,6 +22,7 @@ import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
   figmaCategories,
@@ -29,9 +30,9 @@ import {
   figmaSkillsCount,
 } from "@/data/skills";
 import {
-  bundleSavingUsd,
   FIGMA_COMMUNITY_URL,
   formatUsd,
+  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -359,7 +360,10 @@ const flows = [
       </h2>
       <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
         All {figmaSkillsCount} skills, the README (PDF) and free lifetime
-        updates for {formatUsd(product.priceUsd)}.
+        updates for <Price product="figma" lang="en" />.
+      </p>
+      <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
+        The price goes up to {formatUsd(products.figma.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
       </p>
 
       <PricingCard
@@ -401,7 +405,7 @@ const flows = [
           />
         </div>
         <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
-          The bundle saves you {formatUsd(bundleSavingUsd)} compared with buying
+          The bundle saves you <BundleSaving lang="en" /> compared with buying
           the two editions separately.
         </p>
       </div>

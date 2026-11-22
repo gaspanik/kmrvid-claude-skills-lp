@@ -14,6 +14,7 @@ import Header from "@/components/Header.astro";
 import PackageCard from "@/components/PackageCard.astro";
 import PricingCard from "@/components/PricingCard.astro";
 import Price from "@/components/Price.astro";
+import BundleSaving from "@/components/BundleSaving.astro";
 import Layout from "@/layouts/Layout.astro";
 import { bundleFlows } from "@/data/flows";
 import { museSkillsCount } from "@/data/muse";
@@ -26,8 +27,8 @@ import {
 } from "@/data/skills";
 import {
   AGENSI_URL,
-  bundleSavingUsd,
   formatUsd,
+  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -240,12 +241,11 @@ const flows = bundleFlows.map((flow) => ({
           KMRVID Skills Bundle
         </h2>
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
-          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}. Buying the
-          two editions separately costs {
-            formatUsd(
-              products.claude.en.priceUsd + products.figma.en.priceUsd,
-            )
-          }, so the bundle saves you {formatUsd(bundleSavingUsd)}.
+          All {totalSkills} skills for <Price product="bundle" lang="en" />. Buying the
+          two editions separately costs <BundleSaving lang="en" kind="total" />, so the bundle saves you <BundleSaving lang="en" />.
+        </p>
+        <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
+          The price goes up to {formatUsd(products.bundle.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
         </p>
       </div>
 
@@ -401,7 +401,7 @@ const flows = bundleFlows.map((flow) => ({
       >
         <Tag size={28} stroke-width={1.75} class="text-accent" />
         <h2 id="final-cta-heading" class="text-canvas">
-          All {totalSkills} skills for {formatUsd(bundle.priceUsd)}
+          All {totalSkills} skills for <Price product="bundle" lang="en" />
         </h2>
         <p class="max-w-md text-white/70 text-base leading-relaxed">
           Claude Code and Figma’s Design Agent, one purchase, free lifetime

@@ -71,7 +71,7 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code + Figma Design Agent',
     href: '/bundle/',
     url: 'https://kmrvid.com/products/kmrvid-skills-bundle',
-    // 2026-11-28 0:00 JST から 35,200円に改定。それまでは 29,800円（海外版は据え置き）
+    // 2026-11-28 0:00 JST から 35,200円（海外版は $229）に改定。それまでは 29,800円（$199）
     price: 35200,
     skills: totalSkills,
     videos: 60,
@@ -82,7 +82,8 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Skills Bundle',
       href: '/en/bundle/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-bundle',
-      priceUsd: 199,
+      priceUsd: 229,
+      priceUsdBefore: 199,
     },
   },
   claude: {
@@ -90,7 +91,7 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code',
     href: '/claude',
     url: 'https://kmrvid.com/products/kmrvid-claude-skills',
-    // 2026-11-28 0:00 JST から 25,300円に改定。それまでは 19,800円（海外版は据え置き）
+    // 2026-11-28 0:00 JST から 25,300円（海外版は $149）に改定。それまでは 19,800円（$137）
     price: 25300,
     skills: claudeSkillsCount,
     videos: 40,
@@ -101,7 +102,8 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Claude Skills',
       href: '/en/claude/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-claudeskills',
-      priceUsd: 137,
+      priceUsd: 149,
+      priceUsdBefore: 137,
     },
   },
   figma: {
@@ -109,7 +111,7 @@ export const products: Record<ProductKey, Product> = {
     env: 'Figma Design Agent',
     href: '/figma',
     url: 'https://kmrvid.com/products/kmrvid-figma-skills',
-    // 2026-11-28 0:00 JST から 19,800円に改定。それまでは 15,400円（海外版は据え置き）
+    // 2026-11-28 0:00 JST から 19,800円（海外版は $129）に改定。それまでは 15,400円（$97）
     price: 19800,
     skills: figmaSkillsCount,
     videos: 20,
@@ -120,7 +122,8 @@ export const products: Record<ProductKey, Product> = {
       name: 'KMRVID Figma Skills',
       href: '/en/figma/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-figmaskills',
-      priceUsd: 97,
+      priceUsd: 129,
+      priceUsdBefore: 97,
     },
   },
   // Claude版・Figma版・Bundle には特典として同梱。動画は付属しない（講座内の解説動画3本は YouTube でも公開）
@@ -219,8 +222,19 @@ export const bundleSavingBefore =
 
 export const formatUsd = (price: number) => `$${price}`
 
-/** 海外版で Claude版 + Figma版を個別に買う場合との差額（USD） */
-export const bundleSavingUsd =
-  products.claude.en.priceUsd +
-  products.figma.en.priceUsd -
-  products.bundle.en.priceUsd
+/** 海外版で Claude版 + Figma版を個別に買う場合の合計（USD、改定後） */
+export const individualTotalUsd =
+  products.claude.en.priceUsd + products.figma.en.priceUsd
+
+/** 同・改定前の価格ベース（`priceUsdBefore` が旧価格） */
+export const individualTotalUsdBefore =
+  (products.claude.en.priceUsdBefore ?? products.claude.en.priceUsd) +
+  (products.figma.en.priceUsdBefore ?? products.figma.en.priceUsd)
+
+/** 海外版で Claude版 + Figma版を個別に買う場合との差額（USD、改定後） */
+export const bundleSavingUsd = individualTotalUsd - products.bundle.en.priceUsd
+
+/** 同・改定前の価格ベース */
+export const bundleSavingUsdBefore =
+  individualTotalUsdBefore -
+  (products.bundle.en.priceUsdBefore ?? products.bundle.en.priceUsd)

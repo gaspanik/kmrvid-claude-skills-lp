@@ -5,21 +5,22 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 
 | 商品 | LP | 商品ページ | 定価（税込） | スキル数 | 動画 | 総時間 |
 |---|---|---|---|---|---|---|
-| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円 | 87個（Claude版53＋Figma版34） | 60本 | 約6時間5分 |
-| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円 | 53個 | 40本 | 約4時間10分 |
-| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円 | 34個 | 20本 | 約1時間55分 |
+| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円（2026年11月28日 0:00 JSTから35,200円に改定） | 87個（Claude版53＋Figma版34） | 60本 | 約6時間5分 |
+| KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円（2026年11月28日 0:00 JSTから25,300円に改定） | 53個 | 40本 | 約4時間10分 |
+| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円（2026年11月28日 0:00 JSTから19,800円に改定） | 34個 | 20本 | 約1時間55分 |
 | KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円（2026年11月28日 0:00 JSTから15,400円に改定） | 33個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
 | KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 発売記念 7,700円（2026年11月27日（金）23:59まで）。11月28日 0:00 JSTから通常価格15,400円 | 32個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
 - Muse Skills はMuse（Figmaコネクタ経由）用の単体商品。Claude版・Figma版・Bundleには特典として同梱され続けるため、既に購入済みの人には重複購入しないよう案内する。海外版は $59（Gumroad）。
-- 価格改定（2026-11-28 0:00 JST）: Muse版・CDC版とも、収録スキルの追加にともない通常価格を15,400円（海外版は両方$97）に引き上げる。CDC版の発売記念価格7,700円（海外版は$59）は改定前日まで。LPはブラウザ側の自動切替（`data-campaign-ended`）で、`products.muse.campaign`（`kind: 'increase'`、改定前の価格9,900円）と `products.desktop.campaign`（`kind: 'launch'`）の `endsAt` を過ぎると `product.price`・`en.priceUsd` の表示に変わる。改定前の期間は取り消し線の「通常価格」を使わず、「11/28から15,400円」と予告表示する（15,400円での販売実績がない間の二重価格表示を避けるため）。切り替え後は、両方の `campaign` と `priceUsdBefore` を削除して再デプロイし、改定の予告を片づける。
+- 価格改定（2026-11-28 0:00 JST）: Bundle 35,200円（旧29,800円）・Claude版 25,300円（旧19,800円）・Figma版 19,800円（旧15,400円）。海外版（Gumroad・USD）は据え置き（$199/$137/$97）。LPの切替方式はMuse版・CDC版と同じで、`products.bundle/claude/figma.campaign`（`kind: 'increase'`、`price` が旧価格）の `endsAt` を過ぎると `product.price` に切り替わる。個別購入との差額も `BundleSaving` で自動切替。切り替え後は3商品の `campaign` を削除して再デプロイする。
+- 価格改定（Muse版・CDC版）: Muse版・CDC版とも、収録スキルの追加にともない通常価格を15,400円（海外版は両方$97）に引き上げる。CDC版の発売記念価格7,700円（海外版は$59）は改定前日まで。LPはブラウザ側の自動切替（`data-campaign-ended`）で、`products.muse.campaign`（`kind: 'increase'`、改定前の価格9,900円）と `products.desktop.campaign`（`kind: 'launch'`）の `endsAt` を過ぎると `product.price`・`en.priceUsd` の表示に変わる。改定前の期間は取り消し線の「通常価格」を使わず、「11/28から15,400円」と予告表示する（15,400円での販売実績がない間の二重価格表示を避けるため）。切り替え後は、両方の `campaign` と `priceUsdBefore` を削除して再デプロイし、改定の予告を片づける。
 - CDC Skills（Desktop版）は Claude Desktop のチャット用の単体商品で、プラグイン形式で配布する（通常のスキルは .md のみ登録可能で、リファレンスファイルを含められないため）。**単体販売のみ**で、Claude版・Figma版・Bundle・Muse版には含まれない。既存スキル所有者への2,200円割引を日本語版のみで検討中（未確定。LPには未記載）。海外版は Gumroad（`kmrvid-cdcskills`）、USD価格は $59（2026-11-18 確定）。
 - トップページ（`/`）は各商品への入口。「環境にあわせて選ぶ」（5商品）・「各スキルについて」・「講師紹介」・「更新履歴（最新5件）」を持つ。All-in-One Bundle の紹介ページは `/bundle`（旧トップの内容）。Header / Footer は全ページ共通メニュー（スキルについて・講師紹介・更新履歴＋5商品へのリンク）で、`variant` は購入ボタンと現在ページの強調だけを切り替える。商品固有のページ内リンクはフッターに置く。
 - `/skills` は Bundle 収録の全スキルを、パッケージ別（Claude Code版 → Figma Design Agent版）・カテゴリ別に一覧表示するスキル紹介ページ。各スキルの説明・依存スキル（必須 / オプション / いずれか）を併記し、末尾に「Claude版とFigma版の対応表」を置く。
 - `/changelog` は更新履歴（簡易版）。直近（`RECENT_FROM` 以降）を開いて表示し、それ以前は折りたたむ。パッケージ別の絞り込みつき。詳細は各パッケージ同梱のREADMEが持つ。
 - 価格・動画本数・総再生時間は `src/data/products.ts` に集約（動画本数・時間は2026年9月20日時点の集計）。スキル数は `src/data/skills.ts` から自動集計する。
 - スキルの日英説明・依存関係は `src/data/skills.ts`、Claude版とFigma版の対応は `src/data/counterparts.ts`、更新履歴は `src/data/changelog.ts` が持つ。スキル数をコピーして書かない（BRIEF.md・DESIGN.md の数字は手書きなので、スキルを増減したら更新する）。
-- Bundle は Claude版とFigma版を通常価格で個別に購入するより5,400円お得（19,800円＋15,400円−29,800円）。
+- Bundle は Claude版とFigma版を通常価格で個別に購入するより5,400円お得（19,800円＋15,400円−29,800円）。2026年11月28日 0:00 JSTの改定後は9,900円お得（25,300円＋19,800円−35,200円）。LPは `BundleSaving` コンポーネントで自動切替する。
 
 インターネット黎明期から活動し、数多くのWeb制作関連の記事・書籍の執筆/監修を手がけ、今なお現役で実務の現場に立つ著者（こもりまさあき）が、最新の技術スタックを駆使して制作時間の短縮・自身の時間単価の最大化のために生み出したオリジナルスキル群を一挙公開する講座。
 

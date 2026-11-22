@@ -5,9 +5,9 @@ Claude Code / Figma向けオリジナルスキル講座の販促用LP群（日�
 
 | 商品 | LP | 商品ページ | 定価（税込） | スキル数 | 動画 | 総時間 |
 |---|---|---|---|---|---|---|
-| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円（2026年11月28日 0:00 JSTから35,200円に改定） | 87個（Claude版53＋Figma版34） | 60本 | 約6時間5分 |
+| KMRVID Skills - All-in-One Bundle | `/bundle` | https://kmrvid.com/products/kmrvid-skills-bundle | 29,800円（2026年11月28日 0:00 JSTから35,200円に改定） | 88個（Claude版53＋Figma版35） | 60本 | 約6時間5分 |
 | KMRVID Claude Skills | `/claude` | https://kmrvid.com/products/kmrvid-claude-skills | 19,800円（2026年11月28日 0:00 JSTから25,300円に改定） | 53個 | 40本 | 約4時間10分 |
-| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円（2026年11月28日 0:00 JSTから19,800円に改定） | 34個 | 20本 | 約1時間55分 |
+| KMRVID Figma Skills | `/figma` | https://kmrvid.com/products/kmrvid-figma-skills | 15,400円（2026年11月28日 0:00 JSTから19,800円に改定） | 35個 | 20本 | 約1時間55分 |
 | KMRVID Muse Skills | `/muse` | https://kmrvid.com/products/kmrvid-muse-skills | 9,900円（2026年11月28日 0:00 JSTから15,400円に改定） | 33個（`src/data/muse.ts`。Bundle等の総数には含めない） | 解説動画3本（講座内＋YouTube公開。`MUSE_VIDEOS`） | — |
 | KMRVID CDC Skills（Desktop版） | `/desktop` | https://kmrvid.com/products/kmrvid-cdc-skills | 発売記念 7,700円（2026年11月27日（金）23:59まで）。11月28日 0:00 JSTから通常価格15,400円 | 32個（`src/data/desktop.ts`。Muse版から space-guideline を除いて派生。総数には含めない。マスターは `kmrvid-cdc-skills-en`） | なし（導入動画2〜3本を追加予定。使い方はFigma版のYouTubeプレイリストへ誘導） | — |
 
@@ -85,7 +85,7 @@ Web制作者・フリーランスを主体としつつ、企業（AI導入を検
 - 実務即活用可能さで差別化（プロンプト中心ではなく、エージェントが理解できるスキル形式での提供）
 
 ## 規模感
-Bundleに含まれる87スキル・60本の動画のうち、Bundleページ（`/bundle`）では代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
+Bundleに含まれる88スキル・60本の動画のうち、Bundleページ（`/bundle`）では代表的な数枚のみをハイライト表示し、全体の詳細は別途用意するスキル紹介ページ（`/skills`）へ誘導する。Claude版・Figma版はそれぞれ専用ページで収録内容を紹介する。
 
 ## デバイス優先度
 PC・スマートフォンともにほぼ半々を想定し、しっかり対応する。

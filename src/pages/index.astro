@@ -12,6 +12,7 @@ import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { changelogSorted } from "@/data/changelog";
 import { FIGMA_HANDSON } from "@/data/handson";
+import { tryout } from "@/data/tryout";
 import { desktopSkillsCount } from "@/data/desktop";
 import { MUSE_HANDSON, museSkillsCount } from "@/data/muse";
 import {
@@ -216,6 +217,28 @@ const recent = changelogSorted
           })
         }
       </ul>
+
+      <div
+        id="tryout"
+        class="flex sm:flex-row flex-col sm:items-center gap-3 sm:gap-6 bg-accent-soft mt-8 p-5 sm:px-6 rounded-2xl"
+      >
+        <span class="flex-none font-medium text-accent-dark text-sm uppercase tracking-widest">
+          Tryout
+        </span>
+        <p class="flex-1 text-ink text-base leading-snug">
+          まずは試したい方へ：お試し版（KMRVID Tryout Skills）
+          <span class="block mt-1 text-ink-soft text-sm">
+            「読む・作る・磨く」の{tryout.skills}スキルを{tryout.editions}エディション分収録して、{formatYen(tryout.price)}円（税込）。フル版へのアップグレード時は同額が割引されます。
+          </span>
+        </p>
+        <a
+          href={tryout.href}
+          class="inline-flex flex-none items-center gap-1.5 min-h-11 font-medium text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          お試し版を見る
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
 
       <div
         id="team-license"

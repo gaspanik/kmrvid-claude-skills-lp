@@ -9,6 +9,7 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
+import { tryout } from "@/data/tryout";
 import { changelogSorted } from "@/data/changelog";
 import { desktopSkillsCount } from "@/data/desktop";
 import { museSkillsCount } from "@/data/muse";
@@ -17,7 +18,7 @@ import {
   figmaSkillsCount,
   totalSkills,
 } from "@/data/skills";
-import { type ProductKey, products } from "@/data/products";
+import { formatUsd, type ProductKey, products } from "@/data/products";
 
 const productCards: { key: ProductKey; title: string; desc: string }[] = [
   {
@@ -165,6 +166,27 @@ const recent = changelogSorted.slice(0, 5);
           })
         }
       </ul>
+      <div
+        id="tryout"
+        class="flex sm:flex-row flex-col sm:items-center gap-3 sm:gap-6 bg-accent-soft mt-8 p-5 sm:px-6 rounded-2xl"
+      >
+        <span class="flex-none font-medium text-accent-dark text-sm uppercase tracking-widest">
+          Tryout
+        </span>
+        <p class="flex-1 text-ink text-base leading-snug">
+          Try before you buy: KMRVID Tryout Skills
+          <span class="block mt-1 text-ink-soft text-sm">
+            {tryout.skills} skills in all {tryout.editions} editions for {formatUsd(tryout.priceUsd)}. The price is credited when you upgrade to a full edition.
+          </span>
+        </p>
+        <a
+          href={tryout.hrefEn}
+          class="inline-flex flex-none items-center gap-1.5 min-h-11 font-medium text-ink hover:text-accent text-sm underline underline-offset-4 transition"
+        >
+          See the Tryout pack
+          <ArrowRight size={14} stroke-width={2} />
+        </a>
+      </div>
     </section>
 
     <section aria-label="Concept" class="relative py-20 md:py-28 overflow-hidden text-canvas">

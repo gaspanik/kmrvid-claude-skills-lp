@@ -1,0 +1,249 @@
+---
+import { ArrowRight, CircleCheck, ExternalLink, Info } from "@lucide/astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { formatYen, NEW_PRICE_FROM, products } from "@/data/products";
+import { tryout, tryoutFiles } from "@/data/tryout";
+
+const PRICE = formatYen(tryout.price);
+const campaign = products.bundle.campaign;
+
+const steps = [
+  {
+    step: "読む",
+    name: "doc-brief-me",
+    desc: "指示書・Excel・手書きラフなど、手元の資料から制作ブリーフ（BRIEF.md）を作ります。",
+    note: "全エディション共通の名前です。",
+  },
+  {
+    step: "作る",
+    name: "create-figma-page",
+    desc: "ブリーフをもとに、Figmaのページを新規生成します。",
+    note: "Figma版の名称は create-single-page です。",
+  },
+  {
+    step: "磨く",
+    name: "hey-polish-me",
+    desc: "生成したデザインへの改善提案で、仕上がりを磨き上げます。",
+    note: "Claude Code版の名称は figma-polish-me です。",
+  },
+];
+
+const editions = [
+  { name: "Claude Skills版", env: "Claude Code" },
+  { name: "Figma Skills版", env: "Figmaエージェント" },
+  { name: "Muse Skills版", env: "Muse" },
+  { name: "CDC Skills版", env: "Claude Desktop（Claudeアプリ含む）" },
+];
+
+const upgrades = [
+  {
+    use: "Figmaエージェントだけで使う",
+    label: "Figma版（Muse版は特典で付属）",
+    href: products.figma.href,
+  },
+  {
+    use: "Claude Codeだけで使う",
+    label: "Claude版（コード編集＋Figma編集。Muse版は特典で付属）",
+    href: products.claude.href,
+  },
+  {
+    use: "どちらもフルに使う",
+    label: "All-in-One Bundle（Figma版＋Claude版＋Muse版）",
+    href: products.bundle.href,
+  },
+  { use: "Museだけで完結する", label: "Muse版", href: products.muse.href },
+  {
+    use: "Claude Desktopのチャットだけで使う",
+    label: "CDC版",
+    href: products.desktop.href,
+  },
+];
+
+const notes = [
+  "お試し版には、機能追加や不具合修正などのアップデートはありません。ご購入時点のバージョンをそのままお使いいただきます。",
+  "実行時の描画の不具合を防ぐ known-pitfalls.md は抜粋版で、フル版とは異なります。",
+  "デザインガイドラインのスキル（cognitive-ui-design／japanese-web-guideline）は、フル版のみの収録です。",
+  "フル版をすでにお持ちの方は、収録スキルが重複します。ログイン後、マイコース内をご確認ください。",
+  "各環境のアカウントが必要です。Figma連携には、Figmaコネクタ（Figma MCPサーバ）の接続と、対象ファイルの編集権限が必要です。ClaudeとFigmaの利用料金は含まれません。",
+  "書き込み系のスキルは、対象のFigmaファイルを変更します。実行前に複製するか、バージョン履歴で戻せる状態にしてください。",
+  "動作を保証するものではなく、個別のスキル修正・動作サポートは行っていません。本商品内だけで配布しているスキルの無断転載・販売は禁止です（同梱のLICENSEをご確認ください）。",
+];
+---
+
+<Layout
+  title="KMRVID Tryout Skills（お試し版）— 3スキルを4つの環境で試す"
+  description={`KMRVIDのスキルを「読む・作る・磨く」の${tryout.skills}スキルで試せるお試し版。Claude Code・Figma・Muse・Claude Desktopの${tryout.editions}エディションを収録して、${PRICE}円（税込）。フル版へのアップグレード時は同額が差し引かれます。`}
+  translated
+>
+  <Header tryout />
+
+  <main id="top">
+    <section
+      aria-labelledby="hero-heading"
+      class="mx-auto px-6 pt-14 md:pt-20 pb-16 max-w-5xl"
+    >
+      <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+        Tryout Skills（お試し版）
+      </p>
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-balance text-left">
+        まずは{tryout.skills}つのスキルで、<br />
+        <span class="text-accent">いつもの環境</span>で試す
+      </h1>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        Figmaの編集操作に特化した「読む・作る・磨く」の{tryout.skills}スキルを、Claude Code・Figmaエージェント・Muse・Claude Desktopの{tryout.editions}エディション分すべて収録しました。指示書からのブリーフ作成、画面の生成、デザインの改善提案まで、実務でも使えるセットです。
+      </p>
+      <p class="flex items-baseline gap-2 mt-8 text-ink">
+        <span class="font-heading text-5xl">{PRICE}</span>
+        <span class="text-lg">円</span>
+        <span class="text-ink-soft text-sm">税込・買い切り</span>
+      </p>
+      <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-6">
+        <a
+          href={tryout.url}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+        >
+          {PRICE}円で試す
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href={tryout.videoUrl}
+          class="inline-flex items-center gap-2 hover:bg-surface-alt px-6 py-3.5 border border-ink/15 rounded-full font-medium text-ink transition"
+        >
+          使い方の動画を見る
+          <ExternalLink size={16} stroke-width={2} />
+        </a>
+      </div>
+      <p class="mt-4 text-ink-soft text-sm">
+        フル版へアップグレードするときは、{PRICE}円分が自動で割引されます。
+      </p>
+    </section>
+
+    <section aria-labelledby="skills-heading" class="bg-surface-alt py-16 md:py-20">
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="text-ink text-left">
+          読む → 作る → 磨く
+        </h2>
+        <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          {
+            steps.map((item) => (
+              <li class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+                <p class="font-medium text-accent-dark text-sm">{item.step}</p>
+                <h3 class="mt-1 font-mono text-lg text-left break-all">
+                  {item.name}
+                </h3>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {item.desc}
+                </p>
+                <p class="mt-4 text-ink-soft text-sm">{item.note}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="editions-heading" class="mx-auto px-6 py-16 md:py-20 max-w-5xl">
+      <h2 id="editions-heading" class="text-ink text-left">
+        {tryout.editions}エディション、<br class="sm:hidden" />全{tryoutFiles}ファイル
+      </h2>
+      <p class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        ある環境でトークンやプランの上限が厳しくなったら、別の環境に移って続きを試せます。Figma
+        MCP経由で他のエージェントから実行すれば、FigmaのAIクレジットは消費しません。
+      </p>
+      <ul class="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-10">
+        {
+          editions.map((edition) => (
+            <li class="p-5 border border-border rounded-2xl">
+              <h3 class="text-lg text-left leading-snug">{edition.name}</h3>
+              <p class="mt-1 text-ink-soft text-sm">{edition.env}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+        スキル本体はすべて英語です（トークン消費を抑えるため）。日本語化を含め、ご自身で自由に改変できます。各環境へのインストール方法は、付属の
+        README.md に記載しています。
+      </p>
+    </section>
+
+    <section aria-labelledby="upgrade-heading" class="bg-surface-alt py-16 md:py-20">
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="upgrade-heading" class="text-ink text-left">
+          フル版への<br class="sm:hidden" />アップグレード
+        </h2>
+        <p class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+          後からフル版を購入すると、チェックアウト時にお試し版の価格（{PRICE}円）が自動で差し引かれます。チームライセンス版の各パッケージも対象です。購入後は、お試し版のスキルをフル版のスキルに入れ替えてご利用ください。
+        </p>
+        {
+          campaign && (
+            <p class="campaign-ended:hidden bg-accent-soft mt-6 p-4 rounded-2xl max-w-2xl text-accent-dark text-base leading-snug">
+              {NEW_PRICE_FROM}にフル版の価格を改定します。改定前（{campaign.endsAtLabel}まで）にアップグレードすると、改定前の価格から{PRICE}円引きで購入できます。
+            </p>
+          )
+        }
+        <ul class="bg-canvas mt-8 border border-border rounded-2xl *:border-border *:not-first:border-t">
+          {
+            upgrades.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="group flex sm:flex-row flex-col sm:items-center gap-1 sm:gap-6 px-6 py-4"
+                >
+                  <span class="sm:w-72 text-ink-soft text-sm">{item.use}</span>
+                  <span class="flex flex-1 justify-between items-center gap-4 font-medium text-ink group-hover:text-accent text-base transition-colors">
+                    {item.label}
+                    <ArrowRight size={16} stroke-width={2} class="flex-none" />
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="notes-heading" class="mx-auto px-6 py-16 md:py-20 max-w-5xl">
+      <h2 id="notes-heading" class="text-ink text-left">ご購入前の確認事項</h2>
+      <ul class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 mt-8 max-w-3xl *:[&_svg]:text-accent text-ink-soft text-base text-justify">
+        {
+          notes.map((note) => (
+            <li>
+              <Info size={18} stroke-width={2} />
+              <span>{note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="final-cta-heading" class="bg-ink py-20 text-canvas">
+      <div class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">
+        <CircleCheck size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          試してから、決める
+        </h2>
+        <p class="max-w-md text-white/70 text-base leading-relaxed">
+          {tryout.skills}スキル × {tryout.editions}エディションを{PRICE}円（税込）で。
+        </p>
+        <a
+          href={tryout.url}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          {PRICE}円で試す
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+        <a
+          href={tryout.noticeUrl}
+          class="inline-flex items-center gap-1.5 min-h-11 text-white/70 hover:text-white text-sm underline underline-offset-4"
+        >
+          リリースのお知らせ
+          <ExternalLink size={14} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

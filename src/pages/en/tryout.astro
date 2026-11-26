@@ -1,0 +1,232 @@
+---
+import { ArrowRight, CircleCheck, Info } from "@lucide/astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { formatUsd, NEW_PRICE_FROM_EN, products } from "@/data/products";
+import { tryout, tryoutFiles } from "@/data/tryout";
+
+const PRICE = formatUsd(tryout.priceUsd);
+const campaign = products.bundle.campaign;
+
+const steps = [
+  {
+    step: "Read",
+    name: "doc-brief-me",
+    desc: "Builds a production brief (BRIEF.md) from your source materials: instruction sheets, Excel files, hand-drawn roughs and more.",
+    note: "Same name in every edition.",
+  },
+  {
+    step: "Create",
+    name: "create-figma-page",
+    desc: "Generates a new Figma page from the brief.",
+    note: "Named create-single-page in the Figma edition.",
+  },
+  {
+    step: "Polish",
+    name: "hey-polish-me",
+    desc: "Proposes improvements that refine the generated design.",
+    note: "Named figma-polish-me in the Claude Code edition.",
+  },
+];
+
+const editions = [
+  { name: "Claude Skills", env: "Claude Code" },
+  { name: "Figma Skills", env: "Figma Design Agent" },
+  { name: "Muse Skills", env: "Muse" },
+  { name: "CDC Skills", env: "Claude Desktop" },
+];
+
+const upgrades = [
+  {
+    use: "Figma Design Agent only",
+    label: "KMRVID Figma Skills (Muse edition included as a bonus)",
+    href: products.figma.en.href,
+  },
+  {
+    use: "Claude Code only",
+    label: "KMRVID Claude Skills (code and Figma editing; Muse edition included)",
+    href: products.claude.en.href,
+  },
+  {
+    use: "Both, in full",
+    label: "KMRVID Skills Bundle (Figma + Claude + Muse editions)",
+    href: products.bundle.en.href,
+  },
+  { use: "Muse only", label: "KMRVID Muse Skills", href: products.muse.en.href },
+  {
+    use: "Claude Desktop chat only",
+    label: "KMRVID CDC Skills",
+    href: products.desktop.en.href,
+  },
+];
+
+const notes = [
+  "The Tryout pack gets no future updates (feature additions or bug fixes). It is a fixed snapshot of the version at the time of purchase.",
+  "The included known-pitfalls.md, which guards against runtime drawing bugs, is an excerpt and differs from the full version.",
+  "The design guideline skills (cognitive-ui-design / japanese-web-guideline) are in the full editions only.",
+  "If you already own a full edition, the skills in this pack overlap with it.",
+  "You need an account for each environment. The Figma skills need a connected Figma connector (Figma MCP server) and edit access to the target file. Claude and Figma usage fees are not included.",
+  "Skills that write to Figma modify the target file. Duplicate it first, or make sure you can restore it from version history.",
+  "Operation is not guaranteed, and individual fixes or one-to-one support are not offered. Redistribution or resale of the skills distributed only in this pack is prohibited (see the included LICENSE).",
+];
+---
+
+<Layout
+  title="KMRVID Tryout Skills — Try 3 skills in 4 environments"
+  description={`Try KMRVID Skills with ${tryout.skills} skills (Read, Create, Polish) in ${tryout.editions} editions for Claude Code, Figma, Muse and Claude Desktop, for ${PRICE}. The price is credited when you upgrade.`}
+  translated
+>
+  <Header tryout />
+
+  <main id="top">
+    <section
+      aria-labelledby="hero-heading"
+      class="mx-auto px-6 pt-14 md:pt-20 pb-16 max-w-5xl"
+    >
+      <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
+        Tryout Skills
+      </p>
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-balance text-left">
+        Try {tryout.skills} skills first,<br />
+        <span class="text-accent">where you already work</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        {tryout.skills} Figma-focused skills (Read, Create, Polish) in all {tryout.editions} editions: Claude Code, Figma Design Agent, Muse and Claude Desktop. Turn source documents into a brief, generate the screen and get improvement proposals.
+      </p>
+      <p class="flex items-baseline gap-2 mt-8 text-ink">
+        <span class="font-heading text-5xl">{PRICE}</span>
+        <span class="text-ink-soft text-sm">one-time purchase on Gumroad</span>
+      </p>
+      <div class="flex sm:flex-row flex-col items-start sm:items-center gap-4 mt-6">
+        <a
+          href={tryout.urlEn}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-6 py-3.5 rounded-full font-medium text-white transition"
+        >
+          Try it for {PRICE}
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+      </div>
+      <p class="mt-4 text-ink-soft text-sm">
+        The {PRICE} is credited when you upgrade to a full edition.
+      </p>
+    </section>
+
+    <section aria-labelledby="skills-heading" class="bg-surface-alt py-16 md:py-20">
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="skills-heading" class="text-ink text-left">
+          Read → Create → Polish
+        </h2>
+        <ol class="gap-6 grid grid-cols-1 md:grid-cols-3 mt-10">
+          {
+            steps.map((item) => (
+              <li class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
+                <p class="font-medium text-accent-dark text-sm">{item.step}</p>
+                <h3 class="mt-1 font-mono text-lg text-left break-all">
+                  {item.name}
+                </h3>
+                <p class="flex-1 mt-3 text-ink-soft text-base text-justify leading-snug">
+                  {item.desc}
+                </p>
+                <p class="mt-4 text-ink-soft text-sm">{item.note}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="editions-heading" class="mx-auto px-6 py-16 md:py-20 max-w-5xl">
+      <h2 id="editions-heading" class="text-ink text-left">
+        {tryout.editions} editions, {tryoutFiles} files
+      </h2>
+      <p class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+        If tokens or plan limits get tight in one environment, pick up where you left off in another. Running the skills from another agent through the Figma MCP uses no Figma AI credits.
+      </p>
+      <ul class="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-10">
+        {
+          editions.map((edition) => (
+            <li class="p-5 border border-border rounded-2xl">
+              <h3 class="text-lg text-left leading-snug">{edition.name}</h3>
+              <p class="mt-1 text-ink-soft text-sm">{edition.env}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-snug">
+        All skills are written in English to keep token use down, and you are free to modify them, including translating them. The included README.md explains installation for each environment.
+      </p>
+    </section>
+
+    <section aria-labelledby="upgrade-heading" class="bg-surface-alt py-16 md:py-20">
+      <div class="mx-auto px-6 max-w-5xl">
+        <h2 id="upgrade-heading" class="text-ink text-left">
+          Upgrading to a full edition
+        </h2>
+        <p class="mt-4 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
+          The {PRICE} you pay for this pack is credited toward any full edition: a discount code is on your download page after purchase. After upgrading, replace the Tryout skills with the full ones.
+        </p>
+        {
+          campaign && (
+            <p class="campaign-ended:hidden bg-accent-soft mt-6 p-4 rounded-2xl max-w-2xl text-accent-dark text-base leading-snug">
+              Full-edition prices change on {NEW_PRICE_FROM_EN}. Upgrade before then and you pay the current price minus {PRICE}.
+            </p>
+          )
+        }
+        <ul class="bg-canvas mt-8 border border-border rounded-2xl *:border-border *:not-first:border-t">
+          {
+            upgrades.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="group flex sm:flex-row flex-col sm:items-center gap-1 sm:gap-6 px-6 py-4"
+                >
+                  <span class="sm:w-72 text-ink-soft text-sm">{item.use}</span>
+                  <span class="flex flex-1 justify-between items-center gap-4 font-medium text-ink group-hover:text-accent text-base transition-colors">
+                    {item.label}
+                    <ArrowRight size={16} stroke-width={2} class="flex-none" />
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="notes-heading" class="mx-auto px-6 py-16 md:py-20 max-w-5xl">
+      <h2 id="notes-heading" class="text-ink text-left">Before you buy</h2>
+      <ul class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 mt-8 max-w-3xl *:[&_svg]:text-accent text-ink-soft text-base text-justify">
+        {
+          notes.map((note) => (
+            <li>
+              <Info size={18} stroke-width={2} />
+              <span>{note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="final-cta-heading" class="bg-ink py-20 text-canvas">
+      <div class="flex flex-col items-center gap-6 mx-auto px-6 max-w-2xl text-center">
+        <CircleCheck size={28} stroke-width={1.75} class="text-accent" />
+        <h2 id="final-cta-heading" class="text-canvas">
+          Try first, then decide
+        </h2>
+        <p class="max-w-md text-white/70 text-base leading-relaxed">
+          {tryout.skills} skills × {tryout.editions} editions for {PRICE}.
+        </p>
+        <a
+          href={tryout.urlEn}
+          class="inline-flex items-center gap-2 bg-accent shadow-xs hover:brightness-110 px-8 py-4 rounded-full font-medium text-white transition"
+        >
+          Try it for {PRICE}
+          <ArrowRight size={18} stroke-width={2} />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

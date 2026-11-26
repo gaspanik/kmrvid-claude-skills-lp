@@ -1,14 +1,17 @@
 ---
 import { Languages, Menu, X } from '@lucide/astro';
 import { type ProductKey, products } from '@/data/products';
+import { tryout as tryoutProduct } from '@/data/tryout';
 import { altPath, type Lang, langOf } from '@/i18n/ui';
 
 interface Props {
   /** 商品ページのとき、その商品を強調し購入ボタンを出す。ホーム・更新履歴などは省略 */
   variant?: ProductKey;
+  /** お試し版のページ。メニューを強調し、お試し版の購入ボタンを出す */
+  tryout?: boolean;
 }
 
-const { variant } = Astro.props;
+const { variant, tryout = false } = Astro.props;
 
 const lang: Lang = langOf(Astro.url.pathname);
 const en = lang === 'en';
@@ -67,16 +70,26 @@ const t = en
     };
 
 const home = root;
-const brand = variant
+const brand = tryout
+  ? 'Tryout Skills'
+  : variant
   ? en
     ? products[variant].en.name.replace('KMRVID ', '')
     : products[variant].name.replace('KMRVID ', '')
   : 'Skills';
-const PURCHASE_URL = variant
+const PURCHASE_URL = tryout
   ? en
-    ? products[variant].en.url
-    : products[variant].url
-  : undefined;
+    ? tryoutProduct.urlEn
+    : tryoutProduct.url
+  : variant
+    ? en
+      ? products[variant].en.url
+      : products[variant].url
+    : undefined;
+const tryoutLink = {
+  href: en ? tryoutProduct.hrefEn : tryoutProduct.href,
+  label: en ? 'Tryout' : 'お試し版',
+};
 const productHref = (key: ProductKey) =>
   en ? products[key].en.href : products[key].href;
 const productName = (key: ProductKey) =>
@@ -128,6 +141,15 @@ const productName = (key: ProductKey) =>
             </li>
           ))
         }
+        <li>
+          <a
+            href={tryoutLink.href}
+            aria-current={tryout ? 'page' : undefined}
+            class:list={[tryout && 'font-medium text-accent']}
+          >
+            {tryoutLink.label}
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -216,6 +238,15 @@ const productName = (key: ProductKey) =>
           </li>
         ))
       }
+      <li>
+        <a
+          href={tryoutLink.href}
+          aria-current={tryout ? 'page' : undefined}
+          class:list={[tryout && 'font-medium text-accent!']}
+        >
+          {en ? tryoutProduct.name : `${tryoutProduct.name}（お試し版）`}
+        </a>
+      </li>
     </ul>
     <ul
       class="flex flex-col mt-6 px-6 *:border-white/10 *:border-y **:flex **:items-center **:min-h-14 **:text-base **:text-canvas"

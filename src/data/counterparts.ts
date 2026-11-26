@@ -19,7 +19,13 @@ export const counterparts: Counterpart[] = [
     ja: 'Claude版は BRIEF.md をファイルとして保存し、Figma版はネイティブのFigma Specとして作成します（希望すればチャットにもMarkdownを出力）。',
     en: 'The Claude edition saves BRIEF.md as a file; the Figma edition creates a native Figma Spec (and can also print Markdown in the chat).',
   },
-  { claude: 'rewrite-me', figma: 'rewrite-me' },
+  { claude: 'code-rewrite-me', figma: 'rewrite-me' },
+  {
+    claude: 'figma-rewrite-me',
+    figma: 'rewrite-me',
+    ja: 'どちらもFigmaのテキストを書き直します。Claude版はフレームのURLを渡してFigma MCP経由で実行します。',
+    en: 'Both rewrite copy in Figma. The Claude Code edition takes a frame URL and runs through the Figma MCP.',
+  },
   {
     claude: 'create-jp-lp',
     figma: 'create-jp-lp',
@@ -40,10 +46,16 @@ export const counterparts: Counterpart[] = [
     en: 'The Claude edition adds mobile support to implemented code; the Figma edition generates a 390px mobile frame from a desktop frame.',
   },
   {
-    claude: 'polish-me',
+    claude: 'code-polish-me',
     figma: 'hey-polish-me',
     ja: 'どちらも原本を編集せずに改善案を出します。Claude版は稼働中のページを測定、Figma版はフレームを分析します。',
     en: 'Both propose improvements without editing the original. The Claude edition measures the running page; the Figma edition analyzes the frame.',
+  },
+  {
+    claude: 'figma-polish-me',
+    figma: 'hey-polish-me',
+    ja: 'どちらも原本を残してFigma上に改善案を作ります。Claude版はフレームのURLを渡してFigma MCP経由で実行します。',
+    en: 'Both build proposals in Figma while keeping the original. The Claude Code edition takes a frame URL and runs through the Figma MCP.',
   },
   { claude: 'create-multi-mockup', figma: 'create-multi-pattern' },
   {

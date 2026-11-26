@@ -493,7 +493,7 @@ export const categories: Category[] = [
         en: 'Turns DESIGN.md into a visual HTML or Astro page.',
       },
       {
-        name: 'rewrite-me',
+        name: 'code-rewrite-me',
         desc: '実装済みページの目に見える文言をビジネス要件 BRIEF.md に合わせて書き直す',
         en: 'Rewrites page copy to match BRIEF.md.',
         deps: [req('brief-me'), opt('japanese-web-guideline')],
@@ -656,6 +656,32 @@ export const categories: Category[] = [
         depsNoteEn: 'Requires a connection to the Figma MCP server.',
       },
       {
+        name: 'figma-polish-me',
+        desc: '完成済みの Figma フレーム/セクションを URL で渡すと、元には触れず、隣に複製として根拠のある改善案を作る。BRIEF に沿ったコピー書き換え、変更レポート／Content注釈にも対応。code-polish-me の Figma 版',
+        en: 'Builds an evidence-based improvement proposal as a duplicate next to a finished Figma frame or section (by URL), leaving the original untouched, with an optional BRIEF-based copy rewrite and a change report or Content annotations. The Figma counterpart of code-polish-me.',
+        deps: [
+          opt(
+            'cognitive-ui-design',
+            'create-figma-page',
+            'figma-rewrite-me',
+            'create-jp-lp',
+            'brief-me',
+          ),
+        ],
+        depsNote: 'Figma MCPサーバーとの接続が必要です。',
+        depsNoteEn: 'Requires a connection to the Figma MCP server.',
+      },
+      {
+        name: 'figma-rewrite-me',
+        desc: 'Figma フレーム/セクション内のテキストを BRIEF.md の要件に合わせて書き直す。変更するのは文言だけで、レイアウト・色・構造には触れない。code-rewrite-me の Figma 版',
+        en: 'Rewrites the copy in a Figma frame or section to match BRIEF.md, changing text only, never layout, color or structure. The Figma counterpart of code-rewrite-me.',
+        deps: [req('brief-me'), opt('figma-layer-rename')],
+        depsNote:
+          'Figma MCPサーバーとの接続が必要です。プロジェクトに BRIEF.md があれば、brief-me は未インストールでも動作します',
+        depsNoteEn:
+          'Requires a connection to the Figma MCP server. If BRIEF.md already exists in the project, brief-me does not need to be installed.',
+      },
+      {
         name: 'code-to-figma',
         desc: '実装済みコードをFigmaに書き出し（キャプチャ〜コンポーネント生成まで4段階）。自動でエクスポート設定も',
         en: 'Sends implemented code back to Figma, from a quick capture to full components.',
@@ -749,11 +775,16 @@ export const categories: Category[] = [
         deps: [opt('japanese-web-guideline')],
       },
       {
-        name: 'polish-me',
+        name: 'code-polish-me',
         desc: '実装済みのページやセクションをレビューし、根拠のある改善提案をレポートするスキル。Figma版 hey-polish-me の姉妹スキル',
         en: 'Report-only design review: measures the running page (desktop + mobile) and pins numbered, evidence-based findings onto it. Edits no source files.',
         deps: [
-          opt('cognitive-ui-design', 'rewrite-me', 'create-jp-lp', 'brief-me'),
+          opt(
+            'cognitive-ui-design',
+            'code-rewrite-me',
+            'create-jp-lp',
+            'brief-me',
+          ),
         ],
       },
       {
@@ -761,11 +792,16 @@ export const categories: Category[] = [
         desc: '既存モックアップに対して、最適化処理を対話形式で順番に実行する仕上げパイプライン',
         en: 'A step-by-step finishing pass over an existing mockup.',
         deps: [
-          req('rewrite-me', 'mobile-polish', 'click-to-fix', 'tailwind-review'),
+          req(
+            'code-rewrite-me',
+            'mobile-polish',
+            'click-to-fix',
+            'tailwind-review',
+          ),
           opt('astro-doctor'),
         ],
-        depsNote: 'rewrite-me の依存スキルもあわせて必要です',
-        depsNoteEn: 'Also needs everything rewrite-me depends on.',
+        depsNote: 'code-rewrite-me の依存スキルもあわせて必要です',
+        depsNoteEn: 'Also needs everything code-rewrite-me depends on.',
       },
       {
         name: 'a11y-review',

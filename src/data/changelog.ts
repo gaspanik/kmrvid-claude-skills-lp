@@ -21,6 +21,45 @@ export const RECENT_FROM = '2026-09-01'
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2026-11-25',
+    product: 'claude',
+    kind: 'new',
+    skills: ['figma-polish-me', 'figma-rewrite-me'],
+    ja: 'Figma MCP でフレーム/セクションのURLを対象に動く figma-polish-me（元を残して複製に改善案を作る）と figma-rewrite-me（テキストだけを BRIEF に合わせて書き直す）を追加（Claude版は55スキルに）。',
+    en: 'Added figma-polish-me (builds an improvement proposal on a duplicate, keeping the original) and figma-rewrite-me (rewrites only the text to match the BRIEF), which work on a frame or section URL through the Figma MCP (the Claude edition is now 55 skills).',
+  },
+  {
+    date: '2026-11-25',
+    product: 'claude',
+    kind: 'update',
+    skills: [
+      'code-polish-me',
+      'code-rewrite-me',
+      'finish-me',
+      'pipeline-thinking',
+      'html-to-astro',
+      'astro-i18n',
+    ],
+    ja: 'Figma版と区別するため、polish-me を code-polish-me、rewrite-me を code-rewrite-me に改名。参照している finish-me・pipeline-thinking・html-to-astro・astro-i18n も更新。',
+    en: 'Renamed polish-me to code-polish-me and rewrite-me to code-rewrite-me to set them apart from the Figma editions, and updated finish-me, pipeline-thinking, html-to-astro and astro-i18n, which refer to them.',
+  },
+  {
+    date: '2026-11-25',
+    product: 'desktop',
+    kind: 'update',
+    skills: ['hey-polish-me', 'rewrite-me'],
+    ja: '実機での通し実行で分かった注意点を追記（textWrapStyle が効かない場合の対処、インスタンス内のサイズ・フォントサイズ変更の落とし穴、ブリーフとの食い違いの報告など）。hey-polish-me には複数案を並べて作るときの注意点も追加。',
+    en: 'Added lessons from a real run (what to do when textWrapStyle has no effect, pitfalls when resizing or changing font size inside instances, reporting conflicts with the BRIEF), plus notes for building several proposals side by side in hey-polish-me.',
+  },
+  {
+    date: '2026-11-25',
+    product: 'desktop',
+    kind: 'fix',
+    skills: ['hey-polish-me', 'rewrite-me', 'brief-me'],
+    ja: 'hey-polish-me の説明文（URL指定・日本語トリガー）と推奨値モードの既定を明記し、rewrite-me の移植前の記述を削除。連続実行時のバックアップ確認は1回に。brief-me に LICENSE を追加。',
+    en: 'Clarified the hey-polish-me description (URL target, Japanese triggers) and its recommended-values defaults, removed pre-port wording from rewrite-me, asked about backups only once when the two run together, and added the missing LICENSE to brief-me.',
+  },
+  {
     date: '2026-11-22',
     product: 'claude',
     kind: 'update',

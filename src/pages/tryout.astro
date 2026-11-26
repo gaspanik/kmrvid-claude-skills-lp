@@ -87,8 +87,8 @@ const notes = [
       <p class="mb-4 text-ink-soft text-sm uppercase tracking-widest">
         Tryout Skills（お試し版）
       </p>
-      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-balance text-left">
-        まずは{tryout.skills}つのスキルで、<br />
+      <h1 id="hero-heading" class="max-w-3xl text-ink max-sm:text-2xl text-left text-balance">
+        まずは{tryout.skills}つのスキルを、<br />
         <span class="text-accent">いつもの環境</span>で試す
       </h1>
       <p class="mt-6 max-w-2xl text-ink-soft text-base text-justify leading-relaxed">
@@ -129,7 +129,7 @@ const notes = [
           {
             steps.map((item) => (
               <li class="flex flex-col bg-canvas p-6 border border-border rounded-2xl">
-                <p class="font-medium text-accent-dark text-sm">{item.step}</p>
+                <p class="font-medium text-sm text-accent-dark">{item.step}</p>
                 <h3 class="mt-1 font-mono text-lg text-left break-all">
                   {item.name}
                 </h3>
@@ -178,12 +178,12 @@ const notes = [
         </p>
         {
           campaign && (
-            <p class="campaign-ended:hidden bg-accent-soft mt-6 p-4 rounded-2xl max-w-2xl text-accent-dark text-base leading-snug">
+            <p class="campaign-ended:hidden mt-6 p-4 rounded-2xl max-w-2xl text-base leading-snug bg-accent-soft text-accent-dark">
               {NEW_PRICE_FROM}にフル版の価格を改定します。改定前（{campaign.endsAtLabel}まで）にアップグレードすると、改定前の価格から{PRICE}円引きで購入できます。
             </p>
           )
         }
-        <ul class="bg-canvas mt-8 border border-border rounded-2xl *:border-border *:not-first:border-t">
+        <ul class="bg-canvas mt-8 border border-border *:border-border *:not-first:border-t rounded-2xl">
           {
             upgrades.map((item) => (
               <li>
@@ -206,7 +206,7 @@ const notes = [
 
     <section aria-labelledby="notes-heading" class="mx-auto px-6 py-16 md:py-20 max-w-5xl">
       <h2 id="notes-heading" class="text-ink text-left">ご購入前の確認事項</h2>
-      <ul class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 *:[&_svg]:mt-0.5 mt-8 max-w-3xl *:[&_svg]:text-accent text-ink-soft text-base text-justify">
+      <ul class="flex *:flex flex-col *:[&_svg]:flex-none *:items-start gap-3 *:gap-3 mt-8 *:[&_svg]:mt-0.5 max-w-3xl text-ink-soft *:[&_svg]:text-accent text-base text-justify">
         {
           notes.map((note) => (
             <li>

@@ -158,7 +158,11 @@ const productName = (key: ProductKey) =>
         href={altHref}
         hreflang={en ? 'ja' : 'en'}
         lang={en ? 'ja' : 'en'}
-        class="inline-flex items-center gap-1.5 px-2 min-h-11 text-ink-soft hover:text-accent text-sm transition-colors"
+        class:list={[
+          'inline-flex items-center gap-1.5 px-2 min-h-11 text-ink-soft hover:text-accent text-sm transition-colors',
+          // 購入ボタンがあるページの狭い画面では幅が足りないので、メニュー内の切替に任せる
+          PURCHASE_URL && 'max-sm:hidden',
+        ]}
       >
         <Languages size={16} stroke-width={1.75} />
         {t.switchLabel}

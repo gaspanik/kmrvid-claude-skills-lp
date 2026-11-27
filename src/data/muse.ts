@@ -301,12 +301,3 @@ export const MUSE_VIDEOS = [
     en: 'Running several skills in a row: generating 5 pages in parallel',
   },
 ]
-
-/** ハンズオンセッション（日本語・Zoom・定員10名）。`endsAt` を過ぎたらLPの告知帯を非表示にする */
-export const MUSE_HANDSON = {
-  url: 'https://kmrvid.com/blogs/news/muse-skill-handson-session-20261125',
-  dateLabel: '11月25日(水) 21:00〜23:00',
-  capacity: 10,
-  /** 終了時刻（JST） */
-  endsAt: '2026-11-25T23:00:00+09:00',
-}

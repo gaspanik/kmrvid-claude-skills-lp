@@ -27,8 +27,6 @@ import {
 } from "@/data/skills";
 import {
   AGENSI_URL,
-  formatUsd,
-  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -243,9 +241,6 @@ const flows = bundleFlows.map((flow) => ({
         <p class="mt-4 text-ink-soft text-base text-justify leading-relaxed">
           All {totalSkills} skills for <Price product="bundle" lang="en" />. Buying the
           two editions separately costs <BundleSaving lang="en" kind="total" />, so the bundle saves you <BundleSaving lang="en" />.
-        </p>
-        <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
-          The price goes up to {formatUsd(products.bundle.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
         </p>
       </div>
 

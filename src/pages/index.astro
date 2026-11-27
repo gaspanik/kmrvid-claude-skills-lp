@@ -6,15 +6,13 @@ import deskKeyboardDark from "@/assets/images/desk-keyboard-dark.jpg";
 import laptopWork from "@/assets/images/laptop-work.jpg";
 import ChangelogList from "@/components/ChangelogList.astro";
 import Footer from "@/components/Footer.astro";
-import HandsOn from "@/components/HandsOn.astro";
 import Header from "@/components/Header.astro";
 import Price from "@/components/Price.astro";
 import Layout from "@/layouts/Layout.astro";
 import { changelogSorted } from "@/data/changelog";
-import { FIGMA_HANDSON } from "@/data/handson";
 import { tryout } from "@/data/tryout";
 import { desktopSkillsCount } from "@/data/desktop";
-import { MUSE_HANDSON, museSkillsCount } from "@/data/muse";
+import { museSkillsCount } from "@/data/muse";
 import {
   claudeSkillsCount,
   figmaSkillsCount,
@@ -145,14 +143,6 @@ const recent = changelogSorted
         </div>
       </div>
     </section>
-
-    <!-- ============ HANDS-ON EVENT ============ -->
-    <HandsOn
-      items={[
-        { label: "Figma", ...FIGMA_HANDSON },
-        { label: "Muse", ...MUSE_HANDSON },
-      ]}
-    />
 
 
     <section

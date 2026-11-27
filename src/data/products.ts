@@ -54,14 +54,6 @@ interface Product {
   en: EnMarket
 }
 
-/** Bundle・Claude版・Figma版の価格改定（2026-11-28 0:00 JST）。改定前の期間は `campaign` で旧価格を表示する */
-const PRICE_REVISION_20261128 = {
-  kind: 'increase',
-  endsAt: '2026-11-28T00:00:00+09:00',
-  endsAtLabel: '2026年11月27日（金）23:59',
-  endsAtShort: '11/27（金）',
-} as const
-
 /** 動画本数・総再生時間の集計日 */
 export const STATS_AS_OF = '2026年9月20日'
 
@@ -71,19 +63,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code + Figma Design Agent',
     href: '/bundle/',
     url: 'https://kmrvid.com/products/kmrvid-skills-bundle',
-    // 2026-11-28 0:00 JST から 35,200円（海外版は $229）に改定。それまでは 29,800円（$199）
     price: 35200,
     skills: totalSkills,
     videos: 60,
     hours: 6,
     minutes: 5,
-    campaign: { ...PRICE_REVISION_20261128, price: 29800 },
     en: {
       name: 'KMRVID Skills Bundle',
       href: '/en/bundle/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-bundle',
       priceUsd: 229,
-      priceUsdBefore: 199,
     },
   },
   claude: {
@@ -91,19 +80,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Code',
     href: '/claude',
     url: 'https://kmrvid.com/products/kmrvid-claude-skills',
-    // 2026-11-28 0:00 JST から 25,300円（海外版は $149）に改定。それまでは 19,800円（$137）
     price: 25300,
     skills: claudeSkillsCount,
     videos: 40,
     hours: 4,
     minutes: 10,
-    campaign: { ...PRICE_REVISION_20261128, price: 19800 },
     en: {
       name: 'KMRVID Claude Skills',
       href: '/en/claude/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-claudeskills',
       priceUsd: 149,
-      priceUsdBefore: 137,
     },
   },
   figma: {
@@ -111,19 +97,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Figma Design Agent',
     href: '/figma',
     url: 'https://kmrvid.com/products/kmrvid-figma-skills',
-    // 2026-11-28 0:00 JST から 19,800円（海外版は $129）に改定。それまでは 15,400円（$97）
     price: 19800,
     skills: figmaSkillsCount,
     videos: 20,
     hours: 1,
     minutes: 55,
-    campaign: { ...PRICE_REVISION_20261128, price: 15400 },
     en: {
       name: 'KMRVID Figma Skills',
       href: '/en/figma/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-figmaskills',
       priceUsd: 129,
-      priceUsdBefore: 97,
     },
   },
   // Claude版・Figma版・Bundle には特典として同梱。動画は付属しない（講座内の解説動画3本は YouTube でも公開）
@@ -132,25 +115,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Muse',
     href: '/muse',
     url: 'https://kmrvid.com/products/kmrvid-muse-skills',
-    // 2026-11-28 0:00 JST から 15,400円（海外版は $97）に改定。それまでは 9,900円（$59）
     price: 15400,
     skills: museSkillsCount,
     videos: 0,
     hours: 0,
     minutes: 0,
-    campaign: {
-      kind: 'increase',
-      price: 9900,
-      endsAt: '2026-11-28T00:00:00+09:00',
-      endsAtLabel: '2026年11月27日（金）23:59',
-      endsAtShort: '11/27（金）',
-    },
     en: {
       name: 'KMRVID Muse Skills',
       href: '/en/muse/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-museskills',
       priceUsd: 97,
-      priceUsdBefore: 59,
     },
   },
   // Claude Desktop のチャット用。Muse版とほぼ同じスキルを、プラグイン形式（リファレンス同梱）で配布する
@@ -159,25 +133,16 @@ export const products: Record<ProductKey, Product> = {
     env: 'Claude Desktop',
     href: '/desktop/',
     url: 'https://kmrvid.com/products/kmrvid-cdc-skills',
-    // 通常価格は 2026-11-28 0:00 JST から 15,400円（海外版は $97）。それまでは発売記念価格 7,700円（$59）
     price: 15400,
     skills: desktopSkillsCount,
     videos: 0,
     hours: 0,
     minutes: 0,
-    campaign: {
-      kind: 'launch',
-      price: 7700,
-      endsAt: '2026-11-28T00:00:00+09:00',
-      endsAtLabel: '2026年11月27日（金）23:59',
-      endsAtShort: '11/27（金）',
-    },
     en: {
       name: 'KMRVID CDC Skills',
       href: '/en/desktop/',
       url: 'https://gaspanik.gumroad.com/l/kmrvid-cdcskills',
       priceUsd: 97,
-      priceUsdBefore: 59,
     },
   },
 }

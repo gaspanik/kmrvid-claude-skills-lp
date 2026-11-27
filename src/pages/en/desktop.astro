@@ -36,8 +36,6 @@ import {
 import { MUSE_PLAYLIST_URL, museSkillsCount } from "@/data/muse";
 import {
   FIGMA_COMMUNITY_URL,
-  formatUsd,
-  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -424,9 +422,6 @@ const flows = [
         <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
           All {desktopSkillsCount} skills, the README and free lifetime
           updates for <Price product="desktop" lang="en" />.
-        </p>
-        <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
-          The price goes up to {formatUsd(products.desktop.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
         </p>
 
         <PricingCard

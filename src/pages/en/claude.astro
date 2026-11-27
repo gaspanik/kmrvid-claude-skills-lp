@@ -31,8 +31,6 @@ import {
 } from "@/data/skills";
 import {
   AGENSI_URL,
-  formatUsd,
-  NEW_PRICE_FROM_EN,
   products,
 } from "@/data/products";
 
@@ -367,9 +365,6 @@ const flows = [
         <p class="mt-4 max-w-xl text-ink-soft text-base text-justify leading-relaxed">
           All {claudeSkillsCount} skills, the README (PDF) and free lifetime
           updates for <Price product="claude" lang="en" />.
-        </p>
-        <p class="campaign-ended:hidden mt-3 max-w-xl text-accent-dark text-base leading-relaxed">
-          The price goes up to {formatUsd(products.claude.en.priceUsd)} on {NEW_PRICE_FROM_EN}.
         </p>
 
         <PricingCard

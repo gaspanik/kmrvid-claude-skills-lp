@@ -81,6 +81,12 @@
     font-size: var(--text-base);
   }
 
+  /* 長いURLや英単語のはみ出し対策。anywhere は最小幅が1文字分になり、
+     flex 内の価格の数字が途中で改行されるため使わない */
+  p {
+    overflow-wrap: break-word;
+  }
+
   em {
     font-style: normal;
     font-weight: 700;
